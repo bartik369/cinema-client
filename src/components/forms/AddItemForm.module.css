@@ -1,0 +1,226 @@
+.form {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 20px 30px;
+    background-color: #12131c;
+    border: 1px solid #161823;
+    display: flex;
+    flex-direction: column;
+    transition: all 1.3s;
+    box-shadow: 0 2px 2px 0 rgba(37, 31, 83, 0.06), 0 4px 4px 0 rgba(37, 31, 83, 0.06), 0 6px 6px 0 rgba(37, 31, 83, 0.06), 0 16px 16px 0 rgba(37, 31, 83, 0.06), 0 32px 32px 0 rgba(37, 31, 83, 0.06), 0 64px 64px 0 rgba(37, 31, 83, 0.06);
+}
+
+.form:hover {
+    box-shadow: 0 4px 4px 0 rgba(46, 46, 110, 0.06), 0 8px 8px 0 rgba(46, 46, 110, 0.06), 0 16px 16px 0 rgba(46, 46, 110, 0.06), 0 32px 32px 0 rgba(46, 46, 110, 0.06), 0 64px 64px 0 rgba(46, 46, 110, 0.06), 0 128px 128px 0 rgba(46, 46, 110, 0.06);
+}
+
+
+/* before */
+
+input,
+textarea,
+select {
+    background-color: #191a27;
+    border: 1px solid #1f2334;
+    font-family: "Roboto", sans-serif;
+    padding: 11px 6px;
+    outline: none;
+    font-size: 11px;
+    color: #8a8ea3;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.input-data {
+    padding: 10px 6px;
+    width: 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    font-size: 11px;
+    color: #a4aec1;
+    background-color: #1c1d2e;
+    border: 1px solid #2e334c;
+}
+
+input::placeholder {
+    color: #a4aec1;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
+}
+
+textarea {
+    min-height: 150px;
+}
+
+textarea::placeholder {
+    color: #8a8ea3;
+}
+
+span.input-info {
+    color: #777ea7;
+    margin: 15px 0 5px;
+    font-size: 13px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+.bi-image {
+    color: #2421db;
+    font-size: 24px;
+}
+
+
+/*  */
+
+.block {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-column {
+    display: flex;
+    align-items: center;
+}
+
+.column1 {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.column2 {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.column2:not(:last-child),
+.column3:not(:last-child) {
+    margin-right: 6px;
+}
+
+.column3 {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.photo-layer {
+    padding: 9.2px;
+    margin: 0;
+    border-radius: 4px;
+    background-color: #3e29bf;
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    cursor: pointer;
+    transition: all .6s ease-in-out;
+}
+
+.photo-layer:hover {
+    background-color: #27bda8;
+}
+
+.photo-icon {
+    color: aliceblue;
+    margin-right: 5px;
+}
+
+.select-photo {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 11px;
+    color: aliceblue;
+}
+
+
+/*  */
+
+.select-img {
+    background-color: #12131c;
+    font-family: "Roboto", sans-serif;
+    padding: 9px 6px;
+    outline: none;
+    font-size: 11px;
+    color: #8f8f8f;
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.genre {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 7px;
+}
+
+.genre .item {
+    position: relative;
+    width: fit-content;
+    color: #8f8f8f;
+    font-family: "Roboto", sans-serif;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    border: 1px solid #2a2b2e;
+    border-radius: 4px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.close-btn {
+    color: #f43c57;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 4px;
+}
+
+.datepick {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+span.hide {
+    display: none;
+}
+
+.main-column .reset {
+    font-size: 11px;
+    font-family: inherit;
+    padding: 10.3px;
+    margin: 0;
+    border-radius: 4px;
+    border: none;
+    background-color: #d5461f;
+    color: #fff;
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    cursor: pointer;
+    transition: all .6s ease-in-out;
+    position: absolute;
+}
+
+.main-column .reset:hover {
+    background-color: #ff4a4a;
+}
+
+@media screen and (max-width: 960px) {
+    .column2 {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+    .column3 {
+        display: flex;
+        flex-direction: column;
+        width: 33%;
+    }
+}

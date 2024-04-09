@@ -1,0 +1,27 @@
+.filter {
+    width: 100%;
+    display: flex;
+    margin-bottom: 25px;
+    padding-left: 10px;
+}
+
+.item {
+    width: fit-content;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item .title {
+    color: #fff;
+    font-family: inherit;
+    padding: 10px 0 5px;
+}
+
+.filter select,
+.filter option {
+    font-size: 14px;
+    font-weight: 300;
+    font-family: inherit;
+    color: cadetblue;
+}

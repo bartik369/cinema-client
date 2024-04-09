@@ -1,0 +1,181 @@
+import React, { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import {useAppSelector } from '../../hooks/reduxHook';
+import { 
+  useGetFavoritesMutation, 
+  useAddFavoriteMutation,
+  useGetMovieQuery,
+  useSetRatingMutation,
+  useGetRatingQuery,
+} from '../../store/movieApi';
+import { useGetMovieActorsMutation } from '../../store/actorApi';
+import { IMovie, IMovieRating, IMovieAddFavorite } from '../../types/media';
+import * as contentConst from '../../utils/constants/content';
+import ENV from '../../env.config';
+import Rating from '../../components/rating/Rating';
+import Loader from '../../components/loader/Loader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import nonePoster from '../../assets/pics/blank_movie.jpg';
+import vignette from '../../assets/pics/vignette.png';
+import cinema from '../../assets/pics/cinema.jpg';
+import style from './Movies.module.css';
+
+const Movie: FC = () => {
+  const [getFavorites, {data: favorites}] = useGetFavoritesMutation();
+  const [addFavorite] = useAddFavoriteMutation();
+  const [setRating] = useSetRatingMutation();
+  const [getMovieActors, {data: actors}] = useGetMovieActorsMutation()
+  const params = useParams();
+  const { id } = params;
+  const {data: movie} = useGetMovieQuery(id!);
+  const {data: movieRating} = useGetRatingQuery(id!);
+  const user = useAppSelector((state) => state.auth.user);
+  const [visibleRating, setVisibleRating] = useState<boolean>(false);
+  const [successVote, setSuccessVote] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (movie && user) {
+      getMovieActors(movie.actors);
+      getFavorites({ id: user._id });
+    }
+  }, [movie]);
+
+  const ratingHandler = async (value: number) => {
+    if (movie) {
+      const ratingData: IMovieRating = {
+        id: movie._id!,
+        value: value,
+      };
+      await setRating(ratingData).then((res) => {
+        setSuccessVote(true);
+        setTimeout(() => {
+          setVisibleRating(false);
+          setSuccessVote(false);
+        }, 2000);
+      });
+    }
+  };
+
+  const favoriteHandler = async (_id: string) => {
+    
+    if (user && movie) {
+      const favoriteData: IMovieAddFavorite = {
+        userId: user._id,
+        movieId: movie._id!,
+      };
+      await addFavorite(favoriteData).then(() => {
+      getFavorites({ id: user._id });
+      });
+    }
+  };
+
+  return (
+    <>
+      {visibleRating && (
+        <Rating
+          setVisibleRating={setVisibleRating}
+          visibleRating={visibleRating}
+          ratingHandler={ratingHandler}
+          movie={movie as IMovie}
+          successVote={successVote}
+        />
+      )}
+      {movie ? (
+        <div className={style.movie}>
+          <div className={style['video-layer']}>
+            {movie.trailer ? (
+              <video className={style.video} autoPlay muted loop
+                src={`${ENV.API_URL_UPLOADS_MOVIES}${movie.trailer}`}
+              />
+            ) : (
+              <img className={style.cinema} src={cinema} />
+            )}
+            <img className={style.vignette} src={vignette} alt='' />
+          </div>
+
+          <div className={style.inner}>
+            <div className={style.poster}>
+              <img alt="" src={ movie.picture
+                    ? `${ENV.API_URL_UPLOADS_MOVIES}${movie.picture}`
+                    : nonePoster
+                }
+              />
+            </div>
+            <div className={style.info}>
+              <div className={style['title-ru']}>{movie.titleRu}</div>
+              <div className={style['title-en']}>{movie.titleEn}</div>
+              <div className={style['ext-info']}>
+                <div className={style.sub}>{movie.year}</div>
+                <div className={style.sub}>{movie.country}</div>
+                <div className={style.sub}>
+                  {movie.time}
+                  <span>{contentConst.movieMins}</span>
+                </div>
+              </div>
+              <div className={style['ext-info']}>
+                <div className={style.category}>
+                  {movie &&
+                    movie.genre.map((item, index) => (
+                      <div className={style.item} key={index}>
+                        {item}
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <div className={style.age}>{movie.ageCategory}</div>
+              <div className={style.description}>{movie.description}</div>
+              <div className={style.action}>
+                <div className={style.watch}>{contentConst.watch}</div>
+                <div
+                  className={
+                    favorites?.movies.includes(movie._id as string)
+                      ? style.favorite
+                      : style.nofavorite
+                  }
+                >
+                  <FontAwesomeIcon
+                    onClick={() => favoriteHandler(movie._id as string)}
+                    icon={faStar}
+                  />
+                </div>
+                <div
+                  className={style['movie-rating']}
+                  onClick={() => setVisibleRating(true)}
+                >
+                  <div className={style.number}>
+                    {movieRating && movieRating.toFixed(1)}
+                  </div>
+                  <div className={style.vote}>{contentConst.vote}</div>
+                </div>
+              </div>
+              <div className={style['cast-title']}>
+                {contentConst.movieCasts}
+              </div>
+              <div className={style.cast}>
+                {actors &&
+                  actors.map((item) => (
+                    <div className={style.item2} key={item._id}>
+                      <div className={style.portrait}>
+                        <img
+                          src={`${ENV.API_URL_UPLOADS_ACTORS}${item.picture}`}
+                          alt=''
+                        />
+                      </div>
+                      <div className={style.name}>
+                        <div>{item.nameRu}</div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+         <Loader />
+      )}
+    </>
+  );
+};
+
+export default Movie;

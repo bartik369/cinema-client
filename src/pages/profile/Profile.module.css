@@ -1,0 +1,392 @@
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.profile-inner {
+    display: grid;
+    grid-gap: 10px 10px;
+    padding: 5px;
+}
+
+.subscription,
+.gift,
+.purchases,
+.receipt,
+.messages,
+.promo,
+.favorites,
+.viewed,
+.paymethods,
+.devices,
+.invite,
+.events,
+.bill,
+.settings {
+    padding: 10px;
+    border-radius: 5px;
+    color: #d9e0ef;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(2, 1, 5, 0.3);
+}
+
+.subscription:hover,
+.gift:hover,
+.purchases:hover,
+.receipt:hover,
+.messages:hover,
+.promo:hover,
+.viewed:hover,
+.paymethods:hover,
+.invite:hover,
+.events:hover,
+.bill:hover,
+.invite:hover,
+.events:hover,
+.bill:hover,
+.settings:hover,
+.devices:hover,
+.favorites:hover {
+    background-color: #25263a;
+}
+
+.profile-inner .title {
+    font-family: inherit;
+    font-size: 11px;
+    color: #75788f;
+    display: flex;
+    align-items: center;
+}
+
+.profile-inner .subscription img,
+.profile-inner .bill img,
+.profile-inner .messages img,
+.profile-inner .events img {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.profile-inner .purchases img,
+.profile-inner .receipt img {
+    width: 27px;
+    margin-right: 5px;
+}
+
+.profile-inner .gift img {
+    width: 27px;
+    margin-right: 5px;
+}
+
+.extra-title {
+    color: #e7eaef;
+    font-family: inherit;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.profile-inner .messages .inner,
+.profile-inner .events .inner,
+.profile-inner .bill .inner {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.subscription {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    background-color: #1d1e2d;
+}
+
+.bill {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    background-color: #1d1e2d;
+}
+
+.gift {
+    grid-column: 3 / 5;
+    grid-row: 1 / 2;
+    background-color: #1d1e2d;
+    display: flex;
+    justify-content: center;
+}
+
+.purchases {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    background-color: #1d1e2d;
+    display: flex;
+    justify-content: center;
+}
+
+.receipt {
+    grid-column: 4 / 5;
+    grid-row: 2 / 3;
+    background-color: #1d1e2d;
+    display: flex;
+    justify-content: center;
+}
+
+.messages {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    background-color: #1d1e2d;
+}
+
+.promo {
+    grid-column: 2 / 3;
+    grid-row: 3 / 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: #1d1e2d;
+}
+
+.favorites {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+    background-color: #1d1e2d;
+}
+
+.viewed {
+    grid-column: 3 / 4;
+    grid-row: 4 / 5;
+    background-color: #1d1e2d;
+}
+
+.devices {
+    grid-column: 4 / 5;
+    grid-row: 3 / 4;
+    background-color: #1d1e2d;
+}
+
+.paymethods {
+    grid-column: 4 / 5;
+    grid-row: 4 / 5;
+    background-color: #1d1e2d;
+}
+
+.profile-inner .viewed,
+.profile-inner .paymethods,
+.profile-inner .favorites,
+.profile-inner .devices,
+.profile-inner .settings,
+.profile-inner .invite,
+.profile-inner .promo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-inner .viewed img {
+    width: 50px;
+}
+
+.profile-inner .paymethods img {
+    width: 40px;
+    margin-bottom: 4px;
+}
+
+.profile-inner .favorites img {
+    width: 39px;
+    margin-bottom: 5px;
+}
+
+.profile-inner .devices img {
+    width: 37px;
+    margin-bottom: 4px;
+}
+
+.profile-inner .settings img {
+    width: 37px;
+    margin-bottom: 3px;
+}
+
+.profile-inner .invite img {
+    width: 45px;
+    margin-bottom: 3px;
+}
+
+.profile-inner .promo img {
+    width: 70px;
+    margin-bottom: 10px;
+}
+
+.invite {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+    background-color: #202132;
+}
+
+.events {
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+    background-color: #202132;
+}
+
+.settings {
+    grid-column: 2 / 3;
+    grid-row: 5 / 6;
+    background-color: #202132;
+}
+
+.messages .inner {
+    display: flex;
+    position: relative;
+}
+
+.inner .currency {
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.messages .inner .count .new,
+.events .inner .count .new {
+    font-family: inherit;
+    font-size: 10px;
+    background-color: #3338ca;
+    position: absolute;
+    padding: 2px 6px;
+    height: 13px;
+    border-radius: 2px;
+    top: 0;
+}
+
+.messages .inner .count .new {
+    right: -45px;
+}
+
+.events .inner .count .new {
+    right: -45px;
+}
+
+.subscription .info {
+    display: flex;
+    justify-content: center;
+    font-family: inherit;
+    padding: 10px 0;
+    font-size: 30px;
+}
+
+.inner .count {
+    font-family: inherit;
+    font-size: 40px;
+    position: relative;
+}
+
+@media (max-width: 1000px) {
+    .subscription {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+    }
+    .bill {
+        grid-column: 1 / 3;
+        grid-row: 2 / 3;
+    }
+    .messages {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+    }
+    .promo {
+        grid-column: 1 / 3;
+        grid-row: 4 / 5;
+    }
+    .invite {
+        grid-column: 1 / 3;
+        grid-row: 5 / 6;
+    }
+    .events {
+        grid-column: 1 / 3;
+        grid-row: 5 / 6;
+    }
+    .settings {
+        grid-column: 3 / 5;
+        grid-row: 5 / 6;
+    }
+    .gift {
+        grid-column: 3 / 5;
+        grid-row: 1 / 2;
+    }
+    .purchases {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+    }
+    .receipt {
+        grid-column: 4 / 5;
+        grid-row: 2 / 3;
+    }
+    .favorites {
+        grid-column: 3 / 4;
+        grid-row: 3 / 4;
+    }
+    .viewed {
+        grid-column: 3 / 4;
+        grid-row: 4 / 5;
+    }
+    .devices {
+        grid-column: 4 / 5;
+        grid-row: 3 / 4;
+    }
+    .paymethods {
+        grid-column: 4 / 5;
+        grid-row: 4 / 5;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-inner {
+        display: block;
+    }
+    .subscription,
+    .bill,
+    .messages,
+    .promo,
+    .invite,
+    .events,
+    .settings,
+    .gift,
+    .purchases,
+    .receipt,
+    .favorites,
+    .viewed,
+    .devices,
+    .paymethods {
+        margin-bottom: 10px;
+    }
+    .profile-inner .title {
+        font-family: inherit;
+        font-size: 11px;
+        color: #e7eaef;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .profile-inner .title img {
+        width: 17px;
+    }
+    .profile-inner .title {
+        font-family: inherit;
+        font-size: 11px;
+        color: #75788f;
+        display: flex;
+        align-items: center;
+    }
+    .profile-inner .gift img,
+    .profile-inner .purchases img,
+    .profile-inner .receipt img {
+        width: 37px;
+        margin-bottom: 5px;
+    }
+    .profile-inner .promo img {
+        width: 37px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 540px) {}
+
+@media (max-width: 480px) {}
