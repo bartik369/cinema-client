@@ -43,7 +43,7 @@ export const useValidateAccessToken = () => {
 
   const validateAccessToken = async(token:string) => {
       try {
-          const response = await axios.get(`${ENV.API_URL}api/verify-token/`, {
+          const response = await axios.get(`${ENV.API_URL}/verify-token/`, {
               withCredentials: true,
               headers: { Authorization: `Bearer ${token}`}
           });
