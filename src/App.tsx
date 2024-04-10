@@ -33,6 +33,7 @@ const App: FC = () => {
 
   return (
     <div className={style.wrapper}>
+      <div>test</div>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
