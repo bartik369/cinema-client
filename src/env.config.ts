@@ -1,7 +1,7 @@
 const ENV = {
     API_URL: 'https://cinema.webcloudlab.ru/api',
     API_URL_UPLOADS_ACTORS: 'https://cinema.webcloudlab.ru/api/uploads/actors/',
-    API_URL_UPLOADS_MOVIES: 'https://cinema.webcloudlab.ru/api/movies/',
+    API_URL_UPLOADS_MOVIES: 'https://cinema.webcloudlab.ru/api/uploads/movies/',
     API_URL_UPLOADS_MAIN_SLIDER: 'https://cinema.webcloudlab.ru/api/uploads/slider/main/',
     API_ACTORS: '/actors',
     API_MOVIE_ACTORS: '/movie_actors',
