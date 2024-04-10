@@ -1,8 +1,8 @@
 const ENV = {
-    API_URL: 'http://localhost:5001/',
-    API_URL_UPLOADS_ACTORS: 'http://localhost:5001/uploads/actors/',
-    API_URL_UPLOADS_MOVIES: 'http://localhost:5001/uploads/movies/',
-    API_URL_UPLOADS_MAIN_SLIDER: 'http://localhost:5001/uploads/slider/main/',
+    API_URL: 'https://cinema.webcloudlab.ru/api',
+    API_URL_UPLOADS_ACTORS: 'https://cinema.webcloudlab.ru/uploads/actors/',
+    API_URL_UPLOADS_MOVIES: 'https://cinema.webcloudlab.ru/movies/',
+    API_URL_UPLOADS_MAIN_SLIDER: 'https://cinema.webcloudlab.ru/uploads/slider/main/',
     API_ACTORS: 'api/actors',
     API_MOVIE_ACTORS: 'api/movie_actors',
     API_ADD_ACTOR: 'api/add-actor',
@@ -32,13 +32,12 @@ const ENV = {
     API_DELETE_SLIDE: 'api/delete-slide',
     API_UPDATE_SLIDE: 'api/update-slide',
     
-    CLIENT_URL: 'http://localhost:3000',
-    MOVIES_URL: 'http://localhost:3000/movies/',
+    CLIENT_URL: 'https://cinema.webcloudlab.ru',
+    MOVIES_URL: 'https://cinema.webcloudlab.ru/movies/',
     MOVIES: '/movies/',
     EDIT_SLIDER: '/admin/edit-slider/',
     ADD_MOVIE: '/admin/add-movie/',
     ADD_ACTOR: '/admin/add-actor/',
     ADMIN:'/admin/',
 }
-
 export default ENV;
