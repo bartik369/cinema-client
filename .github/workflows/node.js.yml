@@ -27,6 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: cp env.for-back.ts env.config.ts
+    - run: cp env.for-back.ts src/env.config.ts
     - run: npm run build --if-present
     #- run: npm test
