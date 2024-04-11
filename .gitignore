@@ -1,3 +1,3 @@
+.env
+env.config
 /node_modules
-env.config.ts
-App.tsx
