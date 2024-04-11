@@ -1,2 +1,2 @@
-env.config.ts
+src/env.config.ts
 /node_modules
