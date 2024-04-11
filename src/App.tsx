@@ -33,7 +33,6 @@ const App: FC = () => {
 
   return (
     <div className={style.wrapper}>
-      <div>Check avto deploy with action and overwrite env file</div>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
