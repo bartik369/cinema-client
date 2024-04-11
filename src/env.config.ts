@@ -39,6 +39,5 @@ const ENV = {
     ADD_MOVIE: '/admin/add-movie/',
     ADD_ACTOR: '/admin/add-actor/',
     ADMIN:'/admin/',
-    
 }
 export default ENV;
