@@ -3,6 +3,7 @@ import DropCategory from '../dropdown/DropCategory';
 import DropCountry from '../dropdown/DropCountry';
 import DropYear from '../dropdown/DropYear';
 import DropRating from '../dropdown/DropRating';
+import { useGetPropertiesQuery } from '../../store/movieApi';
 import { IMovie } from '../../types/media';
 import style from './MovieFilter.module.css';
 
@@ -11,7 +12,7 @@ interface IMovieFilterProps {
 }
 
 const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
-
+  const { data: properties } = useGetPropertiesQuery();
   const genre: string[] = [];
   const country: string[] = [];
   const year: string[] = [];
@@ -26,33 +27,23 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
       year.push(item.year);
     });
 
-  const genreArr =
-    genre &&
-    genre.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    });
-  const countryArr =
-    country &&
-    country.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    });
-  const yearArr =
-    year &&
-    year.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    });
-  const ratingArr =
-    rating &&
-    rating.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-    });
-
-
+  const genreArr = genre.filter((value, index, self) => {
+    return self.indexOf(value) === index;
+  });
+  const countryArr = country.filter((value, index, self) => {
+    return self.indexOf(value) === index;
+  });
+  const yearArr = year.filter((value, index, self) => {
+    return self.indexOf(value) === index;
+  });
+  const ratingArr = rating.filter((value, index, self) => {
+    return self.indexOf(value) === index;
+  });
 
   return (
     <div className={style.filter}>
       <div className={style.item}>
-        <DropCategory existGenre={genreArr && genreArr} />
+        <DropCategory existGenre={properties?.genreArr} />
       </div>
       <div className={style.item}>
       <DropCountry existCountry={countryArr && countryArr}/>
