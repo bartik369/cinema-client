@@ -9,7 +9,7 @@ type MovieState = {
 
 const initialState: MovieState = {
   filter: {
-    category: [],
+    genre: [],
     country: [],
     year: [],
     rating: [],
@@ -23,12 +23,17 @@ const movieSlice = createSlice({
   name: 'movieOptions',
   initialState,
   reducers: {
+    resetFilter: (state, action) => {
+      state.filter.genre = action.payload;
+      state.filter.country = [];
+      state.filter.year = [];
+    },
     setMovieCategory: (state, action) => {
-      state.filter.category.includes(action.payload)
-        ? (state.filter.category = state.filter.category.filter(
+      state.filter.genre.includes(action.payload)
+        ? (state.filter.genre = state.filter.genre.filter(
             (el) => el !== action.payload
           ))
-        : state.filter.category.push(action.payload);
+        : state.filter.genre.push(action.payload);
     },
     setMovieCountry: (state, action) => {
       state.filter.country.includes(action.payload)
@@ -66,6 +71,7 @@ export const {
   setMovieCountry,
   setMovieYear,
   setMovieRating,
+  resetFilter,
 } = movieSlice.actions;
 
 const isError = (action: AnyAction) => {

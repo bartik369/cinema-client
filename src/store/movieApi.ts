@@ -3,6 +3,7 @@ import {
     IMovie,
     ISearch,
     IMovieRating,
+    IFilterMovie,
     IMovieAddFavorite,
     IMovieFavorites,
     IExistFavorite,
@@ -14,7 +15,7 @@ export const movieApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: ENV.API_URL }),
   tagTypes: ['Movies', 'Rating'],
   endpoints: (builder) => ({
-    getMovies: builder.query<IMovie[], any>({
+    getMovies: builder.query<IMovie[], IFilterMovie>({
       query: (data) => ({
         url: `${ENV.API_MOVIES}`,
         method: "POST",

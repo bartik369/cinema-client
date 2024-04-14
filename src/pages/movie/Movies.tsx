@@ -16,11 +16,12 @@ const Movies = () => {
 
   useEffect(() => {
     user && getFavorites({ id: user._id });
-  }, [filter, user]);
+  }, [ user]);
+
 
   return (
     <div className={style.container}>
-      <MovieFilter />
+      <MovieFilter movies={movies! && movies} />
       <div className={style.movies}>
         {movies && movies.length > 0 && (
           movies.map((movie) => (

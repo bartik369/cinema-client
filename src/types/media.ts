@@ -63,7 +63,7 @@ export interface IExistFavorite {
 }
 
 export interface IFilterMovie {
-    category:  string[];
+    genre:  string[];
     country: string[];
     year: string [];
     rating: number [];
