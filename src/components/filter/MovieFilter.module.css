@@ -1,6 +1,7 @@
 .filter {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 25px;
     padding-left: 10px;
 }
@@ -8,6 +9,7 @@
 .item {
     width: fit-content;
     margin-right: 20px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
 }
