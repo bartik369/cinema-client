@@ -9,12 +9,17 @@ import style from './Drop.module.css'
 
 interface IDropCountryProps {
   existCountry: string[];
+  checkedState: any,
+  setCheckedState: (checkedState:any) => void;
 }
 
-const DropCountry: FC<IDropCountryProps> = ({existCountry}) => {
+const DropCountry: FC<IDropCountryProps> = ({
+  existCountry,
+  checkedState,
+  setCheckedState,
+}) => {
     const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
     const dispatch = useAppDispatch();
-    const [checkedState, setCheckedState] = useState<any>([]);
     const myRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
@@ -48,13 +53,17 @@ const DropCountry: FC<IDropCountryProps> = ({existCountry}) => {
                 <label className={style['check-container']}>
                  <input onChange={(e) => {
                      dispatch(setMovieCountry(item.name))
-                     setCheckedState({...checkedState,
-                        [item.id]: e.target.checked
-                    })
+                     setCheckedState({
+                      ...checkedState,
+                      country: {
+                        ...checkedState.country,
+                        [item.id]: e.target.checked,
+                      },
+                    });
                  }} 
                 id={item.name} 
                 type="checkbox"
-                checked={checkedState[item.id]}
+                checked={checkedState.country[item.id]}
                 disabled={existCountry.includes(item.name) === false}
                  />
                  <span className={style.checkmark}></span>

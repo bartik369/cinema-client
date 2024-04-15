@@ -101,5 +101,9 @@ export interface ISliderUpdate {
     slideData: ISlider;
     file64: string;
 }
-
+export interface IMovieCheckMenu {
+    genre: [];
+    country: [];
+    year: [];
+}
 

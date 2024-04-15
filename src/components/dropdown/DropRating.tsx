@@ -9,12 +9,17 @@ import style from './Drop.module.css'
 
 interface IDropRatingProps {
   existRating: string[];
+  checkedState: any,
+  setCheckedState: (checkedState:any) => void;
 }
 
-const DropRating: FC<IDropRatingProps> = ({existRating}) => {
+const DropRating: FC<IDropRatingProps> = ({
+  existRating,
+  checkedState,
+  setCheckedState,
+}) => {
     const dispatch = useAppDispatch()
     const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false)
-    const [checkedState, setCheckedState] = useState<any>([]);
     const myRef = useRef<HTMLButtonElement>(null)
 
     useEffect(() => {
@@ -49,13 +54,17 @@ const DropRating: FC<IDropRatingProps> = ({existRating}) => {
                 <label className={style['check-container']}>
                  <input onChange={(e) => {
                      dispatch(setMovieRating(item.value))
-                     setCheckedState({...checkedState,
-                        [item.id]: e.target.checked
-                    })
+                     setCheckedState({
+                      ...checkedState,
+                      rating: {
+                        ...checkedState.rating,
+                        [item.id]: e.target.checked,
+                      },
+                    });
                  }} 
                 id={item.title} 
                 type="checkbox"
-                checked={checkedState[item.id]}
+                checked={checkedState.rating[item.id]}
                  />
                  <span className={style.checkmark}></span>
                  <label htmlFor={item.value}>{item.title}</label>

@@ -3,19 +3,27 @@ import { useAppDispatch } from '../../hooks/reduxHook';
 import {categoryMovies} from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
 import { setMovieCategory } from '../../store/movieOptionsSlice';
+import { IMovieCheckMenu } from '../../types/media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
 import style from './Drop.module.css'
 
 interface IDropCategoryProps {
   existGenre: string[];
+  checkedState: any,
+  setCheckedState: (checkedState:any) => void;
 }
 
-const DropCategory: FC<IDropCategoryProps> = ({existGenre}) => {
+const DropCategory: FC<IDropCategoryProps> = ({
+  existGenre,
+  checkedState,
+  setCheckedState,
+}) => {
   const dispatch = useAppDispatch();
   const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
-  const [checkedState, setCheckedState] = useState<any>([]);
+  // const [checkedState, setCheckedState] = useState<any>([]);
   const myRef = useRef<HTMLButtonElement>(null);
+
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
@@ -35,7 +43,7 @@ const DropCategory: FC<IDropCategoryProps> = ({existGenre}) => {
       <fieldset>
         <button
           ref={myRef}
-          className={style['drop-btn']}
+          className={style["drop-btn"]}
           onClick={() => setDropdownDisplay(!dropdownDisplay)}
         >
           <span>{contentConst.movieCategory}</span>
@@ -49,23 +57,28 @@ const DropCategory: FC<IDropCategoryProps> = ({existGenre}) => {
         </button>
         {dropdownDisplay && (
           <div
-            className={style['panel-three']}
+            className={style["panel-three"]}
             onClick={(e) => e.stopPropagation()}
           >
             {categoryMovies.map((item) => (
-              <label className={style['check-container']}>
+              <label className={style["check-container"]}>
                 <input
                   onChange={(e) => {
                     dispatch(setMovieCategory(item.name));
                     setCheckedState({
                       ...checkedState,
-                      [item.id]: e.target.checked,
+                      genre: {
+                        ...checkedState.genre,
+                        [item.id]: e.target.checked,
+                      },
                     });
                   }}
                   id={item.name}
                   type="checkbox"
-                  checked={checkedState[item.id]}
-                  disabled={existGenre && existGenre.includes(item.name) === false}
+                  checked={checkedState.genre[item.id]}
+                  disabled={
+                    existGenre && existGenre.includes(item.name) === false
+                  }
                 />
                 <span className={style.checkmark}></span>
                 <label htmlFor={item.value}>{item.name}</label>

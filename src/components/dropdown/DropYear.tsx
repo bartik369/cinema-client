@@ -9,12 +9,17 @@ import style from './Drop.module.css';
 
 interface IDropYearProps {
   existYear: string[];
+  checkedState: any,
+  setCheckedState: (checkedState:any) => void;
 }
 
-const DropYear: FC<IDropYearProps> = ({existYear}) => {
+const DropYear: FC<IDropYearProps> = ({
+  existYear,
+  checkedState,
+  setCheckedState,
+}) => {
   const dispatch = useAppDispatch();
   const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
-  const [checkedState, setCheckedState] = useState<any>([]);
   const myRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -59,12 +64,15 @@ const DropYear: FC<IDropYearProps> = ({existYear}) => {
                     dispatch(setMovieYear(item.value));
                     setCheckedState({
                       ...checkedState,
-                      [item.id]: e.target.checked,
+                      year: {
+                        ...checkedState.year,
+                        [item.id]: e.target.checked,
+                      },
                     });
                   }}
                   id={item.title}
                   type="checkbox"
-                  checked={checkedState[item.id]}
+                  checked={checkedState.year[item.id]}
                   disabled={existYear && existYear.includes(item.value) === false}
                 />
                 <span className={style.checkmark}></span>
