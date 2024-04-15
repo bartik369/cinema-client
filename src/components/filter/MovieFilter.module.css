@@ -18,6 +18,24 @@
     padding: 10px 0 5px;
 }
 
+.item .reset {
+    border: 1px solid #6c313c;
+    background-color: transparent;
+    padding: 11.5px 10px;
+    border-radius: 6px;
+    color: #984756;
+    font-family: inherit;
+    font-size: 12px;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+}
+
+.item .reset:hover {
+    background-color: #fd4e52;
+    border: 1px solid #fd4e52;
+    color: #fff;
+}
+
 .filter select,
 .filter option {
     font-size: 14px;

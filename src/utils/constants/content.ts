@@ -79,6 +79,7 @@ export const loading = 'Загрузка...';
 export const resetForm = 'Очистить форму'
 export const selectSlide = 'Выбрать слайд'
 export const addSlide = 'Добавить слайд'
+export const resetFilter = 'Сбросить фильтр';
 
 
 export const dontPasswordMatch = 'Пароли не совпадают';
@@ -101,21 +102,23 @@ export const chatHelp = 'Написать нам в чате'
 // errors
 export const serverError = 'server error';
 
-export const subscription = 'Подписка'
-export const bill = 'Счет'
-export const ruble = 'руб'
-export const gift = 'Подарить'
-export const purchases = 'История покупок'
-export const receipt = 'Квитанции'
-export const newItems = 'новых'
-export const certificate = 'Применить промо-код'
-export const favorites = 'Избранное'
-export const devices = 'Мои устройства'
-export const viewed = 'Просмотренные'
-export const paymethods = 'Способы оплаты'
-export const invite = 'Пригласить'
-export const events = 'События'
-export const settings = 'Настройки'
+export const subscription = 'Подписка';
+export const bill = 'Счет';
+export const ruble = 'руб';
+export const gift = 'Подарить';
+export const purchases = 'История покупок';
+export const receipt = 'Квитанции';
+export const newItems = 'новых';
+export const certificate = 'Применить промо-код';
+export const favorites = 'Избранное';
+export const devices = 'Мои устройства';
+export const viewed = 'Просмотренные';
+export const paymethods = 'Способы оплаты';
+export const invite = 'Пригласить';
+export const events = 'События';
+export const settings = 'Настройки';
+
+
 
 
 

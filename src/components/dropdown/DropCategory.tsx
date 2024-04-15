@@ -21,9 +21,7 @@ const DropCategory: FC<IDropCategoryProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
-  // const [checkedState, setCheckedState] = useState<any>([]);
   const myRef = useRef<HTMLButtonElement>(null);
-
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
