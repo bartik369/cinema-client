@@ -12,7 +12,6 @@ interface IDropRatingProps {
   checkedState: any,
   setCheckedState: (checkedState:any) => void;
 }
-
 const DropRating: FC<IDropRatingProps> = ({
   existRating,
   checkedState,
