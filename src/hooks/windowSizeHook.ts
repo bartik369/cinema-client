@@ -13,7 +13,7 @@ export default function useWindowSizeHook() {
         }  else if (window.innerWidth > 650) {
          setSlidesCount(5);
         } else if (window.innerWidth > 480) {
-            setSlidesCount(5);
+            setSlidesCount(4);
            }
        }, [window.innerWidth])
        
