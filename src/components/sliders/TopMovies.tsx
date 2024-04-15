@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector} from '../../hooks/reduxHook';
 import { useGetFavoritesMutation, useGetTopMoviesQuery } from '../../store/movieApi';
 import MovieItem from '../items/MovieItem';
-import useWindowSizeHook from '../../hooks/windowSizeHook';
+import useCountTopHook  from '../../hooks/useCountTopHook';
 import {
   CarouselProvider,
   Slider,
@@ -21,7 +21,7 @@ const TopMovies: FC = () => {
   const [getFavorites, {data: favorites}] = useGetFavoritesMutation();
   const {data: movies} = useGetTopMoviesQuery();
   const user = useAppSelector(state => state.auth.user);
-  const slidesCount = useWindowSizeHook();
+  const slidesCount = useCountTopHook();
 
   useEffect(() => {
     getFavorites({ id: user?._id });

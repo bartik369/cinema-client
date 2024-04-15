@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-export default function useWindowSizeHook() {
+export default function useCountTopHook() {
     const [slidesCount, setSlidesCount] = useState<any>();
 
     useEffect(() => {
@@ -12,9 +12,11 @@ export default function useWindowSizeHook() {
          setSlidesCount(6);
         }  else if (window.innerWidth > 650) {
          setSlidesCount(5);
+        } else if (window.innerWidth > 480) {
+            setSlidesCount(4);
         } else if (window.innerWidth < 480) {
-            setSlidesCount(3);
-           }
+            setSlidesCount(2);
+        }
        }, [window.innerWidth])
        
        return slidesCount

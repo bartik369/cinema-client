@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector} from '../../hooks/reduxHook';
 import { useGetFavoritesMutation, useGetLatestMoviesQuery} from '../../store/movieApi';
-import useWindowSizeHook from '../../hooks/windowSizeHook';
+import useCountLastHook from '../../hooks/useCountLastHook';
 import MovieItem from '../items/MovieItem';
 import {faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -21,7 +21,7 @@ const LastMovies: FC = () => {
   const [getFavorites, {data: favorites}] = useGetFavoritesMutation();
   const {data: movies} = useGetLatestMoviesQuery();
   const user = useAppSelector(state => state.auth.user);
-  const slidesCount = useWindowSizeHook();
+  const slidesCount = useCountLastHook();
 
   useEffect(() => {
     getFavorites({ id: user?._id });
