@@ -132,3 +132,37 @@ fieldset {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+@media (max-width: 800px) {
+    .panel-three {
+        grid-template-columns: repeat(3, 125px);
+        position: absolute;
+        left: 20px;
+    }
+    .panel-five {
+        grid-template-columns: repeat(4, 130px);
+        position: absolute;
+        left: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .panel-five {
+        grid-template-columns: repeat(3, 130px);
+        position: absolute;
+        left: 20px;
+    }
+}
+
+@media (max-width: 465px) {
+    .panel-five {
+        grid-template-columns: repeat(3, 110px);
+        position: absolute;
+        left: 20px;
+    }
+    .panel-three {
+        grid-template-columns: repeat(2, 130px);
+        position: absolute;
+        left: 20px;
+    }
+}

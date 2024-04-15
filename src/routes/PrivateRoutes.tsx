@@ -13,10 +13,10 @@ const PrivateRoutes: FC<IPrivateRoutesProps> = ({ allowedRoles }) => {
   return (
     <div>
       {token &&
-        ((user?.roles || []).find((role) => allowedRoles?.includes(role)) ? (
+        ((user && user.roles || []).find((role) => allowedRoles?.includes(role)) ? (
           <Outlet />
         ) : (
-          <Navigate to={'/'} />
+          <Navigate to="/" />
         ))}
     </div>
   );

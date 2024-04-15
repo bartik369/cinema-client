@@ -22,6 +22,8 @@ const Profile: FC = () => {
   const user = useAppSelector((state) => state.auth.user);
   const { data: profile } = useProfileUserQuery(user._id);
 
+  console.log(profile)
+
   return (
     <div className={style.container}>
       {profile && (
