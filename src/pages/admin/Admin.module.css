@@ -4,6 +4,7 @@
     justify-content: space-evenly;
     max-width: 1320px;
     margin: 0 auto;
+    padding: 0px 20px;
 }
 
 .admin-inner {
@@ -47,6 +48,7 @@
 }
 
 .admin-inner .menu .item .icon span {
+    margin-top: 3px;
     font-size: 11px;
     font-family: inherit;
 }
@@ -94,4 +96,22 @@
 
 .pink:hover {
     /* box-shadow: 0 4px 4px 0 rgba(21, 35, 129, 0.06), 0 8px 8px 0 rgba(21, 35, 129, 0.06), 0 16px 16px 0 rgba(21, 35, 129, 0.06), 0 32px 32px 0 rgba(21, 35, 129, 0.06), 0 64px 64px 0 rgba(21, 35, 129, 0.06), 0 128px 128px 0 rgba(21, 35, 129, 0.06); */
+}
+
+@media (max-width: 1000px) {
+    .admin-inner .menu {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .admin-inner .statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .admin-inner .menu {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .admin-inner .statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
