@@ -157,7 +157,7 @@ fieldset {
 
 @media (max-width: 465px) {
     .panel-five {
-        grid-template-columns: repeat(3, 95px);
+        grid-template-columns: repeat(3, 110px);
         position: absolute;
         left: 20px;
     }
