@@ -10,14 +10,14 @@ import style from './Drop.module.css'
 
 interface IDropCategoryProps {
   existGenre: string[];
-  checkedState: any,
-  setCheckedState: (checkedState:any) => void;
+  checkedGenre: any;
+  setCheckedGenre: (checkedGenre:any) => void;
 }
 
 const DropCategory: FC<IDropCategoryProps> = ({
   existGenre,
-  checkedState,
-  setCheckedState,
+  checkedGenre,
+  setCheckedGenre,
 }) => {
   const dispatch = useAppDispatch();
   const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
@@ -59,21 +59,19 @@ const DropCategory: FC<IDropCategoryProps> = ({
             onClick={(e) => e.stopPropagation()}
           >
             {categoryMovies.map((item) => (
-              <label className={style["check-container"]}>
+              <label className={style["check-container"]} key={item.id}>
                 <input
                   onChange={(e) => {
                     dispatch(setMovieCategory(item.name));
-                    setCheckedState({
-                      ...checkedState,
-                      genre: {
-                        ...checkedState.genre,
+                    setCheckedGenre({
+                      ...checkedGenre,
                         [item.id]: e.target.checked,
-                      },
                     });
                   }}
                   id={item.name}
+                  value="12"
                   type="checkbox"
-                  checked={checkedState.genre[item.id]}
+                  checked={checkedGenre[item.id]}
                   disabled={
                     existGenre && existGenre.includes(item.name) === false
                   }

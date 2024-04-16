@@ -10,6 +10,7 @@ fieldset {
     display: flex;
     align-items: center;
     width: fit-content;
+    cursor: pointer;
 }
 
 .drop-btn span,
@@ -156,7 +157,7 @@ fieldset {
 
 @media (max-width: 465px) {
     .panel-five {
-        grid-template-columns: repeat(3, 110px);
+        grid-template-columns: repeat(3, 95px);
         position: absolute;
         left: 20px;
     }

@@ -8,8 +8,8 @@ import { useAppSelector } from '../../hooks/reduxHook';
 import ProfileMenu from '../navigation/ProfileMenu';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faBars, faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content'
-import { faSearch, faUser, faBars, faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import Glasses from '../../assets/pics/cinema.svg';
 import Login from '../../assets/pics/login.svg';
 import style from './Header.module.css';

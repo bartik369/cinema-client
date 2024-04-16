@@ -9,14 +9,14 @@ import style from './Drop.module.css';
 
 interface IDropYearProps {
   existYear: string[];
-  checkedState: any,
-  setCheckedState: (checkedState:any) => void;
+  checkedYear: any,
+  setCheckedYear: (checkedYear:any) => void;
 }
 
 const DropYear: FC<IDropYearProps> = ({
   existYear,
-  checkedState,
-  setCheckedState,
+  checkedYear,
+  setCheckedYear,
 }) => {
   const dispatch = useAppDispatch();
   const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
@@ -58,21 +58,19 @@ const DropYear: FC<IDropYearProps> = ({
             onClick={(e) => e.stopPropagation()}
           >
             {yearMovieRageData.map((item) => (
-              <label className={style['check-container']}>
+              <label className={style['check-container']} key={item.id}>
                 <input
                   onChange={(e) => {
                     dispatch(setMovieYear(item.value));
-                    setCheckedState({
-                      ...checkedState,
-                      year: {
-                        ...checkedState.year,
+                    setCheckedYear({
+                      ...checkedYear,
                         [item.id]: e.target.checked,
-                      },
                     });
                   }}
                   id={item.title}
                   type="checkbox"
-                  checked={checkedState.year[item.id]}
+                  checked={checkedYear[item.id]}
+                  value={checkedYear[item.id] || ""}
                   disabled={existYear && existYear.includes(item.value) === false}
                 />
                 <span className={style.checkmark}></span>

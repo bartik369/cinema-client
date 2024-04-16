@@ -9,14 +9,14 @@ import style from './Drop.module.css'
 
 interface IDropCountryProps {
   existCountry: string[];
-  checkedState: any,
-  setCheckedState: (checkedState:any) => void;
+  checkedCountry: any;
+  setCheckedCountry: (checkedCountry:any) => void;
 }
 
 const DropCountry: FC<IDropCountryProps> = ({
   existCountry,
-  checkedState,
-  setCheckedState,
+  checkedCountry,
+  setCheckedCountry,
 }) => {
     const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
     const dispatch = useAppDispatch();
@@ -50,20 +50,17 @@ const DropCountry: FC<IDropCountryProps> = ({
         {dropdownDisplay && 
         <div className={style['panel-five']} onClick={e => e.stopPropagation()}>
             {countryList.map((item) => (
-                <label className={style['check-container']}>
+                <label className={style['check-container']} key={item.id}>
                  <input onChange={(e) => {
                      dispatch(setMovieCountry(item.name))
-                     setCheckedState({
-                      ...checkedState,
-                      country: {
-                        ...checkedState.country,
+                     setCheckedCountry({
+                      ...checkedCountry,
                         [item.id]: e.target.checked,
-                      },
                     });
                  }} 
                 id={item.name} 
                 type="checkbox"
-                checked={checkedState.country[item.id]}
+                checked={checkedCountry[item.id]}
                 disabled={existCountry.includes(item.name) === false}
                  />
                  <span className={style.checkmark}></span>

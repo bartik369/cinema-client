@@ -70,7 +70,7 @@
 @media (max-width: 380px) {
     .header-nav .menu-items .menu-item,
     .header-nav .menu-items .active {
-        margin-right: 15px;
+        margin-right: 10px;
         font-size: 11px;
     }
     .menu-item .icon,

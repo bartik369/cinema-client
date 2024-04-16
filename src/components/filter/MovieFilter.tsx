@@ -7,6 +7,8 @@ import { useGetPropertiesQuery} from '../../store/movieApi';
 import { resetFilter } from '../../store/movieOptionsSlice';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { IMovie} from '../../types/media';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBan } from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content'
 import style from './MovieFilter.module.css';
 
@@ -18,21 +20,17 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
 
   const dispatch = useAppDispatch()
   const { data: properties } = useGetPropertiesQuery();
-  const [checkedState, setCheckedState] = useState<any>({
-    genre: {},
-    country: {},
-    year: {},
-    rating: {},
-  });
+  const [checkedGenre, setCheckedGenre] = useState<any>('');
+  const [checkedCountry, setCheckedCountry] = useState('');
+  const [checkedYear, setCheckedYear] = useState('');
+  const [checkedRating, setCheckedRating] = useState('');
 
   const resetFilterHandler = () => {
     dispatch(resetFilter([]));
-    setCheckedState({
-      genre: {},
-      country: {},
-      year: {},
-      rating: {},
-    })
+    setCheckedGenre({});
+    setCheckedCountry('');
+    setCheckedYear('');
+    setCheckedRating('');
   }
 
   return (
@@ -40,33 +38,35 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
       <div className={style.item}>
         <DropCategory 
         existGenre={properties && properties.genreArr}
-        checkedState={checkedState}
-        setCheckedState={setCheckedState}
+        checkedGenre={checkedGenre}
+        setCheckedGenre={setCheckedGenre}
         />
       </div>
       <div className={style.item}>
       <DropCountry 
       existCountry={properties && properties.countryArr}
-      checkedState={checkedState}
-      setCheckedState={setCheckedState}
+      checkedCountry={checkedCountry}
+      setCheckedCountry={setCheckedCountry}
       />
       </div>
       <div className={style.item}>
        <DropYear 
        existYear={properties && properties.yearArr}
-       checkedState={checkedState}
-      setCheckedState={setCheckedState}
+       checkedYear={checkedYear}
+       setCheckedYear={setCheckedYear}
        />
       </div>
       <div className={style.item}>
         <DropRating
-        checkedState={checkedState}
-        setCheckedState={setCheckedState} 
-        existRating={properties && properties.ratingArr} />
+        existRating={properties && properties.ratingArr} 
+        checkedRating={checkedRating}
+        setCheckedRating={setCheckedRating}
+        />
       </div>
-      <div className={style.item}>
-        <button className={style.reset} onClick={resetFilterHandler}>{contentConst.resetFilter}</button>
-      </div>
+        <button className={style['reset-filter']} onClick={resetFilterHandler}>
+          <FontAwesomeIcon className={style.icon} icon={faBan}/>
+          {contentConst.resetFilter}
+        </button>
     </div>
   );
 };

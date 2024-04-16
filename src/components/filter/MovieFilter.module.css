@@ -20,22 +20,31 @@
     padding: 10px 0 5px;
 }
 
-.item .reset {
-    border: 1px solid #6c313c;
-    background-color: transparent;
-    padding: 11.5px 10px;
-    border-radius: 6px;
-    color: #984756;
-    font-family: inherit;
-    font-size: 12px;
-    transition: all .5s ease-in-out;
+.reset-filter {
+    border: 2px solid #2a2a42;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    margin-top: 10px;
+    padding: 9.5px;
+    border-radius: 6px;
+    font-weight: 300;
+    color: #b0bbd9;
+    font-family: inherit;
+    font-size: 13px;
+    transition: all .5s ease-in-out;
 }
 
-.item .reset:hover {
-    background-color: #fd4e52;
-    border: 1px solid #fd4e52;
+.reset-filter:hover {
+    background-color: #e94949;
+    border: 2px solid #e94949;
     color: #fff;
+}
+
+.reset-filter .icon {
+    font-size: 17px;
+    margin-right: 5px;
 }
 
 .filter select,
