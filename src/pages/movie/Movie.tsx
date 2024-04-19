@@ -53,7 +53,8 @@ const Movie: FC = () => {
           setVisibleRating(false);
           setSuccessVote(false);
         }, 2000);
-      });
+      })
+      .catch((error) => console.log(error))
     }
   };
 
@@ -66,7 +67,8 @@ const Movie: FC = () => {
       };
       await addFavorite(favoriteData).then(() => {
       getFavorites({ id: user._id });
-      });
+      })
+      .catch((error) => console.log(error))
     }
   };
 

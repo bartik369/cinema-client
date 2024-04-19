@@ -1,23 +1,25 @@
-import React, { FC } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '../hooks/reduxHook';
+import React, { FC, useEffect } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { IUser } from '../types/auth';
 
 interface IPrivateRoutesProps {
   allowedRoles: string[];
+  user: IUser;
+  authToken: string;
 }
 
-const PrivateRoutes: FC<IPrivateRoutesProps> = ({ allowedRoles }) => {
-  const user = useAppSelector(state => state.auth.user);
-  const token = useAppSelector(state => state.auth.token);
+const PrivateRoutes: FC<IPrivateRoutesProps> = ({ 
+  allowedRoles, 
+  user,
+  authToken }) => {
+  const location = useLocation();
 
   return (
     <div>
-      {token &&
-        ((user && user.roles || []).find((role) => allowedRoles?.includes(role)) ? (
-          <Outlet />
-        ) : (
-          <Navigate to="/" />
-        ))}
+      {(authToken && (user.roles || []).find((role) => allowedRoles?.includes(role)))
+      ? <Outlet />
+      : <Navigate to="/"  state={{from: location}} replace/>
+      }
     </div>
   );
 };

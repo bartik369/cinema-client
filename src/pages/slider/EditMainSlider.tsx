@@ -11,6 +11,7 @@ import EditSliderForm from '../../components/forms/EditSliderForm';
 import SlidersList from '../../components/sliders/SlidersList';
 import * as contentConst from '../../utils/constants/content';
 import style from './EditMainSlider.module.css';
+import { error } from 'console';
 
 const EditMainSlider: FC = () => {
   const [slider, setSlider] = useState<ISlider>({
@@ -74,9 +75,11 @@ const EditMainSlider: FC = () => {
       formData.append(key, slider[key as sliderKey]);
     });
     file && formData.append('file', file);
-    await addSlide(formData as unknown as ISliderFormData).then((payload) => {
+    await addSlide(formData as unknown as ISliderFormData)
+    .then((payload) => {
       payload && setModalSlider(false);
-    });
+    })
+    .catch((error) => console.log(error));
   };
   
   const updateSlideHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -87,11 +90,12 @@ const EditMainSlider: FC = () => {
       formData.append(key, slider[key as sliderKey]);
     });
     file && formData.append('file', file);
-    await updateSlide(formData as unknown as ISliderFormData).then(
+    await updateSlide(formData as unknown as ISliderFormData)
+    .then(
       (payload) => {
         payload && setModalSlider(false);
       }
-    );
+    ).catch((error) => console.log(error))
   };
 
   return (

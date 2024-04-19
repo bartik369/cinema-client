@@ -20,7 +20,7 @@ const Admin: FC = () => {
                        <UsersCounts />
                     </div>
                     <div className={style.item}>
-                    
+                    3
                     </div>
                     <div className={style.item}>
                         4

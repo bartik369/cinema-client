@@ -188,24 +188,3 @@
         border-radius: 2px;
     }
 }
-
-@media (min-width: 1800px) {
-    .carousel__slider::before {
-        content: '';
-        position: absolute;
-        height: 100%;
-        width: 110px;
-        background-image: url('../../../src/assets/pics/vignette_left.png');
-        z-index: 9;
-        left: 0;
-    }
-    .carousel__slider::after {
-        content: '';
-        position: absolute;
-        height: 100%;
-        width: 100px;
-        background-image: url('../../../src/assets/pics/vignette_right.png');
-        z-index: 9;
-        right: 0;
-    }
-}

@@ -27,7 +27,7 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
 
   const resetFilterHandler = () => {
     dispatch(resetFilter([]));
-    setCheckedGenre({});
+    setCheckedGenre('');
     setCheckedCountry('');
     setCheckedYear('');
     setCheckedRating('');
