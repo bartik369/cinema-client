@@ -1,5 +1,5 @@
 import { apiSlice } from "./apiSlice";
-import { logOut, setCredentials } from './authSlice';
+import { logOut, setCredentials, setAuth } from './authSlice';
 import ENV from "../env.config";
 
 export const authApi = apiSlice.injectEndpoints({
@@ -49,6 +49,23 @@ export const authApi = apiSlice.injectEndpoints({
                 }
             }
         }),
+        verifyToken: builder.mutation<undefined, string>({
+            query:(token) => ({
+                url: `${ENV.API_URL}/verify-token/`,
+                method: 'GET',
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${token}`}
+            }),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled
+                    dispatch(setCredentials(data))
+                    dispatch(setAuth(true))
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+        }),
         profileUser: builder.query({
             query: (id) => ({
                 url: `${ENV.API_PROFILE}${id}`,
@@ -64,4 +81,5 @@ export const {
     useLogoutUserMutation,
     useProfileUserQuery,
     useRefreshMutation,
+    useVerifyTokenMutation,
 } = authApi;

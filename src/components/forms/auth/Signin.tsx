@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useAppDispatch} from '../../../hooks/reduxHook';
 import { IUserAuth } from '../../../types/auth';
 import { useSigninUserMutation } from '../../../store/authApi';
-import { setCredentials } from '../../../store/authSlice';
+import { setCredentials, setAuth } from '../../../store/authSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,6 +43,7 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
         .unwrap()
         .then((data) => {
             dispatch(setCredentials(data));
+            dispatch(setAuth(true))
             closeFormHandler();
             localStorage.setItem('accessToken', data.token)
         })

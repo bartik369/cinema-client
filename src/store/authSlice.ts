@@ -3,6 +3,7 @@ import { IUser} from '../types/auth';
 
 type AuthState = {
     user: IUser;
+    isAuth: boolean;
     token: string | null;
     error: string | null;
     success: boolean;
@@ -16,6 +17,7 @@ const initialState: AuthState = {
         roles: [],
         member: [],
     },
+    isAuth: false,
     token: null,
     error: null,
     success: false,
@@ -31,6 +33,10 @@ const authSlice = createSlice({
             const {user, token} = action.payload
             state.user = user;
             state.token = token;
+            state.loading = true;
+        },
+        setAuth: (state, action) => {
+            state.isAuth = action.payload;
         },
         logOut:(state, action) => {
             state.user = action.payload
@@ -40,7 +46,7 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer
-export const  {setCredentials, logOut} = authSlice.actions;
+export const  {setCredentials, setAuth,  logOut} = authSlice.actions;
 
 const isError = (action:AnyAction) => {
     return action.type.endsWith('rejected')
