@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     max-width: 1320px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
 }
 
 .l-side {

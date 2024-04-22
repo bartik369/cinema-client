@@ -1,12 +1,12 @@
 .wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 10px;
 }
 
 .portrait {
     display: flex;
-    width: 48%;
     box-sizing: border-box;
 }
 
@@ -22,7 +22,6 @@
 .info {
     box-sizing: border-box;
     word-wrap: break-word;
-    width: 48%;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -103,4 +102,12 @@
 
 .btn-submit:hover {
     background-color: #27bda8;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

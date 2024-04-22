@@ -3,12 +3,10 @@ import { IMovie } from '../../types/media';
 import { ageItemsData, categoryMovies, yearMedia } from '../../utils/data/data';
 import { countryList } from '../../utils/data/coutry';
 import { directorsList } from '../../utils/data/directors';
-// import { getActors } from '../../store/actorSlice';
 import { useGetActorsQuery } from '../../store/actorApi';
-import { useAppDispatch } from '../../hooks/reduxHook';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faCamera, faVideo } from '@fortawesome/free-solid-svg-icons';
 import style from './AddItemForm.module.css';
 
 interface IMovieProps {
@@ -231,7 +229,7 @@ const MovieForm: FC<IMovieProps> = ({
             {contentConst.movieTrailer}
           </span>
           <label className={style['photo-layer']} htmlFor={"upload-video"}>
-            <FontAwesomeIcon className={style['photo-icon']} icon={faCamera} />
+            <FontAwesomeIcon className={style['photo-icon']} icon={faVideo} />
             <span className={style['select-photo']}>
               {contentConst.actorSelectPhoto}
             </span>
