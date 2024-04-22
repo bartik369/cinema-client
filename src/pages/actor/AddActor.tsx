@@ -25,10 +25,6 @@ const AddActor: FC = () => {
     },
   });
 
-  // useEffect(() => {
-  //   dispatch(getActors());
-  // }, [dispatch]);
-
   const [file, setFile] = useState<string | Blob>('');
   const [prevImg, setPrevImg] = useState<string | null>('');
 
