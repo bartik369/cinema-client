@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { footerMenu1, footerMenu2 } from '../../utils/data/data';
-import Glasses from '../../assets/pics/cinema.svg';
+import { useAppSelector } from '../../hooks/reduxHook';
 import * as contentConst from '../../utils/constants/content'
 import Instagram from '../../assets/pics/instagram.svg'
 import Twitter from '../../assets/pics/twitter.svg'
@@ -11,8 +11,9 @@ import Message from '../../assets/pics/message.svg'
 import style from './Footer.module.css';
 
 const Footer: FC = () => {
+  const existTrailer = useAppSelector(state => state.movies.existTrailer);
   return (
-    <div className={style.container}>
+    <div className={existTrailer ? style.container : style.notrailer}>
       <div className={style.inner}>
         <div className={style.menu}>
           <ul>

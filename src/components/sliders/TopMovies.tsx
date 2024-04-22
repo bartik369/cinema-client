@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector} from '../../hooks/reduxHook';
+import Loader from '../loader/Loader';
 import { useGetFavoritesMutation, useGetTopMoviesQuery } from '../../store/movieApi';
 import MovieItem from '../items/MovieItem';
 import useCountTopHook  from '../../hooks/useCountTopHook';
@@ -29,7 +30,8 @@ const TopMovies: FC = () => {
 
   return (
     <div className={style.movies__carousel}>
-      <CarouselProvider
+      {movies ? (
+        <CarouselProvider
         naturalSlideWidth={70}
         naturalSlideHeight={160}
         totalSlides={movies! && movies.length + 1}
@@ -61,6 +63,7 @@ const TopMovies: FC = () => {
             ))}
         </Slider>
       </CarouselProvider>
+      ) : <Loader />}
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {useAppSelector } from '../../hooks/reduxHook';
+import {useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
 import { 
   useGetFavoritesMutation, 
   useAddFavoriteMutation,
@@ -8,6 +8,7 @@ import {
   useSetRatingMutation,
   useGetRatingQuery,
 } from '../../store/movieApi';
+import { setExistTrailer } from '../../store/movieOptionsSlice';
 import { useGetMovieActorsMutation } from '../../store/actorApi';
 import { IMovie, IMovieRating, IMovieAddFavorite } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
@@ -22,6 +23,7 @@ import cinema from '../../assets/pics/cinema.jpg';
 import style from './Movies.module.css';
 
 const Movie: FC = () => {
+  const dispatch = useAppDispatch()
   const [getFavorites, {data: favorites}] = useGetFavoritesMutation();
   const [addFavorite] = useAddFavoriteMutation();
   const [setRating] = useSetRatingMutation();
@@ -39,7 +41,15 @@ const Movie: FC = () => {
       getMovieActors(movie.actors);
       getFavorites({ id: user._id });
     }
+    if (movie && movie.trailer) {
+      dispatch(setExistTrailer(true))
+    } else {
+      dispatch(setExistTrailer(false))
+    }
   }, [movie]);
+
+
+
 
   const ratingHandler = async (value: number) => {
     if (movie) {

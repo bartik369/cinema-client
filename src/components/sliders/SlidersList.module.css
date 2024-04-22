@@ -87,4 +87,18 @@
 
 @media (max-width: 540px) {}
 
-@media (max-width: 480px) {}
+@media (max-width: 450px) {
+    .info .actions .update,
+    .info .actions .delete {
+        font-size: 11px;
+        border: none;
+        padding: 9px 10px 7px;
+        color: #a4aec1;
+        border-radius: 4px;
+        background-color: #2a2e45;
+        cursor: pointer;
+    }
+    .info .btns span {
+        display: none;
+    }
+}

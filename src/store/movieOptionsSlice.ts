@@ -5,6 +5,7 @@ type MovieState = {
   loading: boolean;
   error: null | string;
   filter: IFilterMovie;
+  existTrailer: boolean;
 };
 
 const initialState: MovieState = {
@@ -14,6 +15,7 @@ const initialState: MovieState = {
     year: [],
     rating: [],
   },
+  existTrailer: false,
   loading: false,
   error: null,
 };
@@ -56,6 +58,9 @@ const movieSlice = createSlice({
           ))
         : state.filter.rating.push(action.payload);
     },
+    setExistTrailer: (state, action) => {
+      state.existTrailer = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -72,6 +77,7 @@ export const {
   setMovieYear,
   setMovieRating,
   resetFilter,
+  setExistTrailer,
 } = movieSlice.actions;
 
 const isError = (action: AnyAction) => {

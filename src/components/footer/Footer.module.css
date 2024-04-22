@@ -7,6 +7,14 @@
     margin: 0 auto;
 }
 
+.notrailer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
 .inner {
     display: grid;
     grid-gap: 10px;
@@ -90,6 +98,17 @@ ul li {
 .menu .help img {
     width: 29px;
     margin-right: 2px;
+}
+
+@media (max-width: 1140px) {
+    .notrailer {
+        display: flex;
+        padding-top: 120px;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        max-width: 1320px;
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 800px) {

@@ -11,6 +11,7 @@ import Footer from "./components/footer/Footer";
 import AddActor from "./pages/actor/AddActor";
 import Movie from "./pages/movie/Movie";
 import Profile from "./pages/profile/Profile";
+import Page404 from "./pages/404/Page404";
 import Admin from "./pages/admin/Admin";
 import EditMainSlider from "./pages/slider/EditMainSlider";
 import style from "./App.module.css";
@@ -35,6 +36,7 @@ const App: FC = () => {
         <Route path="/" index element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:id" element={<Movie />} />
+        <Route path="*" element={<Page404 />} />
         <Route element={<PrivateRoutes allowedRoles={[contentConst.USER]} />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
