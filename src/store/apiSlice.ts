@@ -2,8 +2,6 @@ import { RootState } from './index';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query'
 import { setCredentials, logOut } from "./authSlice";
-import { useAppDispatch } from '../hooks/reduxHook';
-import axios from 'axios';
 import ENV from "../env.config";
 
 const baseQuery = fetchBaseQuery({
@@ -37,39 +35,6 @@ const baseQueryWithReauth: BaseQueryFn<
   }
   return result
 }
-
-// export const useValidateAccessToken = () => {
-//   const dispatch = useAppDispatch()
-
-//   const validateAccessToken = async(token:string) => {
-//       try {
-//           const response = await axios.get(`${ENV.API_URL}/verify-token/`, {
-//               withCredentials: true,
-//               headers: { Authorization: `Bearer ${token}`}
-//           });
-
-//           if (response.data) {
-//               try {
-//                 dispatch(setCredentials(response.data));
-//               } catch (error) { }
-//           }
-//       } catch (error: any) {
-//           if (error.response.status === 403) {
-//               const response = await axios.get(`${ENV.API_URL}/refresh-token`, {
-//                   withCredentials: true,
-//               });
-
-//               if (response.data) {
-//                 localStorage.setItem('accessToken', response.data.token)
-//                 dispatch(setCredentials(response.data));
-//               } else {}
-//           }
-//       }
-
-//   }
-//   return validateAccessToken;
-// };
-
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,

@@ -103,6 +103,7 @@ export const chatHelp = 'Написать нам в чате'
 export const serverError = 'server error';
 export const error404 = '404';
 export const error404text = 'Страница не найдена';
+export const errorAddFavotite = 'Доступно только авторизированным пользователям';
 
 export const subscription = 'Подписка';
 export const bill = 'Счет';

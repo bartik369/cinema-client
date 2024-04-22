@@ -1,4 +1,4 @@
-import {createSlice, AnyAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import { IUser} from '../types/auth';
 
 type AuthState = {
@@ -41,13 +41,10 @@ const authSlice = createSlice({
         logOut:(state, action) => {
             state.user = action.payload
             state.token = null;
+            state.isAuth = false;
         }
     },
 });
 
 export default authSlice.reducer
 export const  {setCredentials, setAuth,  logOut} = authSlice.actions;
-
-const isError = (action:AnyAction) => {
-    return action.type.endsWith('rejected')
-}

@@ -1,7 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../hooks/reduxHook';
-import { useAddActorMutation, useGetActorsQuery } from '../../store/actorApi';
-// import { addActor, getActors } from '../../store/actorSlice';
+import React, { FC, useState } from 'react';
+import { useAddActorMutation } from '../../store/actorApi';
 import { IActor } from '../../types/media';
 import ActorForm from '../../components/forms/ActorForm';
 import PreviewActor from '../../components/preview/PreviewActor';

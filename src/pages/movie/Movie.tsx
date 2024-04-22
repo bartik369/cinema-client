@@ -14,7 +14,9 @@ import { IMovie, IMovieRating, IMovieAddFavorite } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
 import ENV from '../../env.config';
 import Rating from '../../components/rating/Rating';
+import Casts from './Casts';
 import Loader from '../../components/loader/Loader';
+import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import nonePoster from '../../assets/pics/blank_movie.jpg';
@@ -32,7 +34,8 @@ const Movie: FC = () => {
   const { id } = params;
   const {data: movie} = useGetMovieQuery(id!);
   const {data: movieRating} = useGetRatingQuery(id!);
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector(state => state.auth.user);
+  const isAuth = useAppSelector(state => state.auth.isAuth);
   const [visibleRating, setVisibleRating] = useState<boolean>(false);
   const [successVote, setSuccessVote] = useState<boolean>(false);
 
@@ -46,12 +49,10 @@ const Movie: FC = () => {
     } else {
       dispatch(setExistTrailer(false))
     }
-  }, [movie]);
-
-
-
+  }, [movie, user]);
 
   const ratingHandler = async (value: number) => {
+
     if (movie) {
       const ratingData: IMovieRating = {
         id: movie._id!,
@@ -69,8 +70,8 @@ const Movie: FC = () => {
   };
 
   const favoriteHandler = async (_id: string) => {
-    
-    if (user && movie) {
+
+    if (isAuth && user && movie) {
       const favoriteData: IMovieAddFavorite = {
         userId: user._id,
         movieId: movie._id!,
@@ -79,6 +80,8 @@ const Movie: FC = () => {
       getFavorites({ id: user._id });
       })
       .catch((error) => console.log(error))
+    } else {
+      toast.error(contentConst.errorAddFavotite)
     }
   };
 
@@ -95,17 +98,21 @@ const Movie: FC = () => {
       )}
       {movie ? (
         <div className={style.movie}>
+          <ToastContainer
+            theme="colored"
+            autoClose={7000}
+            position="top-center"
+          />
           <div className={style['video-layer']}>
             {movie.trailer ? (
               <video className={style.video} autoPlay muted loop
                 src={`${ENV.API_URL_UPLOADS_MOVIES}${movie.trailer}`}
               />
             ) : (
-              <img className={style.cinema} src={cinema} />
+              <img className={style.cinema} src={cinema} alt="" />
             )}
             <img className={style.vignette} src={vignette} alt='' />
           </div>
-
           <div className={style.inner}>
             <div className={style.poster}>
               <img alt="" src={ movie.picture
@@ -139,9 +146,7 @@ const Movie: FC = () => {
               <div className={style.description}>{movie.description}</div>
               <div className={style.action}>
                 <div className={style.watch}>{contentConst.watch}</div>
-                <div
-                  className={
-                    favorites?.movies.includes(movie._id as string)
+                <div className={favorites && favorites.movies.includes(movie._id as string)
                       ? style.favorite
                       : style.nofavorite
                   }
@@ -151,10 +156,9 @@ const Movie: FC = () => {
                     icon={faStar}
                   />
                 </div>
-                <div
-                  className={style['movie-rating']}
-                  onClick={() => setVisibleRating(true)}
-                >
+                <div 
+                className={style['movie-rating']}
+                onClick={() => setVisibleRating(true)}>
                   <div className={style.number}>
                     {movieRating && movieRating.toFixed(1)}
                   </div>
@@ -164,22 +168,7 @@ const Movie: FC = () => {
               <div className={style['cast-title']}>
                 {contentConst.movieCasts}
               </div>
-              <div className={style.cast}>
-                {actors &&
-                  actors.map((item) => (
-                    <div className={style.item2} key={item._id}>
-                      <div className={style.portrait}>
-                        <img
-                          src={`${ENV.API_URL_UPLOADS_ACTORS}${item.picture}`}
-                          alt=''
-                        />
-                      </div>
-                      <div className={style.name}>
-                        <div>{item.nameRu}</div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
+              <Casts actors={actors!}/>
             </div>
           </div>
         </div>
