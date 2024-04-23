@@ -6,8 +6,6 @@ type AuthState = {
     isAuth: boolean;
     token: string | null;
     error: string | null;
-    success: boolean;
-    loading:boolean;
 }
 
 const initialState: AuthState = {
@@ -20,8 +18,6 @@ const initialState: AuthState = {
     isAuth: false,
     token: null,
     error: null,
-    success: false,
-    loading: false,
 }
 
 
@@ -33,7 +29,6 @@ const authSlice = createSlice({
             const {user, token} = action.payload
             state.user = user;
             state.token = token;
-            state.loading = true;
         },
         setAuth: (state, action) => {
             state.isAuth = action.payload;

@@ -2,7 +2,9 @@ import React, { FC, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import * as contentConst from "../src/utils/constants/content";
 import PrivateRoutes from "./routes/PrivateRoutes";
-import { useVerifyTokenMutation } from "./store/authApi";
+import { useAppDispatch } from "./hooks/reduxHook";
+import { useVerifyTokenMutation, useRefreshTokenMutation } from "./store/authApi";
+import { setCredentials, setAuth } from "./store/authSlice";
 import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
 import Movies from "./pages/movie/Movies";
@@ -17,17 +19,33 @@ import EditMainSlider from "./pages/slider/EditMainSlider";
 import style from "./App.module.css";
 
 const App: FC = () => {
+  const dispatch = useAppDispatch()
   const [verifyToken] = useVerifyTokenMutation();
+  const [refreshToken] = useRefreshTokenMutation()
   const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     token &&
-      verifyToken(token)
-        .then((data) => console.log(data))
-        .catch((error) => {
-          return error;
-        });
+    verifyToken(token)
+    .unwrap()
+    .then((data) => {
+      dispatch(setCredentials(data));
+      dispatch(setAuth(true));
+    })
+    .catch((error) => {
+      if (error.status == '403') {
+        refreshToken()
+        .unwrap()
+        .then((data) => {
+          localStorage.setItem('accessToken', data.token)
+          dispatch(setCredentials(data));
+          dispatch(setAuth(true));
+        })
+        .catch()
+      }
+    })
   }, [token]);
+
 
   return (
     <div className={style.wrapper}>

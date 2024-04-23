@@ -24,3 +24,7 @@ export interface IUserAuth {
     password: string;
     repeatPassword: string;
 }
+export interface IUserValidate {
+    user: IUser;
+    token: string;
+}

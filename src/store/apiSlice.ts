@@ -29,6 +29,7 @@ const baseQueryWithReauth: BaseQueryFn<
     if (refreshResult.data) {
       api.dispatch(setCredentials(refreshResult.data))
       result = await baseQuery(args, api, extraOptions)
+
     } else {
       api.dispatch(logOut(null))
     }
