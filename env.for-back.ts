@@ -23,6 +23,7 @@ const ENV = {
     API_CREATE_USER: '/create-user/',
     API_AUTH: '/auth/',
     API_LOGOUT: '/logout/',
+    API_VERIFY_TOKEN: '/verify-token/',
     API_REFRESH_TOKEN: '/refresh-token/',
     API_PROFILE: '/profile/',
 

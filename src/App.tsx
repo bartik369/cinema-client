@@ -1,10 +1,8 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import * as contentConst from "../src/utils/constants/content";
 import PrivateRoutes from "./routes/PrivateRoutes";
-import { useAppDispatch } from "./hooks/reduxHook";
-import { useVerifyTokenMutation, useRefreshTokenMutation } from "./store/authApi";
-import { setCredentials, setAuth } from "./store/authSlice";
+import { useVerifyTokenMutation } from "./store/authApi";
 import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
 import Movies from "./pages/movie/Movies";
@@ -17,38 +15,23 @@ import Page404 from "./pages/404/Page404";
 import Admin from "./pages/admin/Admin";
 import EditMainSlider from "./pages/slider/EditMainSlider";
 import style from "./App.module.css";
+import Information from "./components/information/Information";
 
 const App: FC = () => {
-  const dispatch = useAppDispatch()
   const [verifyToken] = useVerifyTokenMutation();
-  const [refreshToken] = useRefreshTokenMutation()
+  const [visibleInfo, setVisibleInfo] = useState<boolean>(true)
   const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    token &&
-    verifyToken(token)
-    .unwrap()
-    .then((data) => {
-      dispatch(setCredentials(data));
-      dispatch(setAuth(true));
-    })
-    .catch((error) => {
-      if (error.status == '403') {
-        refreshToken()
-        .unwrap()
-        .then((data) => {
-          localStorage.setItem('accessToken', data.token)
-          dispatch(setCredentials(data));
-          dispatch(setAuth(true));
-        })
-        .catch()
-      }
-    })
+    token && verifyToken(token)
   }, [token]);
-
 
   return (
     <div className={style.wrapper}>
+      {visibleInfo && <Information 
+      setVisibleInfo={setVisibleInfo}
+      visibleInfo={visibleInfo}
+      />}
       <Header />
       <Routes>
         <Route path="/" index element={<Home />} />

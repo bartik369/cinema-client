@@ -1,21 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RootState } from './index';
+import { apiSlice } from "./apiSlice";
 import { logOut, setCredentials, setAuth } from './authSlice';
 import ENV from "../env.config";
 
-export const authApi = createApi({
-    reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({ 
-        baseUrl: ENV.API_URL,
-        credentials: 'include',
-        prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).auth.token;
-            if (token) {
-                headers.set("authorization", `Bearer ${token}`)
-            }
-            return headers
-        }
-     }),
+export const authApi = apiSlice.injectEndpoints({
     endpoints: builder =>({
         signupUser:builder.mutation({
             query: (credentials) => ({
@@ -47,37 +34,41 @@ export const authApi = createApi({
                 }
             }
         }),
-        refreshToken: builder.mutation<any, void>({
+        refresh: builder.mutation({
             query:() => ({
                 url: `${ENV.API_REFRESH_TOKEN}`,
                 method: 'GET',
             }),
-            // async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-            //     try {
-            //         const { data } = await queryFulfilled
-            //         const { accessToken } = data
-            //         dispatch(setCredentials({ accessToken }))
-            //     } catch (err) {
-            //         console.log(err)
-            //     }
-            // }
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setCredentials(data));
+                    dispatch(setAuth(true));
+                } catch (err) {
+                    if (err) {
+                        dispatch(logOut(null));
+                        dispatch(setAuth(false));
+                    }
+                }
+            }
         }),
         verifyToken: builder.mutation<undefined, string>({
             query:(token) => ({
-                url: `${ENV.API_URL}/verify-token/`,
+                url: `${ENV.API_VERIFY_TOKEN}`,
                 method: 'GET',
                 withCredentials: true,
                 headers: { Authorization: `Bearer ${token}`}
             }),
-            // async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-            //     try {
-            //         const { data } = await queryFulfilled
-            //         dispatch(setCredentials(data))
-            //         dispatch(setAuth(true))
-            //     } catch (err:any) {
-            //         return err
-            //     }
-            // }
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled
+                    dispatch(setCredentials(data))
+                    dispatch(setAuth(true))
+                } catch (err) {
+                    dispatch(logOut(null));
+                    dispatch(setAuth(false));
+                }
+            }
         }),
         profileUser: builder.query({
             query: (id) => ({
@@ -93,6 +84,6 @@ export const {
     useSignupUserMutation,
     useLogoutUserMutation,
     useProfileUserQuery,
+    useRefreshMutation,
     useVerifyTokenMutation,
-    useRefreshTokenMutation,
 } = authApi;
