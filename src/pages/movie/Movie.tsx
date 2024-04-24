@@ -4,10 +4,11 @@ import {useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
 import { 
   useGetFavoritesMutation, 
   useAddFavoriteMutation,
-  useGetMovieQuery,
+  useGetMovieMutation,
   useSetRatingMutation,
   useGetRatingQuery,
 } from '../../store/movieApi';
+import { useNavigate } from 'react-router-dom';
 import { setExistTrailer } from '../../store/movieOptionsSlice';
 import { useGetMovieActorsMutation } from '../../store/actorApi';
 import { IMovie, IMovieRating, IMovieAddFavorite } from '../../types/media';
@@ -32,12 +33,23 @@ const Movie: FC = () => {
   const [getMovieActors, {data: actors}] = useGetMovieActorsMutation()
   const params = useParams();
   const { id } = params;
-  const {data: movie} = useGetMovieQuery(id!);
+  const [getMovie, {data: movie, error}] = useGetMovieMutation();
   const {data: movieRating} = useGetRatingQuery(id!);
   const user = useAppSelector(state => state.auth.user);
   const isAuth = useAppSelector(state => state.auth.isAuth);
   const [visibleRating, setVisibleRating] = useState<boolean>(false);
   const [successVote, setSuccessVote] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) {
+      getMovie(id)
+      .unwrap()
+      .catch((error) => {
+        error.status == '404' && navigate('/404')
+      })
+    }
+  }, []);
 
   useEffect(() => {
     if (movie && user) {
@@ -58,7 +70,8 @@ const Movie: FC = () => {
         id: movie._id!,
         value: value,
       };
-      await setRating(ratingData).then((res) => {
+      setRating(ratingData)
+      .then(() => {
         setSuccessVote(true);
         setTimeout(() => {
           setVisibleRating(false);

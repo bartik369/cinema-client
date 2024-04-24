@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
+import {FC, useEffect} from 'react';
 import { useLocation, Link, useNavigate} from 'react-router-dom';
-import { useGetMovieQuery } from '../../store/movieApi';
+import { useGetMovieMutation } from '../../store/movieApi';
 import { pageTitles } from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,11 @@ const Breadcrumbs: FC = () => {
   const navigate = useNavigate();
   const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
   const pathnames = location.pathname.split("/").filter((x) => x);
-  const {data: movie} = useGetMovieQuery(regEx! && pathnames[1])
+  const [getMovie, {data: movie}] = useGetMovieMutation()
+
+  useEffect(() => {
+     regEx && getMovie(pathnames[1])
+  }, [pathnames[1]])
 
   return (
     <div className={pathnames.length === 0 
@@ -36,7 +40,7 @@ const Breadcrumbs: FC = () => {
 
         return isLast ? (
           <div className={style['last-link']} key={name}>
-            {regEx ? movie?.titleRu : pageTitles[name as keyof typeof pageTitles]}
+            {(regEx && movie) ? movie.titleRu : pageTitles[name as keyof typeof pageTitles]}
           </div>
         ) : (
           <Link key={name} onClick={() => navigate(routeTo)} to={routeTo}>

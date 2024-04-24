@@ -27,7 +27,7 @@
 
 .page404 .error .number {
     color: rgb(255, 255, 255);
-    font-size: 100px;
+    font-size: 60px;
     font-family: inherit;
     font-weight: 600;
     text-transform: uppercase;
@@ -37,7 +37,7 @@
     color: aliceblue;
     font-family: inherit;
     font-weight: 300;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 .page404 .video {
@@ -58,4 +58,22 @@
     display: flex;
     justify-content: center;
     position: relative;
+}
+
+@media (max-width: 1000px) {
+    .page404 .error .number {
+        font-size: 70px;
+    }
+    .page404 .error .text {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .page404 .error .number {
+        font-size: 50px;
+    }
+    .page404 .error .text {
+        font-size: 18px;
+    }
 }

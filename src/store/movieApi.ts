@@ -8,6 +8,7 @@ import {
     IMovieFavorites,
     IExistFavorite,
   } from './../types/media';
+import { useNavigate } from 'react-router-dom';
 import ENV from '../env.config';
 
 export const movieApi = createApi({
@@ -29,11 +30,12 @@ export const movieApi = createApi({
             ]
           : [{ type: "Movies", _id: "LIST" }],
     }),
-    getMovie: builder.query<IMovie, string>({
+    getMovie: builder.mutation<IMovie, string>({
         query: (id:string) => ({
-          url: `${ENV.API_MOVIE}${id}`,
-          method: "GET",
-        }),
+          url: `${ENV.API_MOVIE}`,
+          method: "POST",
+          body: {id: id},
+        })
       }),
     addMovie: builder.mutation<IMovie, any>({
       query: (data) => ({
@@ -107,7 +109,7 @@ export const {
     useGetLatestMoviesQuery,
     useAddMovieMutation,
     useAddFavoriteMutation,
-    useGetMovieQuery,
+    useGetMovieMutation,
     useSetRatingMutation,
     useSearchMovieMutation,
     useGetPropertiesQuery,
