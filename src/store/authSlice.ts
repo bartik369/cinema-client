@@ -30,14 +30,14 @@ const authSlice = createSlice({
             state.user = user;
             state.token = token;
         },
-        setAuth: (state, action) => {
-            state.isAuth = action.payload;
-        },
         logOut:(state, action) => {
             state.user = action.payload
             state.token = null;
             state.isAuth = false;
-        }
+        },
+        setAuth: (state, action) => {
+            state.isAuth = action.payload;
+        },
     },
 });
 

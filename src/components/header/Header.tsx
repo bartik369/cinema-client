@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useRef, MouseEvent } from 'react';
+import  { FC, useEffect, useState, useRef, MouseEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../navigation/Navbar';
 import Search from '../search/Search';
@@ -23,6 +23,7 @@ const Header: FC = () => {
   const [visibleSignup, setVisibleSignup] = useState<boolean>(false);
   const location = useLocation();
   const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
+  const regEx404 = location.pathname.match(/\/404/);
   const myRef = useRef<HTMLButtonElement>(null);
 
   const visibleHandler = () => {
@@ -56,7 +57,7 @@ const Header: FC = () => {
   return (
     <>
     {visible && <Search visibleHandler={visibleHandler} />}
-      <div className={regEx ? style['nav-absolute'] : style['nav-relative']}>
+      <div className={(regEx || regEx404) ? style['nav-absolute'] : style['nav-relative']}>
         <div className={style.container}>
             <Link className={style.logo} to={'/'}>
               <img src={Glasses} alt='' />

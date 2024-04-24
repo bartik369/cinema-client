@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { FC, useEffect} from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import * as contentConst from "../src/utils/constants/content";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import { useVerifyTokenMutation } from "./store/authApi";
@@ -15,11 +15,9 @@ import Page404 from "./pages/404/Page404";
 import Admin from "./pages/admin/Admin";
 import EditMainSlider from "./pages/slider/EditMainSlider";
 import style from "./App.module.css";
-import Information from "./components/information/Information";
 
 const App: FC = () => {
   const [verifyToken] = useVerifyTokenMutation();
-  const [visibleInfo, setVisibleInfo] = useState<boolean>(true)
   const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
@@ -28,16 +26,13 @@ const App: FC = () => {
 
   return (
     <div className={style.wrapper}>
-      {visibleInfo && <Information 
-      setVisibleInfo={setVisibleInfo}
-      visibleInfo={visibleInfo}
-      />}
       <Header />
       <Routes>
         <Route path="/" index element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:id" element={<Movie />} />
-        <Route path="*" element={<Page404 />} />
+        <Route path="/404" element={<Page404 />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
         <Route element={<PrivateRoutes allowedRoles={[contentConst.USER]} />}>
           <Route path="/profile" element={<Profile />} />
         </Route>

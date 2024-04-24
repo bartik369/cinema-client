@@ -137,4 +137,5 @@ export const pageTitles = {
   'add-movie': 'Добавить фильм',
   'add-actor': 'Добавить актера',
   'edit-slider': 'Слайдер',
+  '404': 'Страница не найдена',
 }
