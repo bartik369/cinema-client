@@ -121,7 +121,7 @@ export const invite = 'Пригласить';
 export const events = 'События';
 export const settings = 'Настройки';
 
-export const information = `Данный портал является тестовой платформой для изучения Frontend && Backend разработки и не несет в себе какой-либо коммерческой составляющей.`;
+export const information = `Данный портал является тестовой средой для изучения/тестирования Frontend && Backend разработки и не несет в себе какой-либо коммерческой составляющей.`;
 export const close = 'Закрыть';
 
 
