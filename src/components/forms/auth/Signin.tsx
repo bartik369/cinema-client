@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import validate from '../../../middleware/validateAuth';
-import authBanner from '../../../assets/pics/authwall.jpeg'
+import authBanner from '../../../assets/pics/authwall.jpg'
 import { faEye, faEyeSlash, faEnvelope, faXmark } from '@fortawesome/free-solid-svg-icons';
 import style from './Auth.module.css';
 import 'react-toastify/dist/ReactToastify.css';

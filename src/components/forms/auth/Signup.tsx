@@ -7,7 +7,7 @@ import validate from '../../../middleware/validateAuth'
 import { IUserAuth } from '../../../types/auth';
 import * as contentConst from '../../../utils/constants/content';
 import { ToastContainer, toast } from 'react-toastify';
-import authBanner from '../../../assets/pics/authwall.jpeg'
+import authBanner from '../../../assets/pics/authwall.jpg'
 import { faEye, faEyeSlash, faEnvelope, faXmark} from '@fortawesome/free-solid-svg-icons';
 import style from './Auth.module.css';
 import 'react-toastify/dist/ReactToastify.css';
