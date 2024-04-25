@@ -11,7 +11,9 @@ const Page404: FC = () => {
         <video className={style.video} autoPlay muted loop src={video404} />
         <img className={style.vignette} src={vignette} alt="" />
         <div className={style.error}>
-          <div className={style.number}>{contentConst.error404}</div>
+          <div className={style.number}>
+            {contentConst.error404}
+            </div>
           <div className={style.text}>{contentConst.error404text}</div>
         </div>
       </div>

@@ -26,18 +26,19 @@
 }
 
 .page404 .error .number {
-    color: rgb(255, 255, 255);
-    font-size: 60px;
+    color: #ffffff;
+    line-height: 85px;
+    font-size: 95px;
     font-family: inherit;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 .page404 .error .text {
-    color: aliceblue;
+    color: rgb(255, 255, 255);
     font-family: inherit;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .page404 .video {
@@ -63,31 +64,40 @@
 @media (max-width: 1000px) {
     .page404 .error .number {
         font-size: 70px;
+        line-height: 70px;
     }
     .page404 .error .text {
-        font-size: 20px;
+        font-size: 16px;
     }
 }
 
 @media (max-width: 800px) {
+    .page404 {
+        align-items: flex-end;
+    }
     .page404 .video {
         width: 100%;
         max-width: 1600px;
     }
     .page404 .error .number {
-        font-size: 50px;
+        font-size: 80px;
+        line-height: 80px;
     }
     .page404 .error .text {
-        font-size: 18px;
+        font-size: 15px;
     }
 }
 
 @media (max-width: 450px) {
+    .page404 {
+        align-items: flex-end;
+    }
     .page404 .error .number {
-        font-size: 50px;
+        font-size: 70px;
+        line-height: 70px;
     }
     .page404 .error .text {
-        font-size: 18px;
+        font-size: 14px;
     }
     .page404 {
         height: 300px;
