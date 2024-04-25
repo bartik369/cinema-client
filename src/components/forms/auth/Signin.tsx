@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import validate from '../../../middleware/validateAuth';
+import authBanner from '../../../assets/pics/authwall.jpeg'
 import { faEye, faEyeSlash, faEnvelope, faXmark } from '@fortawesome/free-solid-svg-icons';
 import style from './Auth.module.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -60,6 +61,12 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
       position="top-center"
        />
        </div> 
+
+      <div className={style.inner}>
+      <div className={style.banner}>
+        <img src={authBanner} alt="" />
+      </div>
+      <div className={style.formwall}>
       <form className={style.form} action='' onSubmit={login}>
         <span className={style.title}>{contentConst.signinTitle}</span>
         <span className={style.label}>{contentConst.email}</span>
@@ -113,6 +120,9 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
         </div>
         <button type="submit" className={style['enter-btn']}>{contentConst.enterBtn}</button>
       </form>
+      </div>
+      </div>
+
       <button className={style.close} onClick={closeFormHandler}>
         <FontAwesomeIcon icon={faXmark} />
       </button>

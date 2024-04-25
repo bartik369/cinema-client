@@ -1,5 +1,5 @@
 .auth {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -12,22 +12,45 @@
     align-items: center;
 }
 
-.form .error {
-    color: #f83b56;
-    font-size: 10px;
-    font-family: inherit;
-    text-align: right;
+.inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+    max-height: 600px;
+    height: 100%;
+    max-width: 1000px;
+    width: 100%;
 }
 
-.form {
+.inner .banner {
+    background-color: rgb(15, 15, 15);
+    overflow: hidden;
+}
+
+.banner img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.inner .formwall {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     background-color: #10111a;
     border: 1px solid #141520;
     padding: 30px 40px;
-    width: 300px;
-    border-radius: 8px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.06), 0 4px 4px 0 rgba(0, 0, 0, 0.06), 0 8px 8px 0 rgba(0, 0, 0, 0.06), 0 16px 16px 0 rgba(0, 0, 0, 0.06), 0 32px 32px 0 rgba(0, 0, 0, 0.06), 0 64px 64px 0 rgba(0, 0, 0, 0.06);
+}
+
+.inner .form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.form .error {
+    color: #f83b56;
+    font-size: 13px;
+    font-family: inherit;
+    text-align: right;
 }
 
 .toast {
@@ -60,15 +83,17 @@
     font-weight: 300;
     text-align: center;
     font-family: inherit;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 21px;
+    text-transform: uppercase;
     margin-bottom: 5px;
 }
 
 .icon {
     color: hsl(222, 15%, 50%);
-    font-size: 16px;
+    font-size: 32px;
     cursor: pointer;
-    margin-right: 8px;
+    margin-right: 12px;
     width: 20px;
 }
 
@@ -77,29 +102,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 6px;
+    margin-bottom: 11px;
 }
 
 .input-data .data {
     display: flex;
     align-items: center;
-    width: 100%
+    font-size: 18px;
+    width: 100%;
+    padding: 14px 20px;
+    background-color: #161723;
 }
 
 .label {
-    color: rgb(99, 96, 117);
+    color: rgb(192, 192, 192);
     font-family: inherit;
-    font-size: 11px;
-    padding: 5px 25px;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 7px 33px;
 }
 
 .enter-btn {
     border: none;
-    padding: 10px 30px;
+    cursor: pointer;
+    padding: 13px 40px;
     background-color: #3e29bf;
     color: rgb(255, 255, 255);
     font-family: inherit;
-    font-size: 12px;
+    font-size: 15px;
     margin: 0 auto;
     margin-top: 27px;
     border-radius: 3px;
@@ -112,15 +142,45 @@
 
 .form .switch {
     color: #a4aec1;
+    font-weight: 300;
     font-family: inherit;
-    font-size: 11px;
+    font-size: 14px;
     text-align: center;
     margin-top: 10px;
 }
 
 .login {
     cursor: pointer;
+    font-family: inherit;
+    font-weight: 300;
     color: #fff;
-    font-size: 11px;
+    font-size: 14px;
     margin-left: 6px;
+}
+
+@media(max-width: 900px) {
+    .inner {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 450px;
+        height: 100%;
+        max-width: 1000px;
+        width: 100%;
+    }
+    .banner img {
+        object-fit: cover;
+        width: 100%;
+    }
+}
+
+@media(max-width: 700px) {
+    .inner {
+        grid-template-columns: repeat(1, 1fr);
+        max-height: 450px;
+        height: 100%;
+        max-width: 1000px;
+        width: 100%;
+    }
+    .inner .banner {
+        display: none;
+    }
 }
