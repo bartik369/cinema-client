@@ -51,15 +51,22 @@
         left: 0;
         z-index: 99;
         background-color: #0e0f16;
-        padding: 10px;
+        padding: 10px 0px;
     }
 }
 
 @media (max-width: 450px) {
     .header-nav .menu-items .menu-item,
     .header-nav .menu-items .active {
-        margin-right: 20px;
         font-size: 11px;
+    }
+    .menu-item .icon,
+    .active .icon {
+        font-size: 16px;
+    }
+    .header-nav .menu-items .menu-item:not(:last-child),
+    .header-nav .menu-items .active:not(:last-child) {
+        margin-right: 20px;
     }
     .menu-item .icon,
     .active .icon {
@@ -70,8 +77,11 @@
 @media (max-width: 380px) {
     .header-nav .menu-items .menu-item,
     .header-nav .menu-items .active {
-        margin-right: 10px;
         font-size: 11px;
+    }
+    .header-nav .menu-items .menu-item:not(:last-child),
+    .header-nav .menu-items .active:not(:last-child) {
+        margin-right: 10px;
     }
     .menu-item .icon,
     .active .icon {
