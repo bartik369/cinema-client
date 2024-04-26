@@ -20,8 +20,14 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
   useEffect(() => {
     if (text.search.length > 1) {
       searchMovie(text)
-    } 
-  }, [text.search]);
+    } else{
+      searchMovie('')
+    }
+  }, [text]);
+
+  console.log(text)
+
+  
 
   return (
     <div className={style.search}>
@@ -37,11 +43,12 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
         {searchResult &&
         <div className={style.result}>
         {searchResult.map((item) => (
+          <a href={`${ENV.MOVIES}${item._id}`}>
           <div className={style.item}>
             <div className={style.description}>
               <div className={style.title}>
                 <div className={style.ru}>
-                  <a href={`${ENV.MOVIES}${item._id}`}>{item.titleRu}</a>
+                  {item.titleRu}
                 </div>
                 <div className={style.en}>{item.titleEn}</div>
               </div>
@@ -49,6 +56,7 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
               <span>{item.country}</span>
             </div>
           </div>
+          </a>
         ))}
       </div>
         }

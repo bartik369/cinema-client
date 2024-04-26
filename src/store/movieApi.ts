@@ -8,7 +8,6 @@ import {
     IMovieFavorites,
     IExistFavorite,
   } from './../types/media';
-import { useNavigate } from 'react-router-dom';
 import ENV from '../env.config';
 
 export const movieApi = createApi({
@@ -87,7 +86,7 @@ export const movieApi = createApi({
       }),
       invalidatesTags: ['Rating'],
     }),
-    searchMovie: builder.mutation<IMovie[], ISearch>({
+    searchMovie: builder.mutation<IMovie[], ISearch | string>({
       query: (data) => ({
         url: `${ENV.API_SEARCH_MOVIE}`,
         method: "POST",
