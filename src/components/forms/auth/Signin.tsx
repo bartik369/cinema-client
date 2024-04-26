@@ -72,7 +72,7 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
         <span className={style.label}>{contentConst.email}</span>
         <div className={style['input-data']}>
           <FontAwesomeIcon className={style.icon} icon={faEnvelope} />
-          <input className={style.data} type='text'
+          <input className={style.data} type='text' autoFocus
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setAuthData({ ...authData, email: e.target.value })
               setErrors(validate({ ...authData, email: e.target.value }))

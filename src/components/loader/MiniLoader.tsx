@@ -1,14 +1,14 @@
 import * as contentConst from '../../utils/constants/content'
 import style from './Loader.module.css';
 
-const Loader = () => {
+const MiniLoader = () => {
     return (
       <div className={style["loader-wrap"]}>
         <div className={style.inner}>
-        <span className={style.loader}></span>
+        <span className={style['mini-loader']}></span>
         </div>
       </div>
     );
 };
 
-export default Loader;
+export default MiniLoader;

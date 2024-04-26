@@ -76,6 +76,7 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
           <input
             className={style.data}
             type="text"
+            autoFocus
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setAuthData({ ...authData, email: e.target.value })
               setErrors(validate({ ...authData, email: e.target.value }))
