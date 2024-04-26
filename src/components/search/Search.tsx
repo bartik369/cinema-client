@@ -18,11 +18,9 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
   });
 
   useEffect(() => {
-    if (text.search.length > 2) {
+    if (text.search.length > 1) {
       searchMovie(text)
-    } else {
-
-    }
+    } 
   }, [text.search]);
 
   return (
@@ -36,22 +34,24 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
             }
           />
         </div>
+        {searchResult &&
         <div className={style.result}>
-          {searchResult && searchResult.map((item) => (
-            <div className={style.item}>
-              <div className={style.description}>
-                <div className={style.title}>
-                  <div className={style.ru}>
-                    <a href={`${ENV.MOVIES}${item._id}`}>{item.titleRu}</a>
-                  </div>
-                  <div className={style.en}>{item.titleEn}</div>
+        {searchResult.map((item) => (
+          <div className={style.item}>
+            <div className={style.description}>
+              <div className={style.title}>
+                <div className={style.ru}>
+                  <a href={`${ENV.MOVIES}${item._id}`}>{item.titleRu}</a>
                 </div>
-                <span>{item.year}</span>
-                <span>{item.country}</span>
+                <div className={style.en}>{item.titleEn}</div>
               </div>
+              <span>{item.year}</span>
+              <span>{item.country}</span>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
+        }
       </div>
       <br />
       <button className={style.close} onClick={visibleHandler}>

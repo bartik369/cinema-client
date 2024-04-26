@@ -5,7 +5,6 @@ import { useAppSelector } from '../../hooks/reduxHook';
 import { useLogoutUserMutation } from '../../store/authApi';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import logoutIcon from '../../assets/pics/logout.svg'
 import style from './ProfileMenu.module.css';
 
 interface IProfileMenuProps {
@@ -48,10 +47,9 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
             )
           )}
         </ul>
-      <button className={style.logout} onClick={logoutHandler}>
+      <div className={style.logout} onClick={logoutHandler}>
       {contentConst.logout}
-      <img src={logoutIcon} alt="" />
-      </button>
+      </div>
     </div>
   );
 };
