@@ -86,11 +86,11 @@ export const movieApi = createApi({
       }),
       invalidatesTags: ['Rating'],
     }),
-    searchMovie: builder.mutation<IMovie[], ISearch | string>({
+    searchMovie: builder.mutation<IMovie[], string>({
       query: (data) => ({
         url: `${ENV.API_SEARCH_MOVIE}`,
         method: "POST",
-        body: data,
+        body: {search: data},
       }),
     }),
     getProperties: builder.query<any, void>({

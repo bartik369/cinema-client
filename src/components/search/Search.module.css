@@ -40,6 +40,23 @@
     margin-bottom: 15px;
 }
 
+.search .input {
+    display: flex;
+    align-items: center;
+}
+
+.input .reset-search {
+    position: absolute;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    right: 20px;
+}
+
+.input .reset-search:hover {
+    color: #fd8841;
+}
+
 .search input {
     background-color: transparent;
     border-radius: 12px;
@@ -68,6 +85,14 @@
     overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: #fd8841 #161622;
+}
+
+.search .noresult {
+    font-size: 30px;
+    font-weight: 500;
+    font-family: inherit;
+    color: #fff;
+    margin-top: 30px;
 }
 
 .description {}

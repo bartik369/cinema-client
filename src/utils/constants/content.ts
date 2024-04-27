@@ -104,7 +104,8 @@ export const serverError = 'server error';
 export const error404 = '404';
 export const text404 = 'error';
 export const error404text = 'Страница не найдена';
-export const errorAddFavotite = 'Авторизируйтесь, пожалуйста.s';
+export const errorAddFavotite = 'Авторизируйтесь, пожалуйста.';
+export const nothingFound = 'Ничего не найдено.'
 
 export const subscription = 'Подписка';
 export const bill = 'Счет';

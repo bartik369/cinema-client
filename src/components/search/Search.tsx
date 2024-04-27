@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { ISearch } from '../../types/media';
+import { Link } from 'react-router-dom';
 import { useSearchMovieMutation } from '../../store/movieApi';
+import useDebounce from '../../hooks/useDebounce';
 import ENV from '../../env.config';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,38 +13,61 @@ interface IVisibleProps {
 }
 
 const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
-  const [searchMovie, {data: searchResult}] = useSearchMovieMutation()
-  const [text, setText] = useState<ISearch>({
+  const [searchMovie, {data: searchResult, reset}] = useSearchMovieMutation();
+  const [emptySearchResult, setEmptySearchResult] = useState<boolean>(false)
+  const [text, setText] = useState({
     search: '',
   });
+  const debouncedSearch = useDebounce(text.search, 1000);
 
   useEffect(() => {
-    if (text.search.length > 1) {
-      searchMovie(text)
-    } else{
-      searchMovie('')
-    }
-  }, [text]);
 
-  console.log(text)
-
-  
+      if (debouncedSearch.length > 1) {
+        searchMovie(debouncedSearch)
+        .unwrap()
+        .then((data) => {
+          
+          if (data.length == 0) {
+            setEmptySearchResult(true)
+          } else {
+            setEmptySearchResult(false)
+          }
+        })
+        .catch(error => {
+          return error
+        })
+      } else {
+        reset();
+        setEmptySearchResult(false);
+      }
+      
+  }, [debouncedSearch, emptySearchResult]);
 
   return (
     <div className={style.search}>
       <div className={style.inner}>
         <div className={style.title}>{contentConst.search}</div>
         <div className={style.input}>
-          <input type='text' autoFocus
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setText({ ...text, search: e.target.value })
-            }
+          <input type='text' autoFocus value={text.search}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+              setText({ ...text, search: e.target.value })}
           />
+          {text.search.length &&
+          <FontAwesomeIcon 
+          className={style['reset-search']}
+          onClick={() => setText({...text, search: ''})}
+          icon={faXmark}/>
+          }
         </div>
+        {emptySearchResult &&
+        <div className={style.noresult}>
+          {contentConst.nothingFound}
+        </div>
+        }
         {searchResult &&
         <div className={style.result}>
         {searchResult.map((item) => (
-          <a href={`${ENV.MOVIES}${item._id}`}>
+          <Link to={`${ENV.MOVIES}${item._id}`} key={item._id} reloadDocument>
           <div className={style.item}>
             <div className={style.description}>
               <div className={style.title}>
@@ -56,10 +80,10 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
               <span>{item.country}</span>
             </div>
           </div>
-          </a>
+          </Link>
         ))}
       </div>
-        }
+      }
       </div>
       <br />
       <button className={style.close} onClick={visibleHandler}>
