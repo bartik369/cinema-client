@@ -52,7 +52,7 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
               setText({ ...text, search: e.target.value })}
           />
-          {text.search.length &&
+          {text.search.length !== 0 &&
           <FontAwesomeIcon 
           className={style['reset-search']}
           onClick={() => setText({...text, search: ''})}
