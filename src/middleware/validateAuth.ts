@@ -10,9 +10,9 @@ export default function validateLogin(authData: IAuthData) {
 
     if (!authData.email) {
       errors.email = contentConst.inputEmail;
-    } else if (!/\S+@\S+\.\S+/.test(authData.email)) {
+    } else if (!/^[^а-я]+@[^а-я]+\.[^а-я\._'+;*^&=?~{}\-\.\/,\\/]+$/.test(authData.email)) {
       errors.email = contentConst.wrongEmailFormat;
-    }
+    } 
     
     if (!authData.password) {
       errors.password = contentConst.inputPassword;
