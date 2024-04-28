@@ -85,7 +85,7 @@ export const resetFilter = 'Сбросить фильтр';
 export const dontPasswordMatch = 'Пароли не совпадают';
 export const inputPassword = 'Введите пароль';
 export const inputEmail = 'Укажите почту';
-export const wrongEmailFormat = 'Неправильный формат почты';
+export const wrongEmailFormat = 'Неправильный формат';
 
 export const homePageTitle = 'Главная';
 export const newMovies = 'Новинки';

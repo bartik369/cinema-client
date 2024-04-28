@@ -33,7 +33,7 @@ const Movie: FC = () => {
   const [getMovieActors, {data: actors}] = useGetMovieActorsMutation()
   const params = useParams();
   const { id } = params;
-  const [getMovie, {data: movie, error}] = useGetMovieMutation();
+  const [getMovie, {data: movie}] = useGetMovieMutation();
   const {data: movieRating} = useGetRatingQuery(id!);
   const user = useAppSelector(state => state.auth.user);
   const isAuth = useAppSelector(state => state.auth.isAuth);

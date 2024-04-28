@@ -20,14 +20,14 @@ interface ISignupProps {
 const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
   type Errors = Partial<Record<keyof IUserAuth, string>>
   type Touched = Partial<Record<keyof IUserAuth, boolean>>
+  const [signupUser] = useSignupUserMutation();
   const dispatch = useAppDispatch();
-  const [passwordType, setPasswordType] = useState(false);
   const [authData, setAuthData] = useState({
     email: '',
     password: '',
     repeatPassword: '',
   });
-  const [signupUser] = useSignupUserMutation();
+  const [passwordType, setPasswordType] = useState(false);
   const [errors, setErrors] = useState<Errors>(validate(authData));
   const [touched, setTouched] = useState<Touched>({});
 
@@ -67,10 +67,10 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
       <div className={style.banner}>
         <img src={authBanner} alt="" />
       </div>
-      <div className={style.formwall}>
+      <div className={style['form-wrap']}>
       <form className={style.form} action='' onSubmit={create}>
-        <span className={style.title}>{contentConst.signupTitle}</span>
-        <span className={style.label}>{contentConst.email}</span>
+        <div className={style.title}>{contentConst.signupTitle}</div>
+        <div className={style.label}>{contentConst.email}</div>
         <div className={style['input-data']}>
           <FontAwesomeIcon className={style.icon} icon={faEnvelope} />
           <input
@@ -83,14 +83,12 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
             }}
             onBlur={() => setTouched({ ...touched, email: true })}
           />
+           {(errors.email && touched.email) 
+           ? <div className={style.error}>{errors.email}</div> 
+           : null
+           }
         </div>
-        <div className={style.error}>
-          {errors.email && touched.email 
-          ? <p>{errors.email}</p> 
-          : null
-          }
-        </div>
-        <span className={style.label}>{contentConst.password}</span>
+        <div className={style.label}>{contentConst.password}</div>
         <div className={style['input-data']}>
           {passwordType ? (
             <FontAwesomeIcon
@@ -112,9 +110,10 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
             }}
             onBlur={() => setTouched({ ...touched, password: true })}
           />
-        </div>
-        <div className={style.error}>
-        {errors.password && touched.password ? <p>{errors.password}</p> : null}
+           {(errors.password && touched.password ) 
+           ? <div className={style.error}>{errors.password}</div> 
+           : null
+           }
         </div>
         <span className={style.label}>{contentConst.repeatPassword}</span>
         <div className={style['input-data']}>
@@ -138,9 +137,10 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
             }}
             onBlur={() => setTouched({ ...touched, repeatPassword: true })}
           />
-        </div>
-        <div className={style.error}>
-        {errors.repeatPassword && touched.repeatPassword ? <p>{errors.repeatPassword}</p> : null}
+           {(errors.repeatPassword && touched.repeatPassword) 
+           ? <div className={style.error}>{errors.repeatPassword}</div> 
+           : null
+           }
         </div>
         <div className={style.switch}>
           {contentConst.haveAccount}

@@ -19,7 +19,6 @@ interface ISigninProps {
 const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
   type Errors = Partial<Record<keyof IUserAuth, string>>
   type Touched = Partial<Record<keyof IUserAuth, boolean>>
-
   const dispatch = useAppDispatch();
   const [signinUser] = useSigninUserMutation();
   const [authData, setAuthData] = useState<IUserAuth>({
@@ -66,10 +65,10 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
       <div className={style.banner}>
         <img src={authBanner} alt="" />
       </div>
-      <div className={style.formwall}>
+      <div className={style['form-wrap']}>
       <form className={style.form} action='' onSubmit={login}>
-        <span className={style.title}>{contentConst.signinTitle}</span>
-        <span className={style.label}>{contentConst.email}</span>
+        <div className={style.title}>{contentConst.signinTitle}</div>
+        <div className={style.label}>{contentConst.email}</div>
         <div className={style['input-data']}>
           <FontAwesomeIcon className={style.icon} icon={faEnvelope} />
           <input className={style.data} type='text' autoFocus
@@ -79,14 +78,12 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
             }}
             onBlur={() => setTouched({ ...touched, email: true })}
           />
-        </div>
-        <div className={style.error}>
-        {errors.email && touched.email 
-        ? <p>{errors.email}</p> 
+        {(errors.email && touched.email) 
+        ? <div className={style.error}>{errors.email}</div> 
         : null
         }
         </div>
-        <span className={style.label}>{contentConst.password}</span>
+        <div className={style.label}>{contentConst.password}</div>
         <div className={style['input-data']}>
           {passwordType ? (
             <FontAwesomeIcon
@@ -108,9 +105,10 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
             }}
             onBlur={() => setTouched({ ...touched, password: true })}
           />
-        </div>
-        <div className={style.error}>
-        {errors.password && touched.password ? <p>{errors.password}</p> : null}
+        {(errors.password && touched.password) 
+        ? <div className={style.error}>{errors.password}</div> 
+        : null
+        }
         </div>
         <div className={style.switch}>
           {contentConst.havenotAccount}

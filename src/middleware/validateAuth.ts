@@ -16,8 +16,11 @@ export default function validateLogin(authData: IAuthData) {
     
     if (!authData.password) {
       errors.password = contentConst.inputPassword;
-    } else if (
-      (authData.password.length !== 0  && authData.repeatPassword.length !== 0) 
+    }
+    if (!authData.repeatPassword) {
+      errors.repeatPassword = contentConst.inputPassword;
+    }
+    if ((authData.password.length !== 0  && authData.repeatPassword.length !== 0) 
       && (authData.password !== authData.repeatPassword)) {
       errors.password = contentConst.dontPasswordMatch;
       errors.repeatPassword = contentConst.dontPasswordMatch;
