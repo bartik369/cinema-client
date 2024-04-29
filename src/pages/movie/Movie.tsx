@@ -178,9 +178,6 @@ const Movie: FC = () => {
                   <div className={style.vote}>{contentConst.vote}</div>
                 </div>
               </div>
-              {/* <div className={style['cast-title']}>
-                {contentConst.movieCasts}
-              </div> */}
               <Casts actors={actors!}/>
             </div>
           </div>

@@ -76,7 +76,6 @@
     font-size: 38px;
     font-weight: 500;
     color: #fff;
-    margin-bottom: 4px;
 }
 
 .title-en {
@@ -116,17 +115,22 @@
     display: flex;
     flex-direction: row;
     color: #fff;
-    margin-bottom: 10px;
+    margin: 8px 0px;
+}
+
+.category .item {
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit
 }
 
 .category .item:not(:last-child)::after {
     content: '|';
-    color: #fff;
     padding: 0 4px;
 }
 
 .age {
-    color: #fd9941;
+    color: #fe9656;
     font-size: 30px;
     font-weight: 600;
     font-family: inherit;
@@ -138,17 +142,8 @@
 .cast {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     margin-top: 10px;
-}
-
-.cast-title {
-    position: relative;
-    display: flex;
-    color: #fff;
-    font-family: inherit;
-    font-weight: 500;
-    font-size: 14px;
-    margin-bottom: 10px;
 }
 
 .cast .actor {
@@ -157,9 +152,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgba(30, 28, 42, 0.85);
+    background-color: rgba(26, 26, 40, 0.85);
     border-radius: 10px;
     padding: 20px 10px 10px;
+    margin-top: 7px;
 }
 
 .cast .actor:not(:last-child) {
@@ -344,11 +340,21 @@
         height: 65px;
         margin-bottom: 10px;
     }
+    .category .item {
+        color: #fff;
+        font-size: 14px;
+        font-family: inherit
+    }
 }
 
 @media (max-width: 480px) {
     .movies {
         grid-template-columns: repeat(3, 1fr);
+    }
+    .category .item {
+        color: #fff;
+        font-size: 13px;
+        font-family: inherit
     }
 }
 

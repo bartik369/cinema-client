@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { footerMenu1, footerMenu2 } from '../../utils/data/data';
 import { useAppSelector } from '../../hooks/reduxHook';
 import * as contentConst from '../../utils/constants/content'
@@ -11,9 +11,12 @@ import Message from '../../assets/pics/message.svg'
 import style from './Footer.module.css';
 
 const Footer: FC = () => {
+  const location = useLocation();
   const existTrailer = useAppSelector(state => state.movies.existTrailer);
+  const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
+  
   return (
-    <div className={existTrailer ? style.container : style.notrailer}>
+    <div className={(existTrailer && regEx) ? style.container : style.notrailer}>
       <div className={style.inner}>
         <div className={style.menu}>
           <ul>
