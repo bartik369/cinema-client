@@ -235,6 +235,11 @@
     cursor: pointer;
     align-items: center;
     margin-left: 5px;
+    color: #cc84ff;
+}
+
+.movie-rating:hover {
+    color: #d08fff;
 }
 
 .movie-rating .number {
@@ -242,23 +247,33 @@
     font-family: inherit;
     font-size: 30px;
     font-weight: 600;
-    color: #cc84ff;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .movie-rating .vote {
-    color: #cc84ff;
     font-family: inherit;
     font-size: 12px;
+}
+
+.loading {
+    position: absolute;
+    color: #d5dbf9;
+    font-size: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rating {
+    color: hotpink;
+    font-size: 50px;
 }
 
 @media only screen and (max-width: 1300px) and (min-width: 1140px) {
     .inner {
         grid-template-columns: 15% auto;
-        flex-direction: row;
         top: 110px;
-        z-index: 99;
     }
     .cast .actor {
         width: 110px;
@@ -272,7 +287,6 @@
     .portrait {
         width: 65px;
         height: 65px;
-        margin-bottom: 10px;
     }
 }
 
@@ -297,20 +311,6 @@
     .video-layer {
         display: none;
     }
-}
-
-.loading {
-    position: absolute;
-    color: #d5dbf9;
-    font-size: 30px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.rating {
-    color: hotpink;
-    font-size: 50px;
 }
 
 @media (max-width: 960px) {
