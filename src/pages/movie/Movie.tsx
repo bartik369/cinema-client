@@ -61,6 +61,10 @@ const Movie: FC = () => {
     } else {
       dispatch(setExistTrailer(false))
     }
+    if (window.innerWidth < 1125) {
+     dispatch(setExistTrailer(false))
+     } 
+
   }, [movie, user]);
 
   const ratingHandler = async (value: number) => {
