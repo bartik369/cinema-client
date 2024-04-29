@@ -113,6 +113,7 @@
 
 .category {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     color: #fff;
     margin: 8px 0px;
@@ -143,7 +144,7 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .cast .actor {
@@ -351,9 +352,23 @@
     .movies {
         grid-template-columns: repeat(3, 1fr);
     }
+    .cast .actor {
+        display: flex;
+        width: 100px;
+        border-radius: 8px;
+        padding: 12px 5px;
+    }
+    .cast .actor:not(:last-child) {
+        margin-right: 5px;
+    }
+    .portrait {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 10px;
+    }
     .category .item {
         color: #fff;
-        font-size: 13px;
+        font-size: 12px;
         font-family: inherit
     }
 }

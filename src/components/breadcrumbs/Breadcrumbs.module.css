@@ -49,3 +49,11 @@
     top: 1px;
     margin-left: 6px;
 }
+
+@media(max-width: 400px) {
+    .breadcrumbs .last-link,
+    .breadcrumbs .home-icon,
+    .breadcrumbs a {
+        font-size: 11px;
+    }
+}
