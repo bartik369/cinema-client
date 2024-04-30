@@ -51,6 +51,7 @@ const Movie: FC = () => {
     }
   }, []);
 
+
   useEffect(() => {
     if (movie && user) {
       getMovieActors(movie.actors);
@@ -64,7 +65,6 @@ const Movie: FC = () => {
     if (window.innerWidth < 1125) {
      dispatch(setExistTrailer(false))
      } 
-
   }, [movie, user]);
 
   const ratingHandler = async (value: number) => {

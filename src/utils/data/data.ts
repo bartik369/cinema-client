@@ -132,6 +132,7 @@ export const ratingMovie = [
 ]
 export const pageTitles = {
   'movies': 'Фильмы', 
+  'actors': 'Актеры',
   'profile': 'Профиль',
   'admin': 'Админ панель',
   'add-movie': 'Добавить фильм',
