@@ -11,6 +11,7 @@ import Footer from "./components/footer/Footer";
 import AddActor from "./pages/actor/AddActor";
 import Movie from "./pages/movie/Movie";
 import Actor from "./pages/actor/Actor";
+import Actors from "./pages/actor/Actors";
 import Profile from "./pages/profile/Profile";
 import Page404 from "./pages/404/Page404";
 import Admin from "./pages/admin/Admin";
@@ -33,6 +34,7 @@ const App: FC = () => {
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:id" element={<Movie />} />
         <Route path="/actors/:id" element={<Actor />} />
+        <Route path="/actors" element={<Actors />} />
         <Route path="/404" element={<Page404 />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
         <Route element={<PrivateRoutes allowedRoles={[contentConst.USER]} />}>
