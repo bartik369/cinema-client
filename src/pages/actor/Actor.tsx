@@ -68,7 +68,7 @@ const Actor:FC = () => {
                          </div>
                     </div>
                     <div className={style.item}>
-                        <span>Всего фильмов</span>
+                        <span>Всего фильмов:</span>
                         <div>{movies && movies.length}</div>
                     </div>
                 </div>
