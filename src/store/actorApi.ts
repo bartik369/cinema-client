@@ -1,6 +1,6 @@
 import { apiSlice } from "./apiSlice";
 import { IActor } from "../types/media";
-import ENV from "../env.config";
+import ENV from '../env.config';
 
 export const actorApi = apiSlice.injectEndpoints({
     endpoints: builder =>({ 

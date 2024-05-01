@@ -19,11 +19,11 @@ const Actor:FC = () => {
 
     useEffect(() => {
         if (actor?.extInfo?.birthday) {
-            let date = new Date(parseInt(actor.extInfo.birthday)).toLocaleDateString()
+            let date = new Date(parseInt(actor.extInfo.birthday)).toLocaleDateString();
             setBirthday(date);
         }
         if (actor?.nameRu) {
-            dispatch(setMovieTitle(actor.nameRu))
+            dispatch(setMovieTitle(actor.nameRu));
         }
     }, [actor, id]);
 

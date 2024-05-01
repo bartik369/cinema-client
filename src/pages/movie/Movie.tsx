@@ -51,7 +51,6 @@ const Movie: FC = () => {
     }
   }, []);
 
-
   useEffect(() => {
     if (movie && user) {
       getMovieActors(movie.actors);
