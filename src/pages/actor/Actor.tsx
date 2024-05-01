@@ -10,12 +10,14 @@ import ENV from '../../env.config';
 import style from './Actor.module.css'
 
 const Actor:FC = () => {
+    const [birthday, setBirthday] = useState<any>();
     const dispatch = useAppDispatch();
     const params = useParams();
     const {id} = params;
     const {data: actor} = useGetActorQuery(id!);
     const {data: movies} = useGetMoviesActorQuery(id!);
-    const [birthday, setBirthday] = useState<any>();
+
+    console.log(movies && movies)
 
     useEffect(() => {
         if (actor?.extInfo?.birthday) {
