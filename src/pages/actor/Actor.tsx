@@ -1,12 +1,15 @@
 import {FC, useEffect, useState} from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useGetActorQuery, useGetMoviesActorQuery } from '../../store/actorApi';
+import { setMovieTitle } from '../../store/movieOptionsSlice';
+import { useAppDispatch } from '../../hooks/reduxHook';
 import { IMovie } from '../../types/media';
 import Loader from '../../components/loader/Loader';
 import ENV from '../../env.config';
 import style from './Actor.module.css'
 
 const Actor:FC = () => {
+    const dispatch = useAppDispatch();
     const params = useParams();
     const {id} = params;
     const {data: actor} = useGetActorQuery(id!);
@@ -17,6 +20,9 @@ const Actor:FC = () => {
         if (actor?.extInfo?.birthday) {
             let date = new Date(parseInt(actor.extInfo.birthday)).toLocaleDateString()
             setBirthday(date);
+        }
+        if (actor?.nameRu) {
+            dispatch(setMovieTitle(actor.nameRu))
         }
     }, [actor, id]);
 

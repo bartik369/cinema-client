@@ -10,6 +10,12 @@ export const actorApi = apiSlice.injectEndpoints({
                 method: 'GET',
             })
         }),
+        getActors: builder.query<IActor[], void>({
+            query: () => ({
+                url:`${ENV.API_ACTORS}`,
+                method: 'GET',
+            })
+        }),
         getMoviesActor: builder.query<any, string>({
             query:(id) => ({
                 url:`${ENV.API_GET_MOVIE_BY_ACTOR}${id}`,
@@ -28,12 +34,6 @@ export const actorApi = apiSlice.injectEndpoints({
                 url:`${ENV.API_MOVIE_ACTORS}`,
                 method: 'POST',
                 body: data,
-            })
-        }),
-        getActors: builder.query<IActor[], void>({
-            query: () => ({
-                url:`${ENV.API_ACTORS}`,
-                method: 'GET',
             })
         }),
     })
