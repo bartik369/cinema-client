@@ -11,6 +11,7 @@ const ENV = {
     API_MOVIE: '/movie/',
     API_MOVIE_PROPERTIES: '/properties/',
     API_MOVIES: '/movies',
+    API_GET_MOVIE_BY_ACTOR: '/movies-actor/',
     API_LAST_MOVIES: '/last-movies',
     API_TOP_MOVIES: '/top-movies',
     API_ADD_MOVIE: '/add-movie',
