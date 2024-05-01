@@ -17,8 +17,6 @@ const Actor:FC = () => {
     const {data: actor} = useGetActorQuery(id!);
     const {data: movies} = useGetMoviesActorQuery(id!);
 
-    console.log(movies && movies)
-
     useEffect(() => {
         if (actor?.extInfo?.birthday) {
             let date = new Date(parseInt(actor.extInfo.birthday)).toLocaleDateString();
@@ -48,19 +46,19 @@ const Actor:FC = () => {
                     </div>
                     
                     <div className={style.item}>
-                        <span>Дата рождения</span>
+                        <span>{contentConst.actorBirthday}</span>
                         <div>{birthday && birthday}</div>
                     </div>
                     <div className={style.item}>
-                        <span>Рост</span>
+                        <span>{contentConst.actorHeight}</span>
                         <div>{actor.extInfo.height}</div>
                     </div>
                     <div className={style.item}>
-                        <span>Место рождения</span>
+                        <span>{contentConst.bornPlace}</span>
                         <div>{actor.extInfo.country} {actor.extInfo.city}</div>
                     </div>
                     <div className={style.item}>
-                        <span>Жанры</span>
+                        <span>{contentConst.actorGenre}</span>
                          <div className={style.genre}>
                          {actor.extInfo.genre.map((item:string, index:number) => 
                          <div key={index}>{item}</div>
@@ -68,12 +66,12 @@ const Actor:FC = () => {
                          </div>
                     </div>
                     <div className={style.item}>
-                        <span>Всего фильмов:</span>
+                        <span>{contentConst.totalMovies}</span>
                         <div>{movies && movies.length}</div>
                     </div>
                 </div>
                 <div className={style.movies}>
-                    <div className={style.title}>Все фильмы</div>
+                    <div className={style.title}>{contentConst.allActorMovies}</div>
                     {movies && movies.map((movie:IMovie) => 
                     <Link to={`/movies/${movie._id}`} key={movie._id}>
                     <li className={style.item}>{movie.titleRu}</li>

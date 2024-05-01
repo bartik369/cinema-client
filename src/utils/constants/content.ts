@@ -37,7 +37,9 @@ export const actorHeight = 'Рост';
 export const actorGender = 'Пол';
 export const actorGenre = 'Жанры';
 export const bornPlace = 'Место рождения';
-export const movieMins = ' мин.'
+export const movieMins = ' мин.';
+export const allActorMovies = 'Все фильмы';
+
 
 export const signinTitle = 'Войти в кабинет';
 export const signupTitle = 'Регистрация';
