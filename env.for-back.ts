@@ -4,6 +4,7 @@ const ENV = {
     API_URL_UPLOADS_MOVIES: 'https://cinema.webcloudlab.ru/api/uploads/movies/',
     API_URL_UPLOADS_MAIN_SLIDER: 'https://cinema.webcloudlab.ru/api/uploads/slider/main/',
     API_ACTORS: '/actors',
+    API_GET_ACTOR: '/get-actor/',
     API_MOVIE_ACTORS: '/movie_actors',
     API_ADD_ACTOR: '/add-actor',
     API_MOVIES_COUNT: '/movies-count',
