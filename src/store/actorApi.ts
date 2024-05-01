@@ -38,7 +38,6 @@ export const actorApi = apiSlice.injectEndpoints({
         }),
     })
 });
-
 export const {
     useAddActorMutation,
     useGetMovieActorsMutation,
