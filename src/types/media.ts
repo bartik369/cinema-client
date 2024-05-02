@@ -43,6 +43,13 @@ export interface IActorExt {
     height: string;
     genre: string[];
 }
+export interface IListResponse<T> {
+    page: number;
+    per_page: number;
+    total: number;
+    total_pages: number;
+    data: T[];
+  }
 export interface ISearch {
     search: string;
 }

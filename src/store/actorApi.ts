@@ -1,47 +1,69 @@
-import { apiSlice } from "./apiSlice";
-import { IActor } from "../types/media";
-import ENV from '../env.config';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IActor, IListResponse } from "../types/media";
+import ENV from "../env.config";
 
-export const actorApi = apiSlice.injectEndpoints({
-    endpoints: builder =>({ 
-        getActor: builder.query<any, string>({
-            query:(id) => ({
-                url:`${ENV.API_GET_ACTOR}${id}`,
-                method: 'GET',
-            })
-        }),
-        getActors: builder.query<IActor[], void>({
-            query: () => ({
-                url:`${ENV.API_ACTORS}`,
-                method: 'GET',
-            })
-        }),
-        getMoviesActor: builder.query<any, string>({
-            query:(id) => ({
-                url:`${ENV.API_GET_MOVIE_BY_ACTOR}${id}`,
-                method: 'GET',
-            })
-        }),
-        addActor: builder.mutation<IActor, any>({
-            query: (data) => ({
-                url:`${ENV.API_ADD_ACTOR}`,
-                method: 'POST',
-                body: data,
-            })
-        }),
-        getMovieActors: builder.mutation<IActor[], string[]>({
-            query: (data) => ({
-                url:`${ENV.API_MOVIE_ACTORS}`,
-                method: 'POST',
-                body: data,
-            })
-        }),
-    })
+
+export const actorApi = createApi({
+  reducerPath: "actorApi",
+  baseQuery: fetchBaseQuery({ baseUrl: ENV.API_URL }),
+  endpoints: (builder) => ({
+    getActor: builder.query<any, string>({
+      query: (id) => ({
+        url: `${ENV.API_GET_ACTOR}${id}`,
+        method: "GET",
+      }),
+    }),
+    getActors: builder.query<IListResponse<IActor>, number | void>({
+      query: (page = 1) => ({
+        // query: (page) => `users?page=${page}&perPage=25`,
+        url: `${ENV.API_ACTORS}?page=${page}&limit=10`,
+        method: "GET",
+      }),
+    }),
+    getMoviesActor: builder.query<any, string>({
+      query: (id) => ({
+        url: `${ENV.API_GET_MOVIE_BY_ACTOR}${id}`,
+        method: "GET",
+      }),
+    }),
+    addActor: builder.mutation<IActor, any>({
+      query: (data) => ({
+        url: `${ENV.API_ADD_ACTOR}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getMovieActors: builder.mutation<IActor[], string[]>({
+      query: (data) => ({
+        url: `${ENV.API_MOVIE_ACTORS}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+  }),
 });
 export const {
-    useAddActorMutation,
-    useGetMovieActorsMutation,
-    useGetActorsQuery,
-    useGetActorQuery,
-    useGetMoviesActorQuery,
+  useAddActorMutation,
+  useGetMovieActorsMutation,
+  useGetActorsQuery,
+  useGetActorQuery,
+  useGetMoviesActorQuery,
 } = actorApi;
+
+
+
+// endpoints: builder => ({
+//     getUsers: builder.query({
+//       query: queryParams => ({
+//         url: `users/?${queryParams}`,
+//         method: 'GET'
+//       }),
+//       serializeQueryArgs: ({ queryArgs }) => {
+//         const newQueryArgs = { ...queryArgs };
+//         if (newQueryArgs.page) {
+//           delete newQueryArgs.page;
+//         }
+//         return newQueryArgs;
+//       }
+//     })
+//   })

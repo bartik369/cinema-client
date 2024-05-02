@@ -176,7 +176,7 @@ const MovieForm: FC<IMovieProps> = ({
               {contentConst.select}
             </option>
             {actors &&
-              actors.map((item) => (
+              actors.data.map((item) => (
                 <option key={item._id}>{item.nameRu}</option>
               ))}
           </select>
