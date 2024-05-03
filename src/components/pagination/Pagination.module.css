@@ -1,10 +1,8 @@
 .pagination {
-    text-align: center;
+    display: flex;
     margin: 30px auto;
     width: fit-content;
-    background-color: rgba(26, 26, 40, 1);
     padding: 3px 2px;
-    border-radius: 12px;
 }
 
 .pagination .active,
@@ -13,36 +11,69 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    margin: 5px;
+    margin-right: 5px;
     cursor: pointer;
+    color: #fff;
 }
 
 .pagination .active {
-    background-color: rgb(71, 203, 230);
+    background-color: #6e8fd1;
 }
 
 .pagination .notactive {
     background-color: transparent;
 }
 
-.pagination .prev,
-.pagination .next {
-    background-color: blueviolet;
+.pagination .next,
+.pagination .prev {
+    background-color: transparent;
     padding: 5px 12px;
     color: #fff;
     border: none;
     margin: 0px 10px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.pagination .next .next-arrow,
+.pagination .prev .prev-arrow {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0px 3px;
+    border-top: 2px solid rgb(255, 255, 255);
+    border-right: 2px solid rgb(255, 255, 255);
+    transform: rotate(45deg);
+}
+
+.pagination .next .next-arrow {
+    transform: rotate(45deg);
+}
+
+.pagination .prev .prev-arrow {
+    transform: rotate(-135deg);
 }
 
 .pagination .prev:hover,
 .pagination .next:hover {
-    background-color: rgb(6, 72, 39);
+    color: #6e8fd1;
+}
+
+.pagination .next:hover .next-arrow,
+.pagination .prev:hover .prev-arrow {
+    border-top: 2px solid #6e8fd1;
+    border-right: 2px solid #6e8fd1;
+}
+
+.pagination .next:disabled .next-arrow,
+.pagination .prev:disabled .prev-arrow {
+    border-top: 2px solid rgb(65, 65, 65);
+    border-right: 2px solid rgb(65, 65, 65);
 }
 
 .pagination .prev:disabled,
 .pagination .next:disabled {
-    background-color: rgb(95, 95, 95);
     padding: 5px 12px;
-    color: #fff;
+    color: rgb(65, 65, 65);
 }

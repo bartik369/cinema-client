@@ -46,37 +46,39 @@ const Actors: FC = () => {
           />
         )}
       </div>
-      <div className={style.info}>
-        {actors?.data ? (
-          actors.data.map((item) => (
-            <Link to={`/actors/${item._id}`} key={item._id}>
-              <div className={style.item}>
-                <div className={style.portrait}>
-                  <img alt=""
-                    src={`${ENV.API_URL_UPLOADS_ACTORS}${item.picture}`}
-                  />
-                </div>
-                <div className={style.description}>
-                  <div className={style["name-ru"]}>{item.nameRu}</div>
-                  <div className={style["name-en"]}>{item.nameEn}</div>
-                </div>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <Loader />
-        )}
-      </div>
-      <Pagination
-        setPage={setPage}
-        onPrevPageClick={handlePrevPage}
-        onNextPageClick={handleNextPage}
-        disable={{
-          left: page === 1,
-          right: page === actors?.total_pages,
-        }}
-        nav={{ current: page, total: actors?.total_pages! }}
-      />
+      {actors?.data ? (
+        <>
+          <div className={style.info}>
+            {actors?.data &&
+              actors.data.map((item) => (
+                <Link to={`/actors/${item._id}`} key={item._id}>
+                  <div className={style.item}>
+                    <div className={style.portrait}>
+                      <img
+                        alt=""
+                        src={`${ENV.API_URL_UPLOADS_ACTORS}${item.picture}`}
+                      />
+                    </div>
+                    <div className={style.description}>
+                      <div className={style["name-ru"]}>{item.nameRu}</div>
+                      <div className={style["name-en"]}>{item.nameEn}</div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+          </div>
+            <Pagination
+              setPage={setPage}
+              onPrevPageClick={handlePrevPage}
+              onNextPageClick={handleNextPage}
+              disable={{
+                left: page === 1,
+                right: page === actors?.total_pages,
+              }}
+              nav={{ current: page, total: actors?.total_pages! }}
+            />
+        </>
+      ): <Loader />}
     </div>
   );
 };
