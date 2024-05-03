@@ -13,10 +13,9 @@ export const actorApi = createApi({
         method: "GET",
       }),
     }),
-    getActors: builder.query<IListResponse<IActor>, number | void>({
-      query: (page = 1) => ({
-        // query: (page) => `users?page=${page}&perPage=25`,
-        url: `${ENV.API_ACTORS}?page=${page}&limit=10`,
+    getActors: builder.query<IListResponse<IActor>, any>({
+      query: ({page, debouncedSearch}) => ({
+        url: `${ENV.API_ACTORS}?page=${page}&perPage=10&search=${debouncedSearch}`,
         method: "GET",
       }),
     }),

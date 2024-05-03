@@ -127,6 +127,8 @@ export const settings = 'Настройки';
 
 export const information = `Данный портал является тестовой средой для изучения/тестирования Frontend && Backend разработки и не несет в себе какой-либо коммерческой составляющей.`;
 export const close = 'Закрыть';
+export const next = 'Вперед';
+export const prev = 'Назад';
 
 
 

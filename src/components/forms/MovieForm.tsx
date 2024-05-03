@@ -33,7 +33,7 @@ const MovieForm: FC<IMovieProps> = ({
   deleteActor,
   resetFormHandler,
 }) => {
-  const {data: actors} = useGetActorsQuery()
+  const {data: actors} = useGetActorsQuery('')
 
   return (
     <form className={style.form}>
