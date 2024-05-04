@@ -16,11 +16,11 @@ const Actors: FC = () => {
   const [page, setPage] = useState(1);
   const { data: actors } = useGetActorsQuery({ page, debouncedSearch });
 
-  useEffect(() => {
-    if (debouncedSearch) {
-      console.log(debouncedSearch);
-    }
-  }, [debouncedSearch]);
+  // useEffect(() => {
+  //   if (debouncedSearch) {
+  //     console.log(debouncedSearch);
+  //   }
+  // }, [debouncedSearch]);
 
   const handlePrevPage = () => {
     setPage(page - 1);
