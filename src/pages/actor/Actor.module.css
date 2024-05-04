@@ -265,7 +265,7 @@
     }
     .actors .portrait img {
         object-fit: cover;
-        border-radius: 8px 0 0 8px;
+        border-radius: 8px 8px 0 0;
     }
 }
 
@@ -325,6 +325,6 @@
     }
     .actors .portrait img {
         object-fit: cover;
-        border-radius: 8px 0 0 8px;
+        border-radius: 8px 8px 0 0;
     }
 }
