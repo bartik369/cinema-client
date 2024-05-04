@@ -46,7 +46,7 @@ const Actors: FC = () => {
           />
         )}
       </div>
-      {actors?.data ? (
+      {actors?.data?.length ?
         <>
           <div className={style.info}>
             {actors?.data &&
@@ -78,7 +78,10 @@ const Actors: FC = () => {
               nav={{ current: page, total: actors?.total_pages! }}
             />
         </>
-      ): <Loader />}
+        : (actors?.data.length == 0 && debouncedSearch.length) 
+        ? <div className={style.warning}>{contentConst.nothingFound}</div>
+        : <Loader />
+      }
     </div>
   );
 };

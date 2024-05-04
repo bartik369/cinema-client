@@ -162,10 +162,6 @@
 }
 
 
-/* .cast .actor:not(:last-child) {
-    margin-right: 10px;
-} */
-
 .cast .actor:hover {
     background-color: rgba(29, 29, 45, 0.95);
     transform: scale(1.01);
