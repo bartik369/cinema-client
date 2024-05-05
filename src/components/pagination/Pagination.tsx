@@ -40,8 +40,8 @@ const Pagination: FC<IPaginationProps> = ({
         {contentConst.prev}
       </button>
       {paginationNUmbers &&
-        paginationNUmbers.map((item) => (
-          <button className={item === nav?.current 
+        paginationNUmbers.map((item, index) => (
+          <button key={index} className={item === nav?.current 
             ? style.active 
             : style.notactive}
             onClick={() => setPage(item)}

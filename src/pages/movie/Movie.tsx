@@ -49,7 +49,9 @@ const Movie: FC = () => {
         error.status == '404' && navigate('/404')
       })
     }
-  }, []);
+  }, [id]);
+
+  console.log("ovi")
 
   useEffect(() => {
     if (movie && user) {

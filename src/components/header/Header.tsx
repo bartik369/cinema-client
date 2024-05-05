@@ -1,4 +1,4 @@
-import  { FC, useEffect, useState, useRef, MouseEvent } from 'react';
+import  React, { FC, useEffect, useState, useRef, MouseEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../navigation/Navbar';
 import Search from '../search/Search';

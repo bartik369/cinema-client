@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useGetActorQuery, useGetMoviesActorQuery } from '../../store/actorApi';
 import { setMovieTitle } from '../../store/movieOptionsSlice';
 import { useAppDispatch} from '../../hooks/reduxHook';
@@ -13,8 +13,9 @@ const Actor:FC = () => {
     const [birthday, setBirthday] = useState<any>();
     const dispatch = useAppDispatch();
     const params = useParams();
+    const navigate = useNavigate();
     const {id} = params;
-    const {data: actor} = useGetActorQuery(id!);
+    const {data: actor, error} = useGetActorQuery(id!);
     const {data: movies} = useGetMoviesActorQuery(id!);
 
     useEffect(() => {
@@ -25,8 +26,8 @@ const Actor:FC = () => {
         if (actor?.nameRu) {
             dispatch(setMovieTitle(actor.nameRu));
         }
-    }, [actor, id]);
-
+        if (error) navigate('/404');
+    }, [actor, id, error]);
 
     return (
         <div className={style.actor}>
@@ -45,23 +46,23 @@ const Actor:FC = () => {
                     <div className={style['name-en']}>
                     {actor.nameEn}
                     </div>
-                    
                     <div className={style.item}>
                         <span>{contentConst.actorBirthday}</span>
                         <div>{birthday && birthday}</div>
                     </div>
                     <div className={style.item}>
                         <span>{contentConst.actorHeight}</span>
-                        <div>{actor.extInfo.height}</div>
+                        <div>{actor?.extInfo?.height}</div>
                     </div>
                     <div className={style.item}>
                         <span>{contentConst.bornPlace}</span>
-                        <div>{actor.extInfo.country} {actor.extInfo.city}</div>
+                        <div>{actor?.extInfo?.country} 
+                        {actor?.extInfo?.city}</div>
                     </div>
                     <div className={style.item}>
                         <span>{contentConst.actorGenre}</span>
                          <div className={style.genre}>
-                         {actor.extInfo.genre.map((item:string, index:number) => 
+                         {actor?.extInfo?.genre?.map((item:string, index:number) => 
                          <div key={index}>{item}</div>
                         )}
                          </div>
