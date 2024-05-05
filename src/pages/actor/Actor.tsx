@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useGetActorQuery, useGetMoviesActorQuery } from '../../store/actorApi';
 import { setMovieTitle } from '../../store/movieOptionsSlice';
-import { useAppDispatch } from '../../hooks/reduxHook';
+import { useAppDispatch} from '../../hooks/reduxHook';
 import { IMovie } from '../../types/media';
 import Loader from '../../components/loader/Loader';
 import * as contentConst from '../../utils/constants/content';
@@ -26,6 +26,7 @@ const Actor:FC = () => {
             dispatch(setMovieTitle(actor.nameRu));
         }
     }, [actor, id]);
+
 
     return (
         <div className={style.actor}>

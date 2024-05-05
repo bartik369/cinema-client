@@ -1,5 +1,5 @@
 import { FC, useEffect} from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import * as contentConst from "../src/utils/constants/content";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import { useVerifyTokenMutation } from "./store/authApi";
