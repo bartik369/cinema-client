@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
-import ScrollTop from './components/ScrollTop/ScrollTop';
+import ScrollTopPage from './components/ScrollTopPage/ScrollTopPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
   <BrowserRouter>
-  <ScrollTop />
+  <ScrollTopPage />
    <App />
   </BrowserRouter>
   </Provider>
