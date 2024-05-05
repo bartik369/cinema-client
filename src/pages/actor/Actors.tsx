@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect} from "react";
 import { useGetActorsQuery } from "../../store/actorApi";
 import { Link } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
@@ -16,11 +16,9 @@ const Actors: FC = () => {
   const [page, setPage] = useState(1);
   const { data: actors } = useGetActorsQuery({ page, debouncedSearch });
 
-  // useEffect(() => {
-  //   if (debouncedSearch) {
-  //     console.log(debouncedSearch);
-  //   }
-  // }, [debouncedSearch]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, [actors]);
 
   const handlePrevPage = () => {
     setPage(page - 1);

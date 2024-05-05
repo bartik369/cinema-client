@@ -18,7 +18,11 @@ const Movies = () => {
 
   useEffect(() => {
     user && getFavorites({ id: user._id });
-  }, [ user]);
+  }, [user]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [movies])
 
   const handlePrevPage = () => {
     setPage(page - 1);
@@ -29,30 +33,29 @@ const Movies = () => {
 
   return (
     <div className={style.container}>
-      <MovieFilter movies={movies?.data! && movies.data} />
-      <>
-      <div className={style.movies}>
-        {movies?.data && (
-          movies.data.map((movie) => (
-            <div key={movie._id}>
-              <Link to={`${ENV.MOVIES}${movie._id}`}>
-                <MovieItem movie={movie} favorites={favorites?.movies!} />
-              </Link>
-            </div>
-          ))
-        )}
-      </div>
-      <Pagination
-              setPage={setPage}
-              onPrevPageClick={handlePrevPage}
-              onNextPageClick={handleNextPage}
-              disable={{
-                left: page === 1,
-                right: page === movies?.total_pages,
-              }}
-              nav={{ current: page, total: movies?.total_pages! }}
-            />
-      </>
+      {movies?.data && (
+        <>
+          <div className={style.movies}>
+            {movies.data.map((movie) => (
+              <div key={movie._id}>
+                <Link to={`${ENV.MOVIES}${movie._id}`}>
+                  <MovieItem movie={movie} favorites={favorites?.movies!} />
+                </Link>
+              </div>
+            ))}
+          </div>
+          <Pagination
+            setPage={setPage}
+            onPrevPageClick={handlePrevPage}
+            onNextPageClick={handleNextPage}
+            disable={{
+              left: page == 1,
+              right: page == movies?.total_pages,
+            }}
+            nav={{ current: page, total: movies?.total_pages! }}
+          />
+        </>
+      )}
       {isLoading && <Loader />}
     </div>
   );
