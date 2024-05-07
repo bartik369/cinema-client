@@ -6,7 +6,6 @@ import PreviewActor from '../../components/preview/PreviewActor';
 import style from './AddActor.module.css';
 
 const AddActor: FC = () => {
-  // const dispatch = useAppDispatch();
   const [addActor] = useAddActorMutation()
   const [actor, setActor] = useState<IActor>({
     _id: '',

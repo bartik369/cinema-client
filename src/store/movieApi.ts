@@ -1,9 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {
     IMovie,
-    ISearch,
     IMovieRating,
-    IFilterMovie,
     IMovieAddFavorite,
     IMovieFavorites,
     IExistFavorite,

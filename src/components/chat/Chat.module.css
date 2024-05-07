@@ -1,0 +1,46 @@
+.chat {
+    position: fixed;
+    z-index: 999;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    height: 350px;
+    background-color: darkslategrey;
+    padding: 20px;
+}
+
+.chat .close {
+    color: rgb(232, 194, 42);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.chat .close:hover {
+    color: rgb(126, 5, 62);
+}
+
+.chat .messages {
+    padding: 5px;
+    background-color: green;
+    width: 100%;
+    height: calc(100% - 55px);
+    margin-bottom: 10px;
+    overflow-y: scroll;
+}
+
+.chat .input {
+    height: 40px;
+    padding: 2px;
+    width: 100%;
+    display: flex;
+    background-color: blue;
+}
+
+.chat .input input {
+    width: 100%;
+    padding: 3px 60px 3px 10px;
+    font-size: 13px;
+    font-family: inherit;
+}

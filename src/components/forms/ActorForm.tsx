@@ -95,7 +95,6 @@ const ActorForm: FC<IActorProps> = ({
           <DatePicker
           className={style.datepick}
             selected={new Date(actor.extInfo.birthday)}
-            // onSelect={handleDateSelect} //when day is clicked
             onChange={(date: Date) => {
               if (date !== null) {
                 setActor({
