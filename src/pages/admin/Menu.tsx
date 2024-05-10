@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,7 +49,7 @@ const Menu: FC = () => {
           <span>{contentConst.news}</span>
         </div>
       </div>
-      <div className={style.item} onClick={() => navigate(`${ENV.ADMIN}`)}>
+      <div className={style.item} onClick={() => navigate(`/admin/support-chats`)}>
         <div className={style.icon}>
           <div className={style.img}>
             <FontAwesomeIcon icon={faEnvelope} />

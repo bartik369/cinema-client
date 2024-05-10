@@ -48,21 +48,3 @@ export const {
   useGetActorQuery,
   useGetMoviesActorQuery,
 } = actorApi;
-
-
-
-// endpoints: builder => ({
-//     getUsers: builder.query({
-//       query: queryParams => ({
-//         url: `users/?${queryParams}`,
-//         method: 'GET'
-//       }),
-//       serializeQueryArgs: ({ queryArgs }) => {
-//         const newQueryArgs = { ...queryArgs };
-//         if (newQueryArgs.page) {
-//           delete newQueryArgs.page;
-//         }
-//         return newQueryArgs;
-//       }
-//     })
-//   })

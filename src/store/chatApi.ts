@@ -11,19 +11,20 @@ export const chatApi = createApi({
                 url: `/open-conversation/`,
                 method:'POST',
                 body: {id: id},
-            })
-        }),
-        getConversation:builder.query<string, string>({
-            query:(id) => ({
-                url: `/get-conversation/${id}`,
-                method: 'GET',
-            })
+            }),
         }),
         getMessages: builder.query({
            query:(id) => ({
                url: `/messages/${id}`,
                method: 'GET',
            }) 
+        }),
+        getRecipientMessages: builder.mutation<undefined, string>({
+            query:(id) => ({
+                url: `/recipient-messages/`,
+                method: 'POST',
+                body: {id: id},
+            }) 
         }),
         createMessage: builder.mutation({
             query:(data) => ({
@@ -45,14 +46,21 @@ export const chatApi = createApi({
                 body: data,
             })
         }),
+        getConversations: builder.query({
+            query:(id) => ({
+                url: `/get-conversations/${id}`,
+                method: 'GET',
+            })
+        })
     })
 });
 
 export const {
     useOpenChatMutation,
-    useGetConversationQuery,
     useGetMessagesQuery,
     useCreateMessageMutation,
     useDeleteMessageQuery,
     useUpdateMessageMutation,
+    useGetConversationsQuery,
+    useGetRecipientMessagesMutation,
 } = chatApi;

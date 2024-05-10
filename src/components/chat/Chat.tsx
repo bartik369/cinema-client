@@ -1,31 +1,44 @@
 import {FC, useState} from 'react';
-import { useGetConversationQuery, useCreateMessageMutation, useGetMessagesQuery } from '../../store/chatApi';
+import { 
+  useCreateMessageMutation,
+  useGetMessagesQuery,
+} from '../../store/chatApi';
+import { IUser } from '../../types/auth';
+import { IChatInfo } from '../../types/chat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import style from './Chat.module.css'
-import { IUser } from '../../types/auth';
 
 interface IChatProps {
     visibleHandler: () => void;
     user: IUser;
+    recipientId: string;
+    chatInfo: IChatInfo;
 }
 
-const Chat: FC<IChatProps> = ({ visibleHandler, user }) => {
+const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) => {
   const [message, setMessage] = useState<string>("");
   const [file, setFile] = useState<string | Blob>("");
-  const {data: convessationId} = useGetConversationQuery(user && user._id);
-  // const {data: messages} = useGetMessagesQuery(convessationId);
+  const [replyId, setReplyId] = useState<string>("")
+  const {data: messages} = useGetMessagesQuery(chatInfo?._id);
   const [createMessage] = useCreateMessageMutation();
 
   const sendMessageHandler = () => {
-    const formData = new FormData();
-    message && formData.append('message', message);
-    file && formData.append('file', file);
-    formData && createMessage(formData);
+
+    if (user && chatInfo) {
+      const formData = new FormData();
+      formData.append('senderId', chatInfo.creatorId);
+      recipientId && formData.append('recipientId', recipientId);
+      formData.append('conversationId', chatInfo._id);
+      message && formData.append('message', message);
+      replyId && formData.append('replyTo', replyId);
+      file && formData.append('file', file);
+      formData && createMessage(formData);
+    }
   };
 
-  console.log(file)
-  console.log(message)
+  console.log(messages)
+  console.log(chatInfo)
 
   return (
     <div className={style.chat}>
@@ -34,7 +47,9 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user }) => {
         onClick={visibleHandler}
         icon={faXmark}
       />
-      <div className={style.messages}></div>
+      <div className={style.messages}>
+       
+      </div>
       <div className={style.input}>
         <input
          onChange={(e) => setMessage(e.target.value)}

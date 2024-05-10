@@ -4,6 +4,8 @@ import { footerMenu1, footerMenu2 } from '../../utils/data/data';
 import { useAppSelector } from '../../hooks/reduxHook';
 import { ToastContainer, toast } from 'react-toastify';
 import { useOpenChatMutation } from '../../store/chatApi';
+import { IChatInfo } from '../../types/chat';
+import Chat from '../chat/Chat';
 import * as contentConst from '../../utils/constants/content';
 import Instagram from '../../assets/pics/instagram.svg';
 import Twitter from '../../assets/pics/twitter.svg';
@@ -11,21 +13,26 @@ import VK from '../../assets/pics/vk.svg';
 import Telegram from '../../assets/pics/telegram.svg';
 import Message from '../../assets/pics/message.svg';
 import style from './Footer.module.css';
-import Chat from '../chat/Chat';
 
 const Footer: FC = () => {
   const location = useLocation();
   const existTrailer = useAppSelector(state => state.movies.existTrailer);
   const isAuth = useAppSelector(state => state.auth.isAuth);
   const user = useAppSelector(state => state.auth.user);
-  const [visibleChat, setVisibleChat] = useState(false)
-  const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
   const [openChat] = useOpenChatMutation();
+  const [recipientId, setRecipientId] = useState<string>('');
+  const [chatInfo, setChatInfo] = useState<IChatInfo>()
+  const [visibleChat, setVisibleChat] = useState(false);
+  const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
 
   const startChat = () => {
-    if (isAuth && user) {
-      setVisibleChat(true);
-      openChat(user?._id);
+    
+    if (isAuth) {
+        setVisibleChat(true);
+        openChat(user._id).unwrap().then((data) => {
+          setChatInfo({...data})
+          setRecipientId(data.participants.filter((item:string) => item != user._id))
+        })
     } else {
       toast.error(contentConst.errorAddFavotite)
     }
@@ -74,7 +81,12 @@ const Footer: FC = () => {
         </div>
         <div className={style.info}></div>
       </div>
-      {visibleChat && <Chat visibleHandler={visibleHandler} user={user} />}
+      {visibleChat &&
+       <Chat 
+       visibleHandler={visibleHandler} 
+       user={user} 
+       chatInfo={chatInfo!} 
+       recipientId={recipientId}/>}
     </div>
   );
 };

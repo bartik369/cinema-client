@@ -15,6 +15,7 @@ import Actors from "./pages/actor/Actors";
 import Profile from "./pages/profile/Profile";
 import Page404 from "./pages/404/Page404";
 import Admin from "./pages/admin/Admin";
+import SupportChats from "./pages/admin/SupportChats/chats/SupportChats";
 import EditMainSlider from "./pages/slider/EditMainSlider";
 import style from "./App.module.css";
 
@@ -40,11 +41,12 @@ const App: FC = () => {
         <Route element={<PrivateRoutes allowedRoles={[contentConst.USER]} />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
-        <Route element={<PrivateRoutes allowedRoles={[contentConst.ADMIN]} />}>
+        <Route element={<PrivateRoutes allowedRoles={[contentConst.ADMIN, 'SUPPORT']} />}>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/add-movie" element={<AddMovie />} />
           <Route path="/admin/add-actor" element={<AddActor />} />
           <Route path="/admin/edit-slider" element={<EditMainSlider />} />
+          <Route path="/admin/support-chats" element={<SupportChats />} />
         </Route>
       </Routes>
       <Footer />

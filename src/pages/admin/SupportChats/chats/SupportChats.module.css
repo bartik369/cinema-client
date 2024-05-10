@@ -1,0 +1,16 @@
+.chats {
+    display: grid;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1320px;
+    grid-template-columns: 26% auto;
+    grid-row: 20px;
+}
+
+.chats .conversations {
+    background-color: midnightblue;
+}
+
+.chats .messages {
+    background-color: rgb(25, 77, 112);
+}

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import Menu from './Menu';
 import MoviesCounts from './MoviesCounts';
 import UsersCounts from './UsersCounts';
