@@ -17,3 +17,17 @@ senderId:string;
 updatedAt:string;
 _id:string;
 }
+export interface IConversation {
+creatorId:string;
+participants: string[];
+ticketNumber: string;
+createdAt: string;
+updatedAt: string;
+}
+export interface IParticipantInfo {
+    _id: string;
+    email: string;
+    roles: string[];
+    member: string[];
+    conversationId: string;
+}

@@ -1,4 +1,6 @@
+import { IMessage } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IConversation } from "../types/chat";
 import ENV from "../env.config";
 
 export const chatApi = createApi({
@@ -19,9 +21,23 @@ export const chatApi = createApi({
                method: 'GET',
            }) 
         }),
-        getRecipientMessages: builder.mutation<undefined, string>({
+        getRecipientMessages: builder.mutation<IMessage[], string>({
             query:(id) => ({
                 url: `/recipient-messages/`,
+                method: 'POST',
+                body: {id: id},
+            }) 
+        }),
+        getActiveConverstionMessages: builder.mutation<IMessage[], string>({
+            query:(id) => ({
+                url: `/active-messages/`,
+                method: 'POST',
+                body: {id: id},
+            }) 
+        }),
+        getActiveConverstion: builder.mutation<string, string>({
+            query:(id) => ({
+                url: `/active-conversation/`,
                 method: 'POST',
                 body: {id: id},
             }) 
@@ -51,6 +67,13 @@ export const chatApi = createApi({
                 url: `/get-conversations/${id}`,
                 method: 'GET',
             })
+        }),
+        getConversationId: builder.mutation({
+            query:(id) => ({
+                url: `/get-conversation/`,
+                method: 'POST',
+                body: {id: id},
+            })
         })
     })
 });
@@ -63,4 +86,8 @@ export const {
     useUpdateMessageMutation,
     useGetConversationsQuery,
     useGetRecipientMessagesMutation,
+    useGetConversationIdMutation,
+    useGetActiveConverstionMutation,
+    useGetActiveConverstionMessagesMutation,
+
 } = chatApi;

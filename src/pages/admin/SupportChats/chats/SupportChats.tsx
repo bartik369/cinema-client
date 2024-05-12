@@ -2,8 +2,10 @@ import {FC, useState, useEffect} from 'react';
 import { useAppSelector } from '../../../../hooks/reduxHook';
 import { 
     useGetConversationsQuery, 
-    useGetMessagesQuery,
     useGetRecipientMessagesMutation,
+    useGetConversationIdMutation,
+    useGetActiveConverstionMutation,
+    useGetActiveConverstionMessagesMutation,
  } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
@@ -12,32 +14,48 @@ import style from './SupportChats.module.css'
 const SupportChats:FC = () => {
     const user = useAppSelector(state => state.auth.user);
     const {data: participants} = useGetConversationsQuery(user && user._id);
+    const [getConversationId, ] = useGetConversationIdMutation();
+    const [getActiveConversation, {data: activeConversationId}] = useGetActiveConverstionMutation();
     const [getRecipientMessages, {data: messages}] = useGetRecipientMessagesMutation();
-    const [recipientId, setRecipientId] = useState<string>('')
+    const [getActiveMessages, {data: activeMessages}] = useGetActiveConverstionMessagesMutation();
+    const [recipientId, setRecipientId] = useState<string>('');
+    const [active, setActive] = useState('')
+
 
     useEffect(() => {
-        recipientId && getRecipientMessages(recipientId);
-    }, [recipientId])
+        getActiveConversation(user._id).unwrap().then((data) => {
+            setActive(data)
+            getActiveMessages(data);
+        })
+    }, [user])
 
     const setRecipientHandler = (id:string) => {
         setRecipientId(id)
+        getRecipientMessages(id);
+        getConversationId(id).unwrap().then((data) => {
+            console.log(data)
+            setActive(data)
+        })
     }
 
-    console.log(participants?.lastMessagesData)
     return (
         <div className={style.chats}>
             <div className={style.conversations}>
                 <Participants 
                 participants={participants?.usersInfo} 
                 user={user}
+                lastMessages={participants?.lastMessages}
+                activeConversation={active}
                 getMessagesById={setRecipientHandler}
                 />
             </div>
             <div className={style.messages}>
                 <Messages 
-                participants={participants} 
+                participants={participants}
+                conversationId={activeConversationId!}
+                recipientId={recipientId}
                 user={user}
-                messages={messages!}
+                messages={messages! || activeMessages}
                 />
             </div>
         </div>

@@ -37,9 +37,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     }
   };
 
-  console.log(messages)
-  console.log(chatInfo)
-
   return (
     <div className={style.chat}>
       <FontAwesomeIcon
