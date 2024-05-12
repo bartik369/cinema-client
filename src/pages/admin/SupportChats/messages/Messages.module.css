@@ -1,28 +1,86 @@
 .messages {
     background-color: midnightblue;
+    height: 85vh;
+}
+
+.messages .inner {
+    background-color: brown;
+    overflow-y: scroll;
+    height: calc(100% - 90px);
+}
+
+.messages .typing {
+    display: grid;
+    grid-template-columns: auto 150px;
+    background-color: indianred;
+    padding: 10px 20px;
+}
+
+.messages .typing .input {
+    display: flex;
+}
+
+.messages .typing .input input {
+    width: 100%;
+    background-color: plum;
+    padding: 15px;
+    color: darkred;
+}
+
+.messages .typing .buttons {
+    background-color: rgb(80, 31, 110);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.messages .typing .buttons .file {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0px 5px;
+    margin: 0px 10px;
+    color: rgb(206, 206, 206);
+}
+
+.messages .typing .buttons .file:hover {
+    color: antiquewhite;
+}
+
+.messages .typing .buttons .btn {
+    background-color: rgb(45, 3, 112);
+    border: none;
+    display: flex;
+    color: azure;
+    padding: 9px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.messages .typing .buttons .btn:hover {
+    background-color: rgb(66, 12, 153);
 }
 
 .messages .message {
     position: relative;
-    background-color: coral;
     margin: 3px;
     padding: 10px 5px;
 }
 
+.messages .message .right,
+.messages .message .left {
+    width: fit-content;
+    padding: 16px 20px;
+    border-radius: 6px;
+}
+
 .messages .message .right {
     background-color: dodgerblue;
-    width: fit-content;
-    padding: 12px 20px;
     margin-left: auto;
     margin-right: 0;
-    border-radius: 12px;
 }
 
 .messages .message .left {
     background-color: rgb(6, 127, 99);
-    padding: 12px 20px;
-    width: fit-content;
     margin-left: 0;
     margin-right: auto;
-    border-radius: 12px;
 }
