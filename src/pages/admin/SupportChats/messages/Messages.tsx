@@ -37,17 +37,25 @@ const Messages: FC<IMessagesProps> = ({
     }
   };
 
+  console.log(messages && messages)
+
   return (
-    <div>
-      <>
-        {messages ?
-          messages.map((item) => (
-            <div key={item._id}>
-              <div>{item.senderId}</div>
-              <div>{item.content}</div>
-            </div>
-          )): <Loader />}
-      </>
+    <div className={style.messages}>
+        {messages 
+        ? messages.map((message) => (
+            message.senderId === user._id
+            ? <div className={style.message}>
+              <div className={style.left}>
+                 {message.content}
+               </div>
+              </div>
+            : <div className={style.message}>
+               <div className={style.right}>
+              {message.content}
+              </div>
+              </div>
+          ))
+        : <Loader />}
       <div className={style.input}>
         <input
           onChange={(e) => setMessage(e.target.value)}
@@ -63,6 +71,7 @@ const Messages: FC<IMessagesProps> = ({
         />
         <button onClick={sendMessageHandler}>send</button>
       </div>
+
     </div>
   );
 };

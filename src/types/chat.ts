@@ -30,4 +30,6 @@ export interface IParticipantInfo {
     roles: string[];
     member: string[];
     conversationId: string;
+    avatar: string;
+    ticketNumber: string;
 }

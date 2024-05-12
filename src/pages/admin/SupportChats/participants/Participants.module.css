@@ -15,3 +15,18 @@
 .participants .item:hover {
     background-color: rgb(64, 84, 105);
 }
+
+.participants .user {
+    display: flex;
+    align-items: center;
+}
+
+.participants .user .avatar {
+    width: 55px;
+    height: 55px;
+}
+
+.participants .user .avatar img {
+    width: 100%;
+    object-fit: cover;
+}
