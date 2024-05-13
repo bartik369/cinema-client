@@ -33,6 +33,7 @@ const Movies = () => {
 
   return (
     <div className={style.container}>
+       <MovieFilter movies={movies! && movies.data} />
       {movies?.data && (
         <>
           <div className={style.movies}>

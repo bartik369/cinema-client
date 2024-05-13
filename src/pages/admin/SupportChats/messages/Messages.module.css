@@ -65,7 +65,7 @@
 .messages .inner {
     position: relative;
     margin: 3px;
-    padding: 10px 5px;
+    padding: 10px 20px;
     background-color: darkslateblue;
 }
 
@@ -85,6 +85,7 @@
     border-radius: 6px;
     margin: 20px;
     position: relative;
+    cursor: pointer;
 }
 
 .messages .inner .right .info,
