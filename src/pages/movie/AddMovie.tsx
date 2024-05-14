@@ -96,6 +96,7 @@ const AddMovie: FC = () => {
     e.target.files && console.log(e.target.files);
     e.target.files && setTrailer(e.target.files[0]);
   };
+
   
   return (
     <div className={style.container}>

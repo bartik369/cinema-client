@@ -6,30 +6,30 @@ export interface IChatInfo {
   updatedAt: string;
 }
 export interface IMessage {
-content: string;
-conversationId: string;
-createdAt:string;
-mediaId: string;
-read: boolean;
-recipientId:string;
-replyTo:string;
-senderId:string;
-updatedAt:string;
-_id:string;
+  _id: string;
+  content: string;
+  conversationId: string;
+  createdAt:string;
+  mediaId: string;
+  read: string;
+  recipientId: string;
+  replyTo: string;
+  senderId: string;
+  updatedAt: string;
 }
 export interface IConversation {
-creatorId:string;
-participants: string[];
-ticketNumber: string;
-createdAt: string;
-updatedAt: string;
+  creatorId:string;
+  participants: string[];
+  ticketNumber: string;
+  createdAt: string;
+  updatedAt: string;
 }
 export interface IParticipantInfo {
-    _id: string;
-    email: string;
-    roles: string[];
-    member: string[];
-    conversationId: string;
-    avatar: string;
-    ticketNumber: string;
+  _id: string;
+  email: string;
+  roles: string[];
+  member: string[];
+  conversationId: string;
+  avatar: string;
+  ticketNumber: string;
 }

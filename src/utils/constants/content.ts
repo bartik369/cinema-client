@@ -64,6 +64,7 @@ export const messages = 'Сообщения';
 export const USER = 'USER';
 export const ADMIN = 'ADMIN';
 export const EDITOR = 'EDITOR';
+export const SUPPORT = 'SUPPORT';
 
 
 export const havenotAccount = 'Еще нет аккаунта?';

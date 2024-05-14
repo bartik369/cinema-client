@@ -70,9 +70,28 @@
 }
 
 .messages .menu {
-    background-color: rgb(0, 255, 81);
+    background-color: rgb(63, 63, 63);
+    border-radius: 6px;
+    padding: 10px 12px;
     position: absolute;
-    top: -20px;
+    top: -30px;
+}
+
+.messages .menu .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.messages .menu span {
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.messages .menu .icon {
+    color: #fff;
+    font-size: 16px;
+    margin: 4px 8px;
 }
 
 .messages .inactive {

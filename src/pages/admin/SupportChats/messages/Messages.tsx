@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef, useEffect } from "react";
-import { useCreateMessageMutation } from "../../../../store/chatApi";
+import { useCreateMessageMutation, useGetMessageMutation } from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
 import { IMessage } from "../../../../types/chat";
 import Loader from "../../../../components/loader/Loader";
@@ -23,27 +23,49 @@ const Messages: FC<IMessagesProps> = ({
   recipientId,
   conversationId,
 }) => {
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState<IMessage>({
+    _id: '',
+    content: '',
+    conversationId: '',
+    createdAt: '',
+    mediaId: '',
+    read: '',
+    recipientId: '',
+    replyTo: '',
+    senderId: '',
+    updatedAt: '',
+  });
   const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("");
   const [createMessage] = useCreateMessageMutation();
   const [messageMenu, setMessageMenu] = useState("");
-
+  const [getMessage] = useGetMessageMutation()
+  
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
   };
   const messageMenuRef = useRef<IListRefObj>({});
-  const messageEl = useRef(null);
+
+  useEffect(() => {
+    if (recipientId && conversationId) {
+      setMessage({...message, 
+        recipientId: recipientId,
+        conversationId: conversationId,
+        senderId: user._id,
+      });
+    }
+  }, [recipientId, conversationId, message.content]);
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
+      
       if (messageMenuRef.current) {
-        console.log('chick')
         Object.values(messageMenuRef).map((item) => {
-          console.log(item.current);
+
           if (item !== e.target) {
-            setMessageMenu("");
-            setReplyId("");
+            setMessageMenu('');
+            setMessage({...message, content: ''});
+            setReplyId('');
           }
         });
       }
@@ -51,28 +73,31 @@ const Messages: FC<IMessagesProps> = ({
     document.addEventListener("click", outsideClickhandler);
   }, []);
 
-  console.log(messageMenu)
-
-
-  const sendMessageHandler = () => {
-    if (user && conversationId) {
-      const formData = new FormData();
-      formData.append("senderId", user._id);
-      recipientId && formData.append("recipientId", recipientId);
-      formData.append("conversationId", conversationId);
-      message && formData.append("message", message);
-      replyId && formData.append("replyTo", replyId);
-      file && formData.append("file", file);
-      formData && createMessage(formData);
-    }
+  const sendMessageHandler = () => { 
+        const formData = new FormData();
+        type messageKey = keyof typeof message;
+        Object.keys(message).forEach((key) => {
+          formData.append(key, message[key as messageKey]);
+        });
+        file && formData.append("file", file);
+        createMessage(formData);
   };
+
+  const editMessageHandler = (id: string) => {
+    getMessage(id).unwrap().then((data) => {
+      setMessage({...data})
+    })
+  }
+  const deleteMessageHandler = (id: string) => {
+    console.log('delete', id)
+  }
 
   return (
     <div className={style.messages}>
       <div className={style.inner}>
         {messages ? (
           messages.map((message) =>
-            message.senderId === user._id ? (
+            message.senderId !== user._id ? (
                 <div className={style.left}
                   onClick={e => e.stopPropagation()}> 
                    <div className={message._id == messageMenu 
@@ -92,7 +117,11 @@ const Messages: FC<IMessagesProps> = ({
                      <div className={message._id === messageMenu 
                   ? style.menu 
                   : style.inactive}>
-                    <SenderMessageMenu />
+                    <SenderMessageMenu 
+                    messageId={message._id}
+                    editMessage={editMessageHandler}
+                    deleteMessage={deleteMessageHandler}
+                    />
                   </div>
                    <div className={style.info}
                    onClick={() => setMessageMenu(message._id)}
@@ -102,15 +131,13 @@ const Messages: FC<IMessagesProps> = ({
                 </div>
             )
           )
-        ) : (
-          <Loader />
-        )}
+        ) : participants ? 'No active chats' : <Loader />}
       </div>
       <div className={style.typing}>
         <div className={style.input}>
           <input
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
+            onChange={(e) => setMessage({...message, content: e.target.value})}
+            value={message?.content}
             type="text"
           />
         </div>
@@ -140,6 +167,3 @@ const Messages: FC<IMessagesProps> = ({
 };
 
 export default Messages;
-function e(e: any): (this: Document, ev: MouseEvent) => any {
-  throw new Error("Function not implemented.");
-}

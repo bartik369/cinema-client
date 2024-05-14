@@ -41,7 +41,7 @@ const App: FC = () => {
         <Route element={<PrivateRoutes allowedRoles={[contentConst.USER]} />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
-        <Route element={<PrivateRoutes allowedRoles={[contentConst.ADMIN, 'SUPPORT']} />}>
+        <Route element={<PrivateRoutes allowedRoles={[contentConst.ADMIN, contentConst.SUPPORT]} />}>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/add-movie" element={<AddMovie />} />
           <Route path="/admin/add-actor" element={<AddActor />} />

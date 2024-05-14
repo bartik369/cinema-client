@@ -15,6 +15,13 @@ export const chatApi = createApi({
                 body: {id: id},
             }),
         }),
+        getMessage: builder.mutation({
+            query:(id) => ({
+                url: `/message/`,
+                method: 'POST',
+                body: {id: id},
+            }) 
+         }),
         getMessages: builder.query({
            query:(id) => ({
                url: `/messages/${id}`,
@@ -35,14 +42,14 @@ export const chatApi = createApi({
                 body: {id: id},
             }) 
         }),
-        getActiveConverstion: builder.mutation<string, string>({
+        getActiveConverstion: builder.mutation<IMessage, string>({
             query:(id) => ({
                 url: `/active-conversation/`,
                 method: 'POST',
                 body: {id: id},
             }) 
         }),
-        createMessage: builder.mutation({
+        createMessage: builder.mutation<IMessage, any>({
             query:(data) => ({
                 url: `/create-message/`,
                 method: 'POST',
@@ -89,5 +96,6 @@ export const {
     useGetConversationIdMutation,
     useGetActiveConverstionMutation,
     useGetActiveConverstionMessagesMutation,
+    useGetMessageMutation,
 
 } = chatApi;

@@ -15,17 +15,19 @@ const SupportChats:FC = () => {
     const user = useAppSelector(state => state.auth.user);
     const {data: participants} = useGetConversationsQuery(user && user._id);
     const [getConversationId, ] = useGetConversationIdMutation();
-    const [getActiveConversation, {data: activeConversationId}] = useGetActiveConverstionMutation();
+    const [getActiveConversation] = useGetActiveConverstionMutation();
     const [getRecipientMessages, {data: messages}] = useGetRecipientMessagesMutation();
     const [getActiveMessages, {data: activeMessages}] = useGetActiveConverstionMessagesMutation();
     const [recipientId, setRecipientId] = useState<string>('');
-    const [active, setActive] = useState('')
+    const [active, setActive] = useState<string>('')
 
 
     useEffect(() => {
         getActiveConversation(user._id).unwrap().then((data) => {
-            setActive(data)
-            getActiveMessages(data);
+            setActive(data.conversationId);
+            getActiveMessages(data.conversationId);
+            setActive(data.conversationId);
+            setRecipientId(data.recipientId);
         })
     }, [user])
 
@@ -51,8 +53,8 @@ const SupportChats:FC = () => {
             </div>
             <div className={style.messages}>
                 <Messages 
-                participants={participants}
-                conversationId={activeConversationId!}
+                participants={participants?.usersInfo}
+                conversationId={active}
                 recipientId={recipientId}
                 user={user}
                 messages={messages! || activeMessages}
