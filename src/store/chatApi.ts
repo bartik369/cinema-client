@@ -6,7 +6,7 @@ import ENV from "../env.config";
 export const chatApi = createApi({
     reducerPath: 'chatApi',
     baseQuery: fetchBaseQuery({ baseUrl: ENV.API_URL }),
-    tagTypes: ['Chat'],
+    tagTypes: ['Chat', 'Messages'],
     endpoints: (builder) => ({
         openChat: builder.mutation<any, string>({
             query:(id) => ({
@@ -22,25 +22,45 @@ export const chatApi = createApi({
                 body: {id: id},
             }) 
          }),
-        getMessages: builder.query({
+        getMessages: builder.query<IMessage[], string>({
            query:(id) => ({
                url: `/messages/${id}`,
                method: 'GET',
-           }) 
+           }),
+           providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ _id }) => ({ type: "Messages" as const, _id })),
+              { type: "Messages", _id: "LIST" },
+            ]
+          : [{ type: "Messages", _id: "LIST" }],
+           
         }),
-        getRecipientMessages: builder.mutation<IMessage[], string>({
+        getRecipientMessages: builder.query<IMessage[], string>({
             query:(id) => ({
-                url: `/recipient-messages/`,
-                method: 'POST',
-                body: {id: id},
-            }) 
+                url: `/recipient-messages/${id}`,
+                method: 'GET',
+            }),
+            providesTags: (result) =>
+            result
+              ? [
+                  ...result.map(({ _id }) => ({ type: "Messages" as const, _id })),
+                  { type: "Messages", _id: "LIST" },
+                ]
+              : [{ type: "Messages", _id: "LIST" }],
         }),
-        getActiveConverstionMessages: builder.mutation<IMessage[], string>({
+        getActiveConverstionMessages: builder.query<IMessage[], string>({
             query:(id) => ({
-                url: `/active-messages/`,
-                method: 'POST',
-                body: {id: id},
-            }) 
+                url: `/active-messages/${id}`,
+                method: 'GET',
+            }),
+            providesTags: (result) =>
+            result
+              ? [
+                  ...result.map(({ _id }) => ({ type: "Messages" as const, _id })),
+                  { type: "Messages", _id: "LIST" },
+                ]
+              : [{ type: "Messages", _id: "LIST" }],
         }),
         getActiveConverstion: builder.mutation<IMessage, string>({
             query:(id) => ({
@@ -54,26 +74,36 @@ export const chatApi = createApi({
                 url: `/create-message/`,
                 method: 'POST',
                 body: data,
-            })
+            }),
+            invalidatesTags: ['Messages'],
         }),
-        deleteMessage: builder.query({
+        deleteMessage: builder.mutation<{success: boolean; id: number }, string>({
             query:(id) => ({
                 url: `/delete-message/${id}`,
-                method: 'GET',
-            })
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Messages'],
         }),
         updateMessage: builder.mutation({
             query:(data) => ({
                 url: `/update-message/`,
                 method: 'POST',
                 body: data,
-            })
+            }),
+            invalidatesTags: ['Messages'],
         }),
         getConversations: builder.query({
             query:(id) => ({
                 url: `/get-conversations/${id}`,
                 method: 'GET',
-            })
+            }),
+            // providesTags: (result) =>
+            // result
+            //   ? [
+            //       ...result.usersInfo.map(({ _id }) => ({ type: "Chat" as const, _id })),
+            //       { type: "Chat", _id: "LIST" },
+            //     ]
+            //   : [{ type: "Chat", _id: "LIST" }],
         }),
         getConversationId: builder.mutation({
             query:(id) => ({
@@ -89,13 +119,13 @@ export const {
     useOpenChatMutation,
     useGetMessagesQuery,
     useCreateMessageMutation,
-    useDeleteMessageQuery,
+    useDeleteMessageMutation,
     useUpdateMessageMutation,
     useGetConversationsQuery,
-    useGetRecipientMessagesMutation,
+    useGetRecipientMessagesQuery,
     useGetConversationIdMutation,
     useGetActiveConverstionMutation,
-    useGetActiveConverstionMessagesMutation,
+    useGetActiveConverstionMessagesQuery,
     useGetMessageMutation,
 
 } = chatApi;

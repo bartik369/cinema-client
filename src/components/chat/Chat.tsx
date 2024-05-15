@@ -1,9 +1,10 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import { 
   useCreateMessageMutation,
   useGetMessagesQuery,
 } from '../../store/chatApi';
 import { IUser } from '../../types/auth';
+import { IMessage } from '../../types/chat';
 import { IChatInfo } from '../../types/chat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -17,24 +18,45 @@ interface IChatProps {
 }
 
 const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) => {
-  const [message, setMessage] = useState<string>("");
   const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("")
   const {data: messages} = useGetMessagesQuery(chatInfo?._id);
   const [createMessage] = useCreateMessageMutation();
 
-  const sendMessageHandler = () => {
+  const [message, setMessage] = useState<IMessage>({
+    _id: '',
+    content: '',
+    conversationId: '',
+    createdAt: '',
+    mediaId: '',
+    read: '',
+    recipientId: '',
+    replyTo: '',
+    senderId: '',
+    updatedAt: '',
+  });
 
-    if (user && chatInfo) {
-      const formData = new FormData();
-      formData.append('senderId', chatInfo.creatorId);
-      recipientId && formData.append('recipientId', recipientId);
-      formData.append('conversationId', chatInfo._id);
-      message && formData.append('message', message);
-      replyId && formData.append('replyTo', replyId);
-      file && formData.append('file', file);
-      formData && createMessage(formData);
+  useEffect(() => {
+    if (recipientId && chatInfo._id) {
+      setMessage({...message, 
+        recipientId: recipientId,
+        conversationId: chatInfo._id,
+        senderId: user._id,
+      });
     }
+  }, [recipientId, message.content, chatInfo]);
+
+  console.log(messages)
+
+
+  const sendMessageHandler = () => {
+    const formData = new FormData();
+        type messageKey = keyof typeof message;
+        Object.keys(message).forEach((key) => {
+          formData.append(key, message[key as messageKey]);
+        });
+        file && formData.append("file", file);
+        createMessage(formData);
   };
 
   return (
@@ -44,13 +66,16 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         onClick={visibleHandler}
         icon={faXmark}
       />
+      <div>Обращение № {chatInfo && chatInfo.ticketNumber}</div>
       <div className={style.messages}>
-       
+       {messages && messages.map((message) => 
+       <div key={message._id}>{message.content}</div>
+       )}
       </div>
       <div className={style.input}>
         <input
-         onChange={(e) => setMessage(e.target.value)}
-         value={message}
+         onChange={(e) => setMessage({...message, content: e.target.value})}
+         value={message.content}
          type="text" />
         <input type='file' name='file' 
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files &&

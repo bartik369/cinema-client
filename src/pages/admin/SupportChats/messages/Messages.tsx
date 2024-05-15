@@ -1,5 +1,10 @@
 import React, { FC, useState, useRef, useEffect } from "react";
-import { useCreateMessageMutation, useGetMessageMutation } from "../../../../store/chatApi";
+import { 
+  useCreateMessageMutation, 
+  useGetMessageMutation,
+  useDeleteMessageMutation,
+  useUpdateMessageMutation,
+ } from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
 import { IMessage } from "../../../../types/chat";
 import Loader from "../../../../components/loader/Loader";
@@ -37,9 +42,12 @@ const Messages: FC<IMessagesProps> = ({
   });
   const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("");
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [createMessage] = useCreateMessageMutation();
   const [messageMenu, setMessageMenu] = useState("");
-  const [getMessage] = useGetMessageMutation()
+  const [getMessage] = useGetMessageMutation();
+  const [deleteMessage] = useDeleteMessageMutation();
+  const [updateMessage] = useUpdateMessageMutation();
   
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
@@ -80,16 +88,26 @@ const Messages: FC<IMessagesProps> = ({
           formData.append(key, message[key as messageKey]);
         });
         file && formData.append("file", file);
-        createMessage(formData);
+        
+        if (isUpdating) {
+          updateMessage(formData).unwrap().then((data) => {
+            setIsUpdating(false);
+          })
+        } else {
+          createMessage(formData);
+        }
   };
 
   const editMessageHandler = (id: string) => {
     getMessage(id).unwrap().then((data) => {
-      setMessage({...data})
-    })
+      setMessage({...data});
+      setIsUpdating(true);
+    });
   }
   const deleteMessageHandler = (id: string) => {
-    console.log('delete', id)
+    id && deleteMessage(id).unwrap().then((data) => {
+      setMessageMenu('');
+    })
   }
 
   return (
@@ -99,6 +117,7 @@ const Messages: FC<IMessagesProps> = ({
           messages.map((message) =>
             message.senderId !== user._id ? (
                 <div className={style.left}
+                  key={message._id}
                   onClick={e => e.stopPropagation()}> 
                    <div className={message._id == messageMenu 
                   ? style.menu 
@@ -113,6 +132,7 @@ const Messages: FC<IMessagesProps> = ({
                 </div>
             ) : (
                 <div className={style.right}
+                key={message._id}
                   onClick={e => e.stopPropagation()}>
                      <div className={message._id === messageMenu 
                   ? style.menu 
@@ -134,7 +154,7 @@ const Messages: FC<IMessagesProps> = ({
         ) : participants ? 'No active chats' : <Loader />}
       </div>
       <div className={style.typing}>
-        <div className={style.input}>
+        <div className={style.input} onClick={e => e.stopPropagation()}>
           <input
             onChange={(e) => setMessage({...message, content: e.target.value})}
             value={message?.content}
@@ -158,7 +178,7 @@ const Messages: FC<IMessagesProps> = ({
             }
           />
           <button className={style.btn} onClick={sendMessageHandler}>
-            отправить
+            {isUpdating ? 'Обновить' : 'Отправить'}
           </button>
         </div>
       </div>

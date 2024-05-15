@@ -41,7 +41,7 @@ const Participants: FC<IParticipantsProps> = ({
                 <div className={style.message}>
                   {lastMessages && lastMessages.flatMap((message: any) => {
                         if (message._id.includes(participant.conversationId)) {
-                            return <div>{message.content}</div>
+                            return <div key={participant._id}>{message.content}</div>
                         }
                     })}
                 </div>

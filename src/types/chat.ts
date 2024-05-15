@@ -1,10 +1,12 @@
 export interface IChatInfo {
   _id: string;
   creatorId: string;
+  ticketNumber: string;
   participants: string[];
   createdAt: string;
   updatedAt: string;
 }
+
 export interface IMessage {
   _id: string;
   content: string;

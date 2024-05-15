@@ -2,10 +2,10 @@ import {FC, useState, useEffect} from 'react';
 import { useAppSelector } from '../../../../hooks/reduxHook';
 import { 
     useGetConversationsQuery, 
-    useGetRecipientMessagesMutation,
+    useGetRecipientMessagesQuery,
     useGetConversationIdMutation,
     useGetActiveConverstionMutation,
-    useGetActiveConverstionMessagesMutation,
+    useGetActiveConverstionMessagesQuery,
  } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
@@ -16,29 +16,30 @@ const SupportChats:FC = () => {
     const {data: participants} = useGetConversationsQuery(user && user._id);
     const [getConversationId, ] = useGetConversationIdMutation();
     const [getActiveConversation] = useGetActiveConverstionMutation();
-    const [getRecipientMessages, {data: messages}] = useGetRecipientMessagesMutation();
-    const [getActiveMessages, {data: activeMessages}] = useGetActiveConverstionMessagesMutation();
     const [recipientId, setRecipientId] = useState<string>('');
-    const [active, setActive] = useState<string>('')
+    const [active, setActive] = useState<string>('');
+    const [skip, setSkip] = useState(true);
+    const [skip2, setSkip2] = useState(true);
+    const {data: messages} = useGetRecipientMessagesQuery(recipientId && recipientId, {skip: skip});
+    const {data: activeMessages} = useGetActiveConverstionMessagesQuery(active && active, {skip: skip2} );
 
 
     useEffect(() => {
         getActiveConversation(user._id).unwrap().then((data) => {
             setActive(data.conversationId);
-            getActiveMessages(data.conversationId);
-            setActive(data.conversationId);
             setRecipientId(data.recipientId);
+            setSkip(false)
         })
     }, [user])
 
     const setRecipientHandler = (id:string) => {
         setRecipientId(id)
-        getRecipientMessages(id);
         getConversationId(id).unwrap().then((data) => {
-            console.log(data)
-            setActive(data)
+            setActive(data);
+            setSkip2(false)
         })
     }
+    console.log(participants)
 
     return (
         <div className={style.chats}>
