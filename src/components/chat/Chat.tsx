@@ -12,7 +12,7 @@ import { IChatInfo } from '../../types/chat';
 import SenderMessageMenu from '../../pages/admin/SupportChats/messages/SenderMessageMenu';
 import RecipientMessageMenu from '../../pages/admin/SupportChats/messages/RecipientMessageMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import style from './Chat.module.css'
 
 interface IChatProps {
@@ -166,16 +166,31 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
           )
         ) : "no messages"}
       </div>
-      <div className={style.input}>
-        <input
-         onChange={(e) => setMessage({...message, content: e.target.value})}
-         value={message.content}
-         type="text" />
-        <input type='file' name='file' 
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files &&
-          setFile(e.target.files[0])
-         }/>
-        <button onClick={sendMessageHandler}>send</button>
+      <div className={style.typing}>
+          {(replyId && messages) && messages.map((message) =>
+           message._id === replyId && <div className={style['reply-text']}>{message.content}</div>
+          )}
+        <div className={style.input} onClick={e => e.stopPropagation()}>
+          <input
+            onChange={(e) => setMessage({...message, content: e.target.value})}
+            value={message?.content}
+            type="text"
+          />
+          <div className={style.buttons}>
+          <label className={style.file} htmlFor={"upload"}>
+            <FontAwesomeIcon className={style["photo-icon"]} icon={faPaperclip}/>
+          </label>
+
+          <input type="file" name="file" id="upload" hidden
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              e.target.files && setFile(e.target.files[0])
+            }
+          />
+          <button className={style.btn} onClick={sendMessageHandler}>
+            {isUpdating ? 'Обновить' : 'Отправить'}
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );

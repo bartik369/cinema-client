@@ -139,6 +139,9 @@ const Messages: FC<IMessagesProps> = ({
                   <div className={style.info} 
                    onClick={() => setMessageMenu(message._id)}
                    ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
+                  {message.replyTo && messages.map((item) => 
+                  item._id == message.replyTo && <div key={item._id}>{item.content}</div>
+                  )}
                   {message.content}
                   </div>
                 </div>
