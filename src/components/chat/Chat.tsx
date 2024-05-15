@@ -1,11 +1,16 @@
-import {FC, useState, useEffect} from 'react';
+import {FC, useState, useEffect, useRef} from 'react';
 import { 
   useCreateMessageMutation,
   useGetMessagesQuery,
+  useGetMessageMutation,
+  useDeleteMessageMutation,
+  useUpdateMessageMutation,
 } from '../../store/chatApi';
 import { IUser } from '../../types/auth';
 import { IMessage } from '../../types/chat';
 import { IChatInfo } from '../../types/chat';
+import SenderMessageMenu from '../../pages/admin/SupportChats/messages/SenderMessageMenu';
+import RecipientMessageMenu from '../../pages/admin/SupportChats/messages/RecipientMessageMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import style from './Chat.module.css'
@@ -19,9 +24,14 @@ interface IChatProps {
 
 const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) => {
   const [file, setFile] = useState<string | Blob>("");
-  const [replyId, setReplyId] = useState<string>("")
+  const [replyId, setReplyId] = useState<string>("");
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const {data: messages} = useGetMessagesQuery(chatInfo?._id);
+  const [messageMenu, setMessageMenu] = useState("");
   const [createMessage] = useCreateMessageMutation();
+  const [getMessage] = useGetMessageMutation();
+  const [deleteMessage] = useDeleteMessageMutation();
+  const [updateMessage] = useUpdateMessageMutation();
 
   const [message, setMessage] = useState<IMessage>({
     _id: '',
@@ -36,6 +46,11 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     updatedAt: '',
   });
 
+  type IListRefObj = {
+    [index: string]: HTMLDivElement | null;
+  };
+  const messageMenuRef = useRef<IListRefObj>({});
+
   useEffect(() => {
     if (recipientId && chatInfo._id) {
       setMessage({...message, 
@@ -46,8 +61,22 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     }
   }, [recipientId, message.content, chatInfo]);
 
-  console.log(messages)
+  useEffect(() => {
+    const outsideClickhandler = (e: any) => {
+      
+      if (messageMenuRef.current) {
+        Object.values(messageMenuRef).map((item) => {
 
+          if (item !== e.target) {
+            setMessageMenu('');
+            setMessage({...message, content: ''});
+            setReplyId('');
+          }
+        });
+      }
+    };
+    document.addEventListener("click", outsideClickhandler);
+  }, []);
 
   const sendMessageHandler = () => {
     const formData = new FormData();
@@ -56,8 +85,34 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
           formData.append(key, message[key as messageKey]);
         });
         file && formData.append("file", file);
-        createMessage(formData);
+        
+        if (isUpdating) {
+          updateMessage(formData).unwrap().then((data) => {
+            setIsUpdating(false);
+          })
+        } else {
+          createMessage(formData);
+        }
   };
+
+  const editMessageHandler = (id: string) => {
+    getMessage(id).unwrap().then((data) => {
+      setMessage({...data});
+      setIsUpdating(true);
+    });
+  }
+  const deleteMessageHandler = (id: string) => {
+    id && deleteMessage(id).unwrap().then((data) => {
+      setMessageMenu('');
+    })
+  }
+  const replayMessageHandler = (id:string) => {
+    
+    if (id) {
+      setMessage({...message, replyTo: id});
+      setReplyId(id);
+    }
+  }
 
   return (
     <div className={style.chat}>
@@ -68,9 +123,48 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
       />
       <div>Обращение № {chatInfo && chatInfo.ticketNumber}</div>
       <div className={style.messages}>
-       {messages && messages.map((message) => 
-       <div key={message._id}>{message.content}</div>
-       )}
+      {messages ? (
+          messages.map((message) =>
+            message.senderId !== user._id ? (
+                <div className={style.left}
+                  key={message._id}
+                  onClick={e => e.stopPropagation()}> 
+                   <div className={message._id == messageMenu 
+                  ? style.menu 
+                  : style.inactive}>
+                    <RecipientMessageMenu
+                    messageId={message._id}
+                    reply={replayMessageHandler}
+                    />
+                  </div>
+                  <div className={style.info} 
+                   onClick={() => setMessageMenu(message._id)}
+                   ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
+                  {message.content}
+                  </div>
+                </div>
+            ) : (
+                <div className={style.right}
+                key={message._id}
+                  onClick={e => e.stopPropagation()}>
+                     <div className={message._id === messageMenu 
+                  ? style.menu 
+                  : style.inactive}>
+                    <SenderMessageMenu 
+                    messageId={message._id}
+                    editMessage={editMessageHandler}
+                    deleteMessage={deleteMessageHandler}
+                    />
+                  </div>
+                   <div className={style.info}
+                   onClick={() => setMessageMenu(message._id)}
+                   ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
+                  {message.content}
+                </div>
+                </div>
+            )
+          )
+        ) : "no messages"}
       </div>
       <div className={style.input}>
         <input

@@ -81,6 +81,8 @@ const Messages: FC<IMessagesProps> = ({
     document.addEventListener("click", outsideClickhandler);
   }, []);
 
+  console.log(replyId)
+
   const sendMessageHandler = () => { 
         const formData = new FormData();
         type messageKey = keyof typeof message;
@@ -109,6 +111,13 @@ const Messages: FC<IMessagesProps> = ({
       setMessageMenu('');
     })
   }
+  const replayMessageHandler = (id:string) => {
+    
+    if (id) {
+      setMessage({...message, replyTo: id});
+      setReplyId(id);
+    }
+  }
 
   return (
     <div className={style.messages}>
@@ -122,7 +131,10 @@ const Messages: FC<IMessagesProps> = ({
                    <div className={message._id == messageMenu 
                   ? style.menu 
                   : style.inactive}>
-                    <RecipientMessageMenu />
+                    <RecipientMessageMenu
+                    messageId={message._id}
+                    reply={replayMessageHandler}
+                    />
                   </div>
                   <div className={style.info} 
                    onClick={() => setMessageMenu(message._id)}
@@ -163,16 +175,12 @@ const Messages: FC<IMessagesProps> = ({
         </div>
         <div className={style.buttons}>
           <label className={style.file} htmlFor={"upload"}>
-            <FontAwesomeIcon
-              className={style["photo-icon"]}
-              icon={faPaperclip}
-            />
+            <FontAwesomeIcon className={style["photo-icon"]} icon={faPaperclip}/>
           </label>
-          <input
-            type="file"
-            name="file"
-            id="upload"
-            hidden
+          {(replyId && messages) && messages.map((message) =>
+           message._id === replyId && <div>{message.content}</div>
+          )}
+          <input type="file" name="file" id="upload" hidden
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               e.target.files && setFile(e.target.files[0])
             }

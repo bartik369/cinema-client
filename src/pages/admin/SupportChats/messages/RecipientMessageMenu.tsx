@@ -1,9 +1,19 @@
 import {FC} from 'react';
+import { IMessage } from '../../../../types/chat';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReply} from "@fortawesome/free-solid-svg-icons";
 
-const RecipientMessageMenu:FC = () => {
+interface RecipientMessageMenuProps {
+    messageId: string;
+    reply: (messageId: string) => void;
+}
+const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
+    messageId,
+    reply,
+}) => {
     return (
         <div>
-            recipient menu
+           <FontAwesomeIcon onClick={() => reply(messageId)} icon={faReply}/>
         </div>
     );
 };
