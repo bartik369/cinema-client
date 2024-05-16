@@ -1,6 +1,6 @@
-import { IMessage } from './../types/chat';
+import { IMessage, IMessageMedia } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IConversation } from "../types/chat";
+import { IConversation, IDataForMarkRead } from "../types/chat";
 import ENV from "../env.config";
 
 export const chatApi = createApi({
@@ -111,6 +111,19 @@ export const chatApi = createApi({
                 method: 'POST',
                 body: {id: id},
             })
+        }),
+        markAsRead: builder.mutation<IMessage[], IDataForMarkRead>({
+            query:(data) => ({
+                url: `/mark-message-read/`,
+                method: 'POST',
+                body: data,
+            })
+        }),
+        getConversationMedia: builder.query<IMessageMedia[], string>({
+            query:(id) => ({
+                url: `/conversation-media/${id}`,
+                method: 'GET',
+            })
         })
     })
 });
@@ -127,5 +140,7 @@ export const {
     useGetActiveConverstionMutation,
     useGetActiveConverstionMessagesQuery,
     useGetMessageMutation,
+    useMarkAsReadMutation,
+    useGetConversationMediaQuery,
 
 } = chatApi;

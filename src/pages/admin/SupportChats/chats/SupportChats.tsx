@@ -6,6 +6,7 @@ import {
     useGetConversationIdMutation,
     useGetActiveConverstionMutation,
     useGetActiveConverstionMessagesQuery,
+    useMarkAsReadMutation,
  } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
@@ -19,16 +20,20 @@ const SupportChats:FC = () => {
     const [recipientId, setRecipientId] = useState<string>('');
     const [active, setActive] = useState<string>('');
     const [skip, setSkip] = useState(true);
-    const [skip2, setSkip2] = useState(true);
+    const [skipActive, setSkipActive] = useState(true);
     const {data: messages} = useGetRecipientMessagesQuery(recipientId && recipientId, {skip: skip});
-    const {data: activeMessages} = useGetActiveConverstionMessagesQuery(active && active, {skip: skip2} );
-
+    const {data: activeMessages} = useGetActiveConverstionMessagesQuery(active && active, {skip: skipActive} );
+    const [markMessageAsRead] = useMarkAsReadMutation();
 
     useEffect(() => {
         getActiveConversation(user._id).unwrap().then((data) => {
             setActive(data.conversationId);
             setRecipientId(data.recipientId);
-            setSkip(false)
+            setSkipActive(false);
+            markMessageAsRead({
+                conversationId: data.conversationId, 
+                userId: user._id,
+            });
         })
     }, [user])
 
@@ -36,11 +41,9 @@ const SupportChats:FC = () => {
         setRecipientId(id)
         getConversationId(id).unwrap().then((data) => {
             setActive(data);
-            setSkip2(false)
-        })
+            setSkip(false)
+        });
     }
-    console.log(participants)
-
     return (
         <div className={style.chats}>
             <div className={style.conversations}>
@@ -58,7 +61,7 @@ const SupportChats:FC = () => {
                 conversationId={active}
                 recipientId={recipientId}
                 user={user}
-                messages={messages! || activeMessages}
+                messages={activeMessages || messages!}
                 />
             </div>
         </div>

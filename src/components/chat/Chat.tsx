@@ -1,18 +1,14 @@
 import {FC, useState, useEffect, useRef} from 'react';
-import { 
-  useCreateMessageMutation,
-  useGetMessagesQuery,
-  useGetMessageMutation,
-  useDeleteMessageMutation,
-  useUpdateMessageMutation,
-} from '../../store/chatApi';
+import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
+  useDeleteMessageMutation, useUpdateMessageMutation,
+  useMarkAsReadMutation,
+ } from '../../store/chatApi';
 import { IUser } from '../../types/auth';
-import { IMessage } from '../../types/chat';
-import { IChatInfo } from '../../types/chat';
+import { IMessage, IChatInfo } from '../../types/chat';
 import SenderMessageMenu from '../../pages/admin/SupportChats/messages/SenderMessageMenu';
 import RecipientMessageMenu from '../../pages/admin/SupportChats/messages/RecipientMessageMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faPaperclip, faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import style from './Chat.module.css'
 
 interface IChatProps {
@@ -32,6 +28,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
+  const [markMessageAsRead] = useMarkAsReadMutation();
 
   const [message, setMessage] = useState<IMessage>({
     _id: '',
@@ -58,6 +55,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         conversationId: chatInfo._id,
         senderId: user._id,
       });
+      markMessageAsRead({
+        conversationId: chatInfo._id, 
+        userId: user._id,
+    });
     }
   }, [recipientId, message.content, chatInfo]);
 
@@ -88,10 +89,13 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         
         if (isUpdating) {
           updateMessage(formData).unwrap().then((data) => {
+            setMessage({...message, content: ''});
             setIsUpdating(false);
           })
         } else {
-          createMessage(formData);
+          createMessage(formData).unwrap().then(() => {
+            setMessage({...message, content: ''});
+          })
         }
   };
 
@@ -116,11 +120,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
 
   return (
     <div className={style.chat}>
-      <FontAwesomeIcon
-        className={style.close}
-        onClick={visibleHandler}
-        icon={faXmark}
-      />
+      <FontAwesomeIcon className={style.close} onClick={visibleHandler} icon={faXmark}/>
       <div>Обращение № {chatInfo && chatInfo.ticketNumber}</div>
       <div className={style.messages}>
       {messages ? (
@@ -147,6 +147,12 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                 <div className={style.right}
                 key={message._id}
                   onClick={e => e.stopPropagation()}>
+                    <div className={message.read}>
+                      {message.read === 'yes' 
+                      ? <FontAwesomeIcon icon={faCheckDouble} />
+                      : <FontAwesomeIcon icon={faCheck} />
+                      }
+                    </div>
                      <div className={message._id === messageMenu 
                   ? style.menu 
                   : style.inactive}>
@@ -180,7 +186,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
           <label className={style.file} htmlFor={"upload"}>
             <FontAwesomeIcon className={style["photo-icon"]} icon={faPaperclip}/>
           </label>
-
           <input type="file" name="file" id="upload" hidden
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               e.target.files && setFile(e.target.files[0])

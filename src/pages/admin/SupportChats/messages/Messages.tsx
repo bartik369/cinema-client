@@ -4,14 +4,17 @@ import {
   useGetMessageMutation,
   useDeleteMessageMutation,
   useUpdateMessageMutation,
+  useGetConversationMediaQuery,
  } from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
-import { IMessage } from "../../../../types/chat";
+import { IMessage, IMessageMedia } from "../../../../types/chat";
 import Loader from "../../../../components/loader/Loader";
 import SenderMessageMenu from "./SenderMessageMenu";
 import RecipientMessageMenu from "./RecipientMessageMenu";
+import ENV from "../../../../env.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { faPaperclip, faCheck, faCheckDouble } from "@fortawesome/free-solid-svg-icons";
+import { FileIcon, defaultStyles } from 'react-file-icon';
 import style from "./Messages.module.css";
 
 interface IMessagesProps {
@@ -48,6 +51,8 @@ const Messages: FC<IMessagesProps> = ({
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
+  const [mediaSkip, setMediaSkip] = useState(true);
+  const {data:media} = useGetConversationMediaQuery(conversationId, {skip: mediaSkip})
   
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
@@ -61,6 +66,7 @@ const Messages: FC<IMessagesProps> = ({
         conversationId: conversationId,
         senderId: user._id,
       });
+      setMediaSkip(false)
     }
   }, [recipientId, conversationId, message.content]);
 
@@ -81,8 +87,6 @@ const Messages: FC<IMessagesProps> = ({
     document.addEventListener("click", outsideClickhandler);
   }, []);
 
-  console.log(replyId)
-
   const sendMessageHandler = () => { 
         const formData = new FormData();
         type messageKey = keyof typeof message;
@@ -92,11 +96,14 @@ const Messages: FC<IMessagesProps> = ({
         file && formData.append("file", file);
         
         if (isUpdating) {
-          updateMessage(formData).unwrap().then((data) => {
+          updateMessage(formData).unwrap().then(() => {
             setIsUpdating(false);
+            setMessage({...message, content: ''});
           })
         } else {
-          createMessage(formData);
+          createMessage(formData).then(() => {
+            setMessage({...message, content: ''});
+          })
         }
   };
 
@@ -144,11 +151,36 @@ const Messages: FC<IMessagesProps> = ({
                   )}
                   {message.content}
                   </div>
+                  {media && media.map((item) => {
+                    const fileType: string = item.file.split(".").pop()!;
+                    type iconKey = keyof typeof defaultStyles;
+                    if (item._id === message.mediaId) {
+                      return <div className="fileinfo" key={item._id}>
+                      <div className="icon">
+                        <FileIcon 
+                        extension={fileType} 
+                        {...defaultStyles[fileType as iconKey]}
+                        color='#c5ced9'
+                        glyphColor='white'
+                        />
+                      </div>
+                      <a href={`${ENV.API_URL_UPLOADS_CHAT_MEDIA}${conversationId}/${item.file}`}>{item.file}</a>
+                    </div>
+                    }
+                  }
+        
+                )}
                 </div>
             ) : (
                 <div className={style.right}
                 key={message._id}
                   onClick={e => e.stopPropagation()}>
+                    <div className={message.read}>
+                      {message.read === 'yes' 
+                      ? <FontAwesomeIcon icon={faCheckDouble} />
+                      : <FontAwesomeIcon icon={faCheck} />
+                      }
+                    </div>
                      <div className={message._id === messageMenu 
                   ? style.menu 
                   : style.inactive}>
@@ -163,13 +195,16 @@ const Messages: FC<IMessagesProps> = ({
                    ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
                   {message.content}
                 </div>
+                {media && media.map((item) => 
+                item._id === message.mediaId && <div>{item.file}</div>
+                )}
                 </div>
             )
           )
         ) : participants ? 'No active chats' : <Loader />}
       </div>
-      <div className={style.typing}>
-        <div className={style.input} onClick={e => e.stopPropagation()}>
+      <div className={style.typing} onClick={e => e.stopPropagation()}>
+        <div className={style.input}>
           <input
             onChange={(e) => setMessage({...message, content: e.target.value})}
             value={message?.content}

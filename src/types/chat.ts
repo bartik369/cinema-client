@@ -19,6 +19,14 @@ export interface IMessage {
   senderId: string;
   updatedAt: string;
 }
+export interface IMessageMedia {
+  conversationId: string;
+  createdAt: string;
+  file: string;
+  updatedAt: string;
+  userId: string;
+  _id: string;
+}
 export interface IConversation {
   creatorId:string;
   participants: string[];
@@ -34,4 +42,8 @@ export interface IParticipantInfo {
   conversationId: string;
   avatar: string;
   ticketNumber: string;
+}
+export interface IDataForMarkRead {
+  conversationId: string;
+  userId: string;
 }
