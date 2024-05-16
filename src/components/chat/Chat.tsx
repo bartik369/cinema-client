@@ -6,9 +6,10 @@ import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
 import { IUser } from '../../types/auth';
 import { IMessage, IChatInfo } from '../../types/chat';
 import SenderMessageMenu from '../../pages/admin/SupportChats/messages/SenderMessageMenu';
+import InputUsersSide from './InputUsersSide';
 import RecipientMessageMenu from '../../pages/admin/SupportChats/messages/RecipientMessageMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faPaperclip, faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import style from './Chat.module.css'
 
 interface IChatProps {
@@ -104,12 +105,14 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
       setMessage({...data});
       setIsUpdating(true);
     });
-  }
+  };
+
   const deleteMessageHandler = (id: string) => {
     id && deleteMessage(id).unwrap().then((data) => {
       setMessageMenu('');
     })
   }
+
   const replayMessageHandler = (id:string) => {
     
     if (id) {
@@ -126,16 +129,13 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
       {messages ? (
           messages.map((message) =>
             message.senderId !== user._id ? (
-                <div className={style.left}
-                  key={message._id}
+                <div className={style.left} key={message._id}
                   onClick={e => e.stopPropagation()}> 
                    <div className={message._id == messageMenu 
                   ? style.menu 
                   : style.inactive}>
-                    <RecipientMessageMenu
-                    messageId={message._id}
-                    reply={replayMessageHandler}
-                    />
+                    <RecipientMessageMenu messageId={message._id} 
+                    reply={replayMessageHandler}/>
                   </div>
                   <div className={style.info} 
                    onClick={() => setMessageMenu(message._id)}
@@ -144,8 +144,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                   </div>
                 </div>
             ) : (
-                <div className={style.right}
-                key={message._id}
+                <div className={style.right} key={message._id}
                   onClick={e => e.stopPropagation()}>
                     <div className={message.read}>
                       {message.read === 'yes' 
@@ -172,31 +171,15 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
           )
         ) : "no messages"}
       </div>
-      <div className={style.typing}>
-          {(replyId && messages) && messages.map((message) =>
-           message._id === replyId && <div className={style['reply-text']}>{message.content}</div>
-          )}
-        <div className={style.input} onClick={e => e.stopPropagation()}>
-          <input
-            onChange={(e) => setMessage({...message, content: e.target.value})}
-            value={message?.content}
-            type="text"
-          />
-          <div className={style.buttons}>
-          <label className={style.file} htmlFor={"upload"}>
-            <FontAwesomeIcon className={style["photo-icon"]} icon={faPaperclip}/>
-          </label>
-          <input type="file" name="file" id="upload" hidden
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              e.target.files && setFile(e.target.files[0])
-            }
-          />
-          <button className={style.btn} onClick={sendMessageHandler}>
-            {isUpdating ? 'Обновить' : 'Отправить'}
-          </button>
-        </div>
-        </div>
-      </div>
+      <InputUsersSide
+      replyId={replyId}
+      messages={messages!}
+      message={message}
+      setMessage={setMessage}
+      setFile={setFile}
+      isUpdating={isUpdating}
+      sendMessageHandler={sendMessageHandler}
+      />
     </div>
   );
 };

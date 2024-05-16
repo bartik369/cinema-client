@@ -11,11 +11,12 @@ import { IMessage, IMessageMedia } from "../../../../types/chat";
 import Loader from "../../../../components/loader/Loader";
 import SenderMessageMenu from "./SenderMessageMenu";
 import RecipientMessageMenu from "./RecipientMessageMenu";
+import MediaFile from "./MediaFile";
 import ENV from "../../../../env.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperclip, faCheck, faCheckDouble } from "@fortawesome/free-solid-svg-icons";
-import { FileIcon, defaultStyles } from 'react-file-icon';
+import { faCheck, faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 import style from "./Messages.module.css";
+import Input from "./Input";
 
 interface IMessagesProps {
   participants: IUser[];
@@ -151,25 +152,11 @@ const Messages: FC<IMessagesProps> = ({
                   )}
                   {message.content}
                   </div>
-                  {media && media.map((item) => {
-                    const fileType: string = item.file.split(".").pop()!;
-                    type iconKey = keyof typeof defaultStyles;
-                    if (item._id === message.mediaId) {
-                      return <div className="fileinfo" key={item._id}>
-                      <div className="icon">
-                        <FileIcon 
-                        extension={fileType} 
-                        {...defaultStyles[fileType as iconKey]}
-                        color='#c5ced9'
-                        glyphColor='white'
-                        />
-                      </div>
-                      <a href={`${ENV.API_URL_UPLOADS_CHAT_MEDIA}${conversationId}/${item.file}`}>{item.file}</a>
-                    </div>
-                    }
-                  }
-        
-                )}
+                  <MediaFile 
+                    media={media!} 
+                    message={message} 
+                    conversationId={conversationId} 
+                  />
                 </div>
             ) : (
                 <div className={style.right}
@@ -195,39 +182,25 @@ const Messages: FC<IMessagesProps> = ({
                    ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
                   {message.content}
                 </div>
-                {media && media.map((item) => 
-                item._id === message.mediaId && <div>{item.file}</div>
-                )}
+                <MediaFile 
+                  media={media!} 
+                  message={message} 
+                  conversationId={conversationId} 
+                />
                 </div>
             )
           )
         ) : participants ? 'No active chats' : <Loader />}
       </div>
-      <div className={style.typing} onClick={e => e.stopPropagation()}>
-        <div className={style.input}>
-          <input
-            onChange={(e) => setMessage({...message, content: e.target.value})}
-            value={message?.content}
-            type="text"
-          />
-        </div>
-        <div className={style.buttons}>
-          <label className={style.file} htmlFor={"upload"}>
-            <FontAwesomeIcon className={style["photo-icon"]} icon={faPaperclip}/>
-          </label>
-          {(replyId && messages) && messages.map((message) =>
-           message._id === replyId && <div>{message.content}</div>
-          )}
-          <input type="file" name="file" id="upload" hidden
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              e.target.files && setFile(e.target.files[0])
-            }
-          />
-          <button className={style.btn} onClick={sendMessageHandler}>
-            {isUpdating ? 'Обновить' : 'Отправить'}
-          </button>
-        </div>
-      </div>
+      <Input 
+      message={message}
+      replyId={replyId}
+      messages={messages}
+      setMessage={setMessage}
+      sendMessageHandler={sendMessageHandler}
+      isUpdating={isUpdating}
+      setFile={setFile}
+       />
     </div>
   );
 };
