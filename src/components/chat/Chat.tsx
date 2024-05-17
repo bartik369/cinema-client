@@ -3,13 +3,14 @@ import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
   useDeleteMessageMutation, useUpdateMessageMutation,
   useMarkAsReadMutation,
  } from '../../store/chatApi';
+ import RecipientMessageMenu from '../../pages/admin/SupportChats/messages/RecipientMessageMenu';
+ import SenderMessageMenu from '../../pages/admin/SupportChats/messages/SenderMessageMenu';
+ import { IMessage, IChatInfo } from '../../types/chat';
 import { IUser } from '../../types/auth';
-import { IMessage, IChatInfo } from '../../types/chat';
-import SenderMessageMenu from '../../pages/admin/SupportChats/messages/SenderMessageMenu';
 import InputUsersSide from './InputUsersSide';
-import RecipientMessageMenu from '../../pages/admin/SupportChats/messages/RecipientMessageMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+import * as contentConst from '../../utils/constants/content';
 import style from './Chat.module.css'
 
 interface IChatProps {
@@ -124,12 +125,14 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   return (
     <div className={style.chat}>
       <FontAwesomeIcon className={style.close} onClick={visibleHandler} icon={faXmark}/>
-      <div>Обращение № {chatInfo && chatInfo.ticketNumber}</div>
+      <div className={style.request}>
+        {contentConst.requestNumber}{chatInfo && chatInfo.ticketNumber}
+      </div>
       <div className={style.messages}>
       {messages ? (
           messages.map((message) =>
-            message.senderId !== user._id ? (
-                <div className={style.left} key={message._id}
+            message.senderId !== user._id 
+              ? (<div className={style.left} key={message._id}
                   onClick={e => e.stopPropagation()}> 
                    <div className={message._id == messageMenu 
                   ? style.menu 
@@ -169,7 +172,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                 </div>
             )
           )
-        ) : "no messages"}
+        ) : <div>{contentConst.noMessages}</div>}
       </div>
       <InputUsersSide
       replyId={replyId}

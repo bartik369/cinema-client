@@ -1,11 +1,10 @@
 .messages {
-    background-color: midnightblue;
     height: 83vh;
     overflow: hidden;
+    font-family: inherit;
 }
 
 .messages .inner {
-    background-color: brown;
     overflow-y: scroll;
     height: calc(100% - 120px);
     padding: 20px;
@@ -68,7 +67,6 @@
     position: relative;
     margin: 3px;
     padding: 10px 20px;
-    background-color: darkslateblue;
 }
 
 .messages .menu {
@@ -103,7 +101,6 @@
 .messages .inner .right,
 .messages .inner .left {
     width: fit-content;
-    border-radius: 6px;
     margin: 20px;
     position: relative;
     cursor: pointer;
@@ -111,17 +108,58 @@
 
 .messages .inner .right .info,
 .messages .inner .left .info {
-    padding: 16px 20px;
+    padding: 16px 10px;
+    color: #fff;
+    font-size: 13px;
 }
 
 .messages .inner .right {
-    background-color: dodgerblue;
+    background-color: #6a44ff;
     margin-left: auto;
     margin-right: 0;
+    border-radius: 14px 14px 2px 14px;
 }
 
 .messages .inner .left {
-    background-color: rgb(6, 127, 99);
+    background-color: #29292c;
     margin-left: 0;
     margin-right: auto;
+    border-radius: 14px 14px 14px 2px;
+}
+
+.messages .inner .replied {
+    background-color: cornflowerblue;
+    padding: 8px 10px;
+    border-left: 2px solid #6a44ff;
+}
+
+.messages .file-info {
+    background-color: rgb(63, 63, 63);
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 0 0 6px 6px;
+}
+
+.messages .file-info .icon {
+    width: 25px;
+    margin-right: 7px;
+}
+
+.messages .file-info .name {
+    color: #fff !important;
+    font-size: 10px;
+}
+
+.messages .ext-info {
+    background-color: aqua;
+    display: flex;
+}
+
+.messages .ext-info .time {
+    background-color: mediumvioletred;
+}
+
+.messages .ext-info .read {
+    background-color: rgb(134, 21, 199);
 }

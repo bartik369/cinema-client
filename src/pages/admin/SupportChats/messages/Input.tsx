@@ -2,6 +2,7 @@ import {FC} from 'react';
 import { IMessage } from '../../../../types/chat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperclip} from "@fortawesome/free-solid-svg-icons";
+import * as contentConst from '../../../../utils/constants/content';
 import style from "./Messages.module.css";
 
 interface IInputProps {
@@ -45,7 +46,7 @@ const Input: FC<IInputProps> = ({
             }
           />
           <button className={style.btn} onClick={sendMessageHandler}>
-            {isUpdating ? 'Обновить' : 'Отправить'}
+            {isUpdating ? contentConst.updateBtn : contentConst.sendData}
           </button>
         </div>
       </div>

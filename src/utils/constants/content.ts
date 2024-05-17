@@ -73,6 +73,8 @@ export const registetText = 'Зарегистрироваться';
 export const login = 'Войти';
 export const logout = 'Выйти';
 export const register = 'Отправить';
+export const sendData = 'Отправить';
+
 
 export const watch = 'Смотреть';
 export const vote = 'Оценить';
@@ -125,6 +127,8 @@ export const paymethods = 'Способы оплаты';
 export const invite = 'Пригласить';
 export const events = 'События';
 export const settings = 'Настройки';
+export const requestNumber =  'Обращение №';
+export const noMessages = 'Сообщений нет';
 
 export const information = `Данный портал является тестовой средой для изучения/тестирования Frontend && Backend разработки и не несет в себе какой-либо коммерческой составляющей.`;
 export const close = 'Закрыть';

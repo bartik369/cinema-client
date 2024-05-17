@@ -14,13 +14,13 @@ import style from './SupportChats.module.css'
 
 const SupportChats:FC = () => {
     const user = useAppSelector(state => state.auth.user);
-    const {data: participants} = useGetConversationsQuery(user && user._id);
-    const [getConversationId, ] = useGetConversationIdMutation();
-    const [getActiveConversation] = useGetActiveConverstionMutation();
     const [recipientId, setRecipientId] = useState<string>('');
     const [active, setActive] = useState<string>('');
     const [skip, setSkip] = useState(true);
     const [skipActive, setSkipActive] = useState(true);
+    const {data: participants} = useGetConversationsQuery(user && user._id);
+    const [getConversationId, ] = useGetConversationIdMutation();
+    const [getActiveConversation] = useGetActiveConverstionMutation();
     const {data: messages} = useGetRecipientMessagesQuery(recipientId && recipientId, {skip: skip});
     const {data: activeMessages} = useGetActiveConverstionMessagesQuery(active && active, {skip: skipActive} );
     const [markMessageAsRead] = useMarkAsReadMutation();
@@ -41,7 +41,7 @@ const SupportChats:FC = () => {
         setRecipientId(id)
         getConversationId(id).unwrap().then((data) => {
             setActive(data);
-            setSkip(false)
+            setSkip(false);
         });
     }
     return (

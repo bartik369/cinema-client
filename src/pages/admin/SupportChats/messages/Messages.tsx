@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useEffect } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { 
   useCreateMessageMutation, 
   useGetMessageMutation,
@@ -7,16 +7,16 @@ import {
   useGetConversationMediaQuery,
  } from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
-import { IMessage, IMessageMedia } from "../../../../types/chat";
+import { IMessage} from "../../../../types/chat";
 import Loader from "../../../../components/loader/Loader";
 import SenderMessageMenu from "./SenderMessageMenu";
 import RecipientMessageMenu from "./RecipientMessageMenu";
+import Input from "./Input";
+import Time from "./Time";
 import MediaFile from "./MediaFile";
-import ENV from "../../../../env.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 import style from "./Messages.module.css";
-import Input from "./Input";
 
 interface IMessagesProps {
   participants: IUser[];
@@ -59,6 +59,7 @@ const Messages: FC<IMessagesProps> = ({
     [index: string]: HTMLDivElement | null;
   };
   const messageMenuRef = useRef<IListRefObj>({});
+  const date = new Date()
 
   useEffect(() => {
     if (recipientId && conversationId) {
@@ -148,26 +149,26 @@ const Messages: FC<IMessagesProps> = ({
                    onClick={() => setMessageMenu(message._id)}
                    ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
                   {message.replyTo && messages.map((item) => 
-                  item._id == message.replyTo && <div key={item._id}>{item.content}</div>
+                  item._id == message.replyTo && 
+                  <div className={style.replied} key={item._id}>{
+                    item.content}
+                  </div>
                   )}
-                  {message.content}
+                  <div className={style.message}>{message.content}</div>
                   </div>
                   <MediaFile 
                     media={media!} 
                     message={message} 
                     conversationId={conversationId} 
                   />
+                  <div className={style.time}>
+                   <Time timeStamp={message.createdAt}/>
+                  </div>
                 </div>
             ) : (
                 <div className={style.right}
                 key={message._id}
                   onClick={e => e.stopPropagation()}>
-                    <div className={message.read}>
-                      {message.read === 'yes' 
-                      ? <FontAwesomeIcon icon={faCheckDouble} />
-                      : <FontAwesomeIcon icon={faCheck} />
-                      }
-                    </div>
                      <div className={message._id === messageMenu 
                   ? style.menu 
                   : style.inactive}>
@@ -187,6 +188,17 @@ const Messages: FC<IMessagesProps> = ({
                   message={message} 
                   conversationId={conversationId} 
                 />
+                <div className={style['ext-info']}>
+                  <div className={style.time}>
+                   <Time timeStamp={message.createdAt}/>
+                  </div>
+                  <div className={style.read}>
+                      {message.read === 'yes' 
+                      ? <FontAwesomeIcon icon={faCheckDouble} />
+                      : <FontAwesomeIcon icon={faCheck} />
+                      }
+                  </div>
+                </div>
                 </div>
             )
           )
