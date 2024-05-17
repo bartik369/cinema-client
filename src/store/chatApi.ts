@@ -92,7 +92,7 @@ export const chatApi = createApi({
             }),
             invalidatesTags: ['Messages'],
         }),
-        getConversations: builder.query({
+        getConversations: builder.query<any, string>({
             query:(id) => ({
                 url: `/get-conversations/${id}`,
                 method: 'GET',

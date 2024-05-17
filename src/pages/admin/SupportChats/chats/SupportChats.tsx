@@ -19,7 +19,7 @@ const SupportChats:FC = () => {
     const [skip, setSkip] = useState(true);
     const [skipActive, setSkipActive] = useState(true);
     const {data: participants} = useGetConversationsQuery(user && user._id);
-    const [getConversationId, ] = useGetConversationIdMutation();
+    const [getConversationId] = useGetConversationIdMutation();
     const [getActiveConversation] = useGetActiveConverstionMutation();
     const {data: messages} = useGetRecipientMessagesQuery(recipientId && recipientId, {skip: skip});
     const {data: activeMessages} = useGetActiveConverstionMessagesQuery(active && active, {skip: skipActive} );
@@ -28,7 +28,7 @@ const SupportChats:FC = () => {
     useEffect(() => {
         getActiveConversation(user._id).unwrap().then((data) => {
             setActive(data.conversationId);
-            setRecipientId(data.recipientId);
+            setRecipientId(data.senderId);
             setSkipActive(false);
             markMessageAsRead({
                 conversationId: data.conversationId, 
@@ -48,7 +48,7 @@ const SupportChats:FC = () => {
         <div className={style.chats}>
             <div className={style.conversations}>
                 <Participants 
-                participants={participants?.usersInfo} 
+                participants={participants && participants?.usersInfo} 
                 user={user}
                 lastMessages={participants?.lastMessages}
                 activeConversation={active}

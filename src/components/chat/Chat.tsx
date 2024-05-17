@@ -91,12 +91,12 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         
         if (isUpdating) {
           updateMessage(formData).unwrap().then((data) => {
-            setMessage({...message, content: ''});
+            setMessage({...message, content: '', replyTo: ''});
             setIsUpdating(false);
           })
         } else {
           createMessage(formData).unwrap().then(() => {
-            setMessage({...message, content: ''});
+            setMessage({...message, content: '', replyTo: ''});
           })
         }
   };

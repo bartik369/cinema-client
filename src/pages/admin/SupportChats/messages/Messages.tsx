@@ -59,7 +59,11 @@ const Messages: FC<IMessagesProps> = ({
     [index: string]: HTMLDivElement | null;
   };
   const messageMenuRef = useRef<IListRefObj>({});
-  const date = new Date()
+
+  console.log('user', user._id)
+  console.log('res',recipientId)
+  console.log('conv',conversationId)
+  
 
   useEffect(() => {
     if (recipientId && conversationId) {
@@ -71,6 +75,7 @@ const Messages: FC<IMessagesProps> = ({
       setMediaSkip(false)
     }
   }, [recipientId, conversationId, message.content]);
+
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
@@ -100,11 +105,11 @@ const Messages: FC<IMessagesProps> = ({
         if (isUpdating) {
           updateMessage(formData).unwrap().then(() => {
             setIsUpdating(false);
-            setMessage({...message, content: ''});
+            setMessage({...message, content: '', replyTo: ''});
           })
         } else {
           createMessage(formData).then(() => {
-            setMessage({...message, content: ''});
+            setMessage({...message, content: '', replyTo: ''});
           })
         }
   };
@@ -161,9 +166,6 @@ const Messages: FC<IMessagesProps> = ({
                     message={message} 
                     conversationId={conversationId} 
                   />
-                  <div className={style.time}>
-                   <Time timeStamp={message.createdAt}/>
-                  </div>
                 </div>
             ) : (
                 <div className={style.right}
@@ -172,6 +174,7 @@ const Messages: FC<IMessagesProps> = ({
                      <div className={message._id === messageMenu 
                   ? style.menu 
                   : style.inactive}>
+                    
                     <SenderMessageMenu 
                     messageId={message._id}
                     editMessage={editMessageHandler}
@@ -181,7 +184,14 @@ const Messages: FC<IMessagesProps> = ({
                    <div className={style.info}
                    onClick={() => setMessageMenu(message._id)}
                    ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
+                     {message.replyTo && messages.map((item) => 
+                  item._id == message.replyTo && 
+                  <div className={style.replied} key={item._id}>{
+                    item.content}
+                  </div>)}
+                  <div className={style.message}>
                   {message.content}
+                  </div>
                 </div>
                 <MediaFile 
                   media={media!} 
