@@ -1,43 +1,41 @@
-.messages {
-    height: 83vh;
-    overflow: hidden;
+.list-messages {
     font-family: inherit;
-}
-
-.messages .inner {
+    padding: 10px 20px;
+    background-color: #141414;
+    background-color: olive;
     overflow-y: scroll;
-    height: calc(100% - 120px);
-    padding: 20px;
+    height: calc(100% - 75px);
 }
 
-.messages .read {}
-
-.messages .typing {
-    display: grid;
-    grid-template-columns: auto 150px;
-    background-color: indianred;
+.typing {
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(7, 192, 186);
     padding: 10px 20px;
 }
 
-.messages .typing .input {
+.list-messages .read {}
+
+.list-messages .typing .input {
     display: flex;
 }
 
-.messages .typing .input input {
+.list-messages .typing .input input {
     width: 100%;
     background-color: plum;
     padding: 15px;
     color: darkred;
 }
 
-.messages .typing .buttons {
+.list-messages .typing .buttons {
     background-color: rgb(80, 31, 110);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.messages .typing .buttons .file {
+.list-messages .typing .buttons .file {
     font-size: 24px;
     cursor: pointer;
     padding: 0px 5px;
@@ -45,11 +43,11 @@
     color: rgb(206, 206, 206);
 }
 
-.messages .typing .buttons .file:hover {
+.list-messages .typing .buttons .file:hover {
     color: antiquewhite;
 }
 
-.messages .typing .buttons .btn {
+.list-messages .typing .buttons .btn {
     background-color: rgb(45, 3, 112);
     border: none;
     display: flex;
@@ -59,17 +57,11 @@
     cursor: pointer;
 }
 
-.messages .typing .buttons .btn:hover {
+.list-messages .typing .buttons .btn:hover {
     background-color: rgb(66, 12, 153);
 }
 
-.messages .inner {
-    position: relative;
-    margin: 3px;
-    padding: 10px 20px;
-}
-
-.messages .menu {
+.list-messages .menu {
     background-color: rgb(63, 63, 63);
     border-radius: 6px;
     padding: 10px 12px;
@@ -77,63 +69,63 @@
     top: -30px;
 }
 
-.messages .menu .item {
+.list-messages .menu .item {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
 }
 
-.messages .menu span {
+.list-messages .menu span {
     font-family: inherit;
     font-size: 12px;
 }
 
-.messages .menu .icon {
+.list-messages .menu .icon {
     color: #fff;
     font-size: 16px;
     margin: 4px 8px;
 }
 
-.messages .inactive {
+.list-messages .inactive {
     display: none;
 }
 
-.messages .inner .right,
-.messages .inner .left {
+.list-messages .right,
+.list-messages .left {
     width: fit-content;
     margin: 20px;
     position: relative;
     cursor: pointer;
 }
 
-.messages .inner .right .info,
-.messages .inner .left .info {
+.list-messages .right .info,
+.list-messages .left .info {
     padding: 16px 10px;
     color: #fff;
     font-size: 13px;
 }
 
-.messages .inner .right {
+.list-messages .right {
     background-color: #6a44ff;
     margin-left: auto;
     margin-right: 0;
     border-radius: 14px 14px 2px 14px;
 }
 
-.messages .inner .left {
+.list-messages .left {
     background-color: #29292c;
     margin-left: 0;
     margin-right: auto;
     border-radius: 14px 14px 14px 2px;
 }
 
-.messages .inner .replied {
+.list-messages .replied {
     background-color: cornflowerblue;
     padding: 8px 10px;
     border-left: 2px solid #6a44ff;
 }
 
-.messages .file-info {
+.list-messages .file-info {
     background-color: rgb(63, 63, 63);
     display: flex;
     align-items: center;
@@ -141,25 +133,25 @@
     border-radius: 0 0 6px 6px;
 }
 
-.messages .file-info .icon {
+.list-messages .file-info .icon {
     width: 25px;
     margin-right: 7px;
 }
 
-.messages .file-info .name {
+.list-messages .file-info .name {
     color: #fff !important;
     font-size: 10px;
 }
 
-.messages .ext-info {
+.list-messages .ext-info {
     background-color: aqua;
     display: flex;
 }
 
-.messages .ext-info .time {
+.list-messages .ext-info .time {
     background-color: mediumvioletred;
 }
 
-.messages .ext-info .read {
+.list-messages .ext-info .read {
     background-color: rgb(134, 21, 199);
 }

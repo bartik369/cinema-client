@@ -129,8 +129,8 @@ const Messages: FC<IMessagesProps> = ({
   }
 
   return (
-    <div className={style.messages}>
-      <div className={style.inner}>
+    <>
+      <div className={style['list-messages']}>
         {messages ? (
           messages.map((message) =>
             message.senderId !== user._id ? (
@@ -211,8 +211,8 @@ const Messages: FC<IMessagesProps> = ({
             )
           )
         ) : participants ? 'No active chats' : <Loader />}
-      </div>
-      <Input 
+    </div>
+    <Input 
       message={message}
       replyId={replyId}
       messages={messages}
@@ -221,7 +221,7 @@ const Messages: FC<IMessagesProps> = ({
       isUpdating={isUpdating}
       setFile={setFile}
        />
-    </div>
+  </>
   );
 };
 

@@ -1,16 +1,20 @@
 .chats {
-    display: grid;
+    display: flex;
     margin: 0 auto;
     width: 100%;
     max-width: 1320px;
-    grid-template-columns: 22% auto;
-    grid-row: 20px;
+    height: 85vh;
+    overflow: hidden;
 }
 
 .chats .conversations {
     background-color: #1e1e20;
+    width: 23%;
+    overflow-y: scroll;
 }
 
 .chats .messages {
     background-color: #141414;
+    width: 76%;
+    padding: 2px;
 }
