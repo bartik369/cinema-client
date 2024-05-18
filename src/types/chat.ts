@@ -28,6 +28,7 @@ export interface IMessageMedia {
   _id: string;
 }
 export interface IConversation {
+  _id: string;
   creatorId:string;
   participants: string[];
   ticketNumber: string;

@@ -29,6 +29,7 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
     logoutUser()
     setProfileMenu(!profileMenu)
     localStorage.removeItem('accessToken');
+    window.location.reload();
   }
 
   return (

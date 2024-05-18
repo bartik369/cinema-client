@@ -60,11 +60,6 @@ const Messages: FC<IMessagesProps> = ({
   };
   const messageMenuRef = useRef<IListRefObj>({});
 
-  console.log('user', user._id)
-  console.log('res',recipientId)
-  console.log('conv',conversationId)
-  
-
   useEffect(() => {
     if (recipientId && conversationId) {
       setMessage({...message, 
@@ -166,6 +161,9 @@ const Messages: FC<IMessagesProps> = ({
                     message={message} 
                     conversationId={conversationId} 
                   />
+                  <div className={style.time}>
+                   <Time timeStamp={message.createdAt}/>
+                  </div>
                 </div>
             ) : (
                 <div className={style.right}

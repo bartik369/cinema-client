@@ -41,6 +41,8 @@ const Footer: FC = () => {
     setVisibleChat(false)
   }
   
+  console.log('user', recipientId)
+  
   return (
     <div className={(existTrailer && regEx) ? style.container : style.notrailer}>
       <ToastContainer
