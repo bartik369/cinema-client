@@ -15,6 +15,7 @@ export interface IUserSignin {
 }
 export interface IUser {
         _id: string;
+        avatar: string;
         email: string;
         roles: string[];
         member: string[];

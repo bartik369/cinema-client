@@ -25,29 +25,42 @@ const Input: FC<IInputProps> = ({
     setFile,
 }) => {
     return (
-        <div className={style.typing} onClick={e => e.stopPropagation()}>
+      <div className={style.typing} onClick={(e) => e.stopPropagation()}>
         <div className={style.input}>
           <input
-            onChange={(e) => setMessage({...message, content: e.target.value})}
+            onChange={(e) =>
+              setMessage({ ...message, content: e.target.value })
+            }
             value={message?.content}
             type="text"
           />
-        </div>
-        <div className={style.buttons}>
-          <label className={style.file} htmlFor={"upload"}>
-            <FontAwesomeIcon className={style["photo-icon"]} icon={faPaperclip}/>
-          </label>
-          {(replyId && messages) && messages.map((message) =>
-           message._id === replyId && <div>{message.content}</div>
-          )}
-          <input type="file" name="file" id="upload" hidden
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              e.target.files && setFile(e.target.files[0])
-            }
-          />
-          <button className={style.btn} onClick={sendMessageHandler}>
-            {isUpdating ? contentConst.updateBtn : contentConst.sendData}
-          </button>
+
+          <div className={style.buttons}>
+            <label className={style.file} htmlFor={"upload"}>
+              <FontAwesomeIcon
+                className={style["photo-icon"]}
+                icon={faPaperclip}
+              />
+            </label>
+            {replyId &&
+              messages &&
+              messages.map(
+                (message) =>
+                  message._id === replyId && <div>{message.content}</div>
+              )}
+            <input
+              type="file"
+              name="file"
+              id="upload"
+              hidden
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                e.target.files && setFile(e.target.files[0])
+              }
+            />
+            <button className={style.btn} onClick={sendMessageHandler}>
+              {isUpdating ? contentConst.updateBtn : contentConst.sendData}
+            </button>
+          </div>
         </div>
       </div>
     );

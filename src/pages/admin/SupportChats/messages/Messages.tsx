@@ -1,13 +1,13 @@
 import { FC, useState, useRef, useEffect } from "react";
-import { 
-  useCreateMessageMutation, 
+import {
+  useCreateMessageMutation,
   useGetMessageMutation,
   useDeleteMessageMutation,
   useUpdateMessageMutation,
   useGetConversationMediaQuery,
- } from "../../../../store/chatApi";
+} from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
-import { IMessage} from "../../../../types/chat";
+import { IMessage } from "../../../../types/chat";
 import Loader from "../../../../components/loader/Loader";
 import SenderMessageMenu from "./SenderMessageMenu";
 import RecipientMessageMenu from "./RecipientMessageMenu";
@@ -15,7 +15,12 @@ import Input from "./Input";
 import Time from "./Time";
 import MediaFile from "./MediaFile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faCheckDouble } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faCheckDouble,
+  faEllipsis,
+} from "@fortawesome/free-solid-svg-icons";
+import defaultAvatar from "../../../../assets/pics/profile-circle.svg";
 import style from "./Messages.module.css";
 
 interface IMessagesProps {
@@ -33,16 +38,16 @@ const Messages: FC<IMessagesProps> = ({
   conversationId,
 }) => {
   const [message, setMessage] = useState<IMessage>({
-    _id: '',
-    content: '',
-    conversationId: '',
-    createdAt: '',
-    mediaId: '',
-    read: '',
-    recipientId: '',
-    replyTo: '',
-    senderId: '',
-    updatedAt: '',
+    _id: "",
+    content: "",
+    conversationId: "",
+    createdAt: "",
+    mediaId: "",
+    read: "",
+    recipientId: "",
+    replyTo: "",
+    senderId: "",
+    updatedAt: "",
   });
   const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("");
@@ -53,8 +58,10 @@ const Messages: FC<IMessagesProps> = ({
   const [deleteMessage] = useDeleteMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
   const [mediaSkip, setMediaSkip] = useState(true);
-  const {data:media} = useGetConversationMediaQuery(conversationId, {skip: mediaSkip})
-  
+  const { data: media } = useGetConversationMediaQuery(conversationId, {
+    skip: mediaSkip,
+  });
+
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
   };
@@ -62,26 +69,24 @@ const Messages: FC<IMessagesProps> = ({
 
   useEffect(() => {
     if (recipientId && conversationId) {
-      setMessage({...message, 
+      setMessage({
+        ...message,
         recipientId: recipientId,
         conversationId: conversationId,
         senderId: user._id,
       });
-      setMediaSkip(false)
+      setMediaSkip(false);
     }
   }, [recipientId, conversationId, message.content]);
 
-
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
-      
       if (messageMenuRef.current) {
         Object.values(messageMenuRef).map((item) => {
-
           if (item !== e.target) {
-            setMessageMenu('');
-            setMessage({...message, content: ''});
-            setReplyId('');
+            setMessageMenu("");
+            setMessage({ ...message, content: "" });
+            setReplyId("");
           }
         });
       }
@@ -89,90 +94,212 @@ const Messages: FC<IMessagesProps> = ({
     document.addEventListener("click", outsideClickhandler);
   }, []);
 
-  const sendMessageHandler = () => { 
-        const formData = new FormData();
-        type messageKey = keyof typeof message;
-        Object.keys(message).forEach((key) => {
-          formData.append(key, message[key as messageKey]);
+  const sendMessageHandler = () => {
+    const formData = new FormData();
+    type messageKey = keyof typeof message;
+    Object.keys(message).forEach((key) => {
+      formData.append(key, message[key as messageKey]);
+    });
+    file && formData.append("file", file);
+
+    if (isUpdating) {
+      updateMessage(formData)
+        .unwrap()
+        .then(() => {
+          setIsUpdating(false);
+          setMessage({ ...message, content: "", replyTo: "" });
         });
-        file && formData.append("file", file);
-        
-        if (isUpdating) {
-          updateMessage(formData).unwrap().then(() => {
-            setIsUpdating(false);
-            setMessage({...message, content: '', replyTo: ''});
-          })
-        } else {
-          createMessage(formData).then(() => {
-            setMessage({...message, content: '', replyTo: ''});
-          })
-        }
+    } else {
+      createMessage(formData).then(() => {
+        setMessage({ ...message, content: "", replyTo: "" });
+      });
+    }
   };
 
   const editMessageHandler = (id: string) => {
-    getMessage(id).unwrap().then((data) => {
-      setMessage({...data});
-      setIsUpdating(true);
-    });
-  }
+    getMessage(id)
+      .unwrap()
+      .then((data) => {
+        setMessage({ ...data });
+        setIsUpdating(true);
+      });
+  };
   const deleteMessageHandler = (id: string) => {
-    id && deleteMessage(id).unwrap().then((data) => {
-      setMessageMenu('');
-    })
-  }
-  const replayMessageHandler = (id:string) => {
-    
+    id &&
+      deleteMessage(id)
+        .unwrap()
+        .then((data) => {
+          setMessageMenu("");
+        });
+  };
+  const replayMessageHandler = (id: string) => {
     if (id) {
-      setMessage({...message, replyTo: id});
+      setMessage({ ...message, replyTo: id });
       setReplyId(id);
     }
-  }
+  };
 
   return (
     <>
-      <div className={style['list-messages']}>
+      <div className={style["list-messages"]}>
         {messages ? (
           messages.map((message) =>
             message.senderId !== user._id ? (
-                <div className={style.left}
-                  key={message._id}
-                  onClick={e => e.stopPropagation()}> 
-                   <div className={message._id == messageMenu 
-                  ? style.menu 
-                  : style.inactive}>
-                    <RecipientMessageMenu
-                    messageId={message._id}
-                    reply={replayMessageHandler}
+              <div
+                className={style.left}
+                key={message._id}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className={style.avatar}>
+                  {participants &&
+                    participants.map(
+                      (item) =>
+                        item._id == message.senderId && (
+                          <img src={item.avatar || defaultAvatar} alt="" />
+                        )
+                    )}
+                </div>
+                <div className={style.content}>
+                  <div className={style.info}>
+                    <div
+                      className={
+                        message._id == messageMenu
+                          ? style.active
+                          : style.inactive
+                      }
+                    >
+                      <RecipientMessageMenu
+                        messageId={message._id}
+                        reply={replayMessageHandler}
+                      />
+                    </div>
+                    <div className={style.name}></div>
+                    <div className={style.time}>
+                      <Time timeStamp={message.createdAt} />
+                    </div>
+                    <div
+                      className={style.menu}
+                      onClick={() => setMessageMenu(message._id)}
+                      ref={(elem) =>
+                        (messageMenuRef.current[message._id] = elem)
+                      }
+                    >
+                      <FontAwesomeIcon icon={faEllipsis} />
+                    </div>
+                  </div>
+                  <div className={style.text}>
+                  {message.replyTo &&
+                    messages.map(
+                      (item) =>
+                        item._id == message.replyTo && (
+                          <div className={style.reply} key={item._id}>
+                            {item.content.slice(0, 40)}...
+                          </div>
+                        )
+                    )}
+                    {message.content}
+                    <MediaFile
+                      media={media!}
+                      message={message}
+                      conversationId={conversationId}
                     />
                   </div>
-                  <div className={style.info} 
-                   onClick={() => setMessageMenu(message._id)}
-                   ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
-                  {message.replyTo && messages.map((item) => 
-                  item._id == message.replyTo && 
-                  <div className={style.replied} key={item._id}>{
-                    item.content}
+                </div>
+              </div>
+            ) : (
+              <div className={style.right} key={message._id}
+                onClick={(e) => e.stopPropagation()}>
+              <div className={style.avatar}>
+                  {participants &&
+                    participants.map(
+                      (item) =>
+                        item._id == message.senderId && (
+                          <img src={item.avatar || defaultAvatar} alt="" />
+                        )
+                    )}
+                </div>
+                <div className={style.content}>
+                  <div className={style.info}>
+                    <div className={
+                        message._id == messageMenu
+                        ? style.active
+                        : style.inactive
+                      }>
+                     <SenderMessageMenu 
+                    messageId={message._id}
+                    editMessage={editMessageHandler}
+                    deleteMessage={deleteMessageHandler}
+                    />
+                    </div>
+                    <div className={style.name}></div>
+                    <div className={style.time}>
+                      <Time timeStamp={message.createdAt} />
+                    </div>
+                    <div
+                      className={style.menu}
+                      onClick={() => setMessageMenu(message._id)}
+                      ref={(elem) =>
+                        (messageMenuRef.current[message._id] = elem)
+                      }
+                    >
+                      <FontAwesomeIcon icon={faEllipsis} />
+                    </div>
                   </div>
-                  )}
-                  <div className={style.message}>{message.content}</div>
-                  </div>
-                  <MediaFile 
-                    media={media!} 
-                    message={message} 
-                    conversationId={conversationId} 
-                  />
-                  <div className={style.time}>
-                   <Time timeStamp={message.createdAt}/>
+                  <div className={style.text}>
+                  {message.replyTo &&
+                    messages.map(
+                      (item) =>
+                        item._id == message.replyTo && (
+                          <div className={style.reply} key={item._id}>
+                            {item.content.slice(0, 40)}...
+                          </div>
+                        )
+                    )}
+                    {message.content}
+                    <MediaFile
+                      media={media!}
+                      message={message}
+                      conversationId={conversationId}
+                    />
                   </div>
                 </div>
-            ) : (
-                <div className={style.right}
-                key={message._id}
-                  onClick={e => e.stopPropagation()}>
-                     <div className={message._id === messageMenu 
+                <div className={style.avatar}>
+                  {participants &&
+                    participants.map(
+                      (item) =>
+                        item._id == message.recipientId && (
+                          <img src={item.avatar || defaultAvatar} alt="" />
+                        )
+                    )}
+                </div>
+              </div>
+            )
+          )
+        ) : participants ? (
+          "No active chats"
+        ) : (
+          <Loader />
+        )}
+      </div>
+      <Input
+        message={message}
+        replyId={replyId}
+        messages={messages}
+        setMessage={setMessage}
+        sendMessageHandler={sendMessageHandler}
+        isUpdating={isUpdating}
+        setFile={setFile}
+      />
+    </>
+  );
+};
+
+export default Messages;
+
+
+ {/* <div className={message._id === messageMenu 
                   ? style.menu 
                   : style.inactive}>
-                    
                     <SenderMessageMenu 
                     messageId={message._id}
                     editMessage={editMessageHandler}
@@ -190,13 +317,13 @@ const Messages: FC<IMessagesProps> = ({
                   <div className={style.message}>
                   {message.content}
                   </div>
-                </div>
-                <MediaFile 
+                </div> */}
+                {/* <MediaFile 
                   media={media!} 
                   message={message} 
                   conversationId={conversationId} 
-                />
-                <div className={style['ext-info']}>
+                /> */}
+                {/* <div className={style['ext-info']}>
                   <div className={style.time}>
                    <Time timeStamp={message.createdAt}/>
                   </div>
@@ -206,23 +333,4 @@ const Messages: FC<IMessagesProps> = ({
                       : <FontAwesomeIcon icon={faCheck} />
                       }
                   </div>
-                </div>
-                </div>
-            )
-          )
-        ) : participants ? 'No active chats' : <Loader />}
-    </div>
-    <Input 
-      message={message}
-      replyId={replyId}
-      messages={messages}
-      setMessage={setMessage}
-      sendMessageHandler={sendMessageHandler}
-      isUpdating={isUpdating}
-      setFile={setFile}
-       />
-  </>
-  );
-};
-
-export default Messages;
+                </div> */}

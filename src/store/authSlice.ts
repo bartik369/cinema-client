@@ -11,6 +11,7 @@ type AuthState = {
 const initialState: AuthState = {
     user: {
         _id: '',
+        avatar: '',
         email: '',
         roles: [],
         member: [],

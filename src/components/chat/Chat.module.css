@@ -42,6 +42,7 @@
 .chat .typing .reply-text {
     position: absolute;
     background-color: cyan;
+    top: 40px;
 }
 
 .chat .input {
