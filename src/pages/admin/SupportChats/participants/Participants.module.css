@@ -1,16 +1,21 @@
-.participants {
-    
-}
+.participants {}
 
 .participants .item {
-    padding: 10px 20px;
+    padding: 8px 20px;
     cursor: pointer;
+    background-color: #161723;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border-bottom: 4px solid #191b29;
 }
 
 .participants .item-active {
-    padding: 10px 20px;
-    background-color: rgb(40, 69, 234);
+    padding: 8px 20px;
+    background-color: #1d1e30;
+    border-bottom: 4px solid #fd8841;
     cursor: pointer;
+    margin-bottom: 12px;
+    border-radius: 8px;
 }
 
 .participants .item:hover {
@@ -20,14 +25,33 @@
 .participants .user {
     display: flex;
     align-items: center;
+    font-family: inherit;
 }
 
 .participants .user .avatar {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
+    margin-right: 7px;
 }
 
 .participants .user .avatar img {
     width: 100%;
     object-fit: cover;
+}
+
+.participants .user .info .ticket {
+    color: #a5b2cb;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.participants .user .info .email {
+    color: #5f6879;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.participants .user .info .message {
+    color: #d0d7e3;
+    font-size: 13px;
 }

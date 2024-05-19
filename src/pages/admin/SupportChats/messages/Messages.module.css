@@ -2,36 +2,36 @@
     font-family: inherit;
     padding: 10px 20px;
     overflow-y: scroll;
-    height: calc(100% - 75px);
+    height: calc(100% - 82px);
 }
 
 .typing {
     display: flex;
     bottom: 0;
     width: 100%;
-    background-color: rgb(27, 90, 88);
+    background-color: #14151f;
     justify-content: center;
 }
 
 .list-messages .read {}
 
 .typing .input {
-    background-color: gold;
-    padding: 5px;
-    max-width: 500px;
+    padding: 11px;
+    max-width: 700px;
     width: 100%;
     display: flex;
 }
 
 .typing .input input {
     width: 100%;
-    background-color: plum;
-    padding: 15px;
-    color: darkred;
+    background-color: #1a1b28;
+    padding: 13px 40px 13px 20px;
+    color: #a4aec1;
+    font-size: 14px;
+    border-radius: 20px;
 }
 
 .typing .buttons {
-    background-color: rgb(80, 31, 110);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,11 +42,12 @@
     cursor: pointer;
     padding: 0px 5px;
     margin: 0px 10px;
-    color: rgb(206, 206, 206);
+    color: #41476c;
+    transition: all .6s ease-in-out;
 }
 
 .typing .buttons .file:hover {
-    color: antiquewhite;
+    color: #a4aec1;
 }
 
 .typing .buttons .btn {
@@ -71,7 +72,6 @@
 .list-messages .left {
     width: fit-content;
     position: relative;
-    cursor: pointer;
     margin: 20px 0;
 }
 
@@ -103,29 +103,35 @@
     margin-right: auto;
 }
 
+.list-messages .left .content .info,
+.list-messages .right .content .info {
+    display: flex;
+    align-items: center;
+    color: #a4aec1;
+    font-size: 11px;
+}
+
 .list-messages .left .content .info {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    color: #a4aec1;
 }
 
 .list-messages .right .content .info {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    color: #bfa4c1;
-}
-
-.list-messages .left .content .info .time,
-.list-messages .right .content .info .time {
-    font-size: 11px;
 }
 
 .list-messages .left .content .info .menu,
 .list-messages .right .content .info .menu {
     font-size: 20px;
     margin-left: 10px;
+    cursor: pointer;
+    transition: all .6s ease-in-out;
+}
+
+.list-messages .left .content .info .menu:hover,
+.list-messages .right .content .info .menu:hover {
+    color: #fff;
 }
 
 .list-messages .left .content .info .active .menu-list,
@@ -139,6 +145,11 @@
     font-size: 12px;
 }
 
+.list-messages .left .content .info .name,
+.list-messages .right .content .info .name {
+    margin-right: 5px;
+}
+
 .list-messages .left .content .text {
     border-radius: 20px 20px 20px 0;
     background-color: #383b53;
@@ -146,14 +157,14 @@
 
 .list-messages .right .content .text {
     border-radius: 20px 20px 0 20px;
-    background-color: #3e29bf;
+    background-color: #43359e;
 }
 
 .list-messages .left .content .text,
 .list-messages .right .content .text {
     padding: 16px 20px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
     color: #fff;
 }
 
@@ -162,11 +173,19 @@
 .list-messages .left .content .text .reply {
     background-color: #434766;
     padding: 10px 14px;
-    border-left: 1px solid #4b4f70;
-    border-radius: 0 4px 4px 0;
+    border-left: 3px solid #4b4f70;
+    border-radius: 0 14px 14px 0;
     margin-bottom: 6px;
     font-family: inherit;
     font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-messages .left .content .text .reply span {
+    font-size: 11px;
+    color: #a8afe1;
+    margin-bottom: 3px;
 }
 
 .list-messages .left .file-info,
@@ -182,16 +201,22 @@
 }
 
 .list-messages .right .file-info {
-    border-top: 1px solid #4e38d8;
+    border-top: 1px solid #5a4abe;
 }
 
 .list-messages .file-info .icon {
     width: 25px;
     margin-right: 7px;
+    cursor: pointer;
 }
 
-.list-messages .file-info .name {
+.list-messages .left .file-info .name {
     color: #a4aec1;
+    font-size: 10px;
+}
+
+.list-messages .right .file-info .name {
+    color: #b3a7ff;
     font-size: 10px;
 }
 

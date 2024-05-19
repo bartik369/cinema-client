@@ -161,19 +161,16 @@ const Messages: FC<IMessagesProps> = ({
                 </div>
                 <div className={style.content}>
                   <div className={style.info}>
-                    <div
-                      className={
-                        message._id == messageMenu
-                          ? style.active
-                          : style.inactive
-                      }
-                    >
+                    <div className={ message._id == messageMenu
+                        ? style.active
+                        : style.inactive
+                      }>
                       <RecipientMessageMenu
                         messageId={message._id}
                         reply={replayMessageHandler}
                       />
                     </div>
-                    <div className={style.name}></div>
+                    <div className={style.name}>Пользователь</div>
                     <div className={style.time}>
                       <Time timeStamp={message.createdAt} />
                     </div>
@@ -193,6 +190,7 @@ const Messages: FC<IMessagesProps> = ({
                       (item) =>
                         item._id == message.replyTo && (
                           <div className={style.reply} key={item._id}>
+                             <span>Вы</span>
                             {item.content.slice(0, 40)}...
                           </div>
                         )

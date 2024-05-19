@@ -8,9 +8,10 @@
 }
 
 .chats .conversations {
-    background-color: #1e1e20;
+    background-color: #10111a;
     width: 23%;
     overflow-y: scroll;
+    padding: 12px;
 }
 
 .chats .messages {
