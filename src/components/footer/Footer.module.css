@@ -75,18 +75,20 @@ ul li {
 }
 
 .menu .help {
-    padding: 7px 15px 7px 10px;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 400;
-    color: rgb(255, 255, 255);
-    background-color: #0ebda6;
-    border: none;
-    transition: all .6s ease-in-out;
-    cursor: pointer;
+    position: fixed;
     display: flex;
     align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    right: 20px;
+    bottom: 20px;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(12, 61, 63);
+    color: #fff;
+    font-size: 15px;
 }
 
 .menu .help:hover {

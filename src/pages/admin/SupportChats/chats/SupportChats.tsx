@@ -7,6 +7,7 @@ import {
     useGetActiveConverstionMutation,
     useGetActiveConverstionMessagesQuery,
     useMarkAsReadMutation,
+    useGetUnreadMessagesQuery,
  } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
@@ -22,18 +23,19 @@ const SupportChats:FC = () => {
     const [getConversationId] = useGetConversationIdMutation();
     const [getActiveConversation] = useGetActiveConverstionMutation();
     const {data: messages} = useGetRecipientMessagesQuery(recipientId && recipientId, {skip: skip});
+    // const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
     const {data: activeMessages} = useGetActiveConverstionMessagesQuery(active && active, {skip: skipActive} );
     const [markMessageAsRead] = useMarkAsReadMutation();
 
     useEffect(() => {
         getActiveConversation(user._id).unwrap().then((data) => {
-            setActive(data.conversationId);
-            setRecipientId(data.senderId);
+            setActive(data._id);
+            data.participants.map((item) => item !== user._id && setRecipientId(item))
             setSkipActive(false);
-            markMessageAsRead({
-                conversationId: data.conversationId, 
-                userId: user._id,
-            });
+            // markMessageAsRead({
+            //     conversationId: data.conversationId, 
+            //     userId: user._id,
+            // });
         })
     }, [user])
 
@@ -44,20 +46,22 @@ const SupportChats:FC = () => {
             setSkip(false);
         });
     }
+    
     return (
         <div className={style.chats}>
             <div className={style.conversations}>
                 <Participants 
-                participants={participants && participants?.usersInfo} 
+                participants={participants?.usersInfo!} 
                 user={user}
                 lastMessages={participants?.lastMessages}
+                // unreadMessages={unreadMessages!}
                 activeConversation={active}
                 getMessagesById={setRecipientHandler}
                 />
             </div>
             <div className={style.messages}>
                 <Messages 
-                participants={participants?.usersInfo}
+                participants={participants?.usersInfo!}
                 conversationId={active}
                 recipientId={recipientId}
                 user={user}

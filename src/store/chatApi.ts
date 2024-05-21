@@ -1,6 +1,6 @@
 import { IMessage, IMessageMedia } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IConversation, IDataForMarkRead } from "../types/chat";
+import { IConversation, IDataForMarkRead, IParticipants } from "../types/chat";
 import ENV from "../env.config";
 
 export const chatApi = createApi({
@@ -36,6 +36,12 @@ export const chatApi = createApi({
           : [{ type: "Messages", _id: "LIST" }],
            
         }),
+        getUnreadMessages: builder.query<IMessage[], string>({
+            query:(id) => ({
+                url: `/unread-messages/${id}`,
+                method: 'GET',
+            }) 
+         }),
         getRecipientMessages: builder.query<IMessage[], string>({
             query:(id) => ({
                 url: `/recipient-messages/${id}`,
@@ -62,12 +68,13 @@ export const chatApi = createApi({
                 ]
               : [{ type: "Messages", _id: "LIST" }],
         }),
-        getActiveConverstion: builder.mutation<IMessage, string>({
+        getActiveConverstion: builder.mutation<IConversation, string>({
             query:(id) => ({
                 url: `/active-conversation/`,
                 method: 'POST',
                 body: {id: id},
-            }) 
+            }),
+            invalidatesTags: ['Chat']
         }),
         createMessage: builder.mutation<IMessage, any>({
             query:(data) => ({
@@ -75,7 +82,7 @@ export const chatApi = createApi({
                 method: 'POST',
                 body: data,
             }),
-            invalidatesTags: ['Messages'],
+            invalidatesTags: ['Messages', 'Chat'],
         }),
         deleteMessage: builder.mutation<{success: boolean; id: number }, string>({
             query:(id) => ({
@@ -92,18 +99,18 @@ export const chatApi = createApi({
             }),
             invalidatesTags: ['Messages'],
         }),
-        getConversations: builder.query<any, string>({
+        getConversations: builder.query<IParticipants, string>({
             query:(id) => ({
                 url: `/get-conversations/${id}`,
                 method: 'GET',
             }),
-            // providesTags: (result) =>
-            // result
-            //   ? [
-            //       ...result.usersInfo.map(({ _id }) => ({ type: "Chat" as const, _id })),
-            //       { type: "Chat", _id: "LIST" },
-            //     ]
-            //   : [{ type: "Chat", _id: "LIST" }],
+            providesTags: (result) =>
+            result
+              ? [
+                  ...result.usersInfo.map(({_id }) => ({ type: "Chat" as const, _id })),
+                  { type: "Chat", _id: "LIST" },
+                ]
+              : [{ type: "Chat", _id: "LIST" }],
         }),
         getConversationId: builder.mutation({
             query:(id) => ({
@@ -123,8 +130,8 @@ export const chatApi = createApi({
             query:(id) => ({
                 url: `/conversation-media/${id}`,
                 method: 'GET',
-            })
-        })
+            }),
+        }),
     })
 });
 
@@ -142,5 +149,6 @@ export const {
     useGetMessageMutation,
     useMarkAsReadMutation,
     useGetConversationMediaQuery,
+    useGetUnreadMessagesQuery,
 
 } = chatApi;

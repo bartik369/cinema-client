@@ -78,6 +78,10 @@ const Messages: FC<IMessagesProps> = ({
       setMediaSkip(false);
     }
   }, [recipientId, conversationId, message.content]);
+  
+  console.log("recipientId", message.recipientId)
+  console.log("conversationId", message.conversationId)
+  console.log("senderId", message.senderId)
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
@@ -229,7 +233,7 @@ const Messages: FC<IMessagesProps> = ({
                     deleteMessage={deleteMessageHandler}
                     />
                     </div>
-                    <div className={style.name}></div>
+                    <div className={style.name}>Вы</div>
                     <div className={style.time}>
                       <Time timeStamp={message.createdAt} />
                     </div>
@@ -249,6 +253,7 @@ const Messages: FC<IMessagesProps> = ({
                       (item) =>
                         item._id == message.replyTo && (
                           <div className={style.reply} key={item._id}>
+                            <span>Пользователь</span>
                             {item.content.slice(0, 40)}...
                           </div>
                         )
@@ -259,6 +264,12 @@ const Messages: FC<IMessagesProps> = ({
                       message={message}
                       conversationId={conversationId}
                     />
+                     <div className={style.read}>
+                      {message.read === 'yes' 
+                      ? <FontAwesomeIcon className={style.blue} icon={faCheckDouble} />
+                      : <FontAwesomeIcon className={style.dark} icon={faCheck} />
+                      }
+                  </div>
                   </div>
                 </div>
                 <div className={style.avatar}>

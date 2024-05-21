@@ -13,8 +13,6 @@
     justify-content: center;
 }
 
-.list-messages .read {}
-
 .typing .input {
     padding: 11px;
     max-width: 700px;
@@ -51,17 +49,20 @@
 }
 
 .typing .buttons .btn {
-    background-color: rgb(45, 3, 112);
+    background-color: #484175;
     border: none;
+    font-size: 11px;
+    font-family: inherit;
     display: flex;
-    color: azure;
-    padding: 9px 15px;
+    color: #fff;
+    padding: 11px 16px;
     border-radius: 6px;
     cursor: pointer;
+    transition: all .6s ease-in-out;
 }
 
 .typing .buttons .btn:hover {
-    background-color: rgb(66, 12, 153);
+    background-color: #fd8841;
 }
 
 .list-messages .inactive {
@@ -98,6 +99,21 @@
     width: 100%;
 }
 
+.list-messages .text .read {
+    font-size: 15px;
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+}
+
+.list-messages .text .read .blue {
+    color: #5747be;
+}
+
+.list-messages .text .read .dark {
+    color: #424663;
+}
+
 .list-messages .left .content {
     margin-left: 0;
     margin-right: auto;
@@ -108,7 +124,7 @@
     display: flex;
     align-items: center;
     color: #a4aec1;
-    font-size: 11px;
+    font-size: 11.5px;
 }
 
 .list-messages .left .content .info {
@@ -143,6 +159,7 @@
     position: absolute;
     top: 23px;
     font-size: 12px;
+    z-index: 99;
 }
 
 .list-messages .left .content .info .name,
@@ -153,6 +170,7 @@
 .list-messages .left .content .text {
     border-radius: 20px 20px 20px 0;
     background-color: #383b53;
+    position: relative;
 }
 
 .list-messages .right .content .text {
@@ -170,11 +188,9 @@
 
 .list-messages .left .content .text {}
 
-.list-messages .left .content .text .reply {
-    background-color: #434766;
+.list-messages .left .content .text .reply,
+.list-messages .right .content .text .reply {
     padding: 10px 14px;
-    border-left: 3px solid #4b4f70;
-    border-radius: 0 14px 14px 0;
     margin-bottom: 6px;
     font-family: inherit;
     font-size: 12px;
@@ -182,7 +198,20 @@
     flex-direction: column;
 }
 
-.list-messages .left .content .text .reply span {
+.list-messages .left .content .text .reply {
+    background-color: #434766;
+    border-left: 3px solid #4b4f70;
+    border-radius: 0 14px 14px 0;
+}
+
+.list-messages .right .content .text .reply {
+    background-color: #5344b7;
+    border-left: 3px solid #6655d0;
+    border-radius: 0 14px 14px 0;
+}
+
+.list-messages .left .content .text .reply span,
+.list-messages .right .content .text .reply span {
     font-size: 11px;
     color: #a8afe1;
     margin-bottom: 3px;
@@ -218,13 +247,4 @@
 .list-messages .right .file-info .name {
     color: #b3a7ff;
     font-size: 10px;
-}
-
-.list-messages .ext-info {
-    background-color: aqua;
-    display: flex;
-}
-
-.list-messages .ext-info .read {
-    background-color: rgb(134, 21, 199);
 }

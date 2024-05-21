@@ -7,11 +7,13 @@ import { useOpenChatMutation } from '../../store/chatApi';
 import { IChatInfo } from '../../types/chat';
 import Chat from '../chat/Chat';
 import * as contentConst from '../../utils/constants/content';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import Instagram from '../../assets/pics/instagram.svg';
 import Twitter from '../../assets/pics/twitter.svg';
 import VK from '../../assets/pics/vk.svg';
 import Telegram from '../../assets/pics/telegram.svg';
-import Message from '../../assets/pics/message.svg';
+import ChatIcon from '../../assets/pics/chat.svg';
 import style from './Footer.module.css';
 
 const Footer: FC = () => {
@@ -26,22 +28,19 @@ const Footer: FC = () => {
   const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
 
   const startChat = () => {
-    
     if (isAuth) {
-        setVisibleChat(true);
+      setVisibleChat(!visibleChat)
         openChat(user._id).unwrap().then((data) => {
           setChatInfo({...data})
           setRecipientId(data.participants.filter((item:string) => item != user._id))
         })
     } else {
-      toast.error(contentConst.errorAddFavotite)
+      toast.error(contentConst.errorAddFavotite);
     }
   }
   const visibleHandler = () => {
     setVisibleChat(false)
   }
-  
-  console.log('user', recipientId)
   
   return (
     <div className={(existTrailer && regEx) ? style.container : style.notrailer}>
@@ -77,9 +76,11 @@ const Footer: FC = () => {
             <div><img src={Twitter} alt="" /></div>
           </div>
           <button onClick={startChat} className={style.help}>
-            <img src={Message} alt="" />
-            {contentConst.chatHelp}
-            </button>
+            { !visibleChat
+            ? <img src={ChatIcon} alt="" />
+            : <FontAwesomeIcon icon={faChevronUp} />
+          }
+          </button>
         </div>
         <div className={style.info}></div>
       </div>

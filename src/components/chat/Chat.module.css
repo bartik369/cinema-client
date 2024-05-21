@@ -1,8 +1,9 @@
 .chat {
     position: fixed;
+    border-radius: 12px;
     z-index: 999;
-    right: 0;
-    bottom: 10px;
+    right: 25px;
+    bottom: 90px;
     width: 100%;
     max-width: 400px;
     height: 100%;
@@ -71,20 +72,165 @@
 .chat .messages .left,
 .chat .messages .right {
     width: fit-content;
-    border-radius: 6px;
-    margin: 20px;
     position: relative;
-    cursor: pointer;
+    margin: 20px 0;
 }
 
 .chat .messages .left {
-    background-color: rgb(6, 127, 99);
+    display: flex;
     margin-left: 0;
     margin-right: auto;
 }
 
 .chat .messages .right {
-    background-color: dodgerblue;
+    display: flex;
     margin-left: auto;
     margin-right: 0;
+}
+
+.chat .messages .avatar {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    margin: 0 5px;
+}
+
+.chat .messages .avatar img {
+    width: 100%;
+}
+
+.chat .messages .text .read .blue {
+    color: #5747be;
+}
+
+.chat .messages .text .read .dark {
+    color: #424663;
+}
+
+.chat .messages .left .content .info,
+.chat .messages .right .content .info {
+    display: flex;
+    align-items: center;
+    color: #a4aec1;
+    font-size: 11.5px;
+}
+
+.chat .messages .left .content .info {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.chat .messages .right .content .info {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chat .messages .left .content .info .menu,
+.chat .messages .right .content .info .menu {
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all .6s ease-in-out;
+}
+
+.chat .messages .left .content .info .menu:hover,
+.chat .messages .right .content .info .menu:hover {
+    color: #fff;
+}
+
+.chat .messages .left .content .info .active .menu-list,
+.chat .messages .right .content .info .active .menu-list {
+    padding: 6px 15px;
+    background-color: #202131;
+    width: fit-content;
+    display: flex;
+    position: absolute;
+    top: 23px;
+    font-size: 12px;
+    z-index: 99;
+}
+
+.chat .messages .left .content .info .name,
+.chat .messages .right .content .info .name {
+    margin-right: 5px;
+}
+
+.chat .messages .left .content .text {
+    border-radius: 20px 20px 20px 0;
+    background-color: #383b53;
+    position: relative;
+}
+
+.chat .messages .right .content .text {
+    border-radius: 20px 20px 0 20px;
+    background-color: #43359e;
+}
+
+.chat .messages .left .content .text,
+.chat .messages .right .content .text {
+    padding: 16px 20px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #fff;
+}
+
+.chat .messages .left .content .text .reply,
+.chat .messages .right .content .text .reply {
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    font-family: inherit;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat .messages .left .content .text .reply {
+    background-color: #434766;
+    border-left: 3px solid #4b4f70;
+    border-radius: 0 14px 14px 0;
+}
+
+.chat .messages .right .content .text .reply {
+    background-color: #5344b7;
+    border-left: 3px solid #6655d0;
+    border-radius: 0 14px 14px 0;
+}
+
+.chat .messages .left .content .text .reply span,
+.chat .messages .right .content .text .reply span {
+    font-size: 11px;
+    color: #a8afe1;
+    margin-bottom: 3px;
+}
+
+.chat .messages .left .file-info,
+.chat .messages .right .file-info {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    padding: 7px 0px 0px;
+}
+
+.chat .messages .left .file-info {
+    border-top: 1px solid #434764;
+}
+
+.chat .messages .right .file-info {
+    border-top: 1px solid #5a4abe;
+}
+
+.chat .messages .file-info .icon {
+    width: 25px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.chat .messages .left .file-info .name {
+    color: #a4aec1;
+    font-size: 10px;
+}
+
+.chat .messages .right .file-info .name {
+    color: #b3a7ff;
+    font-size: 10px;
 }

@@ -1,3 +1,4 @@
+import { IUser } from './auth';
 export interface IChatInfo {
   _id: string;
   creatorId: string;
@@ -47,4 +48,8 @@ export interface IParticipantInfo {
 export interface IDataForMarkRead {
   conversationId: string;
   userId: string;
+}
+export interface IParticipants {
+  usersInfo: IParticipantInfo[],
+  lastMessages: IMessage[],
 }
