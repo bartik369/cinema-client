@@ -16,5 +16,6 @@
 
 .chats .messages {
     background-color: #181825;
+    background-image: url('../../../../assets/pics/chat-texture.png');
     width: 77%;
 }

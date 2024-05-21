@@ -141,16 +141,13 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
       <div className={style.messages}>
       {messages ? (
           messages.map((message) =>
-            message.senderId !== user._id 
+            message.senderId == user._id 
               ? (
               <div className={style.left} key={message._id}
                   onClick={e => e.stopPropagation()}>
-
                   <div className={style.avatar}>
                   <img src={defaultAvatar} alt="" />
                   </div>
-
-
                   <div className={style.content}>
                   <div className={style.info}>
                     <div className={ message._id == messageMenu
@@ -211,10 +208,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
             ) : (
                 <div className={style.right} key={message._id}
                   onClick={e => e.stopPropagation()}>
-
-                  <div className={style.avatar}>
-                  <img src={defaultAvatar} alt="" />
-                  </div>
                 <div className={style.content}>
                   <div className={style.info}>
                     <div className={
@@ -269,7 +262,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                 </div>
                 <div className={style.avatar}>
                   <img src={defaultAvatar} alt="" />
-                  </div>
+                </div>
 
 
                     {/* <div className={message.read}>

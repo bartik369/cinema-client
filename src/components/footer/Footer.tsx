@@ -8,7 +8,7 @@ import { IChatInfo } from '../../types/chat';
 import Chat from '../chat/Chat';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Instagram from '../../assets/pics/instagram.svg';
 import Twitter from '../../assets/pics/twitter.svg';
 import VK from '../../assets/pics/vk.svg';
@@ -78,7 +78,7 @@ const Footer: FC = () => {
           <button onClick={startChat} className={style.help}>
             { !visibleChat
             ? <img src={ChatIcon} alt="" />
-            : <FontAwesomeIcon icon={faChevronUp} />
+            : <FontAwesomeIcon icon={faChevronDown} />
           }
           </button>
         </div>

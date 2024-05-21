@@ -89,6 +89,7 @@ ul li {
     background-color: rgb(12, 61, 63);
     color: #fff;
     font-size: 15px;
+    z-index: 9;
 }
 
 .menu .help:hover {
