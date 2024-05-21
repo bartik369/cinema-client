@@ -1,7 +1,7 @@
 import {FC, useState, useEffect, useRef} from 'react';
 import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
   useDeleteMessageMutation, useUpdateMessageMutation,
-  useMarkAsReadMutation, useGetConversationMediaQuery,
+  useMarkAsReadMutation, useGetConversationMediaQuery, useGetRecipientInfoQuery
  } from '../../store/chatApi';
  import RecipientMessageMenu from '../../pages/admin/SupportChats/messages/RecipientMessageMenu';
  import SenderMessageMenu from '../../pages/admin/SupportChats/messages/SenderMessageMenu';
@@ -34,12 +34,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const [deleteMessage] = useDeleteMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
   const [markMessageAsRead] = useMarkAsReadMutation();
-  const [mediaSkip, setMediaSkip] = useState(true);
-  const { data: media } = useGetConversationMediaQuery(chatInfo && chatInfo._id, {
-    skip: mediaSkip,
-  });
+  const [skip, setSkip] = useState<boolean>(true)
+  const {data: recipientInfo} = useGetRecipientInfoQuery(recipientId && recipientId, {skip: skip});
+  const { data: media } = useGetConversationMediaQuery(chatInfo && chatInfo._id);
   
-
   const [message, setMessage] = useState<IMessage>({
     _id: '',
     content: '',
@@ -53,6 +51,8 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     updatedAt: '',
   });
 
+
+
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
   };
@@ -60,6 +60,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
 
   useEffect(() => {
     if (recipientId && chatInfo._id) {
+      setSkip(false);
       setMessage({...message, 
         recipientId: recipientId,
         conversationId: chatInfo._id,
@@ -80,7 +81,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
 
           if (item !== e.target) {
             setMessageMenu('');
-            setMessage({...message, content: ''});
+            // setMessage({...message, content: ''});
             setReplyId('');
           }
         });
@@ -88,8 +89,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     };
     document.addEventListener("click", outsideClickhandler);
   }, []);
-
-  console.log(chatInfo)
 
   const sendMessageHandler = () => {
     const formData = new FormData();
@@ -134,26 +133,29 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
 
   return (
     <div className={style.chat}>
-      <FontAwesomeIcon className={style.close} onClick={visibleHandler} icon={faXmark}/>
+      <FontAwesomeIcon
+        className={style.close}
+        onClick={visibleHandler}
+        icon={faXmark}
+      />
       <div className={style.request}>
-        {contentConst.requestNumber}{chatInfo && chatInfo.ticketNumber}
+        {contentConst.requestNumber}
+        <span>{chatInfo && chatInfo.ticketNumber}</span>
       </div>
       <div className={style.messages}>
-      {messages ? (
-          messages.map((message) =>
-            message.senderId == user._id 
-              ? (
-              <div className={style.left} key={message._id}
-                  onClick={e => e.stopPropagation()}>
-                  <div className={style.avatar}>
+        {messages ? (
+          messages.map((message) => message.senderId == user._id 
+          ? (<div className={style.left} key={message._id}
+                onClick={(e) => e.stopPropagation()}>
+                <div className={style.avatar}>
                   <img src={defaultAvatar} alt="" />
-                  </div>
-                  <div className={style.content}>
+                </div>
+                <div className={style.content}>
                   <div className={style.info}>
-                    <div className={ message._id == messageMenu
+                    
+                    <div className={message._id == messageMenu
                         ? style.active
-                        : style.inactive
-                      }>
+                        : style.inactive}>
                       <RecipientMessageMenu
                         messageId={message._id}
                         reply={replayMessageHandler}
@@ -163,23 +165,16 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                     <div className={style.time}>
                       <Time timeStamp={message.createdAt} />
                     </div>
-                    <div
-                      className={style.menu}
-                      onClick={() => setMessageMenu(message._id)}
-                      ref={(elem) =>
-                        (messageMenuRef.current[message._id] = elem)
-                      }
-                    >
+                    <div className={style.menu} onClick={() => setMessageMenu(message._id)}
+                      ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
                       <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                   </div>
                   <div className={style.text}>
-                  {message.replyTo &&
-                    messages.map(
-                      (item) =>
-                        item._id == message.replyTo && (
+                    {message.replyTo &&
+                      messages.map((item) => item._id == message.replyTo && (
                           <div className={style.reply} key={item._id}>
-                             <span>Вы</span>
+                            <span>Вы</span>
                             {item.content.slice(0, 40)}...
                           </div>
                         )
@@ -193,7 +188,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                   </div>
                 </div>
 
-                   {/* <div className={message._id == messageMenu 
+                {/* <div className={message._id == messageMenu 
                   ? style.menu 
                   : style.inactive}>
                     <RecipientMessageMenu messageId={message._id} 
@@ -204,68 +199,65 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                    ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
                   {message.content}
                   </div> */}
-                </div>
+              </div>
             ) : (
-                <div className={style.right} key={message._id}
-                  onClick={e => e.stopPropagation()}>
+              <div className={style.right} key={message._id}
+                onClick={(e) => e.stopPropagation()}>
                 <div className={style.content}>
                   <div className={style.info}>
-                    <div className={
-                        message._id == messageMenu
+                    <div className={ message._id == messageMenu
                         ? style.active
                         : style.inactive
-                      }>
-                     <SenderMessageMenu 
-                    messageId={message._id}
-                    editMessage={editMessageHandler}
-                    deleteMessage={deleteMessageHandler}
-                    />
+                    }>
+                      <SenderMessageMenu
+                        messageId={message._id}
+                        editMessage={editMessageHandler}
+                        deleteMessage={deleteMessageHandler}
+                      />
                     </div>
                     <div className={style.name}>Вы</div>
                     <div className={style.time}>
                       <Time timeStamp={message.createdAt} />
                     </div>
-                    <div
-                      className={style.menu}
+                    <div className={style.menu}
                       onClick={() => setMessageMenu(message._id)}
                       ref={(elem) =>
                         (messageMenuRef.current[message._id] = elem)
-                      }
-                    >
+                      }>
                       <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                   </div>
                   <div className={style.text}>
-                  {message.replyTo &&
-                    messages.map(
-                      (item) =>
-                        item._id == message.replyTo && (
-                          <div className={style.reply} key={item._id}>
-                            <span>Пользователь</span>
-                            {item.content.slice(0, 40)}...
-                          </div>
-                        )
-                    )}
+                    {message.replyTo &&
+                      messages.map(
+                        (item) =>
+                          item._id == message.replyTo && (
+                            <div className={style.reply} key={item._id}>
+                              <span>Пользователь</span>
+                              {item.content.slice(0, 40)}...
+                            </div>
+                          )
+                      )}
                     {message.content}
                     <MediaFile
                       media={media!}
                       message={message}
                       conversationId={chatInfo._id}
                     />
-                     <div className={style.read}>
-                      {message.read === 'yes' 
-                      ? <FontAwesomeIcon className={style.blue} icon={faCheckDouble} />
-                      : <FontAwesomeIcon className={style.dark} icon={faCheck} />
-                      }
-                  </div>
+                    <div className={style.read}>
+                      {message.read === "yes" ? (
+                        <FontAwesomeIcon className={style.blue} icon={faCheckDouble} />
+                      ) : (
+                        <FontAwesomeIcon className={style.dark} icon={faCheck}/>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className={style.avatar}>
                   <img src={defaultAvatar} alt="" />
                 </div>
 
-
-                    {/* <div className={message.read}>
+                {/* <div className={message.read}>
                       {message.read === 'yes' 
                       ? <FontAwesomeIcon icon={faCheckDouble} />
                       : <FontAwesomeIcon icon={faCheck} />
@@ -285,19 +277,21 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                    ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
                   {message.content}
                 </div> */}
-                </div>
+              </div>
             )
           )
-        ) : <div>{contentConst.noMessages}</div>}
+        ) : (
+          <div>{contentConst.noMessages}</div>
+        )}
       </div>
       <InputUsersSide
-      replyId={replyId}
-      messages={messages!}
-      message={message}
-      setMessage={setMessage}
-      setFile={setFile}
-      isUpdating={isUpdating}
-      sendMessageHandler={sendMessageHandler}
+        replyId={replyId}
+        messages={messages!}
+        message={message}
+        setMessage={setMessage}
+        setFile={setFile}
+        isUpdating={isUpdating}
+        sendMessageHandler={sendMessageHandler}
       />
     </div>
   );

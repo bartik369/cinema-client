@@ -1,3 +1,4 @@
+import { IUser } from './../types/auth';
 import { IMessage, IMessageMedia } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IConversation, IDataForMarkRead, IParticipants } from "../types/chat";
@@ -132,6 +133,12 @@ export const chatApi = createApi({
                 method: 'GET',
             }),
         }),
+        getRecipientInfo: builder.query<IUser, string>({
+            query:(id) => ({
+                url: `/recipient-info/${id}`,
+                method: 'GET',
+            }),
+        }),
     })
 });
 
@@ -150,5 +157,6 @@ export const {
     useMarkAsReadMutation,
     useGetConversationMediaQuery,
     useGetUnreadMessagesQuery,
+    useGetRecipientInfoQuery,
 
 } = chatApi;

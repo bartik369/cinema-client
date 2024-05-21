@@ -218,33 +218,31 @@
 }
 
 .list-messages .left .file-info,
-.list-messages .right .file-info {
+.list-messages .right .file-info,
+.chat .left .file-info,
+.chat .right .file-info {
     display: flex;
     align-items: center;
     margin-top: 5px;
     padding: 7px 0px 0px;
 }
 
-.list-messages .left .file-info {
+.left .file-info {
     border-top: 1px solid #434764;
 }
 
-.list-messages .right .file-info {
+.right .file-info {
     border-top: 1px solid #5a4abe;
 }
 
-.list-messages .file-info .icon {
+.file-info .icon {
     width: 25px;
+    margin-top: 8px;
     margin-right: 7px;
     cursor: pointer;
 }
 
-.list-messages .left .file-info .name {
+.file-info .name {
     color: #a4aec1;
-    font-size: 10px;
-}
-
-.list-messages .right .file-info .name {
-    color: #b3a7ff;
     font-size: 10px;
 }
