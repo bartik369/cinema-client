@@ -14,6 +14,7 @@ import RecipientMessageMenu from "./RecipientMessageMenu";
 import Input from "./Input";
 import Time from "./Time";
 import MediaFile from "./MediaFile";
+import ENV from "../../../../env.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
@@ -78,8 +79,6 @@ const Messages: FC<IMessagesProps> = ({
       setMediaSkip(false);
     }
   }, [recipientId, conversationId, message.content]);
-  
-  console.log('check')
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
@@ -130,7 +129,7 @@ const Messages: FC<IMessagesProps> = ({
     id &&
       deleteMessage(id)
         .unwrap()
-        .then((data) => {
+        .then(() => {
           setMessageMenu("");
         });
   };
@@ -158,7 +157,7 @@ const Messages: FC<IMessagesProps> = ({
             <div className={style.avatar}>
               {participants &&
               participants.map((item) => item._id == message.senderId 
-              && ( <img key={item._id} src={item.avatar || defaultAvatar} alt="" />)
+              &&  <img key={item._id} src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${item.avatar}` || defaultAvatar} alt="" />
               )}
             </div>
             <div className={style.content}>
@@ -202,15 +201,6 @@ const Messages: FC<IMessagesProps> = ({
             ) : (
               <div className={style.right} key={message._id}
                 onClick={(e) => e.stopPropagation()}>
-              <div className={style.avatar}>
-                  {participants &&
-                    participants.map(
-                      (item) =>
-                        item._id == message.senderId && (
-                          <img src={item.avatar || defaultAvatar} alt="" />
-                        )
-                    )}
-                </div>
                 <div className={style.content}>
                   <div className={style.info}>
                     <div className={
@@ -264,9 +254,7 @@ const Messages: FC<IMessagesProps> = ({
                   </div>
                 </div>
                 <div className={style.avatar}>
-                  {participants && participants.map((item) => item._id == message.recipientId 
-                    && (<img key={item._id} src={item.avatar || defaultAvatar} alt="" />)
-                  )}
+                  <img src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${user?.avatar}` || defaultAvatar} alt="" />
                 </div>
               </div>
             )

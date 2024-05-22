@@ -170,14 +170,16 @@
 }
 
 .chat .messages .avatar {
-    width: 44px;
-    height: 44px;
-    object-fit: cover;
+    width: 40px;
+    height: 40px;
     margin: 0 5px;
 }
 
 .chat .messages .avatar img {
+    object-fit: cover;
+    height: 40px;
     width: 100%;
+    border-radius: 50%;
 }
 
 .chat .messages .text .read {
@@ -263,6 +265,7 @@
     font-family: inherit;
     font-size: 13px;
     color: #fff;
+    box-shadow: rgba(17, 16, 26, 0.7) 0px 3px 8px;
 }
 
 .chat .messages .left .content .text .reply,

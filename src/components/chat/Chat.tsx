@@ -12,8 +12,10 @@ import Time from '../../pages/admin/SupportChats/messages/Time';
 import MediaFile from '../../pages/admin/SupportChats/messages/MediaFile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCheck, faCheckDouble, faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import ENV from '../../env.config';
 import defaultAvatar from "../../assets/pics/profile-circle.svg";
 import * as contentConst from '../../utils/constants/content';
+import supportAvatar from '../../assets/pics/support.png'
 import style from './Chat.module.css';
 
 interface IChatProps {
@@ -150,7 +152,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
           ? (<div className={style.left} key={message._id}
                 onClick={(e) => e.stopPropagation()}>
                 <div className={style.avatar}>
-                  <img src={defaultAvatar} alt="" />
+                  <img src={user && `${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
                 </div>
                 <div className={style.content}>
                   <div className={style.info}> 
@@ -230,7 +232,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                   </div>
                 </div>
                 <div className={style.avatar}>
-                  <img src={defaultAvatar} alt="" />
+                  <img src={supportAvatar} alt="" />
                 </div>
               </div>
             )

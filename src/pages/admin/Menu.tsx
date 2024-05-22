@@ -20,6 +20,8 @@ const Menu: FC = () => {
   const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
   const navigate = useNavigate();
 
+  console.log(unreadMessages && unreadMessages)
+
   return (
     <>
       <div className={style.item} onClick={() => navigate(`${ENV.EDIT_SLIDER}`)}>

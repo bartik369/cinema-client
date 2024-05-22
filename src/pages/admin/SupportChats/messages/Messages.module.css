@@ -73,32 +73,36 @@
 .list-messages .left {
     width: fit-content;
     position: relative;
-    margin: 20px 0;
     width: 100%;
     max-width: 550px;
+    margin-bottom: 20px;
 }
 
 .list-messages .right {
     display: flex;
     margin-left: auto;
     margin-right: 0;
+    justify-content: flex-end;
 }
 
 .list-messages .left {
     display: flex;
     margin-left: 0;
     margin-right: auto;
+    justify-content: flex-start;
 }
 
 .list-messages .avatar {
-    width: 44px;
-    height: 44px;
-    object-fit: cover;
+    width: 38px;
+    height: 38px;
     margin: 0 5px;
 }
 
 .list-messages .avatar img {
+    object-fit: cover;
     width: 100%;
+    height: 38px;
+    border-radius: 50%;
 }
 
 .list-messages .text .read {
@@ -190,7 +194,6 @@
 .list-messages .left .content .text {
     border-radius: 20px 20px 20px 0;
     background-color: #383b53;
-    position: relative;
 }
 
 .list-messages .right .content .text {
@@ -204,6 +207,7 @@
     font-family: inherit;
     font-size: 13px;
     color: #fff;
+    box-shadow: rgba(17, 16, 26, 0.7) 0px 3px 8px;
 }
 
 .list-messages .left .content .text {}
