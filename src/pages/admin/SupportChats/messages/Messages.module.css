@@ -74,6 +74,8 @@
     width: fit-content;
     position: relative;
     margin: 20px 0;
+    width: 100%;
+    max-width: 550px;
 }
 
 .list-messages .right {
@@ -150,16 +152,34 @@
     color: #fff;
 }
 
-.list-messages .left .content .info .active .menu-list,
-.list-messages .right .content .info .active .menu-list {
-    padding: 6px 15px;
+.left .content .info .active .menu-list,
+.right .content .info .active .menu-list {
+    padding: 6px 10px;
     background-color: #202131;
+    border-radius: 6px;
     width: fit-content;
     display: flex;
+    flex-direction: column;
     position: absolute;
     top: 23px;
     font-size: 12px;
     z-index: 99;
+}
+
+.left .content .info .active .menu-list .item,
+.right .content .info .active .menu-list .item {
+    padding: 6px 8px;
+    cursor: pointer;
+}
+
+.left .content .info .active .menu-list .item:hover,
+.right .content .info .active .menu-list .item:hover {
+    color: #ffffff;
+}
+
+.list-messages .left .content .info .active .menu-list .item .icon,
+.list-messages .right .content .info .active .menu-list .item .icon {
+    margin-right: 5px;
 }
 
 .list-messages .left .content .info .name,

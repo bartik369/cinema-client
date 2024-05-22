@@ -79,9 +79,7 @@ const Messages: FC<IMessagesProps> = ({
     }
   }, [recipientId, conversationId, message.content]);
   
-  console.log("recipientId", message.recipientId)
-  console.log("conversationId", message.conversationId)
-  console.log("senderId", message.senderId)
+  console.log('check')
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
@@ -142,63 +140,56 @@ const Messages: FC<IMessagesProps> = ({
       setReplyId(id);
     }
   };
+  const messageIdHandler = (id: string) => {
+
+    if (messageMenu === id) {
+      setMessageMenu("");
+    } else {
+      setMessageMenu(id);
+    }
+  };
 
   return (
     <>
       <div className={style["list-messages"]}>
-        {messages ? (
-          messages.map((message) =>
-            message.senderId !== user._id ? (
-              <div
-                className={style.left}
-                key={message._id}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className={style.avatar}>
-                  {participants &&
-                    participants.map(
-                      (item) =>
-                        item._id == message.senderId && (
-                          <img src={item.avatar || defaultAvatar} alt="" />
-                        )
-                    )}
+        {messages ? (messages.map((message) => message.senderId !== user._id 
+        ? (<div className={style.left} key={message._id} 
+          onClick={(e) => e.stopPropagation()}>
+            <div className={style.avatar}>
+              {participants &&
+              participants.map((item) => item._id == message.senderId 
+              && ( <img key={item._id} src={item.avatar || defaultAvatar} alt="" />)
+              )}
+            </div>
+            <div className={style.content}>
+              <div className={style.info}>
+                <div className={ message._id == messageMenu
+                  ? style.active
+                  : style.inactive
+                }>
+                  <RecipientMessageMenu
+                    messageId={message._id}
+                    reply={replayMessageHandler}
+                  />
                 </div>
-                <div className={style.content}>
-                  <div className={style.info}>
-                    <div className={ message._id == messageMenu
-                        ? style.active
-                        : style.inactive
-                      }>
-                      <RecipientMessageMenu
-                        messageId={message._id}
-                        reply={replayMessageHandler}
-                      />
-                    </div>
-                    <div className={style.name}>Пользователь</div>
-                    <div className={style.time}>
-                      <Time timeStamp={message.createdAt} />
-                    </div>
-                    <div
-                      className={style.menu}
-                      onClick={() => setMessageMenu(message._id)}
-                      ref={(elem) =>
-                        (messageMenuRef.current[message._id] = elem)
-                      }
-                    >
-                      <FontAwesomeIcon icon={faEllipsis} />
-                    </div>
-                  </div>
-                  <div className={style.text}>
-                  {message.replyTo &&
-                    messages.map(
-                      (item) =>
-                        item._id == message.replyTo && (
-                          <div className={style.reply} key={item._id}>
-                             <span>Вы</span>
-                            {item.content.slice(0, 40)}...
-                          </div>
-                        )
-                    )}
+                <div className={style.name}>Пользователь</div>
+                <div className={style.time}>
+                  <Time timeStamp={message.createdAt} />
+                </div>
+                <div className={style.menu}
+                  onClick={() => messageIdHandler(message._id)}
+                  ref={(elem) => messageMenuRef.current[message._id] = elem}>
+                  <FontAwesomeIcon icon={faEllipsis} />
+                </div>
+                </div>
+                <div className={style.text}>
+                  {message.replyTo && messages.map((item) =>
+                      item._id == message.replyTo && (
+                      <div className={style.reply} key={item._id}>
+                        <span>Вы</span>
+                        {item.content.slice(0, 40)}...
+                      </div>
+                  ))}
                     {message.content}
                     <MediaFile
                       media={media!}
@@ -239,7 +230,7 @@ const Messages: FC<IMessagesProps> = ({
                     </div>
                     <div
                       className={style.menu}
-                      onClick={() => setMessageMenu(message._id)}
+                      onClick={() => messageIdHandler(message._id)}
                       ref={(elem) =>
                         (messageMenuRef.current[message._id] = elem)
                       }
@@ -273,13 +264,9 @@ const Messages: FC<IMessagesProps> = ({
                   </div>
                 </div>
                 <div className={style.avatar}>
-                  {participants &&
-                    participants.map(
-                      (item) =>
-                        item._id == message.recipientId && (
-                          <img src={item.avatar || defaultAvatar} alt="" />
-                        )
-                    )}
+                  {participants && participants.map((item) => item._id == message.recipientId 
+                    && (<img key={item._id} src={item.avatar || defaultAvatar} alt="" />)
+                  )}
                 </div>
               </div>
             )

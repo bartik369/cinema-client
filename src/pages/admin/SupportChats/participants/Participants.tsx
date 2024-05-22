@@ -1,6 +1,6 @@
-import {FC} from 'react';
+import {FC, useMemo} from 'react';
 import { IUser } from '../../../../types/auth';
-import { IMessage, IParticipantInfo } from '../../../../types/chat';
+import { IParticipantInfo } from '../../../../types/chat';
 import ENV from '../../../../env.config';
 import defaultAvatar from '../../../../assets/pics/profile-circle.svg'
 import style from './Participants.module.css';

@@ -69,13 +69,79 @@
     display: flex;
 }
 
-.chat .input input {
-    background-color: #1a1b28;
+.chat .input .inner {
+    position: relative;
+    flex-grow: 1;
+}
+
+.chat .input .inner input {
+    border: 1px solid #353853;
+    padding: 14px 40px 14px 10px;
+    position: relative;
     border-radius: 18px;
-    width: calc(100% - 170px);
-    padding: 3px 40px 3px 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.chat .input .inner input:hover,
+.chat .input .inner input:focus {
+    background-color: #1f202f;
+    border: 1px solid #3e415f;
+}
+
+.chat .typing .reset {
+    position: absolute;
+    color: #f1f1f1;
     font-size: 13px;
+    padding: 4px 6px;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    background-color: #383b53;
+    border-radius: 50%;
+}
+
+.chat .typing .reset:hover {
+    background-color: #fd8841;
+    color: #ffffff;
+}
+
+.chat .typing .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 80px;
+}
+
+.chat .typing .buttons .file {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0px 5px;
+    margin: 0px 10px;
+    color: #6a72a5;
+    transition: all .6s ease-in-out;
+}
+
+.chat .typing .buttons .file:hover {
+    color: #a4aec1;
+}
+
+.chat .typing .buttons .btn {
+    background-color: #484175;
+    border: none;
+    font-size: 11px;
     font-family: inherit;
+    display: flex;
+    color: #fff;
+    padding: 9px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .6s ease-in-out;
+}
+
+.chat .typing .buttons .btn:hover {
+    background-color: #fd8841;
 }
 
 .chat .messages .menu {}
@@ -160,16 +226,19 @@
     color: #fff;
 }
 
-.chat .messages .left .content .info .active .menu-list,
-.chat .messages .right .content .info .active .menu-list {
-    padding: 6px 15px;
+.left .content .info .active .menu-list,
+.right .content .info .active .menu-list {
+    padding: 6px 10px;
     background-color: #202131;
+    border-radius: 6px;
     width: fit-content;
     display: flex;
+    flex-direction: column;
     position: absolute;
     top: 23px;
     font-size: 12px;
     z-index: 99;
+    justify-content: flex-end;
 }
 
 .chat .messages .left .content .info .name,
@@ -228,40 +297,4 @@
 .chat .right .content .info .text .name {
     color: #b3a7ff;
     font-size: 10px;
-}
-
-.chat .typing .buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chat .typing .buttons .file {
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0px 5px;
-    margin: 0px 10px;
-    color: #41476c;
-    transition: all .6s ease-in-out;
-}
-
-.chat .typing .buttons .file:hover {
-    color: #a4aec1;
-}
-
-.chat .typing .buttons .btn {
-    background-color: #484175;
-    border: none;
-    font-size: 11px;
-    font-family: inherit;
-    display: flex;
-    color: #fff;
-    padding: 9px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all .6s ease-in-out;
-}
-
-.chat .typing .buttons .btn:hover {
-    background-color: #fd8841;
 }

@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPen } from "@fortawesome/free-solid-svg-icons";
-import * as contentConst from '../../../../utils/constants/content';
-import style from './Messages.module.css'
+import * as contentConst from '../../utils/constants/content'
+import style from './Chat.module.css'
 
 interface ISenderMessageMenuProps {
     messageId: string;
