@@ -16,12 +16,9 @@ import Time from "./Time";
 import MediaFile from "./MediaFile";
 import ENV from "../../../../env.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheck,
-  faCheckDouble,
-  faEllipsis,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCheckDouble, faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../../assets/pics/profile-circle.svg";
+import supportIcon from '../../../../assets/pics/support.png'
 import style from "./Messages.module.css";
 
 interface IMessagesProps {
@@ -254,7 +251,7 @@ const Messages: FC<IMessagesProps> = ({
                   </div>
                 </div>
                 <div className={style.avatar}>
-                  <img src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${user?.avatar}` || defaultAvatar} alt="" />
+                <img  src={supportIcon} alt="" />
                 </div>
               </div>
             )

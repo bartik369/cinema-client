@@ -148,11 +148,13 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         <span>{chatInfo && chatInfo.ticketNumber}</span>
       </div>
       <div className={style.messages}>
-        {messages ? ( messages.map((message) => message.senderId == user._id 
+        {messages ? ( messages.map((message) => message.senderId !== user._id 
           ? (<div className={style.left} key={message._id}
                 onClick={(e) => e.stopPropagation()}>
+                <div className={style.block}>
                 <div className={style.avatar}>
-                  <img src={user && `${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
+                <img src={supportAvatar} alt="" />
+                </div>
                 </div>
                 <div className={style.content}>
                   <div className={style.info}> 
@@ -164,7 +166,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                         reply={replayMessageHandler}
                       />
                     </div>
-                    <div className={style.name}>Пользователь</div>
+                    <div className={style.name}>Support</div>
                     <div className={style.time}>
                       <Time timeStamp={message.createdAt} />
                     </div>
@@ -216,7 +218,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                     {message.replyTo && messages.map((item) =>
                       item._id == message.replyTo && (
                       <div className={style.reply} key={item._id}>
-                        <span>Пользователь</span>
+                        <span>Support</span>
                         {item.content.slice(0, 40)}...
                       </div>
                     ))}
@@ -231,8 +233,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
                     </div>
                   </div>
                 </div>
+                <div className={style.block}>
                 <div className={style.avatar}>
-                  <img src={supportAvatar} alt="" />
+                <img src={user && `${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
+                </div>
                 </div>
               </div>
             )

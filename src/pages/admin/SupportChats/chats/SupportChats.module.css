@@ -5,6 +5,7 @@
     max-width: 1320px;
     height: 85vh;
     overflow: hidden;
+    margin-bottom: 40px;
 }
 
 .chats .conversations {

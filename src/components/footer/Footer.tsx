@@ -1,10 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { footerMenu1, footerMenu2 } from '../../utils/data/data';
 import { useAppSelector } from '../../hooks/reduxHook';
 import { ToastContainer, toast } from 'react-toastify';
-import { useOpenChatMutation } from '../../store/chatApi';
+import { useOpenChatMutation, useGetUnreadMessagesQuery } from '../../store/chatApi';
 import { IChatInfo } from '../../types/chat';
+import UnreadMessagesButton from '../information/UnreadMessagesButton';
 import Chat from '../chat/Chat';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,11 +21,14 @@ const Footer: FC = () => {
   const location = useLocation();
   const existTrailer = useAppSelector(state => state.movies.existTrailer);
   const isAuth = useAppSelector(state => state.auth.isAuth);
+  const [isAdmin, setIsAdmin] = useState(false);
   const user = useAppSelector(state => state.auth.user);
   const [openChat] = useOpenChatMutation();
   const [recipientId, setRecipientId] = useState<string>('');
   const [chatInfo, setChatInfo] = useState<IChatInfo>()
   const [visibleChat, setVisibleChat] = useState(false);
+  const [skip, setSkip] = useState(true);
+  const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id, {skip: skip})
   const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
 
   const startChat = () => {
@@ -41,7 +45,18 @@ const Footer: FC = () => {
   const visibleHandler = () => {
     setVisibleChat(false)
   }
-  
+
+  useEffect(() => {
+    user && user.roles?.forEach((role) => {
+
+      if (role === contentConst.ADMIN || role === contentConst.SUPPORT) {
+        setIsAdmin(true);
+        setSkip(false);
+      }
+    });
+  }, [user])
+
+
   return (
     <div className={(existTrailer && regEx) ? style.container : style.notrailer}>
       <ToastContainer
@@ -75,12 +90,17 @@ const Footer: FC = () => {
             <div><img src={Telegram} alt="" /></div>
             <div><img src={Twitter} alt="" /></div>
           </div>
-          <button onClick={startChat} className={style.help}>
+          {!isAdmin 
+          ? <div onClick={startChat} className={style.help}>
             { !visibleChat
-            ? <img src={ChatIcon} alt="" />
-            : <FontAwesomeIcon icon={faChevronDown} />
+              ? <img src={ChatIcon} alt="" />
+              : <FontAwesomeIcon icon={faChevronDown} />
+            }
+          </div>
+          : <div className={style['unread-messages']}>
+            <UnreadMessagesButton unreadMessages={unreadMessages!}/>
+            </div>
           }
-          </button>
         </div>
         <div className={style.info}></div>
       </div>
