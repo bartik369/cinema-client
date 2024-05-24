@@ -51,8 +51,13 @@
     position: absolute;
     background-color: #3e29bf;
     border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 5px;
-    top: 0;
+    top: -10px;
     right: 0;
     font-family: inherit;
     font-weight: 600;

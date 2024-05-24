@@ -8,13 +8,10 @@ import { IChatInfo } from '../../types/chat';
 import UnreadMessagesButton from '../information/UnreadMessagesButton';
 import Chat from '../chat/Chat';
 import * as contentConst from '../../utils/constants/content';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Instagram from '../../assets/pics/instagram.svg';
 import Twitter from '../../assets/pics/twitter.svg';
 import VK from '../../assets/pics/vk.svg';
 import Telegram from '../../assets/pics/telegram.svg';
-import ChatIcon from '../../assets/pics/chat.svg';
 import style from './Footer.module.css';
 
 const Footer: FC = () => {
@@ -28,7 +25,7 @@ const Footer: FC = () => {
   const [chatInfo, setChatInfo] = useState<IChatInfo>()
   const [visibleChat, setVisibleChat] = useState(false);
   const [skip, setSkip] = useState(true);
-  const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id, {skip: skip})
+  const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
   const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
 
   const startChat = () => {
@@ -51,10 +48,11 @@ const Footer: FC = () => {
 
       if (role === contentConst.ADMIN || role === contentConst.SUPPORT) {
         setIsAdmin(true);
-        setSkip(false);
       }
     });
-  }, [user])
+  }, [user]);
+
+  console.log(unreadMessages)
 
 
   return (
@@ -90,17 +88,30 @@ const Footer: FC = () => {
             <div><img src={Telegram} alt="" /></div>
             <div><img src={Twitter} alt="" /></div>
           </div>
-          {!isAdmin 
-          ? <div onClick={startChat} className={style.help}>
-            { !visibleChat
-              ? <img src={ChatIcon} alt="" />
-              : <FontAwesomeIcon icon={faChevronDown} />
-            }
+          <div className={style['chat-block']}>
+            <UnreadMessagesButton
+            startChat={startChat}
+            visibleChat={visibleChat}
+            unreadMessages={unreadMessages!} 
+            isAdmin={isAdmin} />
           </div>
-          : <div className={style['unread-messages']}>
-            <UnreadMessagesButton unreadMessages={unreadMessages!}/>
-            </div>
+      
+          {
+          // !isAdmin 
+          //   ? <div onClick={startChat} className={style.help}>
+          //       <div className={style.count}>
+          //         {unreadMessages && unreadMessages.length}
+          //       </div>
+          //   { !visibleChat
+          //     ? <img src={ChatIcon} alt="" />
+          //     : <FontAwesomeIcon icon={faChevronDown} />
+          //   }
+          // </div>
+          //   :  <div className={style['unread-messages']}>
+          //   <UnreadMessagesButton unreadMessages={unreadMessages!} isAdmin={isAdmin} />
+          //   </div>
           }
+
         </div>
         <div className={style.info}></div>
       </div>
