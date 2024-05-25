@@ -5,9 +5,9 @@ import {
     useGetRecipientMessagesQuery,
     useGetConversationIdMutation,
     useGetActiveConverstionMutation,
-    useGetActiveConverstionMessagesQuery,
+    // useGetActiveConverstionMessagesQuery,
     useMarkAsReadMutation,
-    useGetUnreadMessagesQuery,
+    useGetMessagesQuery,
  } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
@@ -24,7 +24,7 @@ const SupportChats:FC = () => {
     const [getActiveConversation] = useGetActiveConverstionMutation();
     const {data: messages} = useGetRecipientMessagesQuery(recipientId && recipientId, {skip: skip});
     // const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
-    const {data: activeMessages} = useGetActiveConverstionMessagesQuery(active && active, {skip: skipActive} );
+    const {data: activeMessages} = useGetMessagesQuery(active && active, {skip: skipActive} );
     const [markMessageAsRead] = useMarkAsReadMutation();
 
     useEffect(() => {
@@ -32,12 +32,12 @@ const SupportChats:FC = () => {
             setActive(data._id);
             data.participants.map((item) => item !== user._id && setRecipientId(item))
             setSkipActive(false);
-            // markMessageAsRead({
-            //     conversationId: data.conversationId, 
-            //     userId: user._id,
-            // });
+            markMessageAsRead({
+                conversationId: active, 
+                userId: user._id,
+            });
         })
-    }, [user])
+    }, [user, active])
 
     const setRecipientHandler = (id:string) => {
         setRecipientId(id)
@@ -45,7 +45,12 @@ const SupportChats:FC = () => {
             setActive(data);
             setSkip(false);
         });
+        markMessageAsRead({
+            conversationId: active, 
+            userId: user._id,
+        });
     }
+    console.log('support chat')
     
     return (
         <div className={style.chats}>

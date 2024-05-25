@@ -1,7 +1,7 @@
 import {FC, useState, useEffect, useRef} from 'react';
 import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
   useDeleteMessageMutation, useUpdateMessageMutation,
-  useMarkAsReadMutation, useGetConversationMediaQuery, useGetRecipientInfoQuery
+  useMarkAsReadMutation, useGetConversationMediaQuery, useGetRecipientInfoQuery,
  } from '../../store/chatApi';
  import RecipientMessageMenu from './RecipientMessageMenu';
  import SenderMessageMenu from './SenderMessageMenu';
@@ -25,18 +25,18 @@ interface IChatProps {
     chatInfo: IChatInfo;
 }
 const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) => {
+  const [skip, setSkip] = useState<boolean>(true);
   const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("");
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
-  const {data: messages} = useGetMessagesQuery(chatInfo && chatInfo._id);
+  const {data: messages} = useGetMessagesQuery(chatInfo && chatInfo._id, {skip: skip});
   const [messageMenu, setMessageMenu] = useState("");
   const [createMessage] = useCreateMessageMutation();
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
   const [markMessageAsRead] = useMarkAsReadMutation();
-  const [skip, setSkip] = useState<boolean>(true)
-  const {data: recipientInfo} = useGetRecipientInfoQuery(recipientId && recipientId, {skip: skip});
+  // const {data: recipientInfo} = useGetRecipientInfoQuery(recipientId && recipientId, {skip: skip});
   const { data: media } = useGetConversationMediaQuery(chatInfo && chatInfo._id);
   const [message, setMessage] = useState<IMessage>({
     _id: '',
@@ -57,6 +57,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const messageMenuRef = useRef<IListRefObj>({});
 
   useEffect(() => {
+    
     if (recipientId && chatInfo._id) {
       setSkip(false);
       setMessage({...message, 
@@ -67,7 +68,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
       markMessageAsRead({
         conversationId: chatInfo._id, 
         userId: user._id,
-    });
+      });
     }
   }, [recipientId, message.content, chatInfo]);
 
@@ -96,7 +97,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         file && formData.append("file", file);
         
         if (isUpdating) {
-          updateMessage(formData).unwrap().then((data) => {
+          updateMessage(formData).unwrap().then(() => {
             setMessage({...message, content: '', replyTo: ''});
             setIsUpdating(false);
           })

@@ -25,16 +25,16 @@ const Footer: FC = () => {
   const [chatInfo, setChatInfo] = useState<IChatInfo>()
   const [visibleChat, setVisibleChat] = useState(false);
   const [skip, setSkip] = useState(true);
-  const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
+  const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id, {skip: skip});
   const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
 
   const startChat = () => {
     if (isAuth) {
       setVisibleChat(!visibleChat)
-        openChat(user._id).unwrap().then((data) => {
-          setChatInfo({...data})
-          setRecipientId(data.participants.filter((item:string) => item != user._id))
-        })
+      openChat(user._id).unwrap().then((data) => {
+        setChatInfo({...data})
+        setRecipientId(data.participants.filter((item:string) => item != user._id))
+      });
     } else {
       toast.error(contentConst.errorAddFavotite);
     }
@@ -45,15 +45,16 @@ const Footer: FC = () => {
 
   useEffect(() => {
     user && user.roles?.forEach((role) => {
-
       if (role === contentConst.ADMIN || role === contentConst.SUPPORT) {
         setIsAdmin(true);
       }
     });
-  }, [user]);
+    if (isAuth) {
+      setSkip(false);
+    }
+  }, [user, isAuth]);
 
   console.log(unreadMessages)
-
 
   return (
     <div className={(existTrailer && regEx) ? style.container : style.notrailer}>
@@ -95,23 +96,6 @@ const Footer: FC = () => {
             unreadMessages={unreadMessages!} 
             isAdmin={isAdmin} />
           </div>
-      
-          {
-          // !isAdmin 
-          //   ? <div onClick={startChat} className={style.help}>
-          //       <div className={style.count}>
-          //         {unreadMessages && unreadMessages.length}
-          //       </div>
-          //   { !visibleChat
-          //     ? <img src={ChatIcon} alt="" />
-          //     : <FontAwesomeIcon icon={faChevronDown} />
-          //   }
-          // </div>
-          //   :  <div className={style['unread-messages']}>
-          //   <UnreadMessagesButton unreadMessages={unreadMessages!} isAdmin={isAdmin} />
-          //   </div>
-          }
-
         </div>
         <div className={style.info}></div>
       </div>
