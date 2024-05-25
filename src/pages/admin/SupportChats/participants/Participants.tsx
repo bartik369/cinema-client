@@ -1,6 +1,8 @@
-import {FC, useMemo} from 'react';
+import {FC, useState, useRef, useEffect} from 'react';
 import { IUser } from '../../../../types/auth';
 import { IParticipantInfo } from '../../../../types/chat';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import ENV from '../../../../env.config';
 import defaultAvatar from '../../../../assets/pics/profile-circle.svg'
 import style from './Participants.module.css';
@@ -22,12 +24,41 @@ const Participants: FC<IParticipantsProps> = ({
   activeConversation,
   getMessagesById,
 }) => {
+  const [visible, setVisible] = useState<boolean>(false);
+  const [messageMenu, setMessageMenu] = useState("");
 
+  type IListRefObj = {
+    [index: string]: HTMLDivElement | null;
+  };
+  const messageMenuRef = useRef<IListRefObj>({});
 
+  useEffect(() => {
+    const outsideClickhandler = (e: any) => {
+      if (messageMenuRef.current) {
+        Object.values(messageMenuRef).map((item) => {
+          if (item !== e.target) {
+            setMessageMenu("");
+          }
+        });
+      }
+    };
+    document.addEventListener("click", outsideClickhandler);
+  }, []);
+
+  const messageIdHandler = (id: string) => {
+    console.log("fggdg s")
+    if (messageMenu === id) {
+      setMessageMenu(id);
+    } else {
+      setMessageMenu(id);
+    }
+  };
+ 
   return (
     <div className={style.participants}>
-      {participants &&
-        participants.map((participant) => (
+      {participants && [...participants]
+      .sort((a, b) => new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1)
+      .map((participant) => (
           <div className={ participant.conversationId == activeConversation
                 ? style["item-active"]
                 : style.item
@@ -42,6 +73,14 @@ const Participants: FC<IParticipantsProps> = ({
                 } 
               </div>
               <div className={style.info}>
+                <div className={style.menu} onClick={(e) => e.stopPropagation()}>
+                <FontAwesomeIcon icon={faEllipsis} onClick={() => messageIdHandler(participant._id)}/>
+                </div>
+                <div className={participant._id === messageMenu
+                  ? style.active
+                  : style.inactive
+                }>cxzczzc
+                </div>
                 <div className={style.ticket}>№ {participant.ticketNumber}</div>
                 <div className={style.email}>{participant.email}</div>
                 <div className={style.message}>

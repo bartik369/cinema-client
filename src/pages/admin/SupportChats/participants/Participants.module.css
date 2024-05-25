@@ -48,6 +48,35 @@
     border-radius: 50%;
 }
 
+.participants .user .info .menu {
+    position: absolute;
+    padding: 4px 9px;
+    color: #7f84b1;
+    font-size: 16px;
+    cursor: pointer;
+    right: 0;
+}
+
+.participants .user .info .active {
+    padding: 6px 10px;
+    background-color: #9a0362;
+    border-radius: 4px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0px;
+    top: 20px;
+}
+
+.participants .user .info .inactive {
+    display: none;
+}
+
+.participants .user .info .menu:hover {
+    color: #d0d3ea;
+}
+
 .participants .user .info .ticket {
     color: #a5b2cb;
     font-size: 14px;

@@ -44,6 +44,7 @@ export interface IParticipantInfo {
   conversationId: string;
   avatar: string;
   ticketNumber: string;
+  updatedAt: string;
 }
 export interface IDataForMarkRead {
   conversationId: string;
