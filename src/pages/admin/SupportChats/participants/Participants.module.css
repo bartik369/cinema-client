@@ -29,10 +29,19 @@
     position: relative;
 }
 
-.participants .user .count {
+.participants .user .info .count {
     position: absolute;
-    width: 50px;
-    background-color: lightblue;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    font-size: 10px;
+    background-color: rgb(6, 75, 194);
 }
 
 .participants .user .avatar {
@@ -51,10 +60,19 @@
 .participants .user .info .menu {
     position: absolute;
     padding: 4px 9px;
-    color: #7f84b1;
+    color: #b3b7d7;
     font-size: 16px;
     cursor: pointer;
     right: 0;
+    top: 15px;
+}
+
+.participants .user .info .time {
+    color: #6c6f8c;
+    font-size: 10px;
+    position: absolute;
+    right: 0px;
+    top: 3px;
 }
 
 .participants .user .info .active {
@@ -85,11 +103,11 @@
 
 .participants .user .info .email {
     color: #5f6879;
-    font-size: 12px;
+    font-size: 11px;
     margin-bottom: 10px;
 }
 
 .participants .user .info .message {
     color: #d0d7e3;
-    font-size: 13px;
+    font-size: 12.5px;
 }

@@ -5,7 +5,7 @@ import {
     useGetRecipientMessagesQuery,
     useGetConversationIdMutation,
     useGetActiveConverstionMutation,
-    // useGetActiveConverstionMessagesQuery,
+    useGetUnreadMessagesQuery,
     useMarkAsReadMutation,
     useGetMessagesQuery,
  } from '../../../../store/chatApi';
@@ -23,7 +23,7 @@ const SupportChats:FC = () => {
     const [getConversationId] = useGetConversationIdMutation();
     const [getActiveConversation] = useGetActiveConverstionMutation();
     const {data: messages} = useGetRecipientMessagesQuery(recipientId && recipientId, {skip: skip});
-    // const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
+    const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
     const {data: activeMessages} = useGetMessagesQuery(active && active, {skip: skipActive} );
     const [markMessageAsRead] = useMarkAsReadMutation();
 
@@ -50,7 +50,6 @@ const SupportChats:FC = () => {
             userId: user._id,
         });
     }
-    console.log('support chat')
     
     return (
         <div className={style.chats}>
@@ -59,7 +58,7 @@ const SupportChats:FC = () => {
                 participants={participants?.usersInfo!} 
                 user={user}
                 lastMessages={participants?.lastMessages}
-                // unreadMessages={unreadMessages!}
+                unreadMessages={unreadMessages!}
                 activeConversation={active}
                 getMessagesById={setRecipientHandler}
                 />

@@ -1,4 +1,5 @@
 import {FC, useState, useRef, useEffect} from 'react';
+import { IMessage } from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
 import { IParticipantInfo } from '../../../../types/chat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,12 +7,13 @@ import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import ENV from '../../../../env.config';
 import defaultAvatar from '../../../../assets/pics/profile-circle.svg'
 import style from './Participants.module.css';
+import Time from '../messages/Time';
 
 interface IParticipantsProps {
     participants:IParticipantInfo[] ;
     user: IUser;
     lastMessages: any;
-    // unreadMessages: IMessage[];
+    unreadMessages: IMessage[];
     activeConversation: string;
     getMessagesById:(id: string) => void;
 }
@@ -19,13 +21,14 @@ interface IParticipantsProps {
 const Participants: FC<IParticipantsProps> = ({
   participants,
   user,
-  // unreadMessages,
+  unreadMessages,
   lastMessages,
   activeConversation,
   getMessagesById,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [messageMenu, setMessageMenu] = useState("");
+  const [count, setCount] = useState('')
 
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
@@ -46,14 +49,27 @@ const Participants: FC<IParticipantsProps> = ({
   }, []);
 
   const messageIdHandler = (id: string) => {
-    console.log("fggdg s")
+
     if (messageMenu === id) {
       setMessageMenu(id);
     } else {
       setMessageMenu(id);
     }
   };
- 
+
+let result:any[] = [];
+unreadMessages && unreadMessages.reduce((acc:any, elem:any) => {
+
+  if (!acc[elem.conversationId]) {
+    acc[elem.conversationId] = { id: elem.conversationId, qty: 0 };
+    result.push(acc[elem.conversationId])
+  }
+  acc[elem.conversationId].qty += 1;
+  return acc;
+}, {});
+
+console.log(result)
+
   return (
     <div className={style.participants}>
       {participants && [...participants]
@@ -73,14 +89,23 @@ const Participants: FC<IParticipantsProps> = ({
                 } 
               </div>
               <div className={style.info}>
+                <div className={style.time}>
+                  <Time timeStamp={participant.updatedAt}/>
+                </div>
+        
                 <div className={style.menu} onClick={(e) => e.stopPropagation()}>
                 <FontAwesomeIcon icon={faEllipsis} onClick={() => messageIdHandler(participant._id)}/>
                 </div>
                 <div className={participant._id === messageMenu
                   ? style.active
                   : style.inactive
-                }>cxzczzc
+                }>
                 </div>
+                {result && result.map((elem:any) => {
+                    if (elem.id === participant.conversationId) {
+                      return <div className={style.count}>{elem.qty}</div>
+                    }
+                })}
                 <div className={style.ticket}>№ {participant.ticketNumber}</div>
                 <div className={style.email}>{participant.email}</div>
                 <div className={style.message}>
