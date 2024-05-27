@@ -1,4 +1,4 @@
-import { FC} from 'react';
+import { FC, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,6 +19,14 @@ const Menu: FC = () => {
   const user = useAppSelector(state => state.auth.user);
   const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
   const navigate = useNavigate();
+  const [count, setCount] = useState();
+
+  useEffect(() => {
+    if (unreadMessages) {
+      let res = unreadMessages.reduce((acc:any, el:any) => acc + el.qty, 0);
+      setCount(res)
+    }
+  }, [unreadMessages])
 
   return (
     <>
@@ -48,7 +56,7 @@ const Menu: FC = () => {
       </div>
       <div className={style.item} onClick={() => navigate(`/admin/support-chats`)}>
         {unreadMessages && 
-        unreadMessages.length > 0 && <div className={style.unread}>{unreadMessages.length}</div>}
+        unreadMessages.length > 0 && <div className={style.unread}>{count}</div>}
         <div className={style.icon}>
           <div className={style.img}>
             <FontAwesomeIcon icon={faEnvelope} />

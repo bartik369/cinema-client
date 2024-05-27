@@ -1,5 +1,5 @@
 import {FC, useState, useRef, useEffect} from 'react';
-import { IMessage } from '../../../../types/chat';
+import { IUnreadMessages } from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
 import { IParticipantInfo } from '../../../../types/chat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +13,7 @@ interface IParticipantsProps {
     participants:IParticipantInfo[] ;
     user: IUser;
     lastMessages: any;
-    unreadMessages: IMessage[];
+    unreadMessages: IUnreadMessages[];
     activeConversation: string;
     getMessagesById:(id: string) => void;
 }
@@ -26,10 +26,7 @@ const Participants: FC<IParticipantsProps> = ({
   activeConversation,
   getMessagesById,
 }) => {
-  const [visible, setVisible] = useState<boolean>(false);
   const [messageMenu, setMessageMenu] = useState("");
-  const [count, setCount] = useState('')
-
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
   };
@@ -57,19 +54,6 @@ const Participants: FC<IParticipantsProps> = ({
     }
   };
 
-let result:any[] = [];
-unreadMessages && unreadMessages.reduce((acc:any, elem:any) => {
-
-  if (!acc[elem.conversationId]) {
-    acc[elem.conversationId] = { id: elem.conversationId, qty: 0 };
-    result.push(acc[elem.conversationId])
-  }
-  acc[elem.conversationId].qty += 1;
-  return acc;
-}, {});
-
-console.log(result)
-
   return (
     <div className={style.participants}>
       {participants && [...participants]
@@ -92,7 +76,11 @@ console.log(result)
                 <div className={style.time}>
                   <Time timeStamp={participant.updatedAt}/>
                 </div>
-        
+                {unreadMessages && unreadMessages.map((elem:any) => {
+                    if (elem.id === participant.conversationId) {
+                      return <div className={style.count}>{elem.qty}</div>
+                    }
+                })}
                 <div className={style.menu} onClick={(e) => e.stopPropagation()}>
                 <FontAwesomeIcon icon={faEllipsis} onClick={() => messageIdHandler(participant._id)}/>
                 </div>
@@ -101,11 +89,6 @@ console.log(result)
                   : style.inactive
                 }>
                 </div>
-                {result && result.map((elem:any) => {
-                    if (elem.id === participant.conversationId) {
-                      return <div className={style.count}>{elem.qty}</div>
-                    }
-                })}
                 <div className={style.ticket}>№ {participant.ticketNumber}</div>
                 <div className={style.email}>{participant.email}</div>
                 <div className={style.message}>

@@ -8,6 +8,11 @@ export interface IChatInfo {
   updatedAt: string;
 }
 
+export interface IUnreadMessages {
+  id: string;
+  qte: number;
+}
+
 export interface IMessage {
   _id: string;
   content: string;

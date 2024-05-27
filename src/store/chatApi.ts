@@ -1,5 +1,5 @@
 import { IUser } from './../types/auth';
-import { IMessage, IMessageMedia } from './../types/chat';
+import { IMessage, IMessageMedia, IUnreadMessages } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IConversation, IDataForMarkRead, IParticipants } from "../types/chat";
 import ENV from "../env.config";
@@ -27,7 +27,7 @@ export const chatApi = createApi({
                 body: {id: id},
             }),
          }),
-        getUnreadMessages: builder.query<IMessage[], string>({
+        getUnreadMessages: builder.query<IUnreadMessages[], string>({
             query:(id) => ({
                 url: `/unread-messages/${id}`,
                 method: 'GET',

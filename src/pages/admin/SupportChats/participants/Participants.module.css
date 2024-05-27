@@ -37,11 +37,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 0;
-    right: 0;
+    top: -15px;
+    right: -20px;
     color: #fff;
     font-size: 10px;
-    background-color: rgb(6, 75, 194);
+    background-color: #0a9784;
 }
 
 .participants .user .avatar {
