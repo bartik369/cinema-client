@@ -135,6 +135,10 @@ const Messages: FC<IMessagesProps> = ({
       setMessageMenu(id);
     }
   };
+  const resetReplyHandler = () => {
+    setMessage({ ...message, content: "", replyTo: "" });
+    setReplyId('');
+  };
 
   return (
     <>
@@ -172,6 +176,7 @@ const Messages: FC<IMessagesProps> = ({
       <Input
         message={message}
         replyId={replyId}
+        resetReplyHandler={resetReplyHandler}
         messages={messages}
         setMessage={setMessage}
         sendMessageHandler={sendMessageHandler}

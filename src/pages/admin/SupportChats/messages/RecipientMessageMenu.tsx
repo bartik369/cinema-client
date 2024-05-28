@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import { IMessage } from '../../../../types/chat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply} from "@fortawesome/free-solid-svg-icons";
 import style from './Messages.module.css'
@@ -15,9 +14,8 @@ const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
 }) => {
     return (
         <div className={style['menu-list']}>
-            <div className={style.item}>
-           <FontAwesomeIcon className={style.icon} 
-           onClick={() => reply(messageId)} icon={faReply}/>
+            <div className={style.item} onClick={() => reply(messageId)}>
+           <FontAwesomeIcon className={style.icon}  icon={faReply}/>
             <span>Ответить</span>
            </div>
         </div>
