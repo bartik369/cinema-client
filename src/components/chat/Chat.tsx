@@ -132,6 +132,11 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     }
   };
 
+  const resetReplyHandler = () => {
+    setMessage({ ...message, content: "", replyTo: "" });
+    setReplyId('');
+  };
+
   return (
     <div className={style.chat}>
       <FontAwesomeIcon className={style.close} icon={faXmark} 
@@ -177,6 +182,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         setFile={setFile}
         isUpdating={isUpdating}
         sendMessageHandler={sendMessageHandler}
+        resetReplyHandler={resetReplyHandler}
       />
     </div>
   );

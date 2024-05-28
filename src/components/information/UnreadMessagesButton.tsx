@@ -36,7 +36,9 @@ const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
         {isAdmin ? (
           <Link to={"/admin/support-chats"}>
             <div className={style.envelope}>
+              {unreadMessages?.length > 0 &&
               <div className={style.count}>{count}</div>
+              }
               <div className={style.icon}>
                 <img src={notifMessages} alt="" />
               </div>

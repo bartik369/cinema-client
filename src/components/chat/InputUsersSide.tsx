@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import { IMessage } from '../../types/chat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperclip, faXmark} from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faXmark, faReply} from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content';
 import style from './Chat.module.css'
 
@@ -13,6 +13,7 @@ interface InputUsersSideProps {
     setMessage: (message:IMessage) => void;
     setFile: (file: Blob | string) => void;
     sendMessageHandler: () => void;
+    resetReplyHandler: () => void;
 }
 
 const InputUsersSide:FC<InputUsersSideProps> = ({
@@ -23,13 +24,19 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
     setFile,
     isUpdating,
     sendMessageHandler,
+    resetReplyHandler,
 }) => {
     return (
       <div className={style.typing}>
-        {replyId && messages 
-         && messages.map((message) => message._id === replyId && 
-          <div className={style["reply-text"]}>{message.content}</div>
-        )}
+         {(replyId && messages) && messages.map((message) =>
+                message._id === replyId && 
+                <div className={style['reply-for']}>
+                  <FontAwesomeIcon icon={faReply} className={style['reply-icon']}/>
+                  {message.content}
+                  <FontAwesomeIcon onClick={resetReplyHandler} 
+                  icon={faXmark} className={style['reset-reply']} />
+                </div>
+          )}
         <div className={style.input} onClick={(e) => e.stopPropagation()}>
 
           <div className={style.inner}>

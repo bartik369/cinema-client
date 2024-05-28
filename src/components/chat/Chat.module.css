@@ -58,6 +58,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    position: relative;
 }
 
 .chat .typing .reply-text {
@@ -92,6 +93,47 @@
 .chat .input .inner input:focus {
     background-color: #1f202f;
     border: 1px solid #3e415f;
+}
+
+.chat .typing .reply-for {
+    border-radius: 20px 20px 20px 0;
+    background-color: #31344b;
+    color: #a4aec1;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: -50px;
+    padding: 7px 30px 7px 12px;
+    font-size: 12px;
+    width: 100%;
+    max-width: 250px;
+    overflow-y: scroll;
+    height: 32px;
+    left: 10px;
+}
+
+.chat .typing .reply-for .reply-icon {
+    color: cornsilk;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.chat .typing .reply-for .reset-reply {
+    background-color: #292c41;
+    padding: 5px 7px;
+    border-radius: 50%;
+    font-size: 11px;
+    color: azure;
+    margin-left: 5px;
+    right: 8px;
+    cursor: pointer;
+    position: absolute;
+    transition: all .6s ease-in-out;
+}
+
+.chat .typing .reply-for .reset-reply:hover {
+    background-color: #82d8c8;
+    color: #171822;
 }
 
 .chat .typing .reset {
