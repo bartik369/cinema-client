@@ -65,6 +65,13 @@
     background-color: #fd8841;
 }
 
+.list-messages .notification {
+    color: #a4aec1;
+    font-size: 14px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
 .list-messages .inactive {
     display: none;
 }

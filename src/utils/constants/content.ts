@@ -134,6 +134,11 @@ export const information = `Данный портал является тест�
 export const close = 'Закрыть';
 export const next = 'вперёд';
 export const prev = 'назад';
+export const you = 'Вы';
+export const user = 'Пользователь';
+export const support = 'Support';
+export const noActiveChats = 'Нет активных чатов';
+
 
 
 

@@ -1,14 +1,8 @@
 import {FC, useState, useEffect} from 'react';
 import { useAppSelector } from '../../../../hooks/reduxHook';
-import { 
-    useGetConversationsQuery, 
-    useGetRecipientMessagesQuery,
-    useGetConversationIdMutation,
-    useGetActiveConverstionMutation,
-    useGetUnreadMessagesQuery,
-    useMarkAsReadMutation,
-    useGetMessagesQuery,
- } from '../../../../store/chatApi';
+import {useGetConversationsQuery, useGetRecipientMessagesQuery, useGetConversationIdMutation,
+useGetActiveConverstionMutation,useGetUnreadMessagesQuery, useMarkAsReadMutation,
+useGetMessagesQuery } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
 import style from './SupportChats.module.css'
@@ -55,24 +49,23 @@ const SupportChats:FC = () => {
         <div className={style.chats}>
             <div className={style.conversations}>
                 <Participants 
-                participants={participants?.usersInfo!} 
-                user={user}
-                lastMessages={participants?.lastMessages}
-                unreadMessages={unreadMessages!}
-                activeConversation={active}
-                getMessagesById={setRecipientHandler}
+                    participants={participants?.usersInfo!} 
+                    user={user}
+                    lastMessages={participants?.lastMessages}
+                    unreadMessages={unreadMessages!}
+                    activeConversation={active}
+                    getMessagesById={setRecipientHandler}
                 />
             </div>
             <div className={style.messages}>
                 <Messages 
-                participants={participants?.usersInfo!}
-                conversationId={active}
-                recipientId={recipientId}
-                user={user}
-                messages={activeMessages || messages!}
+                    participants={participants?.usersInfo!}
+                    conversationId={active}
+                    recipientId={recipientId}
+                    user={user}
+                    messages={activeMessages || messages!}
                 />
-            </div>
-            
+            </div>  
         </div>
     );
 };

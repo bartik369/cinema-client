@@ -1,21 +1,15 @@
 import {FC, useState, useEffect, useRef} from 'react';
 import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
   useDeleteMessageMutation, useUpdateMessageMutation,
-  useMarkAsReadMutation, useGetConversationMediaQuery, useGetRecipientInfoQuery,
- } from '../../store/chatApi';
- import RecipientMessageMenu from './RecipientMessageMenu';
- import SenderMessageMenu from './SenderMessageMenu';
- import { IMessage, IChatInfo } from '../../types/chat';
+  useMarkAsReadMutation, useGetConversationMediaQuery } from '../../store/chatApi';
+import Sender from './Sender';
+import Recipient from './Recipient';
+import { IMessage, IChatInfo } from '../../types/chat';
 import { IUser } from '../../types/auth';
 import InputUsersSide from './InputUsersSide';
-import Time from '../../pages/admin/SupportChats/messages/Time';
-import MediaFile from '../../pages/admin/SupportChats/messages/MediaFile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCheck, faCheckDouble, faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import ENV from '../../env.config';
-import defaultAvatar from "../../assets/pics/profile-circle.svg";
+import { faXmark} from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content';
-import supportAvatar from '../../assets/pics/support.png'
 import style from './Chat.module.css';
 
 interface IChatProps {
@@ -36,7 +30,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const [deleteMessage] = useDeleteMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
   const [markMessageAsRead] = useMarkAsReadMutation();
-  // const {data: recipientInfo} = useGetRecipientInfoQuery(recipientId && recipientId, {skip: skip});
   const { data: media } = useGetConversationMediaQuery(chatInfo && chatInfo._id);
   const [message, setMessage] = useState<IMessage>({
     _id: '',
@@ -99,11 +92,13 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         if (isUpdating) {
           updateMessage(formData).unwrap().then(() => {
             setMessage({...message, content: '', replyTo: ''});
+            setReplyId('');
             setIsUpdating(false);
           })
         } else {
           createMessage(formData).unwrap().then(() => {
             setMessage({...message, content: '', replyTo: ''});
+            setReplyId('');
           })
         }
   };
@@ -139,107 +134,35 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
 
   return (
     <div className={style.chat}>
-      <FontAwesomeIcon
-        className={style.close}
-        onClick={visibleHandler}
-        icon={faXmark}
-      />
+      <FontAwesomeIcon className={style.close} icon={faXmark} 
+      onClick={visibleHandler}/>
       <div className={style.request}>
         {contentConst.requestNumber}
         <span>{chatInfo && chatInfo.ticketNumber}</span>
       </div>
       <div className={style.messages}>
         {messages ? ( messages.map((message) => message.senderId !== user._id 
-          ? (<div className={style.left} key={message._id}
-                onClick={(e) => e.stopPropagation()}>
-                <div className={style.block}>
-                <div className={style.avatar}>
-                <img src={supportAvatar} alt="" />
-                </div>
-                </div>
-                <div className={style.content}>
-                  <div className={style.info}> 
-                    <div className={message._id == messageMenu
-                      ? style.active
-                      : style.inactive}>
-                      <RecipientMessageMenu
-                        messageId={message._id}
-                        reply={replayMessageHandler}
-                      />
-                    </div>
-                    <div className={style.name}>Support</div>
-                    <div className={style.time}>
-                      <Time timeStamp={message.createdAt} />
-                    </div>
-                    <div className={style.menu} onClick={() => messageIdHandler(message._id)}
-                      ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
-                      <FontAwesomeIcon icon={faEllipsis} />
-                    </div>
-                  </div>
-                  <div className={style.text}>
-                    {message.replyTo && messages.map((item) => item._id == message.replyTo && (
-                      <div className={style.reply} key={item._id}>
-                        <span>Вы</span>
-                        {item.content.slice(0, 40)}...
-                      </div>
-                    ))}
-                    {message.content}
-                    <MediaFile media={media!} message={message} conversationId={chatInfo._id}/>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className={style.right} key={message._id}
-                onClick={(e) => e.stopPropagation()}>
-                <div className={style.content}>
-                  <div className={style.info}>
-                    <div className={ message._id == messageMenu
-                        ? style.active
-                        : style.inactive
-                    }>
-                      <SenderMessageMenu
-                        messageId={message._id}
-                        editMessage={editMessageHandler}
-                        deleteMessage={deleteMessageHandler}
-                      />
-                    </div>
-                    <div className={style.name}>Вы</div>
-                    <div className={style.time}>
-                      <Time timeStamp={message.createdAt} />
-                    </div>
-                    <div className={style.menu}
-                      onClick={() => messageIdHandler(message._id)}
-                      ref={(elem) =>
-                        (messageMenuRef.current[message._id] = elem)
-                      }>
-                      <FontAwesomeIcon icon={faEllipsis} />
-                    </div>
-                  </div>
-                  <div className={style.text}>
-                    {message.replyTo && messages.map((item) =>
-                      item._id == message.replyTo && (
-                      <div className={style.reply} key={item._id}>
-                        <span>Support</span>
-                        {item.content.slice(0, 40)}...
-                      </div>
-                    ))}
-                    {message.content}
-                    <MediaFile media={media!} message={message} conversationId={chatInfo._id}/>
-                    <div className={style.read}>
-                      {message.read === "yes" ? (
-                        <FontAwesomeIcon className={style.blue} icon={faCheckDouble} />
-                      ) : (
-                        <FontAwesomeIcon className={style.dark} icon={faCheck}/>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className={style.block}>
-                <div className={style.avatar}>
-                <img src={user && `${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
-                </div>
-                </div>
-              </div>
+          ? <Sender 
+            message={message}
+            media={media!}
+            messageMenu={messageMenu}
+            replayMessageHandler={replayMessageHandler}
+            messageIdHandler={messageIdHandler}
+            messages={messages}
+            chatInfo={chatInfo}
+          />
+          : ( 
+          <Recipient 
+            message={message}
+            user={user}
+            media={media!}
+            messageMenu={messageMenu}
+            messageIdHandler={messageIdHandler}
+            deleteMessageHandler={deleteMessageHandler}
+            editMessageHandler={editMessageHandler}
+            messages={messages}
+            chatInfo={chatInfo}
+          />
             )
           )
         ) : (

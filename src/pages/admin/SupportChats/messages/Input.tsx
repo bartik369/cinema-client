@@ -9,9 +9,9 @@ interface IInputProps {
     message: IMessage;
     messages: IMessage[];
     replyId: string;
+    isUpdating: boolean;
     setMessage:(message: IMessage) => void
     sendMessageHandler: () => void;
-    isUpdating: boolean;
     setFile: (file: string | Blob) => void;
 }
 
@@ -19,22 +19,22 @@ const Input: FC<IInputProps> = ({
     message,
     messages,
     replyId,
+    isUpdating,
     setMessage,
     sendMessageHandler,
-    isUpdating,
     setFile,
 }) => {
+
+  console.log(message)
+
     return (
       <div className={style.typing} onClick={(e) => e.stopPropagation()}>
         <div className={style.input}>
-          <input
-            onChange={(e) =>
-              setMessage({ ...message, content: e.target.value })
-            }
+          <input onChange={(e) =>
+            setMessage({ ...message, content: e.target.value })}
             value={message?.content}
             type="text"
           />
-
           <div className={style.buttons}>
             <label className={style.file} htmlFor={"upload"}>
               <FontAwesomeIcon
@@ -42,12 +42,9 @@ const Input: FC<IInputProps> = ({
                 icon={faPaperclip}
               />
             </label>
-            {replyId &&
-              messages &&
-              messages.map(
-                (message) =>
-                  message._id === replyId && <div>{message.content}</div>
-              )}
+            {(replyId && messages) && messages.map((message) =>
+                message._id === replyId && <div>{message.content}</div>
+            )}
             <input
               type="file"
               name="file"

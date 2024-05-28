@@ -16,7 +16,11 @@ const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
     return (
         <div className={style['menu-list']}>
             <div className={style.item}>
-           <FontAwesomeIcon className={style.icon} onClick={() => reply(messageId)} icon={faReply}/> <span>Ответить</span>
+                <FontAwesomeIcon 
+                className={style.icon} 
+                onClick={() => reply(messageId)} icon={faReply}
+                />
+                <span>Ответить</span>
            </div>
         </div>
     );

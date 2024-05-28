@@ -12,11 +12,7 @@ const Time:FC<ITimeProps> = ({timeStamp}) => {
         return <div>{date.toTimeString().slice(0, 5)}</div>
     } else {
         return <div>{date.toLocaleString("ru").slice(0, 17)}</div>
-    }
-
-
-
-    
+    } 
 };
 
 export default Time;
