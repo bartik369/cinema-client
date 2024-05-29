@@ -54,8 +54,6 @@ const Footer: FC = () => {
     }
   }, [user, isAuth]);
 
-  console.log(unreadMessages)
-
   return (
     <div className={(existTrailer && regEx) ? style.container : style.notrailer}>
       <ToastContainer

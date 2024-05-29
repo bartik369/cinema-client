@@ -2,13 +2,14 @@ import {FC, useState, useRef, useEffect} from 'react';
 import { IUnreadMessages } from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
 import { IParticipantInfo } from '../../../../types/chat';
-import Pinned from './Pinned';
+import Time from '../messages/Time';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import ENV from '../../../../env.config';
-import defaultAvatar from '../../../../assets/pics/profile-circle.svg'
+import defaultAvatar from '../../../../assets/pics/profile-circle.svg';
+import pinIcom from '../../../../assets/pics/pin.svg'
 import style from './Participants.module.css';
-import Time from '../messages/Time';
+import ParticipantsMenu from './ParticipantsMenu';
 
 interface IParticipantsProps {
     participants:IParticipantInfo[] ;
@@ -55,29 +56,30 @@ const Participants: FC<IParticipantsProps> = ({
     }
   };
 
+  const closeTicketHandler = (id: string) => {
+    console.log(id)
+  }
+
 
   return (
     <div className={style.participants}>
-      <Pinned 
-      participants={participants}
-      activeConversation={activeConversation}
-      lastMessages={lastMessages}
-      unreadMessages={unreadMessages}
-      messageMenu={messageMenu}
-      messageIdHandler={messageIdHandler}
-      getMessagesById={getMessagesById}
-      />
       {participants && [...participants]
-      .sort((a, b) => new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1)
+      .sort((a, b) => 
+      (new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1)
+      && ((a.pinned === b.pinned) ? 0 : a? -1 : 1)
+      )
       .map((participant) => (
-         !participant.pinned && 
           <div className={participant.conversationId === activeConversation
                 ? style["item-active"]
                 : style.item
             }
             onClick={() => getMessagesById(participant._id)}
             key={participant._id}>
+              
             <div className={style.user}>
+              <div className={participant.pinned ? style.pin : style.inactive}>
+              <img src={pinIcom} alt="" />
+              </div>
               <div className={style.avatar}>
                 {participant.avatar 
                 ? <img src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${participant.avatar}`}/>
@@ -100,6 +102,10 @@ const Participants: FC<IParticipantsProps> = ({
                   ? style.active
                   : style.inactive
                 }>
+                  <ParticipantsMenu
+                  closeTicketHandler={closeTicketHandler}
+                  participant={participant}
+                   />
                 </div>
                 <div className={style.ticket}>№ {participant.ticketNumber}</div>
                 <div className={style.email}>{participant.email}</div>
