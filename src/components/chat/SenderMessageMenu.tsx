@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faPen, faClone } from "@fortawesome/free-solid-svg-icons";
 import * as contentConst from '../../utils/constants/content'
 import style from './Chat.module.css'
 
@@ -17,14 +17,20 @@ const SenderMessageMenu:FC<ISenderMessageMenuProps> = ({
 }) => {
     return (
         <div className={style['menu-list']}>
-        <div className={style.item} onClick={() => editMessage(messageId)}>
-            <FontAwesomeIcon className={style.icon} icon={faPen}/>
-            <span>{contentConst.updateBtn}</span>
-        </div>
-        <div className={style.item} onClick={() => deleteMessage(messageId)}>
-            <FontAwesomeIcon className={style.icon} icon={faTrashCan}/>
-            <span>{contentConst.deleteBtn}</span>
-         </div>
+            <ul>
+                <li onClick={() => editMessage(messageId)}>
+                <FontAwesomeIcon className={style.icon} icon={faPen}/>
+                {contentConst.updateBtn}
+                </li>
+                <li onClick={() => deleteMessage(messageId)}>
+                <FontAwesomeIcon className={style.icon} icon={faTrashCan}/>
+                {contentConst.deleteBtn}
+                </li>
+                <li>
+                <FontAwesomeIcon className={style.icon} icon={faClone}/>
+                {contentConst.copyBtn}
+                </li>
+            </ul>
         </div>
     );
 };

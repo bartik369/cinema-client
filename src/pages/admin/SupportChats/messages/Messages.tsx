@@ -140,6 +140,8 @@ const Messages: FC<IMessagesProps> = ({
     setReplyId('');
   };
 
+  console.log(participants)
+
   return (
     <>
       <div className={style["list-messages"]}>

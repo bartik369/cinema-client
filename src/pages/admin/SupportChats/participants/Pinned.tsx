@@ -1,76 +1,37 @@
-import {FC, useState, useRef, useEffect} from 'react';
-import { IUnreadMessages } from '../../../../types/chat';
-import { IUser } from '../../../../types/auth';
-import { IParticipantInfo } from '../../../../types/chat';
-import Pinned from './Pinned';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
+import {FC} from 'react';
+import { IParticipantInfo, IUnreadMessages} from '../../../../types/chat';
 import ENV from '../../../../env.config';
-import defaultAvatar from '../../../../assets/pics/profile-circle.svg'
-import style from './Participants.module.css';
 import Time from '../messages/Time';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsis, faStar} from "@fortawesome/free-solid-svg-icons";
+import defaultAvatar from '../../../../assets/pics/profile-circle.svg'
+import pinIcom from '../../../../assets/pics/pin.svg'
+import style from './Participants.module.css';
 
-interface IParticipantsProps {
-    participants:IParticipantInfo[] ;
-    user: IUser;
+interface IPinnedProps {
+    participants:IParticipantInfo[];
+    activeConversation: string,
+    getMessagesById: (id: string) => void;
+    messageIdHandler: (id: string) => void;
     lastMessages: any;
+    messageMenu: string;
     unreadMessages: IUnreadMessages[];
-    activeConversation: string;
-    getMessagesById:(id: string) => void;
 }
-
-const Participants: FC<IParticipantsProps> = ({
-  participants,
-  user,
-  unreadMessages,
-  lastMessages,
-  activeConversation,
-  getMessagesById,
+const Pinned: FC<IPinnedProps> = ({
+    participants,
+    activeConversation,
+    lastMessages,
+    unreadMessages,
+    messageMenu,
+    getMessagesById,
+    messageIdHandler,
 }) => {
-  const [messageMenu, setMessageMenu] = useState("");
-  type IListRefObj = {
-    [index: string]: HTMLDivElement | null;
-  };
-  const messageMenuRef = useRef<IListRefObj>({});
-
-  useEffect(() => {
-    const outsideClickhandler = (e: any) => {
-      if (messageMenuRef.current) {
-        Object.values(messageMenuRef).map((item) => {
-          if (item !== e.target) {
-            setMessageMenu("");
-          }
-        });
-      }
-    };
-    document.addEventListener("click", outsideClickhandler);
-  }, []);
-
-  const messageIdHandler = (id: string) => {
-
-    if (messageMenu === id) {
-      setMessageMenu(id);
-    } else {
-      setMessageMenu(id);
-    }
-  };
-
-
-  return (
-    <div className={style.participants}>
-      <Pinned 
-      participants={participants}
-      activeConversation={activeConversation}
-      lastMessages={lastMessages}
-      unreadMessages={unreadMessages}
-      messageMenu={messageMenu}
-      messageIdHandler={messageIdHandler}
-      getMessagesById={getMessagesById}
-      />
+    return (
+      <div className={style.pinned}>
       {participants && [...participants]
       .sort((a, b) => new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1)
       .map((participant) => (
-         !participant.pinned && 
+         participant.pinned &&
           <div className={participant.conversationId === activeConversation
                 ? style["item-active"]
                 : style.item
@@ -78,6 +39,9 @@ const Participants: FC<IParticipantsProps> = ({
             onClick={() => getMessagesById(participant._id)}
             key={participant._id}>
             <div className={style.user}>
+              <div className={style.pin}>
+              <img src={pinIcom} alt="" />
+              </div>
               <div className={style.avatar}>
                 {participant.avatar 
                 ? <img src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${participant.avatar}`}/>
@@ -114,8 +78,8 @@ const Participants: FC<IParticipantsProps> = ({
             </div>
           </div>
         ))}
-    </div>
-  );
+      </div>
+    );
 };
 
-export default Participants;
+export default Pinned;

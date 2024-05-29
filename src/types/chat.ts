@@ -3,6 +3,8 @@ export interface IChatInfo {
   _id: string;
   creatorId: string;
   ticketNumber: string;
+  active: boolean;
+  pinned: boolean;
   participants: string[];
   createdAt: string;
   updatedAt: string;
@@ -38,6 +40,8 @@ export interface IConversation {
   creatorId:string;
   participants: string[];
   ticketNumber: string;
+  active: boolean;
+  pinned: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -46,6 +50,7 @@ export interface IParticipantInfo {
   email: string;
   roles: string[];
   member: string[];
+  pinned: boolean;
   conversationId: string;
   avatar: string;
   ticketNumber: string;

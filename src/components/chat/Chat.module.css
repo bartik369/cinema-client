@@ -1,7 +1,7 @@
 .chat {
     position: fixed;
     border-radius: 12px;
-    z-index: 999;
+    z-index: 900;
     right: 25px;
     bottom: 90px;
     width: 100%;
@@ -87,6 +87,7 @@
     border-radius: 18px;
     box-sizing: border-box;
     width: 100%;
+    font-size: 13px;
 }
 
 .chat .input .inner input:hover,
@@ -288,9 +289,20 @@
     flex-direction: column;
     position: absolute;
     top: 23px;
-    font-size: 12px;
+    font-size: 11px;
     z-index: 99;
     justify-content: flex-end;
+}
+
+.left .content .info .active .menu-list .icon,
+.right .content .info .active .menu-list .icon {
+    margin-right: 5px;
+}
+
+.left .content .info .active .menu-list li,
+.right .content .info .active .menu-list li {
+    padding: 6px 8px;
+    cursor: pointer;
 }
 
 .chat .messages .left .content .info .name,

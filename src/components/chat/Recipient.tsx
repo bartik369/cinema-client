@@ -1,37 +1,32 @@
 import {FC, useRef} from 'react';
 import { IChatInfo, IMessage, IMessageMedia } from '../../types/chat';
-import { IUser } from '../../types/auth';
-import SenderMessageMenu from './SenderMessageMenu';
+import RecipientMessageMenu from './RecipientMessageMenu';
 import Time from '../../pages/admin/SupportChats/messages/Time';
 import MediaFile from '../../pages/admin/SupportChats/messages/MediaFile';
-import ENV from '../../env.config';
 import * as contentConst from '../../utils/constants/content';
+import supportAvatar from '../../assets/pics/support.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCheck, faCheckDouble, faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import style from './Chat.module.css';
+import {faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import style from './Chat.module.css'
 
 interface IRecipientProps {
-    user: IUser;
     messages: IMessage[];
     message: IMessage;
     media: IMessageMedia[];
     chatInfo: IChatInfo
     messageMenu: string;
-    deleteMessageHandler: (id: string) => void;
-    editMessageHandler: (id: string) => void;
+    replayMessageHandler: (id: string) => void;
     messageIdHandler: (id: string) => void;
 }
 
 const Recipient:FC<IRecipientProps> = ({
-    user,
     messages,
     message,
     media,
     chatInfo,
     messageMenu,
+    replayMessageHandler,
     messageIdHandler,
-    editMessageHandler,
-    deleteMessageHandler,
 }) => {
     type IListRefObj = {
         [index: string]: HTMLDivElement | null;
@@ -39,55 +34,42 @@ const Recipient:FC<IRecipientProps> = ({
     const messageMenuRef = useRef<IListRefObj>({});
 
     return (
-        <div className={style.right} key={message._id}
+        <div className={style.left} key={message._id}
                 onClick={(e) => e.stopPropagation()}>
+                <div className={style.block}>
+                <div className={style.avatar}>
+                <img src={supportAvatar} alt="" />
+                </div>
+                </div>
                 <div className={style.content}>
-                  <div className={style.info}>
-                    <div className={ message._id == messageMenu
-                        ? style.active
-                        : style.inactive
-                    }>
-                      <SenderMessageMenu
+                  <div className={style.info}> 
+                    <div className={message._id == messageMenu
+                      ? style.active
+                      : style.inactive}>
+                      <RecipientMessageMenu
                         messageId={message._id}
-                        editMessage={editMessageHandler}
-                        deleteMessage={deleteMessageHandler}
+                        reply={replayMessageHandler}
                       />
                     </div>
-                    <div className={style.name}>Вы</div>
+                    <div className={style.name}>{contentConst.support}</div>
                     <div className={style.time}>
                       <Time timeStamp={message.createdAt} />
                     </div>
-                    <div className={style.menu}
-                      onClick={() => messageIdHandler(message._id)}
-                      ref={(elem) =>
-                        (messageMenuRef.current[message._id] = elem)
-                      }>
+                    <div className={style.menu} onClick={() => messageIdHandler(message._id)}
+                      ref={(elem) => (messageMenuRef.current[message._id] = elem)}>
                       <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                   </div>
                   <div className={style.text}>
-                    {message.replyTo && messages.map((item) =>
-                      item._id == message.replyTo && (
+                    {message.replyTo && messages.map((item) => item._id == message.replyTo && (
                       <div className={style.reply} key={item._id}>
-                        <span>{contentConst.support}</span>
+                        <span>{contentConst.you}</span>
                         {item.content.slice(0, 40)}...
                       </div>
                     ))}
                     {message.content}
                     <MediaFile media={media!} message={message} conversationId={chatInfo._id}/>
-                    <div className={style.read}>
-                      {message.read === "yes" ? (
-                        <FontAwesomeIcon className={style.blue} icon={faCheckDouble} />
-                      ) : (
-                        <FontAwesomeIcon className={style.dark} icon={faCheck}/>
-                      )}
-                    </div>
                   </div>
-                </div>
-                <div className={style.block}>
-                <div className={style.avatar}>
-                <img src={user && `${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
-                </div>
                 </div>
               </div>
     );

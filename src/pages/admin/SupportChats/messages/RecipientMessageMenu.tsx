@@ -1,6 +1,7 @@
 import {FC} from 'react';
+import * as contentConst from '../../../../utils/constants/content';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReply} from "@fortawesome/free-solid-svg-icons";
+import { faReply, faTrashCan, faClone} from "@fortawesome/free-solid-svg-icons";
 import style from './Messages.module.css'
 
 
@@ -13,12 +14,18 @@ const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
     reply,
 }) => {
     return (
-        <div className={style['menu-list']}>
-            <div className={style.item} onClick={() => reply(messageId)}>
-           <FontAwesomeIcon className={style.icon}  icon={faReply}/>
-            <span>Ответить</span>
-           </div>
-        </div>
+      <div className={style["menu-list"]}>
+        <ul>
+          <li onClick={() => reply(messageId)}>
+            <FontAwesomeIcon className={style.icon} icon={faReply} />
+            {contentConst.replyBtn}
+          </li>
+          <li>
+            <FontAwesomeIcon className={style.icon} icon={faClone} />
+            {contentConst.copyBtn}
+          </li>
+        </ul>
+      </div>
     );
 };
 

@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import { IMessage } from '../../types/chat';
+import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReply} from "@fortawesome/free-solid-svg-icons";
+import { faReply, faClone} from "@fortawesome/free-solid-svg-icons";
 import style from './Chat.module.css'
 
 
@@ -15,13 +15,16 @@ const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
 }) => {
     return (
         <div className={style['menu-list']}>
-            <div className={style.item}>
-                <FontAwesomeIcon 
-                className={style.icon} 
-                onClick={() => reply(messageId)} icon={faReply}
-                />
-                <span>Ответить</span>
-           </div>
+            <ul>
+                <li onClick={() => reply(messageId)}>
+                <FontAwesomeIcon className={style.icon} icon={faReply}/>
+                {contentConst.replyBtn}
+                </li>
+                <li>
+                <FontAwesomeIcon className={style.icon} icon={faClone}/>
+                {contentConst.copyBtn}
+                </li>
+            </ul>
         </div>
     );
 };

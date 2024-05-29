@@ -2,8 +2,8 @@ import {FC, useState, useEffect, useRef} from 'react';
 import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
   useDeleteMessageMutation, useUpdateMessageMutation,
   useMarkAsReadMutation, useGetConversationMediaQuery } from '../../store/chatApi';
-import Sender from './Sender';
-import Recipient from './Recipient';
+import Sender from './Recipient';
+import Recipient from './Sender';
 import { IMessage, IChatInfo } from '../../types/chat';
 import { IUser } from '../../types/auth';
 import InputUsersSide from './InputUsersSide';

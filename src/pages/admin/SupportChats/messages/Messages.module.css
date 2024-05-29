@@ -244,19 +244,19 @@
     z-index: 99;
 }
 
-.left .content .info .active .menu-list .item,
-.right .content .info .active .menu-list .item {
+.left .content .info .active .menu-list ul li,
+.right .content .info .active .menu-list ul li {
     padding: 6px 8px;
     cursor: pointer;
 }
 
-.left .content .info .active .menu-list .item:hover,
-.right .content .info .active .menu-list .item:hover {
+.left .content .info .active .menu-list ul li:hover,
+.right .content .info .active .menu-list ul li :hover {
     color: #ffffff;
 }
 
-.list-messages .left .content .info .active .menu-list .item .icon,
-.list-messages .right .content .info .active .menu-list .item .icon {
+.list-messages .left .content .info .active .menu-list .icon,
+.list-messages .right .content .info .active .menu-list .icon {
     margin-right: 5px;
 }
 
