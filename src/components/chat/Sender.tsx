@@ -37,6 +37,7 @@ const Sender:FC<ISenderProps> = ({
         [index: string]: HTMLDivElement | null;
       };
     const messageMenuRef = useRef<IListRefObj>({});
+    console.log('chat sender')
 
     return (
         <div className={style.right} key={message._id}

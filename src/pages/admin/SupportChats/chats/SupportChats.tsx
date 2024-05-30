@@ -22,16 +22,18 @@ const SupportChats:FC = () => {
     const [markMessageAsRead] = useMarkAsReadMutation();
 
     useEffect(() => {
-        getActiveConversation(user._id).unwrap().then((data) => {
-            setActive(data._id);
-            data.participants.map((item) => item !== user._id && setRecipientId(item))
-            setSkipActive(false);
-            markMessageAsRead({
-                conversationId: active, 
-                userId: user._id,
+        if (user) {
+            getActiveConversation(user._id).unwrap().then((data) => {
+                setActive(data._id);
+                data.participants.map((item) => item !== user._id && setRecipientId(item));
+                setSkipActive(false);
+                markMessageAsRead({
+                    conversationId: active, 
+                    userId: user._id,
+                });
             });
-        })
-    }, [user, active])
+        }
+    }, []);
 
     const setRecipientHandler = (id:string) => {
         setRecipientId(id)
@@ -44,6 +46,8 @@ const SupportChats:FC = () => {
             userId: user._id,
         });
     }
+
+    console.log('support chat MAIN')
     
     return (
         <div className={style.chats}>

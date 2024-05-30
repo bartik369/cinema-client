@@ -1,4 +1,4 @@
-import {FC, useRef} from 'react';
+import React, {FC, useRef, memo} from 'react';
 import { IUser } from '../../../../types/auth';
 import { IMessage, IMessageMedia } from '../../../../types/chat';
 import RecipientMessageMenu from './RecipientMessageMenu';
@@ -22,7 +22,7 @@ interface IRecipientProps {
     messageIdHandler:(id: string) => void;
 }
 
-const Recipient:FC<IRecipientProps> = ({
+const Recipient:FC<IRecipientProps> = memo(({
     message,
     messages,
     media,
@@ -37,6 +37,8 @@ const Recipient:FC<IRecipientProps> = ({
         [index: string]: HTMLDivElement | null;
       };
     const messageMenuRef = useRef<IListRefObj>({});
+
+    console.log('support chat Receipent')
 
     return (
         <div className={style.left} key={message._id} 
@@ -85,6 +87,6 @@ const Recipient:FC<IRecipientProps> = ({
                 </div>
               </div>
     );
-};
+});
 
-export default Recipient;
+export default React.memo(Recipient);

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import style from './Information.module.css';
 
 interface IConfirmCloseTicketProps {
@@ -7,7 +7,7 @@ interface IConfirmCloseTicketProps {
     setNotofication: (notification: boolean) => void
 }
 
-const ConfirmCloseTicket:FC<IConfirmCloseTicketProps> = ({
+const ConfirmCloseTicket:FC<IConfirmCloseTicketProps> = memo(({
     ticketNumber,
     setNotofication,
 }) => {
@@ -29,6 +29,6 @@ const ConfirmCloseTicket:FC<IConfirmCloseTicketProps> = ({
             </div>
         </div>
     );
-};
+});
 
 export default ConfirmCloseTicket;

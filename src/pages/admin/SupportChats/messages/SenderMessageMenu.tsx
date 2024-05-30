@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPen, faClone } from "@fortawesome/free-solid-svg-icons";
 import * as contentConst from '../../../../utils/constants/content';
@@ -10,11 +10,12 @@ interface ISenderMessageMenuProps {
     deleteMessage: (messageId:string) => void;
 }
 
-const SenderMessageMenu:FC<ISenderMessageMenuProps> = ({
+const SenderMessageMenu:FC<ISenderMessageMenuProps> = memo(({
     messageId,
     editMessage,
     deleteMessage,
 }) => {
+  console.log('support chat Sender message menu')
     return (
       <div className={style["menu-list"]} onClick={(e) => e.stopPropagation()}>
         <ul className={style.items}>
@@ -33,6 +34,6 @@ const SenderMessageMenu:FC<ISenderMessageMenuProps> = ({
         </ul>
       </div>
     );
-};
+});
 
 export default SenderMessageMenu;

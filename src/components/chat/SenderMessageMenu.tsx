@@ -15,6 +15,8 @@ const SenderMessageMenu:FC<ISenderMessageMenuProps> = ({
     editMessage,
     deleteMessage,
 }) => {
+
+    console.log('chat sender menu message')
     return (
         <div className={style['menu-list']} onClick={(e) => e.stopPropagation()}>
             <ul>

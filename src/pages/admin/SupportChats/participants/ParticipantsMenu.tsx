@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import { usePinConversationMutation } from '../../../../store/chatApi';
 import * as contentConst from '../../../../utils/constants/content';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,7 @@ interface IParticipantsMenuProps {
     closeTicketHandler: (id: string) => void;
 }
 
-const ParticipantsMenu:FC<IParticipantsMenuProps> = ({
+const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
     closeTicketHandler,
     setMessageMenu,
     participant,
@@ -40,6 +40,6 @@ const ParticipantsMenu:FC<IParticipantsMenuProps> = ({
             </ul>
         </div>
     );
-};
+});
 
 export default ParticipantsMenu;

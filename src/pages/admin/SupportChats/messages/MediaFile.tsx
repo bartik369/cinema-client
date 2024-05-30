@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import { Link } from 'react-router-dom';
 import {IMessage, IMessageMedia} from '../../../../types/chat';
 import { FileIcon, defaultStyles } from 'react-file-icon';
@@ -11,7 +11,8 @@ interface MediaFileProps {
     conversationId: string;
 }
 
-const MediaFile: FC<MediaFileProps> = ({ media, message, conversationId }) => {
+const MediaFile: FC<MediaFileProps> = memo(({ media, message, conversationId }) => {
+  console.log('support chat MediaFile')
   return (
     <>
       {media && media.map((item) => {
@@ -41,6 +42,6 @@ const MediaFile: FC<MediaFileProps> = ({ media, message, conversationId }) => {
         })}
     </>
   );
-};
+});
 
 export default MediaFile;

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { footerMenu1, footerMenu2 } from '../../utils/data/data';
 import { useAppSelector } from '../../hooks/reduxHook';
@@ -53,6 +53,8 @@ const Footer: FC = () => {
       setSkip(false);
     }
   }, [user, isAuth]);
+
+  console.log('Footer')
 
   return (
     <div className={(existTrailer && regEx) ? style.container : style.notrailer}>

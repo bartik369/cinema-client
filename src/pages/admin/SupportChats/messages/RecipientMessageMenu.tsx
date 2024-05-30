@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import * as contentConst from '../../../../utils/constants/content';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply, faTrashCan, faClone} from "@fortawesome/free-solid-svg-icons";
@@ -9,10 +9,11 @@ interface RecipientMessageMenuProps {
     messageId: string;
     reply: (messageId: string) => void;
 }
-const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
+const RecipientMessageMenu:FC<RecipientMessageMenuProps> = memo(({
     messageId,
     reply,
 }) => {
+  console.log('support chat Receipent message menu')
     return (
       <div className={style["menu-list"]} onClick={(e) => e.stopPropagation()}>
         <ul>
@@ -27,6 +28,6 @@ const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
         </ul>
       </div>
     );
-};
+});
 
 export default RecipientMessageMenu;

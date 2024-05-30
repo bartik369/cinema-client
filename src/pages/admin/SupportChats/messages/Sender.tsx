@@ -1,4 +1,4 @@
-import {FC, useRef} from 'react';
+import React, {FC, useRef, memo} from 'react';
 import SenderMessageMenu from './SenderMessageMenu';
 import { IMessage, IMessageMedia } from '../../../../types/chat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +20,7 @@ interface ISenderProps {
     conversationId: string;
 }
 
-const Sender:FC<ISenderProps> = ({
+const Sender:FC<ISenderProps> = memo(({
     message,
     messages,
     media,
@@ -34,6 +34,8 @@ const Sender:FC<ISenderProps> = ({
         [index: string]: HTMLDivElement | null;
       };
     const messageMenuRef = useRef<IListRefObj>({});
+
+    console.log('support chat Sender')
 
     return (
         <div className={style.right} key={message._id}
@@ -90,6 +92,6 @@ const Sender:FC<ISenderProps> = ({
                 </div>
               </div>
     );
-};
+});
 
 export default Sender;

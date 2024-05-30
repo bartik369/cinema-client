@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { FC, useState, useRef, useEffect, memo } from "react";
 import { useCreateMessageMutation, useGetMessageMutation, useDeleteMessageMutation, useUpdateMessageMutation, useGetConversationMediaQuery 
 } from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
@@ -17,7 +17,7 @@ interface IMessagesProps {
   recipientId: string;
   conversationId: string;
 }
-const Messages: FC<IMessagesProps> = ({
+const Messages: FC<IMessagesProps> = memo(({
   participants,
   user,
   messages,
@@ -38,9 +38,9 @@ const Messages: FC<IMessagesProps> = ({
   });
   const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("");
+  const [messageMenu, setMessageMenu] = useState("");
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [createMessage] = useCreateMessageMutation();
-  const [messageMenu, setMessageMenu] = useState("");
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
@@ -140,7 +140,7 @@ const Messages: FC<IMessagesProps> = ({
     setReplyId('');
   };
 
-  console.log(participants)
+  console.log('support chat MESSAGES')
 
   return (
     <>
@@ -187,6 +187,6 @@ const Messages: FC<IMessagesProps> = ({
       />
     </>
   );
-};
+});
 
 export default Messages;

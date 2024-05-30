@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState, memo} from 'react';
 import { IUnreadMessages} from '../../types/chat';
 import { Link } from 'react-router-dom';
 import * as contentConst from '../../utils/constants/content';
@@ -16,7 +16,7 @@ interface IUnreadMessagesButton {
     startChat: () => void;
 }
 
-const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
+const UnreadMessagesButton:FC<IUnreadMessagesButton> = memo(({
     unreadMessages, 
     isAdmin,
     startChat,
@@ -60,6 +60,6 @@ const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
         )}
       </>
     );
-};
+});
 
 export default UnreadMessagesButton;

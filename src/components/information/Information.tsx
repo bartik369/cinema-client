@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import * as contentConst from '../../utils/constants/content';
 import style from './Information.module.css'
 
@@ -7,7 +7,7 @@ interface IINformationProps {
     visibleInfo: boolean;
 }
 
-const Information:FC<IINformationProps> = ({setVisibleInfo, visibleInfo}) => {
+const Information:FC<IINformationProps> = memo(({setVisibleInfo, visibleInfo}) => {
 
 
     return (
@@ -22,6 +22,6 @@ const Information:FC<IINformationProps> = ({setVisibleInfo, visibleInfo}) => {
             </div>
         </div>
     );
-};
+});
 
 export default Information;

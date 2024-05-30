@@ -13,6 +13,7 @@ const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
     messageId,
     reply,
 }) => {
+    console.log('chat recepient message menu')
     return (
         <div className={style['menu-list']} onClick={(e) => e.stopPropagation()}>
             <ul>

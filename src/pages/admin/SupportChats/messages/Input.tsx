@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import { IMessage } from '../../../../types/chat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperclip, faReply, faXmark} from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +16,7 @@ interface IInputProps {
     setFile: (file: string | Blob) => void;
 }
 
-const Input: FC<IInputProps> = ({
+const Input: FC<IInputProps> = memo(({
     message,
     messages,
     replyId,
@@ -26,8 +26,7 @@ const Input: FC<IInputProps> = ({
     sendMessageHandler,
     setFile,
 }) => {
-
-  console.log(message)
+  console.log('support chat INPUT')
 
     return (
       <div className={style.typing} onClick={(e) => e.stopPropagation()}>
@@ -75,6 +74,6 @@ const Input: FC<IInputProps> = ({
         </div>
       </div>
     );
-};
+});
 
 export default Input;;

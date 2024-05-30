@@ -1,10 +1,10 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 
 interface ITimeProps {
     timeStamp: string;
 }
 
-const Time:FC<ITimeProps> = ({timeStamp}) => {
+const Time:FC<ITimeProps> = memo(({timeStamp}) => {
     let date = new Date(timeStamp);
     let dateNow = new Date();
 
@@ -13,6 +13,6 @@ const Time:FC<ITimeProps> = ({timeStamp}) => {
     } else {
         return <div>{date.toLocaleString("ru").slice(0, 17)}</div>
     } 
-};
+});
 
 export default Time;
