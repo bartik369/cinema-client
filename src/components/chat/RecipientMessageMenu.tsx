@@ -14,7 +14,7 @@ const RecipientMessageMenu:FC<RecipientMessageMenuProps> = ({
     reply,
 }) => {
     return (
-        <div className={style['menu-list']}>
+        <div className={style['menu-list']} onClick={(e) => e.stopPropagation()}>
             <ul>
                 <li onClick={() => reply(messageId)}>
                 <FontAwesomeIcon className={style.icon} icon={faReply}/>

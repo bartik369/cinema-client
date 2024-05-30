@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import { usePinConversationMutation } from '../../../../store/chatApi';
 import * as contentConst from '../../../../utils/constants/content';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbTack, faCheck} from "@fortawesome/free-solid-svg-icons";
@@ -7,18 +8,29 @@ import { IParticipantInfo } from '../../../../types/chat';
 
 interface IParticipantsMenuProps {
     participant: IParticipantInfo;
+    setMessageMenu: (id: string) => void;
     closeTicketHandler: (id: string) => void;
 }
 
 const ParticipantsMenu:FC<IParticipantsMenuProps> = ({
     closeTicketHandler,
+    setMessageMenu,
     participant,
 }) => {
+    const [pinConversation] = usePinConversationMutation();
+
+    const pinConversationHandler = (id: string) => {
+        id && pinConversation(id);
+        setMessageMenu('');
+    }
+
     return (
-        <div className={style['menu-list']}>
+        <div className={style['menu-list']} onClick={(e) => e.stopPropagation()}>
             <ul>
-                <li>
-                    <FontAwesomeIcon className={style.icon} icon={faThumbTack} />
+                <li onClick={() => pinConversationHandler(participant?.conversationId)}>
+                    <FontAwesomeIcon 
+                    className={style.icon} 
+                    icon={faThumbTack} />
                     Закрепить
                 </li>
                 <li onClick={() => closeTicketHandler(participant.conversationId)}>

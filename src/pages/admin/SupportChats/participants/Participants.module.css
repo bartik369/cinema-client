@@ -6,7 +6,6 @@
 .participants .menu-list {
     padding: 6px;
     background-color: #2d2e44;
-    color: #bec5d1;
     border-radius: 6px;
     top: 13px;
     right: 40px;
@@ -24,6 +23,11 @@
     padding: 6px 8px;
     cursor: pointer;
     font-size: 12px;
+    color: #bec5d1;
+}
+
+.participants .menu-list li:hover {
+    color: #e6eaf3;
 }
 
 .participants .user .pin {

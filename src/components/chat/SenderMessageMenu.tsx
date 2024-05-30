@@ -16,7 +16,7 @@ const SenderMessageMenu:FC<ISenderMessageMenuProps> = ({
     deleteMessage,
 }) => {
     return (
-        <div className={style['menu-list']}>
+        <div className={style['menu-list']} onClick={(e) => e.stopPropagation()}>
             <ul>
                 <li onClick={() => editMessage(messageId)}>
                 <FontAwesomeIcon className={style.icon} icon={faPen}/>

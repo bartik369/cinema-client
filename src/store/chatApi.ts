@@ -123,6 +123,13 @@ export const chatApi = createApi({
                 method: 'GET',
             }),
         }),
+        pinConversation: builder.mutation<any, string>({
+            query:(id) => ({
+                url: `/pin-conversation/`,
+                method: 'POST',
+                body: {id: id}
+            }),
+        })
     })
 });
 
@@ -142,5 +149,5 @@ export const {
     useGetConversationMediaQuery,
     useGetUnreadMessagesQuery,
     useGetRecipientInfoQuery,
-
+    usePinConversationMutation,
 } = chatApi;

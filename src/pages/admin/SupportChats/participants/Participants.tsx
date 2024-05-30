@@ -10,6 +10,7 @@ import defaultAvatar from '../../../../assets/pics/profile-circle.svg';
 import pinIcom from '../../../../assets/pics/pin.svg'
 import style from './Participants.module.css';
 import ParticipantsMenu from './ParticipantsMenu';
+import ConfirmCloseTicket from '../../../../components/information/ConfirmCloseTicket';
 
 interface IParticipantsProps {
     participants:IParticipantInfo[] ;
@@ -33,6 +34,7 @@ const Participants: FC<IParticipantsProps> = ({
     [index: string]: HTMLDivElement | null;
   };
   const messageMenuRef = useRef<IListRefObj>({});
+  const [notification, setNotofication] = useState<boolean>(false);
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
@@ -57,17 +59,19 @@ const Participants: FC<IParticipantsProps> = ({
   };
 
   const closeTicketHandler = (id: string) => {
-    console.log(id)
+    setMessageMenu('');
+    setNotofication(true);
   }
 
 
   return (
+    
     <div className={style.participants}>
       {participants && [...participants]
       .sort((a, b) => 
       (new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1)
-      && ((a.pinned === b.pinned) ? 0 : a? -1 : 1)
-      )
+      && 
+      ((a.pinned === b.pinned) ? 0 : a ? -1 : 1))
       .map((participant) => (
           <div className={participant.conversationId === activeConversation
                 ? style["item-active"]
@@ -75,7 +79,11 @@ const Participants: FC<IParticipantsProps> = ({
             }
             onClick={() => getMessagesById(participant._id)}
             key={participant._id}>
-              
+            {notification && <ConfirmCloseTicket 
+            ticketNumber={participant.ticketNumber}
+            notification={notification}
+            setNotofication={setNotofication}
+            />}
             <div className={style.user}>
               <div className={participant.pinned ? style.pin : style.inactive}>
               <img src={pinIcom} alt="" />
@@ -105,6 +113,7 @@ const Participants: FC<IParticipantsProps> = ({
                   <ParticipantsMenu
                   closeTicketHandler={closeTicketHandler}
                   participant={participant}
+                  setMessageMenu={setMessageMenu}
                    />
                 </div>
                 <div className={style.ticket}>№ {participant.ticketNumber}</div>
