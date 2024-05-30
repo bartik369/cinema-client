@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useLocation, Link, useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../hooks/reduxHook";
 import { useGetMovieMutation } from "../../store/movieApi";
@@ -56,4 +56,4 @@ const Breadcrumbs: FC = () => {
   );
 };
 
-export default Breadcrumbs;
+export default React.memo(Breadcrumbs);

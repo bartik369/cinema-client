@@ -7,7 +7,7 @@ import style from "./Messages.module.css";
 
 interface IInputProps {
     message: IMessage;
-    messages: IMessage[];
+    replyMessage: string;
     replyId: string;
     isUpdating: boolean;
     resetReplyHandler: () => void;
@@ -18,7 +18,7 @@ interface IInputProps {
 
 const Input: FC<IInputProps> = memo(({
     message,
-    messages,
+    replyMessage,
     replyId,
     isUpdating,
     resetReplyHandler,
@@ -31,15 +31,12 @@ const Input: FC<IInputProps> = memo(({
     return (
       <div className={style.typing} onClick={(e) => e.stopPropagation()}>
         <div className={style.input}>
-            {(replyId && messages) && messages.map((message) =>
-                message._id === replyId && 
-                <div className={style['reply-for']}>
+           { replyId && <div className={style['reply-for']}>
                   <FontAwesomeIcon icon={faReply} className={style['reply-icon']}/>
-                  {message.content}
+                  {replyMessage}
                   <FontAwesomeIcon onClick={resetReplyHandler} 
                   icon={faXmark} className={style['reset-reply']} />
-                </div>
-            )}
+            </div>}
             <div className={style.inner}>
             <input onChange={(e) =>
               setMessage({ ...message, content: e.target.value })}

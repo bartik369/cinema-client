@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { IActor } from "../../types/media";
 import ENV from "../../env.config";
@@ -8,7 +8,7 @@ interface ICastsProps {
   actors: IActor[];
 }
 
-const Casts: FC<ICastsProps> = memo(({ actors }) => {
+const Casts: FC<ICastsProps> = ({ actors }) => {
   return (
     <div className={style.cast}>
       {actors &&
@@ -29,6 +29,6 @@ const Casts: FC<ICastsProps> = memo(({ actors }) => {
         ))}
     </div>
   );
-});
+};
 
-export default Casts;
+export default React.memo(Casts);

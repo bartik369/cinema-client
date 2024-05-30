@@ -55,4 +55,4 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
   );
 };
 
-export default ProfileMenu;
+export default React.memo(ProfileMenu);

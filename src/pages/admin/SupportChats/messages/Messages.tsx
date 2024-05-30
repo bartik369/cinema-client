@@ -39,6 +39,7 @@ const Messages: FC<IMessagesProps> = memo(({
   const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("");
   const [messageMenu, setMessageMenu] = useState("");
+  const [replyMessage, setReplyMessage] = useState<string>('');
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [createMessage] = useCreateMessageMutation();
   const [getMessage] = useGetMessageMutation();
@@ -106,7 +107,7 @@ const Messages: FC<IMessagesProps> = memo(({
     }
   };
   const editMessageHandler = (id: string) => {
-    getMessage(id)
+    id && getMessage(id)
       .unwrap()
       .then((data) => {
         setMessage({ ...data });
@@ -114,8 +115,7 @@ const Messages: FC<IMessagesProps> = memo(({
       });
   };
   const deleteMessageHandler = (id: string) => {
-    id &&
-      deleteMessage(id)
+    id && deleteMessage(id)
         .unwrap()
         .then(() => {
           setMessageMenu("");
@@ -124,6 +124,11 @@ const Messages: FC<IMessagesProps> = memo(({
   const replayMessageHandler = (id: string) => {
     if (id) {
       setMessage({ ...message, replyTo: id });
+      messages && messages.forEach((item) => {
+         if (item._id === id) {
+           setReplyMessage(item.content);
+         }
+      })
       setReplyId(id);
     }
   };
@@ -179,7 +184,7 @@ const Messages: FC<IMessagesProps> = memo(({
         message={message}
         replyId={replyId}
         resetReplyHandler={resetReplyHandler}
-        messages={messages}
+        replyMessage={replyMessage}
         setMessage={setMessage}
         sendMessageHandler={sendMessageHandler}
         isUpdating={isUpdating}
