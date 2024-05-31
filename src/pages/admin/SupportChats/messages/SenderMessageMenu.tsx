@@ -1,4 +1,4 @@
-import {FC, memo} from 'react';
+import React, {FC} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPen, faClone } from "@fortawesome/free-solid-svg-icons";
 import * as contentConst from '../../../../utils/constants/content';
@@ -10,7 +10,7 @@ interface ISenderMessageMenuProps {
     deleteMessage: (messageId:string) => void;
 }
 
-const SenderMessageMenu:FC<ISenderMessageMenuProps> = memo(({
+const SenderMessageMenu:FC<ISenderMessageMenuProps> = ({
     messageId,
     editMessage,
     deleteMessage,
@@ -34,6 +34,6 @@ const SenderMessageMenu:FC<ISenderMessageMenuProps> = memo(({
         </ul>
       </div>
     );
-});
+};
 
-export default SenderMessageMenu;
+export default React.memo(SenderMessageMenu);

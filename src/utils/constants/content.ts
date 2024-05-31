@@ -140,6 +140,9 @@ export const you = 'Вы';
 export const user = 'Пользователь';
 export const support = 'Support';
 export const noActiveChats = 'Нет активных чатов';
+export const pinConversation = 'Закрепить';
+export const unpinConversation = 'Открепить';
+export const closeTicket = 'Закрыть заявку';
 
 
 

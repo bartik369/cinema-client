@@ -1,5 +1,5 @@
 import { IUser } from './../types/auth';
-import { IMessage, IMessageMedia, IUnreadMessages } from './../types/chat';
+import { IMessage, IMessageMedia, IUnreadMessages, IChatInfo } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IConversation, IDataForMarkRead, IParticipants } from "../types/chat";
 import ENV from "../env.config";
@@ -7,7 +7,7 @@ import ENV from "../env.config";
 export const chatApi = createApi({
     reducerPath: 'chatApi',
     baseQuery: fetchBaseQuery({ baseUrl: ENV.API_URL }),
-    tagTypes: ['Chat', 'Messages', 'Unread', '123'],
+    tagTypes: ['Chat', 'Messages', 'Unread'],
     endpoints: (builder) => ({
         getMessages: builder.query<IMessage[], string>({
            query:(id) => ({
@@ -33,7 +33,7 @@ export const chatApi = createApi({
                 method: 'GET',
             }),
          }),
-          openChat: builder.mutation<any, string>({
+        openChat: builder.mutation<any, string>({
             query:(id) => ({
                 url: `/open-conversation/`,
                 method:'POST',
@@ -46,16 +46,6 @@ export const chatApi = createApi({
                 method: 'GET',
             }),
         }),
-        // getActiveConverstionMessages: builder.query<IMessage[], string>({
-        //     query:(id) => ({
-        //         url: `/active-messages/${id}`,
-        //         method: 'GET',
-        //     }),
-        //     providesTags: (result) =>
-        //     result 
-        //     ? [...result.map(({ _id }) => ({ type: 'Messages' as const, _id })), 'Messages']
-        //     : ['Messages']
-        // }),
         getActiveConverstion: builder.mutation<IConversation, string>({
             query:(id) => ({
                 url: `/active-conversation/`,
@@ -123,15 +113,16 @@ export const chatApi = createApi({
                 method: 'GET',
             }),
         }),
-        pinConversation: builder.mutation<any, string>({
+        pinConversation: builder.mutation<IChatInfo, string>({
             query:(id) => ({
                 url: `/pin-conversation/`,
                 method: 'POST',
                 body: {id: id}
             }),
+            invalidatesTags: ['Chat'],
         })
     })
-});
+}); 
 
 export const {
     useOpenChatMutation,

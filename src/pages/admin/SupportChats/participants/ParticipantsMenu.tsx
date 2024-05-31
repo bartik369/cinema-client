@@ -18,7 +18,6 @@ const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
     participant,
 }) => {
     const [pinConversation] = usePinConversationMutation();
-
     const pinConversationHandler = (id: string) => {
         id && pinConversation(id);
         setMessageMenu('');
@@ -31,11 +30,11 @@ const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
                     <FontAwesomeIcon 
                     className={style.icon} 
                     icon={faThumbTack} />
-                    Закрепить
+                    {participant.pinned ? contentConst.unpinConversation : contentConst.pinConversation}
                 </li>
                 <li onClick={() => closeTicketHandler(participant.conversationId)}>
                     <FontAwesomeIcon className={style.icon} icon={faCheck}/>
-                    Закрыть заявку
+                    {contentConst.closeTicket}
                 </li>
             </ul>
         </div>

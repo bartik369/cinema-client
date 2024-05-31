@@ -1,4 +1,4 @@
-import React, {FC, useRef, memo} from 'react';
+import React, {FC, useRef} from 'react';
 import { IUser } from '../../../../types/auth';
 import { IMessage, IMessageMedia } from '../../../../types/chat';
 import RecipientMessageMenu from './RecipientMessageMenu';
@@ -22,7 +22,7 @@ interface IRecipientProps {
     messageIdHandler:(id: string) => void;
 }
 
-const Recipient:FC<IRecipientProps> = memo(({
+const Recipient:FC<IRecipientProps> = ({
     message,
     messages,
     media,
@@ -41,7 +41,7 @@ const Recipient:FC<IRecipientProps> = memo(({
     console.log('support chat Receipent')
 
     return (
-        <div className={style.left} key={message._id} 
+        <div className={style.left}
           onClick={(e) => e.stopPropagation()}>
             <div className={style.avatar}>
               {participants && participants.map((item) => item._id == message.senderId
@@ -87,6 +87,6 @@ const Recipient:FC<IRecipientProps> = memo(({
                 </div>
               </div>
     );
-});
+};
 
 export default React.memo(Recipient);

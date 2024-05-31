@@ -27,13 +27,16 @@ const SupportChats:FC = () => {
                 setActive(data._id);
                 data.participants.map((item) => item !== user._id && setRecipientId(item));
                 setSkipActive(false);
-                markMessageAsRead({
+                
+                if (active) {
+                     markMessageAsRead({
                     conversationId: active, 
                     userId: user._id,
                 });
+                }
             });
         }
-    }, []);
+    }, [user, active]);
 
     const setRecipientHandler = (id:string) => {
         setRecipientId(id)

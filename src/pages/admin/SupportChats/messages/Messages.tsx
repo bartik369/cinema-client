@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect, memo } from "react";
+import { FC, useState, useRef, useEffect} from "react";
 import { useCreateMessageMutation, useGetMessageMutation, useDeleteMessageMutation, useUpdateMessageMutation, useGetConversationMediaQuery 
 } from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
@@ -17,7 +17,7 @@ interface IMessagesProps {
   recipientId: string;
   conversationId: string;
 }
-const Messages: FC<IMessagesProps> = memo(({
+const Messages: FC<IMessagesProps> = ({
   participants,
   user,
   messages,
@@ -151,7 +151,8 @@ const Messages: FC<IMessagesProps> = memo(({
     <>
       <div className={style["list-messages"]}>
         {messages ? messages.map((message) => message.senderId !== user._id 
-          ? <Recipient
+          ? <div key={message._id}>
+            <Recipient
               message={message}
               media={media!}
               messageMenu={messageMenu}
@@ -161,7 +162,9 @@ const Messages: FC<IMessagesProps> = memo(({
               participants={participants}
               conversationId={conversationId}
           />
-          : <Sender
+          </div>
+          : <div key={message._id}>
+            <Sender
               message={message}
               messages={messages}
               media={media!}
@@ -171,6 +174,7 @@ const Messages: FC<IMessagesProps> = memo(({
               messageIdHandler={messageIdHandler}
               conversationId={conversationId}
             />
+            </div>
 
         )
         : participants 
@@ -192,6 +196,6 @@ const Messages: FC<IMessagesProps> = memo(({
       />
     </>
   );
-});
+};
 
 export default Messages;

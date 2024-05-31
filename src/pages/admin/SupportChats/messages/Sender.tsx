@@ -1,4 +1,4 @@
-import React, {FC, useRef, memo} from 'react';
+import React, {FC, useRef} from 'react';
 import SenderMessageMenu from './SenderMessageMenu';
 import { IMessage, IMessageMedia } from '../../../../types/chat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +20,7 @@ interface ISenderProps {
     conversationId: string;
 }
 
-const Sender:FC<ISenderProps> = memo(({
+const Sender:FC<ISenderProps> = ({
     message,
     messages,
     media,
@@ -38,7 +38,7 @@ const Sender:FC<ISenderProps> = memo(({
     console.log('support chat Sender')
 
     return (
-        <div className={style.right} key={message._id}
+        <div className={style.right}
                 onClick={(e) => e.stopPropagation()}>
                 <div className={style.content}>
                   <div className={style.info}>
@@ -69,7 +69,7 @@ const Sender:FC<ISenderProps> = memo(({
                   <div className={style.text}>
                   {message.replyTo && messages.map((item) =>item._id == message.replyTo && (
                     <div className={style.reply} key={item._id}>
-                        <span>Пользователь</span>
+                        <span>{contentConst.user}</span>
                         {item.content.slice(0, 40)}...
                     </div>
                   ))}
@@ -92,6 +92,6 @@ const Sender:FC<ISenderProps> = memo(({
                 </div>
               </div>
     );
-});
+};
 
-export default Sender;
+export default React.memo(Sender);
