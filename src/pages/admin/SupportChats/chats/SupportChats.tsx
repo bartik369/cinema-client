@@ -43,11 +43,13 @@ const SupportChats:FC = () => {
         getConversationId(id).unwrap().then((data) => {
             setActive(data);
             setSkip(false);
-        });
+        })
+        if (active) {
         markMessageAsRead({
             conversationId: active, 
             userId: user._id,
         });
+    }
     }
 
     console.log('support chat MAIN')

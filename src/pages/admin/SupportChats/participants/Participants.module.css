@@ -15,7 +15,7 @@
 }
 
 .participants .menu-list .icon {
-    font-size: 15px;
+    font-size: 14px;
     margin-right: 5px;
 }
 
@@ -51,19 +51,33 @@
     margin-bottom: 12px;
     border-radius: 8px;
     border-bottom: 4px solid #191b29;
+    transition: all .6s ease-in-out;
 }
 
-.participants .item-active {
-    padding: 8px 20px;
-    background-color: #1d1e30;
-    border-bottom: 4px solid #fd8841;
+.participants .item-active,
+.participants .item:hover {
+    padding: 8px 20px 8px 25px;
     cursor: pointer;
+    background-color: #0b9784;
     margin-bottom: 12px;
     border-radius: 8px;
+    border-bottom: 4px solid #088070;
 }
 
-.participants .item:hover {
-    background-color: rgb(64, 84, 105);
+.participants .item-active .user .info .ticket,
+.participants .item-active .user .info .message,
+.participants .item-active .user .info .time,
+.participants .item-active .user .info .menu,
+.participants .item:hover .user .info .ticket,
+.participants .item:hover .user .info .message,
+.participants .item:hover .user .info .time,
+.participants .item:hover .user .info .menu {
+    color: #fff;
+}
+
+.participants .item-active .user .info .email,
+.participants .item:hover .user .info .email {
+    color: #cbe5df;
 }
 
 .participants .user {
@@ -85,7 +99,7 @@
     right: -20px;
     color: #fff;
     font-size: 10px;
-    background-color: #0a9784;
+    background-color: #e66712;
 }
 
 .participants .user .avatar {
@@ -141,7 +155,7 @@
 }
 
 .participants .user .info .email {
-    color: #5f6879;
+    color: #6b7588;
     font-size: 11px;
     margin-bottom: 10px;
 }

@@ -120,6 +120,14 @@ export const chatApi = createApi({
                 body: {id: id}
             }),
             invalidatesTags: ['Chat'],
+        }),
+        closeTicket: builder.mutation<IChatInfo, string>({
+            query:(id) => ({
+                url: `/close-ticket/`,
+                method: 'POST',
+                body: {id: id}
+            }),
+            invalidatesTags: ['Chat'],
         })
     })
 }); 
@@ -141,4 +149,5 @@ export const {
     useGetUnreadMessagesQuery,
     useGetRecipientInfoQuery,
     usePinConversationMutation,
+    useCloseTicketMutation,
 } = chatApi;

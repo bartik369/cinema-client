@@ -4,12 +4,14 @@ import style from './Information.module.css';
 interface IConfirmCloseTicketProps {
     ticketNumber: string;
     notification: boolean;
-    setNotofication: (notification: boolean) => void
+    setNotofication: (notification: boolean) => void;
+    closeTicket: (ticketNumber: string) => void;
 }
 
 const ConfirmCloseTicket:FC<IConfirmCloseTicketProps> = memo(({
     ticketNumber,
     setNotofication,
+    closeTicket,
 }) => {
     return (
         <div className={style.confirm}>
@@ -19,7 +21,7 @@ const ConfirmCloseTicket:FC<IConfirmCloseTicketProps> = memo(({
                     <span>{` ${ticketNumber}`}</span>
                 </div>
                 <div className={style.buttons}>
-                    <button className={style.yes} onClick={() => setNotofication(false)}>
+                    <button className={style.yes} onClick={() => closeTicket(ticketNumber)}>
                             Да
                     </button>
                     <button className={style.no} onClick={() => setNotofication(false)}>
@@ -30,5 +32,6 @@ const ConfirmCloseTicket:FC<IConfirmCloseTicketProps> = memo(({
         </div>
     );
 });
+
 
 export default ConfirmCloseTicket;

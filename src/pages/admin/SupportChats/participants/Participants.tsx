@@ -2,6 +2,9 @@ import {FC, useState, useRef, useEffect} from 'react';
 import { IUnreadMessages } from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
 import { IParticipantInfo } from '../../../../types/chat';
+import ParticipantsMenu from './ParticipantsMenu';
+import ConfirmCloseTicket from '../../../../components/information/ConfirmCloseTicket';
+import { useCloseTicketMutation } from '../../../../store/chatApi';
 import Time from '../messages/Time';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
@@ -9,8 +12,6 @@ import ENV from '../../../../env.config';
 import defaultAvatar from '../../../../assets/pics/profile-circle.svg';
 import pinIcom from '../../../../assets/pics/pin.svg'
 import style from './Participants.module.css';
-import ParticipantsMenu from './ParticipantsMenu';
-import ConfirmCloseTicket from '../../../../components/information/ConfirmCloseTicket';
 
 interface IParticipantsProps {
     participants:IParticipantInfo[] ;
@@ -35,6 +36,7 @@ const Participants: FC<IParticipantsProps> = ({
   };
   const messageMenuRef = useRef<IListRefObj>({});
   const [notification, setNotofication] = useState<boolean>(false);
+  const [closeTicket] = useCloseTicketMutation();
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
@@ -58,20 +60,20 @@ const Participants: FC<IParticipantsProps> = ({
     }
   };
 
-  const closeTicketHandler = (id: string) => {
+  const noticeTicketHandler = (id: string) => {
     setMessageMenu('');
     setNotofication(true);
   }
-
-
+  const closeTicketHandler = (id: string) => {
+    id && closeTicket(id);
+    setMessageMenu('');
+    setNotofication(false);
+  }
   return (
-    
     <div className={style.participants}>
       {participants && [...participants]
-      .sort((a, b) => 
-      (new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1)
-      && 
-      ((a.pinned === b.pinned) ? 0 : a ? -1 : 1))
+      .sort((a, b) => (new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1))
+      .sort((a, b) => (a.pinned === b.pinned) ? 0 : a ? -1 : 1)
       .map((participant) => (
           <div className={participant.conversationId === activeConversation
                 ? style["item-active"]
@@ -79,10 +81,12 @@ const Participants: FC<IParticipantsProps> = ({
             }
             onClick={() => getMessagesById(participant._id)}
             key={participant._id}>
-            {notification && <ConfirmCloseTicket 
+            {notification && 
+            <ConfirmCloseTicket 
             ticketNumber={participant.ticketNumber}
             notification={notification}
             setNotofication={setNotofication}
+            closeTicket={closeTicketHandler}
             />}
             <div className={style.user}>
               <div className={participant.pinned ? style.pin : style.inactive}>
@@ -111,7 +115,7 @@ const Participants: FC<IParticipantsProps> = ({
                   : style.inactive
                 }>
                   <ParticipantsMenu
-                  closeTicketHandler={closeTicketHandler}
+                  noticeTicketHandler={noticeTicketHandler}
                   participant={participant}
                   setMessageMenu={setMessageMenu}
                    />

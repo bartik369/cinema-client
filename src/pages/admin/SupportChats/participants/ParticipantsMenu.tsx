@@ -9,11 +9,11 @@ import { IParticipantInfo } from '../../../../types/chat';
 interface IParticipantsMenuProps {
     participant: IParticipantInfo;
     setMessageMenu: (id: string) => void;
-    closeTicketHandler: (id: string) => void;
+    noticeTicketHandler: (id: string) => void;
 }
 
 const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
-    closeTicketHandler,
+    noticeTicketHandler,
     setMessageMenu,
     participant,
 }) => {
@@ -32,7 +32,7 @@ const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
                     icon={faThumbTack} />
                     {participant.pinned ? contentConst.unpinConversation : contentConst.pinConversation}
                 </li>
-                <li onClick={() => closeTicketHandler(participant.conversationId)}>
+                <li onClick={() => noticeTicketHandler(participant.conversationId)}>
                     <FontAwesomeIcon className={style.icon} icon={faCheck}/>
                     {contentConst.closeTicket}
                 </li>

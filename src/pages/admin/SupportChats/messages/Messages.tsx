@@ -66,7 +66,7 @@ const Messages: FC<IMessagesProps> = ({
       });
       setMediaSkip(false);
     }
-  }, [recipientId, conversationId, message.content]);
+  }, [recipientId, conversationId]);
 
   useEffect(() => {
     const outsideClickhandler = (e: any) => {
