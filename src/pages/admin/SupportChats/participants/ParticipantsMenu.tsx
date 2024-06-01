@@ -9,20 +9,20 @@ import { IParticipantInfo } from '../../../../types/chat';
 interface IParticipantsMenuProps {
     participant: IParticipantInfo;
     setMessageMenu: (id: string) => void;
-    noticeTicketHandler: (id: string) => void;
+    deleteTicketHandler: (id: string) => void;
 }
 
 const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
-    noticeTicketHandler,
+    deleteTicketHandler,
     setMessageMenu,
     participant,
 }) => {
     const [pinConversation] = usePinConversationMutation();
+
     const pinConversationHandler = (id: string) => {
         id && pinConversation(id);
         setMessageMenu('');
     }
-
     return (
         <div className={style['menu-list']} onClick={(e) => e.stopPropagation()}>
             <ul>
@@ -32,7 +32,7 @@ const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
                     icon={faThumbTack} />
                     {participant.pinned ? contentConst.unpinConversation : contentConst.pinConversation}
                 </li>
-                <li onClick={() => noticeTicketHandler(participant.conversationId)}>
+                <li onClick={() => deleteTicketHandler(participant?.conversationId)}>
                     <FontAwesomeIcon className={style.icon} icon={faCheck}/>
                     {contentConst.closeTicket}
                 </li>

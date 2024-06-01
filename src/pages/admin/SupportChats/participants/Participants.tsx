@@ -3,7 +3,6 @@ import { IUnreadMessages } from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
 import { IParticipantInfo } from '../../../../types/chat';
 import ParticipantsMenu from './ParticipantsMenu';
-import ConfirmCloseTicket from '../../../../components/information/ConfirmCloseTicket';
 import { useCloseTicketMutation } from '../../../../store/chatApi';
 import Time from '../messages/Time';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,7 +34,6 @@ const Participants: FC<IParticipantsProps> = ({
     [index: string]: HTMLDivElement | null;
   };
   const messageMenuRef = useRef<IListRefObj>({});
-  const [notification, setNotofication] = useState<boolean>(false);
   const [closeTicket] = useCloseTicketMutation();
 
   useEffect(() => {
@@ -60,15 +58,12 @@ const Participants: FC<IParticipantsProps> = ({
     }
   };
 
-  const noticeTicketHandler = (id: string) => {
+  const deleteTicketHandler = (id: string) => {
     setMessageMenu('');
-    setNotofication(true);
+    id && closeTicket(id)
   }
-  const closeTicketHandler = (id: string) => {
-    id && closeTicket(id);
-    setMessageMenu('');
-    setNotofication(false);
-  }
+
+  console.log(participants)
   return (
     <div className={style.participants}>
       {participants && [...participants]
@@ -81,13 +76,6 @@ const Participants: FC<IParticipantsProps> = ({
             }
             onClick={() => getMessagesById(participant._id)}
             key={participant._id}>
-            {notification && 
-            <ConfirmCloseTicket 
-            ticketNumber={participant.ticketNumber}
-            notification={notification}
-            setNotofication={setNotofication}
-            closeTicket={closeTicketHandler}
-            />}
             <div className={style.user}>
               <div className={participant.pinned ? style.pin : style.inactive}>
               <img src={pinIcom} alt="" />
@@ -115,7 +103,7 @@ const Participants: FC<IParticipantsProps> = ({
                   : style.inactive
                 }>
                   <ParticipantsMenu
-                  noticeTicketHandler={noticeTicketHandler}
+                  deleteTicketHandler={deleteTicketHandler}
                   participant={participant}
                   setMessageMenu={setMessageMenu}
                    />

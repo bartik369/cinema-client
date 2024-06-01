@@ -34,7 +34,7 @@ const SupportChats:FC = () => {
                     userId: user._id,
                 });
                 }
-            });
+            }).catch((err) => console.log(err))
         }
     }, [user, active]);
 

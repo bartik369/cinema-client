@@ -58,10 +58,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         conversationId: chatInfo._id,
         senderId: user._id,
       });
-      // markMessageAsRead({
-      //   conversationId: chatInfo._id, 
-      //   userId: user._id,
-      // });
+      markMessageAsRead({
+        conversationId: chatInfo._id, 
+        userId: user._id,
+      });
     }
   }, [recipientId, message.content, chatInfo]);
 

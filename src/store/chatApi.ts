@@ -1,5 +1,5 @@
 import { IUser } from './../types/auth';
-import { IMessage, IMessageMedia, IUnreadMessages, IChatInfo } from './../types/chat';
+import { IMessage, IMessageMedia, IUnreadMessages, IChatInfo, IParticipantInfo } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IConversation, IDataForMarkRead, IParticipants } from "../types/chat";
 import ENV from "../env.config";
@@ -32,6 +32,10 @@ export const chatApi = createApi({
                 url: `/unread-messages/${id}`,
                 method: 'GET',
             }),
+            providesTags: (result) =>
+            result 
+            ? [...result.map(({ id }) => ({ type: 'Unread' as const, id })), 'Unread']
+            : ['Unread']
          }),
         openChat: builder.mutation<any, string>({
             query:(id) => ({
@@ -39,6 +43,7 @@ export const chatApi = createApi({
                 method:'POST',
                 body: {id: id},
             }),
+            invalidatesTags: ['Unread']
         }),
         getRecipientMessages: builder.query<IMessage[], string>({
             query:(id) => ({
@@ -52,7 +57,7 @@ export const chatApi = createApi({
                 method: 'POST',
                 body: {id: id},
             }),
-            invalidatesTags: ['Chat', 'Messages']
+            invalidatesTags: ['Chat', 'Unread']
         }),
         createMessage: builder.mutation<IMessage, any>({
             query:(data) => ({
@@ -87,12 +92,29 @@ export const chatApi = createApi({
             ? [...result.usersInfo.map(({ _id }) => ({ type: 'Chat' as const, _id })), 'Chat']
             : ['Chat']
         }),
-        getConversationId: builder.mutation({
+        pinConversation: builder.mutation<IChatInfo, string>({
+            query:(id) => ({
+                url: `/pin-conversation/`,
+                method: 'POST',
+                body: {id: id}
+            }),
+            invalidatesTags: ['Chat'],
+        }),
+        closeTicket: builder.mutation<IChatInfo, string>({
+            query:(id) => ({
+                url: `/close-ticket/`,
+                method: 'POST',
+                body: {id: id}
+            }),
+            invalidatesTags: ['Chat'],
+        }),
+        getConversationId: builder.mutation<string, string>({
             query:(id) => ({
                 url: `/get-conversation/`,
                 method: 'POST',
                 body: {id: id},
-            })
+            }),
+            invalidatesTags: ['Chat'],
         }),
         markAsRead: builder.mutation<IMessage[], IDataForMarkRead>({
             query:(data) => ({
@@ -113,22 +135,6 @@ export const chatApi = createApi({
                 method: 'GET',
             }),
         }),
-        pinConversation: builder.mutation<IChatInfo, string>({
-            query:(id) => ({
-                url: `/pin-conversation/`,
-                method: 'POST',
-                body: {id: id}
-            }),
-            invalidatesTags: ['Chat'],
-        }),
-        closeTicket: builder.mutation<IChatInfo, string>({
-            query:(id) => ({
-                url: `/close-ticket/`,
-                method: 'POST',
-                body: {id: id}
-            }),
-            invalidatesTags: ['Chat'],
-        })
     })
 }); 
 
