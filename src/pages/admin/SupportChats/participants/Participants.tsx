@@ -68,7 +68,7 @@ const Participants: FC<IParticipantsProps> = ({
     <div className={style.participants}>
       {participants && [...participants]
       .sort((a, b) => (new Date(a.updatedAt).getTime() < new Date(b.updatedAt).getTime() ? 1 : -1))
-      .sort((a, b) => (a.pinned === b.pinned) ? 0 : a ? -1 : 1)
+      .sort((a, b) => ((a.pinned === b.pinned) ? 0 : a.pinned ? -1 : 1))
       .map((participant) => (
           <div className={participant.conversationId === activeConversation
                 ? style["item-active"]
