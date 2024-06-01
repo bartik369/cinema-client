@@ -11,7 +11,7 @@ export const chatApi = createApi({
     endpoints: (builder) => ({
         getMessages: builder.query<IMessage[], string>({
            query:(id) => ({
-               url: `/messages/${id}`,
+               url: `${ENV.API_GET_MESSAGES}${id}`,
                method: 'GET',
            }),
            providesTags: (result) =>
@@ -22,14 +22,14 @@ export const chatApi = createApi({
         }),
         getMessage: builder.mutation({
             query:(id) => ({
-                url: `/message/`,
+                url: `${ENV.API_GET_MESSAGE}`,
                 method: 'POST',
                 body: {id: id},
             }),
          }),
         getUnreadMessages: builder.query<IUnreadMessages[], string>({
             query:(id) => ({
-                url: `/unread-messages/${id}`,
+                url: `${ENV.API_GET_UNREAD_MESSAGES}${id}`,
                 method: 'GET',
             }),
             providesTags: (result) =>
@@ -39,7 +39,7 @@ export const chatApi = createApi({
          }),
         openChat: builder.mutation<any, string>({
             query:(id) => ({
-                url: `/open-conversation/`,
+                url: `${ENV.API_OPEN_CONVERSATION}`,
                 method:'POST',
                 body: {id: id},
             }),
@@ -47,13 +47,13 @@ export const chatApi = createApi({
         }),
         getRecipientMessages: builder.query<IMessage[], string>({
             query:(id) => ({
-                url: `/recipient-messages/${id}`,
+                url: `${ENV.API_GET_RECIPIENT_MESSAGES}${id}`,
                 method: 'GET',
             }),
         }),
         getActiveConverstion: builder.mutation<IConversation, string>({
             query:(id) => ({
-                url: `/active-conversation/`,
+                url: `${ENV.API_GET_ACTIVE_CONVERSATION}`,
                 method: 'POST',
                 body: {id: id},
             }),
@@ -61,7 +61,7 @@ export const chatApi = createApi({
         }),
         createMessage: builder.mutation<IMessage, any>({
             query:(data) => ({
-                url: `/create-message/`,
+                url: `${ENV.API_CREATE_MESSAGE}`,
                 method: 'POST',
                 body: data,
             }),
@@ -69,14 +69,14 @@ export const chatApi = createApi({
         }),
         deleteMessage: builder.mutation<{success: boolean; id: number }, string>({
             query:(id) => ({
-                url: `/delete-message/${id}`,
+                url: `${ENV.API_DELETE_MESSAGE}${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Messages'],
         }),
         updateMessage: builder.mutation<IMessage, any>({
             query:(data) => ({
-                url: `/update-message/`,
+                url: `${ENV.API_UPDATE_MESSAGE}`,
                 method: 'POST',
                 body: data,
             }),
@@ -84,7 +84,7 @@ export const chatApi = createApi({
         }),
         getConversations: builder.query<IParticipants, string>({
             query:(id) => ({
-                url: `/get-conversations/${id}`,
+                url: `${ENV.API_GET_CONVERSATIONS}${id}`,
                 method: 'GET',
             }),
             providesTags: (result) =>
@@ -94,7 +94,7 @@ export const chatApi = createApi({
         }),
         pinConversation: builder.mutation<IChatInfo, string>({
             query:(id) => ({
-                url: `/pin-conversation/`,
+                url: `${ENV.API_PIN_CONVERSATION}`,
                 method: 'POST',
                 body: {id: id}
             }),
@@ -102,7 +102,7 @@ export const chatApi = createApi({
         }),
         closeTicket: builder.mutation<IChatInfo, string>({
             query:(id) => ({
-                url: `/close-ticket/`,
+                url: `${ENV.API_CLOSE_TICKET}`,
                 method: 'POST',
                 body: {id: id}
             }),
@@ -110,7 +110,7 @@ export const chatApi = createApi({
         }),
         getConversationId: builder.mutation<string, string>({
             query:(id) => ({
-                url: `/get-conversation/`,
+                url: `${ENV.API_GET_CONVERSATION}`,
                 method: 'POST',
                 body: {id: id},
             }),
@@ -118,20 +118,20 @@ export const chatApi = createApi({
         }),
         markAsRead: builder.mutation<IMessage[], IDataForMarkRead>({
             query:(data) => ({
-                url: `/mark-message-read/`,
+                url: `${ENV.API_MARK_MESSAGES_READ}`,
                 method: 'POST',
                 body: data,
             }),
         }),
         getConversationMedia: builder.query<IMessageMedia[], string>({
             query:(id) => ({
-                url: `/conversation-media/${id}`,
+                url: `${ENV.API_GET_CONVERSATION_MEDIA}${id}`,
                 method: 'GET',
             }),
         }),
         getRecipientInfo: builder.query<IUser, string>({
             query:(id) => ({
-                url: `/recipient-info/${id}`,
+                url: `${ENV.API_GET_RECIPIENT_INFO}${id}`,
                 method: 'GET',
             }),
         }),

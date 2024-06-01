@@ -87,8 +87,10 @@ const Sender:FC<ISenderProps> = ({
                   </div>
                   </div>
                 </div>
+                <div className={style.block}>
                 <div className={style.avatar}>
                 <img  src={supportIcon} alt="" />
+                </div>
                 </div>
               </div>
     );

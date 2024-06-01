@@ -43,10 +43,12 @@ const Recipient:FC<IRecipientProps> = ({
     return (
         <div className={style.left}
           onClick={(e) => e.stopPropagation()}>
+            <div className={style.block}>
             <div className={style.avatar}>
               {participants && participants.map((item) => item._id == message.senderId
               && <img key={item._id} src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${item.avatar}` || defaultAvatar} alt="" />
               )}
+            </div>
             </div>
             <div className={style.content}>
               <div className={style.info}>

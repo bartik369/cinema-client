@@ -143,6 +143,11 @@
     display: none;
 }
 
+.list-messages .block {
+    display: flex;
+    flex-basis: 50px;
+}
+
 .list-messages .right,
 .list-messages .left {
     width: fit-content;
