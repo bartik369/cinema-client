@@ -8,6 +8,18 @@ import io from 'socket.io-client';
 import ENV from "../env.config";
 
 
+const socketOptions = {
+    reconnectionDelay: 1000,
+    reconnection: true,
+    reconnectionAttemps: 10,
+    transports: ['websocket'],
+    agent: false,
+    upgrade: false,
+    rejectUnauthorized: false
+};
+const socketUrl = 'http://localhost:5001';
+
+
 export const chatApi = createApi({
     reducerPath: 'chatApi',
     baseQuery: fetchBaseQuery({ baseUrl: ENV.API_URL }),
@@ -18,6 +30,8 @@ export const chatApi = createApi({
                url: `${ENV.API_GET_MESSAGES}${id}`,
                method: 'GET',
            }),
+        
+
 
            providesTags: (result) =>
            result 

@@ -87,7 +87,7 @@ const Sender:FC<ISenderProps> = ({
                 </div>
                 <div className={style.block}>
                 <div className={style.avatar}>
-                <img src={user && `${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
+                <img src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
                 </div>
                 </div>
               </div>
