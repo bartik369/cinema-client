@@ -33,7 +33,7 @@ const TopMovies: FC = () => {
       {movies ? (
         <CarouselProvider
         naturalSlideWidth={70}
-        naturalSlideHeight={160}
+        naturalSlideHeight={145}
         totalSlides={movies! && movies.length + 1}
         visibleSlides={slidesCount}
         currentSlide={0}
