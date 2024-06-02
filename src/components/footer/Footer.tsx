@@ -40,7 +40,8 @@ const Footer: FC = () => {
     }
   }
   const visibleHandler = () => {
-    setVisibleChat(false)
+    setVisibleChat(false);
+    console.log('click')
   }
 
   useEffect(() => {
