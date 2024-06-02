@@ -63,7 +63,6 @@ const Participants: FC<IParticipantsProps> = ({
     id && closeTicket(id)
   }
 
-  console.log(participants)
   return (
     <div className={style.participants}>
       {participants && [...participants]

@@ -35,8 +35,6 @@ const Sender:FC<ISenderProps> = ({
       };
     const messageMenuRef = useRef<IListRefObj>({});
 
-    console.log('support chat Sender')
-
     return (
         <div className={style.right}
                 onClick={(e) => e.stopPropagation()}>

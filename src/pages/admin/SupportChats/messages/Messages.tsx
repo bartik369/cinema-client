@@ -145,8 +145,6 @@ const Messages: FC<IMessagesProps> = ({
     setReplyId('');
   };
 
-  console.log('support chat MESSAGES')
-
   return (
     <>
       <div className={style["list-messages"]}>

@@ -38,8 +38,6 @@ const Recipient:FC<IRecipientProps> = ({
       };
     const messageMenuRef = useRef<IListRefObj>({});
 
-    console.log('support chat Receipent')
-
     return (
         <div className={style.left}
           onClick={(e) => e.stopPropagation()}>

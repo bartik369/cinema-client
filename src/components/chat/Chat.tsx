@@ -81,8 +81,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     document.addEventListener("click", outsideClickhandler);
   }, []);
 
-  console.log('Chat main component')
-
   const sendMessageHandler = () => {
     const formData = new FormData();
         type messageKey = keyof typeof message;

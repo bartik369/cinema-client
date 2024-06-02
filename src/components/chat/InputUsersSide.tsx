@@ -26,7 +26,7 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
     sendMessageHandler,
     resetReplyHandler,
 }) => {
-  console.log('chat input')
+
     return (
       <div className={style.typing}>
          {(replyId && messages) && messages.map((message) =>

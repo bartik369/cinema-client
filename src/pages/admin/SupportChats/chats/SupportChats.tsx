@@ -49,10 +49,7 @@ const SupportChats:FC = () => {
             conversationId: active, 
             userId: user._id,
         });
-    }
-    }
-
-    console.log('support chat MAIN')
+    }}
     
     return (
         <div className={style.chats}>

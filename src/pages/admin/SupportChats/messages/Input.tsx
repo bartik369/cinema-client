@@ -26,7 +26,6 @@ const Input: FC<IInputProps> = memo(({
     sendMessageHandler,
     setFile,
 }) => {
-  console.log('support chat INPUT')
 
     return (
       <div className={style.typing} onClick={(e) => e.stopPropagation()}>

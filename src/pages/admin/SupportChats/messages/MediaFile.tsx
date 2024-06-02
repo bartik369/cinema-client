@@ -12,7 +12,7 @@ interface MediaFileProps {
 }
 
 const MediaFile: FC<MediaFileProps> = ({ media, message, conversationId }) => {
-  console.log('support chat MediaFile')
+
   return (
     <>
       {media && media.map((item) => {
