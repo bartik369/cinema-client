@@ -23,11 +23,11 @@
 }
 
 .header-nav .menu-items .active {
-    color: #fd8841;
+    color: #5be8d5;
 }
 
 .menu-item:hover {
-    color: #fd8841 !important;
+    color: #5be8d5 !important;
 }
 
 .menu-item .icon,

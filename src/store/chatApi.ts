@@ -1,8 +1,12 @@
+import { authApi } from './authApi';
+import { apiSlice } from './apiSlice';
 import { IUser } from './../types/auth';
 import { IMessage, IMessageMedia, IUnreadMessages, IChatInfo, IParticipantInfo } from './../types/chat';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IConversation, IDataForMarkRead, IParticipants } from "../types/chat";
+import io from 'socket.io-client';
 import ENV from "../env.config";
+
 
 export const chatApi = createApi({
     reducerPath: 'chatApi',
@@ -14,6 +18,7 @@ export const chatApi = createApi({
                url: `${ENV.API_GET_MESSAGES}${id}`,
                method: 'GET',
            }),
+
            providesTags: (result) =>
            result 
            ? [...result.map(({ _id }) => ({ type: 'Messages' as const, _id })), 'Messages']
@@ -65,7 +70,7 @@ export const chatApi = createApi({
                 method: 'POST',
                 body: data,
             }),
-            invalidatesTags: ['Messages'],
+             invalidatesTags: ['Messages'],   
         }),
         deleteMessage: builder.mutation<{success: boolean; id: number }, string>({
             query:(id) => ({

@@ -3,7 +3,7 @@
     top: 22px;
     display: flex;
     right: 0;
-    width: 180px;
+    width: 150px;
     flex-direction: column;
     align-items: center;
     background-color: #1e1e2e;
@@ -21,13 +21,13 @@
     text-transform: uppercase;
     background-color: transparent;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12px;
     margin-top: 20px;
     cursor: pointer;
 }
 
 .logout:hover {
-    color: #fd8841;
+    color: #5be8d5;
 }
 
 .logout img {
@@ -36,7 +36,7 @@
 }
 
 .logout:hover {
-    color: #fd8841;
+    color: #5be8d5;
 }
 
 .profile-menu ul li:not(:last-child) {
@@ -60,13 +60,13 @@ ul.items {}
     font-family: inherit;
     font-weight: 500;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .profile-menu .active {
-    color: #fd8841;
+    color: #5be8d5;
 }
 
 .profile-menu li a:hover {
-    color: #fd8841;
+    color: #5be8d5;
 }
