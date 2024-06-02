@@ -5,7 +5,7 @@ export default function useCountTopHook() {
 
     useEffect(() => {
         if (window.innerWidth > 1200) {
-         setSlidesCount(6);
+         setSlidesCount(8);
         } else if (window.innerWidth > 1100) {
          setSlidesCount(6);
         } else if (window.innerWidth > 990) {
