@@ -1,5 +1,5 @@
-import { FC, useState, useRef, useEffect} from "react";
-import { useCreateMessageMutation, useGetMessageMutation, useDeleteMessageMutation, useUpdateMessageMutation, useGetConversationMediaQuery 
+import { FC, useState} from "react";
+import {useGetMessageMutation, useDeleteMessageMutation, useGetConversationMediaQuery 
 } from "../../../../store/chatApi";
 import { IUser } from "../../../../types/auth";
 import { IMessage } from "../../../../types/chat";
@@ -24,7 +24,7 @@ const Messages: FC<IMessagesProps> = ({
   recipientId,
   conversationId,
 }) => {
-  const [message, setMessage] = useState<IMessage>({
+  const [updatedMessage, setUpdatedMessage] = useState<IMessage>({
     _id: "",
     content: "",
     conversationId: "",
@@ -36,83 +36,26 @@ const Messages: FC<IMessagesProps> = ({
     senderId: "",
     updatedAt: "",
   });
-  const [file, setFile] = useState<string | Blob>("");
   const [replyId, setReplyId] = useState<string>("");
   const [messageMenu, setMessageMenu] = useState("");
   const [replyMessage, setReplyMessage] = useState<string>('');
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
-  const [createMessage] = useCreateMessageMutation();
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
-  const [updateMessage] = useUpdateMessageMutation();
   const [mediaSkip, setMediaSkip] = useState(true);
   const { data: media } = useGetConversationMediaQuery(conversationId && conversationId, {
     skip: mediaSkip,
   });
 
-  type IListRefObj = {
-    [index: string]: HTMLDivElement | null;
-  };
-  const messageMenuRef = useRef<IListRefObj>({});
-
-  useEffect(() => {
-
-    if (recipientId && conversationId) {
-      setMessage({
-        ...message,
-        recipientId: recipientId,
-        conversationId: conversationId,
-        senderId: user._id,
-      });
-      setMediaSkip(false);
-    }
-  }, [recipientId, conversationId]);
-
-  useEffect(() => {
-    const outsideClickhandler = (e: any) => {
-      if (messageMenuRef.current) {
-        Object.values(messageMenuRef).map((item) => {
-          if (item !== e.target) {
-            setMessageMenu("");
-            setMessage({ ...message, content: "" });
-            setReplyId("");
-          }
-        });
-      }
-    };
-    document.addEventListener("click", outsideClickhandler);
-  }, []);
-
-  const sendMessageHandler = () => {
-    const formData = new FormData();
-    type messageKey = keyof typeof message;
-    Object.keys(message).forEach((key) => {
-      formData.append(key, message[key as messageKey]);
-    });
-    file && formData.append("file", file);
-
-    if (isUpdating) {
-      updateMessage(formData)
-        .unwrap()
-        .then(() => {
-          setIsUpdating(false);
-          setMessage({ ...message, content: "", replyTo: "" });
-          setReplyId('');
-        });
-    } else {
-      createMessage(formData).then(() => {
-        setMessage({ ...message, content: "", replyTo: "" });
-        setReplyId('');
-      });
-    }
-  };
   const editMessageHandler = (id: string) => {
     id && getMessage(id)
       .unwrap()
       .then((data) => {
-        setMessage({ ...data });
+        setUpdatedMessage({ ...data });
         setIsUpdating(true);
       });
+
+
   };
   const deleteMessageHandler = (id: string) => {
     id && deleteMessage(id)
@@ -123,7 +66,6 @@ const Messages: FC<IMessagesProps> = ({
   };
   const replayMessageHandler = (id: string) => {
     if (id) {
-      setMessage({ ...message, replyTo: id });
       messages && messages.forEach((item) => {
          if (item._id === id) {
            setReplyMessage(item.content);
@@ -139,10 +81,6 @@ const Messages: FC<IMessagesProps> = ({
     } else {
       setMessageMenu(id);
     }
-  };
-  const resetReplyHandler = () => {
-    setMessage({ ...message, content: "", replyTo: "" });
-    setReplyId('');
   };
 
   return (
@@ -183,14 +121,19 @@ const Messages: FC<IMessagesProps> = ({
        }
       </div>
       <Input
-        message={message}
         replyId={replyId}
-        resetReplyHandler={resetReplyHandler}
+        messages={messages}
+        recipientId={recipientId}
+        conversationId={conversationId}
         replyMessage={replyMessage}
-        setMessage={setMessage}
-        sendMessageHandler={sendMessageHandler}
         isUpdating={isUpdating}
-        setFile={setFile}
+        updatedMessage={updatedMessage!}
+        setIsUpdating={setIsUpdating}
+        setReplyId={setReplyId}
+        setMessageMenu={setMessageMenu}
+        setMediaSkip={setMediaSkip}
+        mediaSkip={mediaSkip}
+        user={user}
       />
     </>
   );

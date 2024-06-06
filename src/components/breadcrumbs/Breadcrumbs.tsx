@@ -38,7 +38,8 @@ const Breadcrumbs: FC = () => {
         const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
         const isLast = index === pathnames.length - 1;
 
-        return isLast ? (
+        return isLast 
+        ? (
           <div className={style["last-link"]} key={name}>
             {regExMovie && movie
               ? movie.titleRu
