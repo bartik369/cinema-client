@@ -1,14 +1,14 @@
-import { FC, useState} from "react";
+import { FC, useEffect, useState} from 'react';
 import {useGetMessageMutation, useDeleteMessageMutation, useGetConversationMediaQuery 
-} from "../../../../store/chatApi";
-import { IUser } from "../../../../types/auth";
-import { IMessage } from "../../../../types/chat";
-import Loader from "../../../../components/loader/Loader";
-import Sender from "./Sender";
-import Input from "./Input";
-import Recipient from "./Recipient";
+} from '../../../../store/chatApi';
+import { IUser } from '../../../../types/auth';
+import { IMessage } from '../../../../types/chat';
+import Loader from '../../../../components/loader/Loader';
+import Sender from './Sender';
+import Input from './Input';
+import Recipient from './Recipient';
 import * as contentConst from '../../../../utils/constants/content';
-import style from "./Messages.module.css";
+import style from './Messages.module.css';
 
 interface IMessagesProps {
   participants: IUser[];
@@ -25,25 +25,25 @@ const Messages: FC<IMessagesProps> = ({
   conversationId,
 }) => {
   const [updatedMessage, setUpdatedMessage] = useState<IMessage>({
-    _id: "",
-    content: "",
-    conversationId: "",
-    createdAt: "",
-    mediaId: "",
-    read: "",
-    recipientId: "",
-    replyTo: "",
-    senderId: "",
-    updatedAt: "",
+    _id: '',
+    content: '',
+    conversationId: '',
+    createdAt: '',
+    mediaId: '',
+    read: '',
+    recipientId: '',
+    replyTo: '',
+    senderId: '',
+    updatedAt: '',
   });
-  const [replyId, setReplyId] = useState<string>("");
-  const [messageMenu, setMessageMenu] = useState("");
+  const [replyId, setReplyId] = useState<string>('');
+  const [messageMenu, setMessageMenu] = useState('');
   const [replyMessage, setReplyMessage] = useState<string>('');
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
   const [mediaSkip, setMediaSkip] = useState(true);
-  const { data: media } = useGetConversationMediaQuery(conversationId && conversationId, {
+  const { data: media } = useGetConversationMediaQuery(conversationId, {
     skip: mediaSkip,
   });
 
@@ -54,14 +54,13 @@ const Messages: FC<IMessagesProps> = ({
         setUpdatedMessage({ ...data });
         setIsUpdating(true);
       });
-
-
   };
+
   const deleteMessageHandler = (id: string) => {
     id && deleteMessage(id)
         .unwrap()
         .then(() => {
-          setMessageMenu("");
+          setMessageMenu('');
         });
   };
   const replayMessageHandler = (id: string) => {
@@ -77,7 +76,7 @@ const Messages: FC<IMessagesProps> = ({
   const messageIdHandler = (id: string) => {
 
     if (messageMenu === id) {
-      setMessageMenu("");
+      setMessageMenu('');
     } else {
       setMessageMenu(id);
     }
@@ -85,7 +84,7 @@ const Messages: FC<IMessagesProps> = ({
 
   return (
     <>
-      <div className={style["list-messages"]}>
+      <div className={style['list-messages']}>
         {messages ? messages.map((message) => message.senderId !== user._id 
           ? <div key={message._id}>
             <Recipient

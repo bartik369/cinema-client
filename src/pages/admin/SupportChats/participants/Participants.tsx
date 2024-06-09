@@ -29,7 +29,8 @@ const Participants: FC<IParticipantsProps> = ({
   activeConversation,
   getMessagesById,
 }) => {
-  const [messageMenu, setMessageMenu] = useState("");
+
+  const [messageMenu, setMessageMenu] = useState('');
   type IListRefObj = {
     [index: string]: HTMLDivElement | null;
   };
@@ -41,7 +42,7 @@ const Participants: FC<IParticipantsProps> = ({
       if (messageMenuRef.current) {
         Object.values(messageMenuRef).map((item) => {
           if (item !== e.target) {
-            setMessageMenu("");
+            setMessageMenu('');
           }
         });
       }

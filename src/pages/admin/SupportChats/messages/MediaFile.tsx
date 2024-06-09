@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {IMessage, IMessageMedia} from '../../../../types/chat';
 import { FileIcon, defaultStyles } from 'react-file-icon';
 import ENV from '../../../../env.config';
-import style from "./Messages.module.css";
+import style from './Messages.module.css';
 
 interface MediaFileProps {
     media: IMessageMedia[],

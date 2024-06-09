@@ -2,7 +2,7 @@ import React, { FC, useState, MouseEvent } from 'react';
 import { useAddMovieMutation } from '../../store/movieApi';
 import PreviewPoster from '../../components/poster/PreviewPoster';
 import { IMovie } from '../../types/media';
-import MovieForm from '../../components/forms/MovieForm';
+import MovieForm from '../../components/forms/movie/MovieForm';
 import style from './AddMovie.module.css';
 
 const AddMovie: FC = () => {

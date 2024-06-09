@@ -67,7 +67,8 @@ export const USER = 'USER';
 export const ADMIN = 'ADMIN';
 export const EDITOR = 'EDITOR';
 export const SUPPORT = 'SUPPORT';
-
+export const START = 'START';
+export const VIP = 'VIP';
 
 export const havenotAccount = 'Еще нет аккаунта?';
 export const haveAccount = 'Уже есть аккаунт?';
@@ -143,6 +144,9 @@ export const noActiveChats = 'Нет активных чатов';
 export const pinConversation = 'Закрепить';
 export const unpinConversation = 'Открепить';
 export const closeTicket = 'Закрыть заявку';
+export const yes = 'yes';
+export const film = 'film';
+export const library = 'library';
 
 
 

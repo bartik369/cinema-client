@@ -8,7 +8,6 @@ import style from './Admin.module.css'
 const UsersCounts: FC = () => {
   const { data: users } = useGetUsersQuery();
 
-  console.log(users)
   return (
     <div className={style.pink}>
       <div className={style.icon}>

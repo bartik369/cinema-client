@@ -43,7 +43,7 @@ const Sender:FC<ISenderProps> = ({
                 onClick={(e) => e.stopPropagation()}>
                 <div className={style.content}>
                   <div className={style.info}>
-                    <div className={ message._id == messageMenu
+                    <div className={ message._id === messageMenu
                         ? style.active
                         : style.inactive
                     }>
@@ -67,7 +67,7 @@ const Sender:FC<ISenderProps> = ({
                   </div>
                   <div className={style.text}>
                     {message.replyTo && messages.map((item) =>
-                      item._id == message.replyTo && (
+                      item._id === message.replyTo && (
                       <div className={style.reply} key={item._id}>
                         <span>{contentConst.support}</span>
                         {item.content.slice(0, 40)}...
@@ -76,7 +76,7 @@ const Sender:FC<ISenderProps> = ({
                     {message.content}
                     <MediaFile media={media!} message={message} conversationId={chatInfo._id}/>
                     <div className={style.read}>
-                      {message.read === "yes" ? (
+                      {message.read === contentConst.yes ? (
                         <FontAwesomeIcon className={style.blue} icon={faCheckDouble} />
                       ) : (
                         <FontAwesomeIcon className={style.dark} icon={faCheck}/>
@@ -85,9 +85,9 @@ const Sender:FC<ISenderProps> = ({
                   </div>
                 </div>
                 <div className={style.block}>
-                <div className={style.avatar}>
-                <img src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
-                </div>
+                  <div className={style.avatar}>
+                    <img src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${user.avatar}`} alt="" />
+                  </div>
                 </div>
               </div>
     );

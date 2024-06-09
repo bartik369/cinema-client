@@ -1,17 +1,17 @@
-import { FC, useState, useEffect} from "react";
-import { useGetActorsQuery } from "../../store/actorApi";
-import { Link } from "react-router-dom";
-import useDebounce from "../../hooks/useDebounce";
-import Loader from "../../components/loader/Loader";
-import Pagination from "../../components/pagination/Pagination";
-import * as contentConst from "../../utils/constants/content";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import ENV from "../../env.config";
-import style from "./Actor.module.css";
+import { FC, useState, useEffect} from 'react';
+import { useGetActorsQuery } from '../../store/actorApi';
+import { Link } from 'react-router-dom';
+import useDebounce from '../../hooks/useDebounce';
+import Loader from '../../components/loader/Loader';
+import Pagination from '../../components/pagination/Pagination';
+import * as contentConst from '../../utils/constants/content';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import ENV from '../../env.config';
+import style from './Actor.module.css';
 
 const Actors: FC = () => {
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const debouncedSearch = useDebounce(search, 1000);
   const [page, setPage] = useState(1);
   const { data: actors } = useGetActorsQuery({ page, debouncedSearch });
@@ -38,8 +38,8 @@ const Actors: FC = () => {
         />
         {search && (
           <FontAwesomeIcon
-            className={style["reset-search"]}
-            onClick={() => setSearch("")}
+            className={style['reset-search']}
+            onClick={() => setSearch('')}
             icon={faXmark}
           />
         )}
@@ -49,17 +49,14 @@ const Actors: FC = () => {
           <div className={style.info}>
             {actors?.data &&
               actors.data.map((item) => (
-                <Link to={`/actors/${item._id}`} key={item._id}>
+                <Link to={`${ENV.ACTORS}${item._id}`} key={item._id}>
                   <div className={style.item}>
                     <div className={style.portrait}>
-                      <img
-                        alt=""
-                        src={`${ENV.API_URL_UPLOADS_ACTORS}${item.picture}`}
-                      />
+                      <img src={`${ENV.API_URL_UPLOADS_ACTORS}${item.picture}`} alt=""/>
                     </div>
                     <div className={style.description}>
-                      <div className={style["name-ru"]}>{item.nameRu}</div>
-                      <div className={style["name-en"]}>{item.nameEn}</div>
+                      <div className={style['name-ru']}>{item.nameRu}</div>
+                      <div className={style['name-en']}>{item.nameEn}</div>
                     </div>
                   </div>
                 </Link>
@@ -76,9 +73,9 @@ const Actors: FC = () => {
               nav={{ current: page, total: actors?.total_pages! }}
             />
         </>
-        : (actors?.data.length == 0 && debouncedSearch.length) 
-        ? <div className={style.warning}>{contentConst.nothingFound}</div>
-        : <Loader />
+        : (actors?.data.length === 0 && debouncedSearch.length) 
+          ? <div className={style.warning}>{contentConst.nothingFound}</div>
+          : <Loader />
       }
     </div>
   );

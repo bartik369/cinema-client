@@ -1,12 +1,12 @@
 import React, { FC} from 'react';
 import DatePicker from 'react-datepicker';
-import { IActor } from '../../types/media';
-import { categoryMovies, genderItemsData } from '../../utils/data/data';
-import { countryList } from '../../utils/data/coutry';
-import * as contentConst from '../../utils/constants/content';
+import { IActor } from '../../../types/media';
+import { categoryMovies, genderItemsData } from '../../../utils/data/data';
+import { countryList } from '../../../utils/data/coutry';
+import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCamera } from '@fortawesome/free-solid-svg-icons';
-import style from './AddItemForm.module.css';
+import style from '../AddItemForm.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface IActorProps {
@@ -109,7 +109,6 @@ const ActorForm: FC<IActorProps> = ({
             }
           />
         </div>
-        
         <div className={style.column3}>
           <span className={style['input-info']}>{contentConst.actorHeight}</span>
           <input
@@ -152,8 +151,7 @@ const ActorForm: FC<IActorProps> = ({
       <div className={style['main-column']}>
         <div className={style.column2}>
           <span className={style['input-info']}>{contentConst.actorGenre}</span>
-          <select
-            defaultValue=''
+          <select defaultValue=''
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => addGenre(e)}
           >
             <option value='' disabled>
@@ -172,11 +170,7 @@ const ActorForm: FC<IActorProps> = ({
               {contentConst.actorSelectPhoto}
             </label>
           </label>
-          <input
-            name="file"
-            id="upload"
-            type="file"
-            hidden
+          <input name="file" id="upload" type="file" hidden
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               imgAction(e)
             }}
@@ -187,8 +181,7 @@ const ActorForm: FC<IActorProps> = ({
         {actor.extInfo.genre.map((item) => (
           <div className={style.item}>
             {item}
-            <FontAwesomeIcon
-              className={style['close-btn']}
+            <FontAwesomeIcon className={style['close-btn']}
               onClick={(e: React.MouseEvent) => deleteGenre(e, item)}
               icon={faXmark}
             />

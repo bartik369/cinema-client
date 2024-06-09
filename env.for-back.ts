@@ -57,9 +57,11 @@ const ENV = {
     CLIENT_URL: 'https://cinema.webcloudlab.ru',
     MOVIES_URL: 'https://cinema.webcloudlab.ru/movies/',
     MOVIES: '/movies/',
+    ACTORS: '/actors/',
     EDIT_SLIDER: '/admin/edit-slider/',
     ADD_MOVIE: '/admin/add-movie/',
     ADD_ACTOR: '/admin/add-actor/',
+    SUPPORT_CHATS: '/admin/support-chats',
     ADMIN:'/admin/',
 }
 export default ENV;

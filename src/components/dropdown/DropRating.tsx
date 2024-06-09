@@ -1,37 +1,35 @@
-import React, {useState, FC, useEffect, useRef} from 'react';
+import {useState, FC, useEffect, useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { setMovieRating } from '../../store/movieOptionsSlice';
 import { ratingRangeData } from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
-import style from './Drop.module.css'
+import style from './Drop.module.css';
 
 interface IDropRatingProps {
-  existRating: string[];
   checkedRating: any,
   setCheckedRating: (checkedRating:any) => void;
 }
 const DropRating: FC<IDropRatingProps> = ({
-  existRating,
   checkedRating,
   setCheckedRating,
 }) => {
-    const dispatch = useAppDispatch()
-    const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false)
-    const myRef = useRef<HTMLButtonElement>(null)
+    const dispatch = useAppDispatch();
+    const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
+    const myRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         const checkIfClickedOutside = (e:any) => {
           
           if (myRef.current && !myRef.current.contains(e.target)) {
-            setDropdownDisplay(false) 
+            setDropdownDisplay(false);
           } else {
           }
         }
-        document.addEventListener('click', checkIfClickedOutside)
+        document.addEventListener('click', checkIfClickedOutside);
         return () => {
-          document.removeEventListener('click', checkIfClickedOutside)
+          document.removeEventListener('click', checkIfClickedOutside);
         }
       }, [])
   
@@ -39,13 +37,13 @@ const DropRating: FC<IDropRatingProps> = ({
         <>
         <fieldset>
         <button ref={myRef} className={style['drop-btn']} onClick={() => setDropdownDisplay(!dropdownDisplay)}>
-        <span>{contentConst.movieRating}</span>
-        <div className={style.angle}>
-           {dropdownDisplay 
-           ? <FontAwesomeIcon icon={faAngleUp} />
-           : <FontAwesomeIcon icon={faAngleDown} />
-           }
-        </div>
+          <span>{contentConst.movieRating}</span>
+          <div className={style.angle}>
+            {dropdownDisplay 
+              ? <FontAwesomeIcon icon={faAngleUp} />
+              : <FontAwesomeIcon icon={faAngleDown} />
+            }
+          </div>
         </button>
         {dropdownDisplay && 
         <div className={style['panel-one']} onClick={e => e.stopPropagation()}>

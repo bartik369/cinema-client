@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import * as contentConst from "../../utils/constants/content";
-import style from "./Pagination.module.css";
+import React, { FC } from 'react';
+import * as contentConst from '../../utils/constants/content';
+import style from './Pagination.module.css';
 
 interface IPaginationProps {
   onNextPageClick: () => void;

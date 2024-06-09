@@ -14,7 +14,7 @@ interface IVisibleProps {
 
 const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
   const [searchMovie, {data: searchResult, reset}] = useSearchMovieMutation();
-  const [emptySearchResult, setEmptySearchResult] = useState<boolean>(false)
+  const [emptySearchResult, setEmptySearchResult] = useState<boolean>(false);
   const [text, setText] = useState({
     search: '',
   });
@@ -27,7 +27,7 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
         .unwrap()
         .then((data) => {
           
-          if (data.length == 0) {
+          if (data.length === 0) {
             setEmptySearchResult(true)
           } else {
             setEmptySearchResult(false)

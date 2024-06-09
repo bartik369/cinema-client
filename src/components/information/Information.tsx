@@ -1,6 +1,6 @@
 import {FC, memo} from 'react';
 import * as contentConst from '../../utils/constants/content';
-import style from './Information.module.css'
+import style from './Information.module.css';
 
 interface IINformationProps {
     setVisibleInfo: (visibleInfo:boolean) => void;
@@ -8,8 +8,6 @@ interface IINformationProps {
 }
 
 const Information:FC<IINformationProps> = memo(({setVisibleInfo, visibleInfo}) => {
-
-
     return (
         <div className={style.information}>
             <div className={style.inner}>

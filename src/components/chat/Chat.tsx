@@ -20,11 +20,11 @@ interface IChatProps {
 }
 const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) => {
   const [skip, setSkip] = useState<boolean>(true);
-  const [file, setFile] = useState<string | Blob>("");
-  const [replyId, setReplyId] = useState<string>("");
+  const [file, setFile] = useState<string | Blob>('');
+  const [replyId, setReplyId] = useState<string>('');
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const {data: messages} = useGetMessagesQuery(chatInfo && chatInfo._id, {skip: skip});
-  const [messageMenu, setMessageMenu] = useState("");
+  const [messageMenu, setMessageMenu] = useState('');
   const [createMessage] = useCreateMessageMutation();
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
@@ -78,7 +78,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         });
       }
     };
-    document.addEventListener("click", outsideClickhandler);
+    document.addEventListener('click', outsideClickhandler);
   }, []);
 
   const sendMessageHandler = () => {
@@ -87,7 +87,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         Object.keys(message).forEach((key) => {
           formData.append(key, message[key as messageKey]);
         });
-        file && formData.append("file", file);
+        file && formData.append('file', file);
         
         if (isUpdating) {
           updateMessage(formData).unwrap().then(() => {
@@ -126,21 +126,22 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const messageIdHandler = (id: string) => {
 
     if (messageMenu === id) {
-      setMessageMenu("");
+      setMessageMenu('');
     } else {
       setMessageMenu(id);
     }
   };
 
   const resetReplyHandler = () => {
-    setMessage({ ...message, content: "", replyTo: "" });
+    setMessage({ ...message, content: '', replyTo: '' });
     setReplyId('');
   };
 
   return (
     <div className={style.chat}>
       <FontAwesomeIcon className={style.close} icon={faXmark} 
-      onClick={visibleHandler}/>
+        onClick={visibleHandler}
+      />
       <div className={style.request}>
         {contentConst.requestNumber}
         <span>{chatInfo && chatInfo.ticketNumber}</span>

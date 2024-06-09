@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
 import { useAddActorMutation } from '../../store/actorApi';
 import { IActor } from '../../types/media';
-import ActorForm from '../../components/forms/ActorForm';
+import ActorForm from '../../components/forms/actor/ActorForm';
 import PreviewActor from '../../components/preview/PreviewActor';
 import style from './AddActor.module.css';
 
 const AddActor: FC = () => {
-  const [addActor] = useAddActorMutation()
+  const [addActor] = useAddActorMutation();
   const [actor, setActor] = useState<IActor>({
     _id: '',
     nameEn: '',

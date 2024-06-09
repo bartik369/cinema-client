@@ -13,7 +13,7 @@ const Casts: FC<ICastsProps> = ({ actors }) => {
     <div className={style.cast}>
       {actors &&
         actors.map((item) => (
-          <Link to={`/actors/${item._id}`} key={item._id}>
+          <Link to={`${ENV.ACTORS}${item._id}`} key={item._id}>
           <div className={style.actor}>
             <div className={style.portrait}>
               <img

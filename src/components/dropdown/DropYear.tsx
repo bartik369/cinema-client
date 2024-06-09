@@ -43,14 +43,14 @@ const DropYear: FC<IDropYearProps> = ({
           className={style['drop-btn']}
           onClick={() => setDropdownDisplay(!dropdownDisplay)}
         >
-          <span>{contentConst.movieYear}</span>
-          <div className={style.angle}>
-            {dropdownDisplay ? (
-              <FontAwesomeIcon icon={faAngleUp} />
-            ) : (
-              <FontAwesomeIcon icon={faAngleDown} />
-            )}
-          </div>
+            <span>{contentConst.movieYear}</span>
+            <div className={style.angle}>
+              {dropdownDisplay ? (
+                <FontAwesomeIcon icon={faAngleUp} />
+              ) : (
+                <FontAwesomeIcon icon={faAngleDown} />
+              )}
+            </div>
         </button>
         {dropdownDisplay && (
           <div

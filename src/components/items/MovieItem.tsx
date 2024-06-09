@@ -7,12 +7,10 @@ import style from './MovieItem.module.css';
 
 interface MovieItemProps {
   movie: IMovie;
-  favorites: string[]
+  favorites: string[];
 }
-
 const MovieItem: FC<MovieItemProps> = ({ movie, favorites }) => {
 const [visible, setVisible] = useState(false);
-
 
   return (
     <div className={style.wrapper}

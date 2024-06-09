@@ -9,8 +9,7 @@ const Navbar: FC = () => {
   return (
     <nav className={style['header-nav']}>
       <ul className={style['menu-items']}>
-        {menuItemsData.map((item) => (
-         
+        {menuItemsData && menuItemsData.map((item) => (
          <NavLink className={({ isActive }) => (isActive 
          ? style.active 
          : style['menu-item'])} to={item.url} key={item.id}>

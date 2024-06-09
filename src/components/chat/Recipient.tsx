@@ -7,7 +7,7 @@ import * as contentConst from '../../utils/constants/content';
 import supportAvatar from '../../assets/pics/support.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import style from './Chat.module.css'
+import style from './Chat.module.css';
 
 interface IRecipientProps {
     messages: IMessage[];
@@ -38,12 +38,12 @@ const Recipient:FC<IRecipientProps> = ({
                 onClick={(e) => e.stopPropagation()}>
                 <div className={style.block}>
                 <div className={style.avatar}>
-                <img src={supportAvatar} alt="" />
+                  <img src={supportAvatar} alt="" />
                 </div>
                 </div>
                 <div className={style.content}>
                   <div className={style.info}> 
-                    <div className={message._id == messageMenu
+                    <div className={message._id === messageMenu
                       ? style.active
                       : style.inactive}>
                       <RecipientMessageMenu
@@ -61,7 +61,7 @@ const Recipient:FC<IRecipientProps> = ({
                     </div>
                   </div>
                   <div className={style.text}>
-                    {message.replyTo && messages.map((item) => item._id == message.replyTo && (
+                    {message.replyTo && messages.map((item) => item._id === message.replyTo && (
                       <div className={style.reply} key={item._id}>
                         <span>{contentConst.you}</span>
                         {item.content.slice(0, 40)}...

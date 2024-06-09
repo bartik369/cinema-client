@@ -1,4 +1,3 @@
-import * as contentConst from '../../utils/constants/content'
 import style from './Loader.module.css';
 
 const Loader = () => {

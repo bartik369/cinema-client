@@ -1,8 +1,8 @@
-import { FC } from "react";
-import * as contentConst from "../../utils/constants/content";
-import video404 from "../../assets/video/404video.mp4";
-import vignette from "../../assets/pics/vignette.png";
-import style from "./Page404.module.css";
+import { FC } from 'react';
+import * as contentConst from '../../utils/constants/content';
+import video404 from '../../assets/video/404video.mp4';
+import vignette from '../../assets/pics/vignette.png';
+import style from './Page404.module.css';
 
 const Page404: FC = () => {
   return (

@@ -7,7 +7,7 @@ import MediaFile from './MediaFile';
 import * as contentConst from '../../../../utils/constants/content';
 import { faCheck, faCheckDouble, faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import supportIcon from '../../../../assets/pics/support.png'
-import style from "./Messages.module.css";
+import style from './Messages.module.css';
 
 interface ISenderProps {
     message: IMessage;
@@ -40,14 +40,14 @@ const Sender:FC<ISenderProps> = ({
                 onClick={(e) => e.stopPropagation()}>
                 <div className={style.content}>
                   <div className={style.info}>
-                    <div className={message._id == messageMenu
+                    <div className={message._id === messageMenu
                       ? style.active
                       : style.inactive
                     }>
                     <SenderMessageMenu 
-                    messageId={message._id}
-                    editMessage={editMessageHandler}
-                    deleteMessage={deleteMessageHandler}
+                      messageId={message._id}
+                      editMessage={editMessageHandler}
+                      deleteMessage={deleteMessageHandler}
                     />
                     </div>
                     <div className={style.name}>{contentConst.you}</div>
@@ -65,7 +65,7 @@ const Sender:FC<ISenderProps> = ({
                     </div>
                   </div>
                   <div className={style.text}>
-                  {message.replyTo && messages.map((item) =>item._id == message.replyTo && (
+                  {message.replyTo && messages.map((item) =>item._id === message.replyTo && (
                     <div className={style.reply} key={item._id}>
                         <span>{contentConst.user}</span>
                         {item.content.slice(0, 40)}...
@@ -78,7 +78,7 @@ const Sender:FC<ISenderProps> = ({
                       conversationId={conversationId}
                     />
                      <div className={style.read}>
-                      {message.read === 'yes' 
+                      {message.read === contentConst.yes
                       ? <FontAwesomeIcon className={style.blue} icon={faCheckDouble} />
                       : <FontAwesomeIcon className={style.dark} icon={faCheck} />
                       }
@@ -86,10 +86,10 @@ const Sender:FC<ISenderProps> = ({
                   </div>
                 </div>
                 <div className={style.block}>
-                <div className={style.avatar}>
-                <img  src={supportIcon} alt="" />
-                </div>
-                </div>
+                  <div className={style.avatar}>
+                    <img  src={supportIcon} alt="" />
+                  </div>
+                  </div>
               </div>
     );
 };

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, memo } from 'react';
+import { FC, useEffect, useState} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { footerMenu1, footerMenu2 } from '../../utils/data/data';
 import { useAppSelector } from '../../hooks/reduxHook';
@@ -22,7 +22,7 @@ const Footer: FC = () => {
   const user = useAppSelector(state => state.auth.user);
   const [openChat] = useOpenChatMutation();
   const [recipientId, setRecipientId] = useState<string>('');
-  const [chatInfo, setChatInfo] = useState<IChatInfo>()
+  const [chatInfo, setChatInfo] = useState<IChatInfo>();
   const [visibleChat, setVisibleChat] = useState(false);
   const [skip, setSkip] = useState(true);
   const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id, {skip: skip});
@@ -30,10 +30,10 @@ const Footer: FC = () => {
 
   const startChat = () => {
     if (isAuth) {
-      setVisibleChat(!visibleChat)
+      setVisibleChat(!visibleChat);
       openChat(user._id).unwrap().then((data) => {
-        setChatInfo({...data})
-        setRecipientId(data.participants.filter((item:string) => item != user._id))
+        setChatInfo({...data});
+        setRecipientId(data.participants.filter((item:string) => item !== user._id));
       });
     } else {
       toast.error(contentConst.errorAddFavotite);
@@ -41,7 +41,6 @@ const Footer: FC = () => {
   }
   const visibleHandler = () => {
     setVisibleChat(false);
-    console.log('click')
   }
 
   useEffect(() => {
@@ -54,8 +53,6 @@ const Footer: FC = () => {
       setSkip(false);
     }
   }, [user, isAuth]);
-
-  console.log('Footer')
 
   return (
     <div className={(existTrailer && regEx) ? style.container : style.notrailer}>
@@ -83,7 +80,7 @@ const Footer: FC = () => {
             ))}
           </ul>
         </div>
-        <div className={style.menu}>
+        <menu className={style.menu}>
           <div className={style.social}>
             <div><img src={Instagram} alt="" /></div>
             <div><img src={VK} alt="" /></div>
@@ -92,20 +89,23 @@ const Footer: FC = () => {
           </div>
           <div className={style['chat-block']}>
             <UnreadMessagesButton
-            startChat={startChat}
-            visibleChat={visibleChat}
-            unreadMessages={unreadMessages!} 
-            isAdmin={isAdmin} />
+              startChat={startChat}
+              visibleChat={visibleChat}
+              unreadMessages={unreadMessages!} 
+              isAdmin={isAdmin} 
+            />
           </div>
-        </div>
+        </menu>
         <div className={style.info}></div>
       </div>
       {visibleChat &&
        <Chat 
-       visibleHandler={visibleHandler} 
-       user={user} 
-       chatInfo={chatInfo!} 
-       recipientId={recipientId}/>}
+        visibleHandler={visibleHandler} 
+        user={user} 
+        chatInfo={chatInfo!} 
+        recipientId={recipientId}
+       />
+       }
     </div>
   );
 };

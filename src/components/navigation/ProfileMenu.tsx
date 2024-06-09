@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { profileMenuData } from '../../utils/data/data';
 import { useAppSelector } from '../../hooks/reduxHook';
 import { useLogoutUserMutation } from '../../store/authApi';
+import ENV from '../../env.config';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from './ProfileMenu.module.css';
@@ -19,24 +20,24 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
 
   useEffect(() => {
     user && user.roles?.forEach((role) => {
-      if (role === 'ADMIN' || role === 'SUPPORT') {
+      if (role === contentConst.ADMIN || role === contentConst.SUPPORT) {
         setIsAdmin(true);
       }
     });
   }, [user]);
 
   const logoutHandler = () => {
-    logoutUser()
-    setProfileMenu(!profileMenu)
+    logoutUser();
+    setProfileMenu(!profileMenu);
     localStorage.removeItem('accessToken');
     window.location.reload();
   }
 
   return (
-    <div className={style['profile-menu']}>
+    <menu className={style['profile-menu']}>
         <ul className={style.items}>
           {profileMenuData.map((item, index) =>
-            !isAdmin && item.url === '/admin' ? null : (
+            !isAdmin && item.url === `${ENV.CLIENT_URL}${ENV.ADMIN}` ? null : (
               <li key={index}>
                  <NavLink className={({ isActive }) => (isActive 
                   ? style.active 
@@ -51,7 +52,7 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
       <div className={style.logout} onClick={logoutHandler}>
       {contentConst.logout}
       </div>
-    </div>
+    </menu>
   );
 };
 

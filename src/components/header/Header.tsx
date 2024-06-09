@@ -48,21 +48,24 @@ const Header: FC = () => {
         setProfileMenu(false);
       }
     }
-    document.addEventListener('click', (e:any) =>  checkIfClickedOutside(e))
+    document.addEventListener('click', (e:any) =>  checkIfClickedOutside(e));
     return () => {
-      document.removeEventListener('click',(e:any) => checkIfClickedOutside(e))
+      document.removeEventListener('click',(e:any) => checkIfClickedOutside(e));
     }
   }, []);
 
   return (
     <>
     {visible && <Search visibleHandler={visibleHandler} />}
-      <div className={(regEx || regEx404) ? style['nav-absolute'] : style['nav-relative']}>
+      <div className={(regEx || regEx404) 
+        ? style['nav-absolute'] 
+        : style['nav-relative']}
+      >
         <div className={style.container}>
             <Link className={style.logo} to={'/'}>
               <img src={Glasses} alt='' />
-              <div className={style.bold}>film</div>
-              <span>library</span>
+              <div className={style.bold}>{contentConst.film}</div>
+              <span>{contentConst.library}</span>
             </Link>
           <Navbar />
           <div className={style.right}>
@@ -94,7 +97,6 @@ const Header: FC = () => {
         <div className={style.breadcrumbs}>
          <Breadcrumbs />
         </div>
-      
       </div>
       {visibleSignin && (
         <Signin signupHandler={signupHandler} closeFormHandler={closeFormHandler} />

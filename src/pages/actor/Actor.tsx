@@ -7,7 +7,7 @@ import { IMovie } from '../../types/media';
 import Loader from '../../components/loader/Loader';
 import * as contentConst from '../../utils/constants/content';
 import ENV from '../../env.config';
-import style from './Actor.module.css'
+import style from './Actor.module.css';
 
 const Actor:FC = () => {
     const [birthday, setBirthday] = useState<any>();
@@ -31,8 +31,8 @@ const Actor:FC = () => {
 
     return (
         <div className={style.actor}>
-            {actor ?
-            <div className={style.info}>
+            {actor 
+            ? <div className={style.info}>
                  <div className={style.portrait}>
                  <img src={actor.picture 
                     ? `${ENV.API_URL_UPLOADS_ACTORS}${actor.picture}` 
@@ -75,7 +75,7 @@ const Actor:FC = () => {
                 <div className={style.movies}>
                     <div className={style.title}>{contentConst.allActorMovies}</div>
                     {movies && movies.map((movie:IMovie) => 
-                    <Link to={`/movies/${movie._id}`} key={movie._id}>
+                    <Link to={`${ENV.MOVIES}${movie._id}`} key={movie._id}>
                     <li className={style.item}>{movie.titleRu}</li>
                     </Link>
                     )}

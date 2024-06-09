@@ -1,12 +1,11 @@
-import React, {useState, FC, useEffect, useRef} from 'react';
+import {useState, FC, useEffect, useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import {categoryMovies} from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
 import { setMovieCategory } from '../../store/movieOptionsSlice';
-import { IMovieCheckMenu } from '../../types/media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
-import style from './Drop.module.css'
+import style from './Drop.module.css';
 
 interface IDropCategoryProps {
   existGenre: string[];
@@ -54,11 +53,8 @@ const DropCategory: FC<IDropCategoryProps> = ({
           </div>
         </button>
         {dropdownDisplay && (
-          <div
-            className={style["panel-three"]}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {categoryMovies.map((item) => (
+          <div className={style["panel-three"]} onClick={(e) => e.stopPropagation()}>
+            {categoryMovies && categoryMovies.map((item) => (
               <label className={style["check-container"]} key={item.id}>
                 <input
                   onChange={(e) => {
@@ -72,9 +68,7 @@ const DropCategory: FC<IDropCategoryProps> = ({
                   value="12"
                   type="checkbox"
                   checked={checkedGenre[item.id]}
-                  disabled={
-                    existGenre && existGenre.includes(item.name) === false
-                  }
+                  disabled={existGenre && existGenre.includes(item.name) === false}
                 />
                 <span className={style.checkmark}></span>
                 <label htmlFor={item.value}>{item.name}</label>

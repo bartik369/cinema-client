@@ -5,7 +5,7 @@ useGetActiveConverstionMutation,useGetUnreadMessagesQuery, useMarkAsReadMutation
 useGetMessagesQuery } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
-import style from './SupportChats.module.css'
+import style from './SupportChats.module.css';
 
 const SupportChats:FC = () => {
     const user = useAppSelector(state => state.auth.user);

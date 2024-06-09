@@ -18,7 +18,7 @@ interface IMovieFilterProps {
 
 const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const { data: properties } = useGetPropertiesQuery();
   const [checkedGenre, setCheckedGenre] = useState<any>('');
   const [checkedCountry, setCheckedCountry] = useState('');
@@ -58,7 +58,6 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
       </div>
       <div className={style.item}>
         <DropRating
-        existRating={properties && properties.ratingArr} 
         checkedRating={checkedRating}
         setCheckedRating={setCheckedRating}
         />

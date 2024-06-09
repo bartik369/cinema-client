@@ -1,16 +1,11 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector} from '../../hooks/reduxHook';
 import Loader from '../loader/Loader';
 import { useGetFavoritesMutation, useGetTopMoviesQuery } from '../../store/movieApi';
 import MovieItem from '../items/MovieItem';
 import useCountTopHook  from '../../hooks/useCountTopHook';
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
+import {CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from 'pure-react-carousel';
 import ENV from '../../env.config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,16 +25,16 @@ const TopMovies: FC = () => {
 
   return (
     <div className={style.movies__carousel}>
-      {movies ? (
-        <CarouselProvider
-        naturalSlideWidth={70}
-        naturalSlideHeight={155}
-        totalSlides={movies! && movies.length + 2}
-        visibleSlides={slidesCount}
-        currentSlide={0}
-        isPlaying={true}
-        interval={6000}
-        infinite={true}
+      {movies 
+      ? (<CarouselProvider
+          naturalSlideWidth={70}
+          naturalSlideHeight={155}
+          totalSlides={movies! && movies.length + 2}
+          visibleSlides={slidesCount}
+          currentSlide={0}
+          isPlaying={true}
+          interval={6000}
+          infinite={true}
       >
         <ButtonBack className={style.btn_prev}>
           <FontAwesomeIcon className={style.chevron} icon={faChevronLeft} />
@@ -63,7 +58,8 @@ const TopMovies: FC = () => {
             ))}
         </Slider>
       </CarouselProvider>
-      ) : <Loader />}
+      ) 
+      : <Loader />}
     </div>
   );
 };

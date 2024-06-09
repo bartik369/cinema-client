@@ -1,10 +1,10 @@
-import {FC, memo} from 'react';
+import React, {FC} from 'react';
 import { usePinConversationMutation } from '../../../../store/chatApi';
 import * as contentConst from '../../../../utils/constants/content';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbTack, faCheck} from "@fortawesome/free-solid-svg-icons";
-import style from './Participants.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbTack, faCheck} from '@fortawesome/free-solid-svg-icons';
 import { IParticipantInfo } from '../../../../types/chat';
+import style from './Participants.module.css';
 
 interface IParticipantsMenuProps {
     participant: IParticipantInfo;
@@ -12,13 +12,12 @@ interface IParticipantsMenuProps {
     deleteTicketHandler: (id: string) => void;
 }
 
-const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
+const ParticipantsMenu:FC<IParticipantsMenuProps> = ({
     deleteTicketHandler,
     setMessageMenu,
     participant,
 }) => {
     const [pinConversation] = usePinConversationMutation();
-
     const pinConversationHandler = (id: string) => {
         id && pinConversation(id);
         setMessageMenu('');
@@ -30,7 +29,10 @@ const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
                     <FontAwesomeIcon 
                     className={style.icon} 
                     icon={faThumbTack} />
-                    {participant.pinned ? contentConst.unpinConversation : contentConst.pinConversation}
+                    {participant.pinned 
+                        ? contentConst.unpinConversation 
+                        : contentConst.pinConversation
+                    }
                 </li>
                 <li onClick={() => deleteTicketHandler(participant?.conversationId)}>
                     <FontAwesomeIcon className={style.icon} icon={faCheck}/>
@@ -39,6 +41,6 @@ const ParticipantsMenu:FC<IParticipantsMenuProps> = memo(({
             </ul>
         </div>
     );
-});
+};
 
-export default ParticipantsMenu;
+export default React.memo(ParticipantsMenu);

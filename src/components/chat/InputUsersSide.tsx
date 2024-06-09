@@ -3,7 +3,7 @@ import { IMessage } from '../../types/chat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip, faXmark, faReply} from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content';
-import style from './Chat.module.css'
+import style from './Chat.module.css';
 
 interface InputUsersSideProps {
     replyId: string;
@@ -20,9 +20,9 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
     replyId,
     messages,
     message,
+    isUpdating,
     setMessage,
     setFile,
-    isUpdating,
     sendMessageHandler,
     resetReplyHandler,
 }) => {
@@ -39,7 +39,6 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
                 </div>
           )}
         <div className={style.input} onClick={(e) => e.stopPropagation()}>
-
           <div className={style.inner}>
             <input onChange={(e) => 
               setMessage({ ...message, content: e.target.value })}
@@ -67,7 +66,6 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
               {isUpdating ? contentConst.updateBtn : contentConst.sendData}
             </button>
           </div>
-          
         </div>
       </div>
     );

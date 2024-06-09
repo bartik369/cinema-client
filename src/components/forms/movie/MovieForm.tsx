@@ -1,13 +1,13 @@
 import React, { FC, MouseEvent } from 'react';
-import { IMovie } from '../../types/media';
-import { ageItemsData, categoryMovies, yearMedia } from '../../utils/data/data';
-import { countryList } from '../../utils/data/coutry';
-import { directorsList } from '../../utils/data/directors';
-import { useGetActorsQuery } from '../../store/actorApi';
-import * as contentConst from '../../utils/constants/content';
+import { IMovie } from '../../../types/media';
+import { ageItemsData, categoryMovies, yearMedia } from '../../../utils/data/data';
+import { countryList } from '../../../utils/data/coutry';
+import { directorsList } from '../../../utils/data/directors';
+import { useGetActorsQuery } from '../../../store/actorApi';
+import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCamera, faVideo } from '@fortawesome/free-solid-svg-icons';
-import style from './AddItemForm.module.css';
+import style from '../AddItemForm.module.css';
 
 interface IMovieProps {
   movie: IMovie;
@@ -33,7 +33,7 @@ const MovieForm: FC<IMovieProps> = ({
   deleteActor,
   resetFormHandler,
 }) => {
-  const {data: actors} = useGetActorsQuery('')
+  const {data: actors} = useGetActorsQuery('');
 
   return (
     <form className={style.form}>
@@ -242,8 +242,7 @@ const MovieForm: FC<IMovieProps> = ({
         </div>
         <div className={style.column2}>
           <button className={style.reset}
-            onClick={(e: MouseEvent<HTMLButtonElement>) => resetFormHandler(e)}
-          >
+            onClick={(e: MouseEvent<HTMLButtonElement>) => resetFormHandler(e)}>
           {contentConst.resetForm}
           </button>
         </div>

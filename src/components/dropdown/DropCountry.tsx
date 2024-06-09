@@ -1,11 +1,11 @@
-import React, {useState, FC, useRef, useEffect} from 'react';
+import {useState, FC, useRef, useEffect} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { countryList } from '../../utils/data/coutry';
 import { setMovieCountry } from '../../store/movieOptionsSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
-import * as contentConst from '../../utils/constants/content'
-import style from './Drop.module.css'
+import * as contentConst from '../../utils/constants/content';
+import style from './Drop.module.css';
 
 interface IDropCountryProps {
   existCountry: string[];
@@ -26,12 +26,12 @@ const DropCountry: FC<IDropCountryProps> = ({
         const checkIfClickedOutside = (e:any) => {
 
           if (myRef.current && !myRef.current.contains(e.target)) {
-            setDropdownDisplay(false) 
+            setDropdownDisplay(false);
           }
         }
-        document.addEventListener('click', checkIfClickedOutside)
+        document.addEventListener('click', checkIfClickedOutside);
         return () => {
-          document.removeEventListener('click', checkIfClickedOutside)
+          document.removeEventListener('click', checkIfClickedOutside);
         }
       }, [])
 
@@ -52,7 +52,7 @@ const DropCountry: FC<IDropCountryProps> = ({
             {countryList.map((item) => (
                 <label className={style['check-container']} key={item.id}>
                  <input onChange={(e) => {
-                     dispatch(setMovieCountry(item.name))
+                     dispatch(setMovieCountry(item.name));
                      setCheckedCountry({
                       ...checkedCountry,
                         [item.id]: e.target.checked,
@@ -66,7 +66,6 @@ const DropCountry: FC<IDropCountryProps> = ({
                  <span className={style.checkmark}></span>
                  <label htmlFor={item.value}>{item.name}</label>
                  </label>
-                
             ))
             }
         </div>}

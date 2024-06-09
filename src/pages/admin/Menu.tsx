@@ -5,13 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '../../hooks/reduxHook';
 import { useGetUnreadMessagesQuery } from '../../store/chatApi';
 import ENV from '../../env.config';
-import {
-  faImages,
-  faFilm,
-  faAddressCard,
-  faNewspaper,
-  faEnvelope,
-  faCreditCard,
+import { faImages, faFilm, faAddressCard, faNewspaper, faEnvelope, faCreditCard
 } from '@fortawesome/free-solid-svg-icons';
 import style from './Admin.module.css';
 
@@ -24,7 +18,7 @@ const Menu: FC = () => {
   useEffect(() => {
     if (unreadMessages) {
       let res = unreadMessages.reduce((acc:any, el:any) => acc + el.qty, 0);
-      setCount(res)
+      setCount(res);
     }
   }, [unreadMessages])
 
@@ -54,7 +48,7 @@ const Menu: FC = () => {
           <span>{contentConst.addActor}</span>
         </div>
       </div>
-      <div className={style.item} onClick={() => navigate(`/admin/support-chats`)}>
+      <div className={style.item} onClick={() => navigate(`${ENV.SUPPORT_CHATS}`)}>
         {unreadMessages && 
         unreadMessages.length > 0 && <div className={style.unread}>{count}</div>}
         <div className={style.icon}>

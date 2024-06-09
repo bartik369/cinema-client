@@ -21,16 +21,16 @@ const MainSlider: FC = () => {
 
   return (
     <div className={style.carousel__container}>
-    {slides ? (
-      <CarouselProvider
-      naturalSlideWidth={100}
-      naturalSlideHeight={55}
-      totalSlides={slides! && slides!.length}
-      visibleSlides={1}
-      currentSlide={1}
-      isPlaying={true}
-      interval={5000}
-      infinite={true}
+    {slides 
+    ? (<CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={55}
+        totalSlides={slides! && slides!.length}
+        visibleSlides={1}
+        currentSlide={1}
+        isPlaying={true}
+        interval={5000}
+        infinite={true}
     >
       <ButtonBack className={style.btn_prev}>
         <FontAwesomeIcon className={style.chevron} icon={faChevronLeft} />
@@ -42,10 +42,7 @@ const MainSlider: FC = () => {
         {slides &&
           slides.map((slide) => (
             <Link  key={slide._id} to={`${ENV.MOVIES_URL}${slide.movieLink}`}>
-              <Slide
-                className={style['carousel__inner-slide']}
-                index={0}
-              >
+              <Slide className={style['carousel__inner-slide']} index={0}>
                 <div className={style.description}>{slide.description}</div>
                 <button className={style.watch}>{contentConst.watch}</button>
                 <img
@@ -57,7 +54,8 @@ const MainSlider: FC = () => {
           ))}
       </Slider>
     </CarouselProvider>
-    ): (<Loader />)}
+    )
+    : (<Loader />)}
     </div>
   );
 };

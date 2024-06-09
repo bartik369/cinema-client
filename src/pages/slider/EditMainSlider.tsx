@@ -1,17 +1,15 @@
-import React, { FC, useState, useEffect, MouseEvent, FormEvent } from 'react';
+import { FC, useState, useEffect, MouseEvent, FormEvent } from 'react';
 import { ISlider, ISliderFormData } from '../../types/media';
 import {
   useAddSlideMutation,
-  useGetSlidesQuery,
   useGetSlideMutation,
   useDeleteSlideMutation,
   useUpdateSideMutation,
 } from '../../store/adminApi';
-import EditSliderForm from '../../components/forms/EditSliderForm';
+import EditSliderForm from '../../components/forms/slider/EditSliderForm';
 import SlidersList from '../../components/sliders/SlidersList';
 import * as contentConst from '../../utils/constants/content';
 import style from './EditMainSlider.module.css';
-import { error } from 'console';
 
 const EditMainSlider: FC = () => {
   const [slider, setSlider] = useState<ISlider>({

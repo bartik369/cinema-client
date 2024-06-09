@@ -56,17 +56,13 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
 
   return (
     <div className={style.auth}>
-       <div className={style.toast}>
-      <ToastContainer
-      theme="colored"
-      autoClose={7000}
-      position="top-center"
-       />
-       </div>
-       <div className={style.inner}>
-      <div className={style.banner}>
-        <img src={authBanner} alt="" />
+      <div className={style.toast}>
+        <ToastContainer theme="colored" autoClose={7000} position="top-center"/>
       </div>
+      <div className={style.inner}>
+        <div className={style.banner}>
+          <img src={authBanner} alt="" />
+        </div>
       <div className={style['form-wrap']}>
       <form className={style.form} action='' onSubmit={create}>
         <div className={style.title}>{contentConst.signupTitle}</div>

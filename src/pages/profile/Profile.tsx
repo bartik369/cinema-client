@@ -1,4 +1,4 @@
-import React, { FC} from 'react';
+import { FC} from 'react';
 import { useProfileUserQuery } from '../../store/authApi';
 import { useAppSelector } from '../../hooks/reduxHook';
 import * as contentConst from '../../utils/constants/content';
@@ -22,8 +22,6 @@ const Profile: FC = () => {
   const user = useAppSelector((state) => state.auth.user);
   const { data: profile } = useProfileUserQuery(user._id);
 
-  console.log(profile)
-
   return (
     <div className={style.container}>
       {profile && (
@@ -33,10 +31,10 @@ const Profile: FC = () => {
               <img src={plan} alt='' />
               {contentConst.subscription}
             </div>
-            {user && user.member.includes('START') ? (
+            {user && user.member.includes(contentConst.START) ? (
               <div className={style.info}>Plan-1</div>
             ) : (
-              'VIP'
+              contentConst.VIP
             )}
           </div>
           <div className={style.bill}>

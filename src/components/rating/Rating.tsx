@@ -7,18 +7,18 @@ import { IMovie } from '../../types/media';
 import style from './Rating.module.css';
 
 interface IRatingProps  {
-    setVisibleRating: (visibleRating: boolean) => void;
-    ratingHandler: (value: number) => void;
     visibleRating: boolean;
     successVote: boolean;
     movie: IMovie;
+    setVisibleRating: (visibleRating: boolean) => void;
+    ratingHandler: (value: number) => void;
 }
 const Rating: FC<IRatingProps> = ({
-    setVisibleRating, 
     visibleRating,
-    ratingHandler,
     successVote,
     movie,
+    setVisibleRating,
+    ratingHandler,
 }) => {
     return (
         <div className={style.rating}>
@@ -30,11 +30,13 @@ const Rating: FC<IRatingProps> = ({
                 <div className={style.en}>{movie.titleEn}</div>
                 <div className={style.numbers}>
                 {ratingMovie.map((item) =>
-                 <div className={style.item} onClick={() => ratingHandler(item.value)} key={item.id}>{item.value}</div>
+                 <div className={style.item} 
+                    onClick={() => ratingHandler(item.value)} key={item.id}>{item.value}</div>
                 )}
                 </div>
             </div>
-            <button className={style.close} onClick={() => setVisibleRating(!visibleRating)}>
+            <button className={style.close} 
+                onClick={() => setVisibleRating(!visibleRating)}>
             <FontAwesomeIcon icon={faXmark} />
             </button>
         </div>
