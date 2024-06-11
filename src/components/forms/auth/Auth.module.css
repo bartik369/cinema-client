@@ -131,7 +131,7 @@
     border: none;
     cursor: pointer;
     padding: 13px 40px;
-    background-color: #3e29bf;
+    background-color: #975A5E;
     color: rgb(255, 255, 255);
     font-family: inherit;
     font-size: 15px;
@@ -142,7 +142,7 @@
 }
 
 .enter-btn:hover {
-    background-color: #27bda8;
+    background-color: #a76569;
 }
 
 .form .switch {

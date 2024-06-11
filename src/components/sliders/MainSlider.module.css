@@ -44,7 +44,7 @@
 
 .btn_next:hover,
 .btn_prev:hover {
-    background-color: #fd8841;
+    background-color: #975A5E;
 }
 
 .chevron {
@@ -121,7 +121,7 @@
 
 .carousel__inner-slide .watch {
     padding: 12px 20px;
-    background-color: #3e29bf;
+    background-color: #453953;
     border-radius: 4px;
     color: #fff;
     font-family: inherit;
@@ -136,7 +136,7 @@
 }
 
 .carousel__inner-slide .watch:hover {
-    background-color: #27bda8;
+    background-color: #85494d;
 }
 
 .carousel__inner-slide::after {
