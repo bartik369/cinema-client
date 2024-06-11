@@ -22,8 +22,9 @@ const MediaFile: FC<MediaFileProps> = ({ media, message, conversationId }) => {
         if (item._id === message.mediaId) {
           return (
               <Link className={style['file-info']} 
-                key={item._id} 
+                key={item._id}
                 to={`${ENV.API_URL_UPLOADS_CHAT_MEDIA}${conversationId}/${item.file}`}
+                target="_blank"
               >
               <div className={style.icon}>
                 <FileIcon
