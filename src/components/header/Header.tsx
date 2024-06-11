@@ -1,4 +1,4 @@
-import  React, { FC, useEffect, useState, useRef, MouseEvent } from 'react';
+import { FC, useEffect, useState, useRef, MouseEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../navigation/Navbar';
 import Search from '../search/Search';
@@ -10,7 +10,7 @@ import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars, faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content'
-import Glasses from '../../assets/pics/cinema.svg';
+import Glasses from '../../assets/pics/cinema.png';
 import Login from '../../assets/pics/login.svg';
 import style from './Header.module.css';
 

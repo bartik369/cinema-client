@@ -50,7 +50,7 @@
 
 .envelope .count {
     position: absolute;
-    background-color: #3e29bf;
+    background-color: #4bada0;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -146,15 +146,15 @@
 @keyframes pulse {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(146, 125, 238, 0.7);
+        box-shadow: 0 0 0 0 rgba(125, 238, 198, 0.7);
     }
     70% {
         transform: scale(1);
-        box-shadow: 0 0 0 10px rgba(163, 145, 245, 0);
+        box-shadow: 0 0 0 10px rgba(145, 245, 228, 0);
     }
     100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(119, 92, 239, 0);
+        box-shadow: 0 0 0 0 rgba(92, 239, 232, 0);
     }
 }
 

@@ -14,12 +14,11 @@ const PrivateRoutes: FC<IPrivateRoutesProps> = ({ allowedRoles }) => {
 
   return (
     <div>
-      {token && user.roles.length === 0 
-      ? (<Loader />) 
-      : (token && user) &&
+       {(token && user) && 
         user.roles.find((role) => allowedRoles?.includes(role)) 
-        ? (<Outlet />) 
-        : (<Navigate to="/" state={{ from: location }} replace />)}
+          ? (<Outlet />) 
+          : (<Navigate to="/" state={{ from: location }} replace />)
+        }
     </div>
   );
 };

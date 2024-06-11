@@ -36,7 +36,7 @@
 }
 
 .logout:hover {
-    color: #5be8d5;
+    color: #e2a6b6;
 }
 
 .profile-menu ul li:not(:last-child) {
@@ -64,9 +64,9 @@ ul.items {}
 }
 
 .profile-menu .active {
-    color: #5be8d5;
+    color: #e2a6b6;
 }
 
 .profile-menu li a:hover {
-    color: #5be8d5;
+    color: #e2a6b6;
 }

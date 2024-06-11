@@ -22,11 +22,10 @@
     display: flex;
     align-items: center;
     top: -40px;
-    padding: 7px 12px;
+    padding: 7px 32px 7px 12px;
     font-size: 12px;
     width: 100%;
     max-width: 300px;
-    overflow-y: scroll;
     height: 32px;
 }
 

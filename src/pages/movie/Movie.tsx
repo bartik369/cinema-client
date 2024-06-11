@@ -51,8 +51,6 @@ const Movie: FC = () => {
     }
   }, [id]);
 
-  console.log("ovi")
-
   useEffect(() => {
     if (movie && user) {
       getMovieActors(movie.actors);
@@ -83,7 +81,7 @@ const Movie: FC = () => {
           setSuccessVote(false);
         }, 2000);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log(error));
     }
   };
 
@@ -97,9 +95,9 @@ const Movie: FC = () => {
       await addFavorite(favoriteData).then(() => {
       getFavorites({ id: user._id });
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log(error));
     } else {
-      toast.error(contentConst.errorAddFavotite)
+      toast.error(contentConst.errorAddFavotite);
     }
   };
 
@@ -122,13 +120,11 @@ const Movie: FC = () => {
             position="top-center"
           />
           <div className={style['video-layer']}>
-            {movie.trailer ? (
-              <video className={style.video} autoPlay muted loop
+            {movie.trailer 
+            ? (<video className={style.video} autoPlay muted loop
                 src={`${ENV.API_URL_UPLOADS_MOVIES}${movie.trailer}`}
-              />
-            ) : (
-              <img className={style.cinema} src={cinema} alt="" />
-            )}
+              />) 
+            : (<img className={style.cinema} src={cinema} alt="" />)}
             <img className={style.vignette} src={vignette} alt='' />
           </div>
           <div className={style.inner}>
