@@ -19,6 +19,12 @@ export const actorApi = createApi({
         method: "GET",
       }),
     }),
+    getAllActors: builder.query<IActor[], void>({
+      query: () => ({
+        url: `/all-actors`,
+        method: "GET",
+      }),
+    }),
     getMoviesActor: builder.query<any, string>({
       query: (id) => ({
         url: `${ENV.API_GET_MOVIE_BY_ACTOR}${id}`,
@@ -47,4 +53,5 @@ export const {
   useGetActorsQuery,
   useGetActorQuery,
   useGetMoviesActorQuery,
+  useGetAllActorsQuery
 } = actorApi;

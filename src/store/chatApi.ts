@@ -30,9 +30,6 @@ export const chatApi = createApi({
                url: `${ENV.API_GET_MESSAGES}${id}`,
                method: 'GET',
            }),
-        
-
-
            providesTags: (result) =>
            result 
            ? [...result.map(({ _id }) => ({ type: 'Messages' as const, _id })), 'Messages']

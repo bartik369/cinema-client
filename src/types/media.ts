@@ -12,7 +12,7 @@ export interface IMovie {
     _id?: string;
     titleEn: string;
     titleRu: string;
-    picture: string;
+    picture?: string;
     trailer?: string;
     genre: string[];
     year: string;
@@ -67,6 +67,11 @@ export interface IMovieFavorites {
 }
 export interface IExistFavorite {
     id: string
+}
+
+export interface IFilter {
+    filter: IFilterMovie;
+    page: number;
 }
 
 export interface IFilterMovie {

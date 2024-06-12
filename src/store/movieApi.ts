@@ -7,7 +7,7 @@ import {
     IExistFavorite,
     IListResponse
   } from './../types/media';
-  import { IMovieProperties } from './../types/media';
+  import { IMovieProperties, IFilter } from './../types/media';
 import ENV from '../env.config';
 
 export const movieApi = createApi({
@@ -15,7 +15,7 @@ export const movieApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: ENV.API_URL }),
   tagTypes: ['Movies', 'Rating'],
   endpoints: (builder) => ({
-    getMovies: builder.query<IListResponse<IMovie>, any>({
+    getMovies: builder.query<IListResponse<IMovie>, IFilter>({
       query: (data) => ({
         url: `${ENV.API_MOVIES}`,
         method: "POST",

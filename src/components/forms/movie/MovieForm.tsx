@@ -3,7 +3,7 @@ import { IMovie } from '../../../types/media';
 import { ageItemsData, categoryMovies, yearMedia } from '../../../utils/data/data';
 import { countryList } from '../../../utils/data/coutry';
 import { directorsList } from '../../../utils/data/directors';
-import { useGetActorsQuery } from '../../../store/actorApi';
+import { useGetAllActorsQuery } from '../../../store/actorApi';
 import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCamera, faVideo } from '@fortawesome/free-solid-svg-icons';
@@ -33,7 +33,9 @@ const MovieForm: FC<IMovieProps> = ({
   deleteActor,
   resetFormHandler,
 }) => {
-  const {data: actors} = useGetActorsQuery('');
+  const {data: actors} = useGetAllActorsQuery();
+
+  console.log(actors && actors)
 
   return (
     <form className={style.form}>
@@ -176,7 +178,7 @@ const MovieForm: FC<IMovieProps> = ({
               {contentConst.select}
             </option>
             {actors &&
-              actors.data.map((item) => (
+              actors.map((item) => (
                 <option key={item._id}>{item.nameRu}</option>
               ))}
           </select>

@@ -36,6 +36,8 @@ const AddMovie: FC = () => {
     });
     file && formData.append('file', file);
     trailer && formData.append('trailer', trailer);
+
+    console.log(formData)
     formData && addMovie(formData);
   };
 
