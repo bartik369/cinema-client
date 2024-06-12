@@ -93,7 +93,7 @@ const Input: FC<IInputProps> = ({
           if (item !== e.target) {
             setMessageMenu('');
             setMessage({ ...message, content: '' });
-            setReplyId('');
+            // setReplyId('');
           }
         });
       }

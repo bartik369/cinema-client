@@ -73,7 +73,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
 
           if (item !== e.target) {
             setMessageMenu('');
-            setReplyId('');
+            // setReplyId('');
           }
         });
       }

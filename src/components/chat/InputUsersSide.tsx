@@ -33,7 +33,7 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
                 message._id === replyId && 
                 <div className={style['reply-for']}>
                   <FontAwesomeIcon icon={faReply} className={style['reply-icon']}/>
-                  {message.content}
+                  {message.content.slice(0, 30)}...
                   <FontAwesomeIcon onClick={resetReplyHandler} 
                   icon={faXmark} className={style['reset-reply']} />
                 </div>

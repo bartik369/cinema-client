@@ -89,7 +89,7 @@ ul li {
     background-color: #43359e;
     color: #fff;
     font-size: 15px;
-    z-index: 9;
+    z-index: 99;
     transition: all .6s ease-in-out;
 }
 

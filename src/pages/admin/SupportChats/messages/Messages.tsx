@@ -1,4 +1,4 @@
-import { FC, useEffect, useState} from 'react';
+import { FC, useState} from 'react';
 import {useGetMessageMutation, useDeleteMessageMutation, useGetConversationMediaQuery 
 } from '../../../../store/chatApi';
 import { IUser } from '../../../../types/auth';
