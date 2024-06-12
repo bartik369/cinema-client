@@ -19,15 +19,15 @@
 }
 
 .header-nav .menu-items .menu-item {
-    color: #d2dcee;
+    color: #bcb8da;
 }
 
 .header-nav .menu-items .active {
-    color: #e2a6b6;
+    color: #ffffff;
 }
 
 .menu-item:hover {
-    color: #e2a6b6 !important;
+    color: #ffffff !important;
 }
 
 .menu-item .icon,

@@ -15,10 +15,10 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
-    background-color: #12131c;
+    background-color: #181825;
     border: 1px solid #161823;
     border-radius: 10px;
-    box-shadow: 0 2px 2px 0 rgba(37, 31, 83, 0.06), 0 4px 4px 0 rgba(37, 31, 83, 0.06), 0 6px 6px 0 rgba(37, 31, 83, 0.06), 0 16px 16px 0 rgba(37, 31, 83, 0.06), 0 32px 32px 0 rgba(37, 31, 83, 0.06), 0 64px 64px 0 rgba(37, 31, 83, 0.06);
+    /* box-shadow: 0 2px 2px 0 rgba(37, 31, 83, 0.06), 0 4px 4px 0 rgba(37, 31, 83, 0.06), 0 6px 6px 0 rgba(37, 31, 83, 0.06), 0 16px 16px 0 rgba(37, 31, 83, 0.06), 0 32px 32px 0 rgba(37, 31, 83, 0.06), 0 64px 64px 0 rgba(37, 31, 83, 0.06); */
 }
 
 .portrait img {
@@ -27,7 +27,7 @@
     height: 100%;
     object-fit: cover;
     border: 1px solid #161823;
-    box-shadow: 0 2px 2px 0 rgba(37, 31, 83, 0.06), 0 4px 4px 0 rgba(37, 31, 83, 0.06), 0 6px 6px 0 rgba(37, 31, 83, 0.06), 0 16px 16px 0 rgba(37, 31, 83, 0.06), 0 32px 32px 0 rgba(37, 31, 83, 0.06), 0 64px 64px 0 rgba(37, 31, 83, 0.06);
+    /* box-shadow: 0 2px 2px 0 rgba(37, 31, 83, 0.06), 0 4px 4px 0 rgba(37, 31, 83, 0.06), 0 6px 6px 0 rgba(37, 31, 83, 0.06), 0 16px 16px 0 rgba(37, 31, 83, 0.06), 0 32px 32px 0 rgba(37, 31, 83, 0.06), 0 64px 64px 0 rgba(37, 31, 83, 0.06); */
 }
 
 span.nf {

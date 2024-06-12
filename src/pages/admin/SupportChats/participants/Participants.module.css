@@ -58,10 +58,10 @@
 .participants .item:hover {
     padding: 8px 20px 8px 25px;
     cursor: pointer;
-    background-color: #875e73;
+    background-color: #824D74;
     margin-bottom: 12px;
     border-radius: 8px;
-    border-bottom: 4px solid #A78295;
+    border-bottom: 4px solid #643b59;
 }
 
 .participants .item-active .user .info .ticket,

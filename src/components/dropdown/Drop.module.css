@@ -103,8 +103,8 @@ fieldset {
 }
 
 .check-container input:checked~.checkmark {
-    border: 1px solid #4fd1bf;
-    background-color: #4fd1bf;
+    border: 1px solid #DBAFA0;
+    background-color: #DBAFA0;
 }
 
 .check-container input:disabled~.checkmark {

@@ -3,16 +3,11 @@
     box-sizing: border-box;
     border-radius: 10px;
     padding: 20px 30px;
-    background-color: #12131c;
+    background-color: #181825;
     border: 1px solid #161823;
     display: flex;
     flex-direction: column;
     transition: all 1.3s;
-    box-shadow: 0 2px 2px 0 rgba(37, 31, 83, 0.06), 0 4px 4px 0 rgba(37, 31, 83, 0.06), 0 6px 6px 0 rgba(37, 31, 83, 0.06), 0 16px 16px 0 rgba(37, 31, 83, 0.06), 0 32px 32px 0 rgba(37, 31, 83, 0.06), 0 64px 64px 0 rgba(37, 31, 83, 0.06);
-}
-
-.form:hover {
-    box-shadow: 0 4px 4px 0 rgba(46, 46, 110, 0.06), 0 8px 8px 0 rgba(46, 46, 110, 0.06), 0 16px 16px 0 rgba(46, 46, 110, 0.06), 0 32px 32px 0 rgba(46, 46, 110, 0.06), 0 64px 64px 0 rgba(46, 46, 110, 0.06), 0 128px 128px 0 rgba(46, 46, 110, 0.06);
 }
 
 
@@ -21,7 +16,7 @@
 input,
 textarea,
 select {
-    background-color: #191a27;
+    background-color: #161622;
     border: 1px solid #1f2334;
     font-family: "Roboto", sans-serif;
     padding: 11px 6px;
@@ -114,7 +109,7 @@ span.input-info {
     padding: 9.2px;
     margin: 0;
     border-radius: 4px;
-    background-color: #3e29bf;
+    background-color: #43359e;
     display: flex;
     width: fit-content;
     align-items: center;
@@ -123,7 +118,7 @@ span.input-info {
 }
 
 .photo-layer:hover {
-    background-color: #27bda8;
+    background-color: #80429f;
 }
 
 .photo-icon {
@@ -175,7 +170,7 @@ span.input-info {
 }
 
 .close-btn {
-    color: #f43c57;
+    color: #da687b;
     border-radius: 50%;
     cursor: pointer;
     font-size: 15px;
@@ -198,7 +193,7 @@ span.hide {
     margin: 0;
     border-radius: 4px;
     border: none;
-    background-color: #d5461f;
+    background-color: #9E4784;
     color: #fff;
     display: flex;
     width: fit-content;
@@ -209,7 +204,7 @@ span.hide {
 }
 
 .main-column .reset:hover {
-    background-color: #ff4a4a;
+    background-color: #c257a2;
 }
 
 @media screen and (max-width: 960px) {

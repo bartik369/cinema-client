@@ -17,7 +17,7 @@
 }
 
 .pagination .active {
-    background-color: #6e8fd1;
+    background-color: #BB8493;
 }
 
 .pagination .notactive {
@@ -57,13 +57,13 @@
 
 .pagination .prev:hover,
 .pagination .next:hover {
-    color: #6e8fd1;
+    color: #d698a9;
 }
 
 .pagination .next:hover .next-arrow,
 .pagination .prev:hover .prev-arrow {
-    border-top: 2px solid #6e8fd1;
-    border-right: 2px solid #6e8fd1;
+    border-top: 2px solid #d698a9;
+    border-right: 2px solid #d698a9;
 }
 
 .pagination .next:disabled .next-arrow,
