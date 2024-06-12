@@ -7,6 +7,7 @@ import {
     IExistFavorite,
     IListResponse
   } from './../types/media';
+  import { IMovieProperties } from './../types/media';
 import ENV from '../env.config';
 
 export const movieApi = createApi({
@@ -92,7 +93,7 @@ export const movieApi = createApi({
         body: {search: data},
       }),
     }),
-    getProperties: builder.query<any, void>({
+    getProperties: builder.query<IMovieProperties, void>({
       query: () => ({
         url: `${ENV.API_MOVIE_PROPERTIES}`,
         method: "GET",

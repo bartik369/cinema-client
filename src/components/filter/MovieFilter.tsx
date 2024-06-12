@@ -37,21 +37,21 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
     <div className={style.filter}>
       <div className={style.item}>
         <DropCategory 
-        existGenre={properties && properties.genreArr}
+        existGenre={properties?.genre!}
         checkedGenre={checkedGenre}
         setCheckedGenre={setCheckedGenre}
         />
       </div>
       <div className={style.item}>
       <DropCountry 
-      existCountry={properties && properties.countryArr}
-      checkedCountry={checkedCountry}
+      existCountry={properties?.country!}
+      checkedCountry={checkedCountry!}
       setCheckedCountry={setCheckedCountry}
       />
       </div>
       <div className={style.item}>
        <DropYear 
-       existYear={properties && properties.yearArr}
+       existYear={properties?.year!}
        checkedYear={checkedYear}
        setCheckedYear={setCheckedYear}
        />
