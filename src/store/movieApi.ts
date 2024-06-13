@@ -6,8 +6,8 @@ import {
     IMovieFavorites,
     IExistFavorite,
     IListResponse
-  } from './../types/media';
-  import { IMovieProperties, IFilter } from './../types/media';
+  } from '../types/media';
+  import { IMovieProperties, IFilter } from '../types/media';
 import ENV from '../env.config';
 
 export const movieApi = createApi({

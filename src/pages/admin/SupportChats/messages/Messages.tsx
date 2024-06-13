@@ -1,5 +1,5 @@
 import { FC, useState} from 'react';
-import {useGetMessageMutation, useDeleteMessageMutation, useGetConversationMediaQuery 
+import {useGetMessageMutation, useDeleteMessageMutation, useGetConversationMediaQuery
 } from '../../../../store/chatApi';
 import { IUser } from '../../../../types/auth';
 import { IMessage } from '../../../../types/chat';
@@ -63,6 +63,7 @@ const Messages: FC<IMessagesProps> = ({
           setMessageMenu('');
         });
   };
+
   const replayMessageHandler = (id: string) => {
     if (id) {
       messages && messages.forEach((item) => {
@@ -85,7 +86,7 @@ const Messages: FC<IMessagesProps> = ({
   return (
     <>
       <div className={style['list-messages']}>
-        {messages ? messages.map((message) => message.senderId !== user._id 
+        {messages ? messages.map((message) => message.senderId !== user._id
           ? <div key={message._id}>
             <Recipient
               message={message}
@@ -112,7 +113,7 @@ const Messages: FC<IMessagesProps> = ({
             </div>
 
         )
-        : participants 
+        : participants
           ? <div className={style.notification}>
             {contentConst.noActiveChats}
           </div>

@@ -71,7 +71,7 @@ const Recipient:FC<IRecipientProps> = ({
                 </div>
                 <div className={style.text}>
                   {message.replyTo && messages.map((item) =>
-                      item._id == message.replyTo && (
+                      item._id === message.replyTo && (
                       <div className={style.reply} key={item._id}>
                         <span>{contentConst.you}</span>
                         {item.content.slice(0, 40)}...
