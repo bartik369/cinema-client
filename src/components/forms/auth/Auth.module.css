@@ -25,6 +25,7 @@
 .inner .banner {
     background-color: rgb(15, 15, 15);
     overflow: hidden;
+    border-radius: 12px 0 0 12px;
 }
 
 .banner img {
@@ -37,6 +38,7 @@
     align-items: center;
     background-color: #10111a;
     padding: 30px 40px;
+    border-radius: 0 12px 12px 0;
 }
 
 .inner .form {
@@ -117,6 +119,7 @@
     width: 100%;
     padding: 11px 20px;
     background-color: #161723;
+    border-radius: 12px !important;
 }
 
 .label {
@@ -131,18 +134,18 @@
     border: none;
     cursor: pointer;
     padding: 13px 40px;
-    background-color: #975A5E;
+    background-color: #66347F;
     color: rgb(255, 255, 255);
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
     margin: 0 auto;
     margin-top: 27px;
-    border-radius: 6px;
+    border-radius: 18px;
     transition: all .5s ease-in-out;
 }
 
 .enter-btn:hover {
-    background-color: #a76569;
+    background-color: #7b4198;
 }
 
 .form .switch {

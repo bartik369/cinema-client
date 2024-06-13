@@ -15,7 +15,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border: 1px solid #161823;
 }
 
 .info {
@@ -24,8 +23,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    background-color: #181825;
-    border: 1px solid #161823;
+    background-color: #1e2031;
     border-radius: 10px;
 }
 

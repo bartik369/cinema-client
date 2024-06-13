@@ -2,12 +2,12 @@
     width: 100%;
     box-sizing: border-box;
     border-radius: 10px;
-    padding: 20px 30px;
-    background-color: #181825;
-    border: 1px solid #161823;
+    padding: 20px 30px 30px;
+    background-color: #1e2031;
+    /* border: 1px solid #3b3270; */
     display: flex;
     flex-direction: column;
-    transition: all 1.3s;
+    /* transition: all 1.3s; */
 }
 
 
@@ -16,14 +16,14 @@
 input,
 textarea,
 select {
-    background-color: #161622;
-    border: 1px solid #1f2334;
+    background-color: #1a1b2a;
+    border: 1px solid #26273d;
     font-family: "Roboto", sans-serif;
-    padding: 11px 6px;
+    padding: 11px;
     outline: none;
     font-size: 11px;
-    color: #8a8ea3;
-    border-radius: 4px;
+    color: #b6bad0;
+    border-radius: 12px;
     cursor: pointer;
 }
 
@@ -38,8 +38,8 @@ select:focus {
     outline: none;
     font-size: 11px;
     color: #a4aec1;
-    background-color: #1c1d2e;
-    border: 1px solid #2e334c;
+    background-color: #222331;
+    border: 1px solid #484a68;
 }
 
 input::placeholder {
@@ -57,7 +57,7 @@ textarea::placeholder {
 }
 
 span.input-info {
-    color: #777ea7;
+    color: #8990b5;
     margin: 15px 0 5px;
     font-size: 13px;
     font-family: "Roboto", sans-serif;

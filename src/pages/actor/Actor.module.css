@@ -23,21 +23,17 @@
     font-size: 14px;
 }
 
+.actors .search input:hover {
+    border: 1px solid #975A5E !important;
+}
+
 .actors .reset-search {
     position: absolute;
     font-size: 17px;
-    color: #fff;
+    color: #ffffff;
     cursor: pointer;
     right: 17px;
     top: 14px;
-}
-
-.actors .reset-search:hover {
-    color: #fd8841;
-}
-
-.actors .search input:hover {
-    border: 1px solid #fd8841 !important;
 }
 
 .actor .info {
@@ -187,7 +183,7 @@
 }
 
 .actor .movies a:hover {
-    color: #fd8841;
+    color: #e2a6b6;
 }
 
 @media(max-width: 1100px) {
