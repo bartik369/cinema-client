@@ -44,7 +44,9 @@ const Recipient:FC<IRecipientProps> = ({
             <div className={style.block}>
             <div className={style.avatar}>
               {participants && participants.map((item) => item._id === message.senderId
-              && (<img key={item._id} src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${item.avatar}`|| defaultAvatar} alt="" />)
+              && (<img key={item._id}
+                       src={`${ENV.API_URL_UPLOADS_USERS_AVATAR}${item.avatar}`|| defaultAvatar}
+                       alt="" />)
               )}
             </div>
             </div>
@@ -87,6 +89,6 @@ const Recipient:FC<IRecipientProps> = ({
                 </div>
               </div>
     );
-};
+}
 
 export default React.memo(Recipient);

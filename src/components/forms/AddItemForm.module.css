@@ -4,10 +4,8 @@
     border-radius: 10px;
     padding: 20px 30px 30px;
     background-color: #1e2031;
-    /* border: 1px solid #3b3270; */
     display: flex;
     flex-direction: column;
-    /* transition: all 1.3s; */
 }
 
 
@@ -157,13 +155,13 @@ span.input-info {
 .genre .item {
     position: relative;
     width: fit-content;
-    color: #8f8f8f;
+    color: #e0e0e0;
     font-family: "Roboto", sans-serif;
     font-size: 11px;
     display: flex;
     align-items: center;
     padding: 7px;
-    border: 1px solid #2a2b2e;
+    border: 1px solid #975A5E;
     border-radius: 4px;
     margin-right: 5px;
     margin-bottom: 5px;

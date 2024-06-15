@@ -15,13 +15,13 @@
 .btn_prev {
     left: 0;
     margin-left: 10px;
-    box-shadow: rgba(13, 13, 21, 0.5) 0px 7px 29px 0px;
+    box-shadow: rgba(13, 13, 21, 0.5) 0 7px 29px 0;
 }
 
 .btn_next {
     right: 0;
     margin-right: 10px;
-    box-shadow: rgba(13, 13, 21, 0.5) 0px 7px 29px 0px;
+    box-shadow: rgba(13, 13, 21, 0.5) 0 7px 29px 0;
 }
 
 .btn_next,
@@ -107,7 +107,7 @@
     border-radius: 12px;
     margin: 10px;
     object-fit: cover;
-    box-shadow: rgba(13, 13, 21, 0.24) 0px 3px 8px;
+    box-shadow: rgba(13, 13, 21, 0.24) 0 3px 8px;
 }
 
 .carousel__inner img {
@@ -122,7 +122,7 @@
 .carousel__inner-slide .watch {
     padding: 12px 20px;
     background-color: #66347F;
-    border-radius: 12px;
+    border-radius: 8px;
     color: #fff;
     font-family: inherit;
     font-size: 12px;
