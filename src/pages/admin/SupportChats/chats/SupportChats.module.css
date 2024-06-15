@@ -5,6 +5,7 @@
     max-width: 1320px;
     height: 85vh;
     overflow: hidden;
+    position: relative;
 }
 
 .chats .conversations {
@@ -25,10 +26,10 @@
     .chats .conversations {
         background-color: #10111a;
         width: 300px;
-        overflow-y: scroll;
         padding: 12px;
         position: absolute;
         z-index: 99;
+        height: 85vh;
     }
 
     .chats .messages {
