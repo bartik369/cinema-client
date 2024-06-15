@@ -28,7 +28,7 @@ fieldset {
 .panel-three,
 .panel-five {
     position: absolute;
-    box-shadow: rgba(15, 15, 27, 0.7) 0px 50px 100px -20px, rgba(15, 15, 27, 0.8) 0px 30px 60px -30px;
+    box-shadow: rgba(15, 15, 27, 0.7) 0 50px 100px -20px, rgba(15, 15, 27, 0.8) 0px 30px 60px -30px;
     background-color: #1c1c2b;
     border: 1px solid #30354f;
     border-radius: 6px;

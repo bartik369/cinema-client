@@ -83,7 +83,6 @@
 
 .title {
     color: #ffffff;
-    font-weight: 300;
     text-align: center;
     font-family: inherit;
     font-weight: 600;
@@ -138,8 +137,7 @@
     color: rgb(255, 255, 255);
     font-family: inherit;
     font-size: 14px;
-    margin: 0 auto;
-    margin-top: 27px;
+    margin: 27px auto 0;
     border-radius: 18px;
     transition: all .5s ease-in-out;
 }

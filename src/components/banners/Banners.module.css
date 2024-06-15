@@ -1,7 +1,7 @@
 .commercial {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-row: 20px;
+    grid-row: 20;
 }
 
 .commercial .item {

@@ -108,6 +108,11 @@ ul li {
         max-width: 1320px;
         margin: 0 auto;
     }
+    .menu .chat-block {
+        right: 20px;
+        bottom: 100px;
+    }
+
 }
 
 @media (max-width: 800px) {
