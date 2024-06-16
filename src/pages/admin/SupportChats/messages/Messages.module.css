@@ -2,7 +2,8 @@
     font-family: inherit;
     padding: 15px 20px;
     overflow-y: scroll;
-    height: calc(100% - 97px);
+    height: calc(100% - 143px);
+    position: relative;
 }
 
 .typing {

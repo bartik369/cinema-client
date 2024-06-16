@@ -9,32 +9,53 @@
 }
 
 .chats .conversations {
-    background-color: #10111a;
-    width: 300px;
-    overflow-y: scroll;
-    padding: 12px;
+    width: 0;
+    overflow: hidden;
+    transition: all .5s ease;
 }
-
-.chats .messages {
+.chats .active {
+    background-color: #10111a;
+    flex: 0 0 320px;
+    overflow-y: scroll;
+    position: relative;
+}
+.chats .messages{
+    flex: 1 1 25%;
     background-color: #181825;
     background-image: url('../../../../assets/pics/chat-texture.png');
-    flex-grow: 1;
 }
+
+.chats .messages .chat-info {
+    width: 100%;
+    padding: 15px;
+    background-color: #975A5E;
+    display: flex;
+}
+
+.chats .messages .chat-info .toggle {
+   display: none;
+}
+
 
 @media (max-width: 850px) {
 
-    .chats .conversations {
-        background-color: #10111a;
-        width: 300px;
-        padding: 12px;
+    .chats .messages .chat-info .toggle {
+        display: flex;
+    }
+
+    .chats .burger {
+        width: 40px;
+        height: 40px;
+        background-color: #4b50d4;
         position: absolute;
-        z-index: 99;
-        height: 85vh;
+        z-index: 999;
+        left: 330px;
     }
 
     .chats .messages {
         background-color: #181825;
         background-image: url('../../../../assets/pics/chat-texture.png');
-        width: 100%;
+        flex-grow: 1;
     }
+
 }

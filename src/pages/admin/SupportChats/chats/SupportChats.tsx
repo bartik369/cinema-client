@@ -6,6 +6,7 @@ useGetMessagesQuery } from '../../../../store/chatApi';
 import Messages from '../messages/Messages';
 import Participants from '../participants/Participants';
 import style from './SupportChats.module.css';
+import ChatInfo from "../messages/ChatInfo";
 
 const SupportChats:FC = () => {
     const user = useAppSelector(state => state.auth.user);
@@ -20,6 +21,7 @@ const SupportChats:FC = () => {
     const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
     const {data: activeMessages} = useGetMessagesQuery(active && active, {skip: skipActive} );
     const [markMessageAsRead] = useMarkAsReadMutation();
+    const [visibleRecipients, setVisibleRecipients] = useState(true)
 
     useEffect(() => {
         if (user) {
@@ -50,12 +52,16 @@ const SupportChats:FC = () => {
             userId: user._id,
         });
     }}
+
+    const visibleBurger = () => {
+        setVisibleRecipients(!visibleRecipients);
+    }
     
     return (
         <div className={style.chats}>
-            <div className={style.conversations}>
-                <Participants 
-                    participants={participants?.usersInfo!} 
+            <div className={visibleRecipients ? style.active : style.conversations}>
+                <Participants
+                    participants={participants?.usersInfo!}
                     user={user}
                     lastMessages={participants?.lastMessages}
                     unreadMessages={unreadMessages!}
@@ -64,14 +70,18 @@ const SupportChats:FC = () => {
                 />
             </div>
             <div className={style.messages}>
-                <Messages 
+                <ChatInfo
+                    visibleBurger={visibleBurger}
+                    visibleRecipients={visibleRecipients}
+                />
+                <Messages
                     participants={participants?.usersInfo!}
                     conversationId={active}
                     recipientId={recipientId}
                     user={user}
                     messages={activeMessages || messages!}
                 />
-            </div>  
+            </div>
         </div>
     );
 };
