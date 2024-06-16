@@ -42,17 +42,21 @@ const SupportChats:FC = () => {
     }, [user, active]);
 
     const setRecipientHandler = (id:string) => {
-        setRecipientId(id)
+        setRecipientId(id);
         getConversationId(id).unwrap().then((data) => {
             setActive(data);
             setSkip(false);
-        })
+        });
+
         if (active) {
         markMessageAsRead({
             conversationId: active, 
             userId: user._id,
         });
-        setVisibleRecipients(false);
+
+        if (window.innerWidth < 851) {
+            setVisibleRecipients(false);
+        }
     }}
 
     const visibleBurger = () => {
