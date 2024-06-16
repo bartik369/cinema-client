@@ -6,6 +6,7 @@
     height: 85vh;
     overflow: hidden;
     position: relative;
+    font-family: inherit;
 }
 
 .chats .conversations {
@@ -27,31 +28,33 @@
 
 .chats .messages .chat-info {
     width: 100%;
-    padding: 15px;
-    background-color: #975A5E;
+    height: 50px;
+    background-color: #1d1e2d;
     display: flex;
+    align-items: center;
+    padding-left: 10px;
 }
 
 .chats .messages .chat-info .toggle {
    display: none;
 }
-
+.chats .messages .chat-info .number {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+}
 
 @media (max-width: 850px) {
 
     .chats .messages .chat-info .toggle {
         display: flex;
+        background-color: transparent;
+        border: none;
+        font-size: 21px;
+        color: #b2bac9;
     }
-
-    .chats .burger {
-        width: 40px;
-        height: 40px;
-        background-color: #4b50d4;
-        position: absolute;
-        z-index: 999;
-        left: 330px;
-    }
-
     .chats .messages {
         background-color: #181825;
         background-image: url('../../../../assets/pics/chat-texture.png');

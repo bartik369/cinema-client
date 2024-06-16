@@ -1,5 +1,6 @@
 import {FC, useState, useEffect} from 'react';
 import { useAppSelector } from '../../../../hooks/reduxHook';
+import {IParticipantInfo} from "../../../../types/chat";
 import {useGetConversationsQuery, useGetRecipientMessagesQuery, useGetConversationIdMutation,
 useGetActiveConverstionMutation,useGetUnreadMessagesQuery, useMarkAsReadMutation,
 useGetMessagesQuery } from '../../../../store/chatApi';
@@ -51,6 +52,7 @@ const SupportChats:FC = () => {
             conversationId: active, 
             userId: user._id,
         });
+        setVisibleRecipients(false);
     }}
 
     const visibleBurger = () => {
@@ -70,10 +72,16 @@ const SupportChats:FC = () => {
                 />
             </div>
             <div className={style.messages}>
-                <ChatInfo
-                    visibleBurger={visibleBurger}
-                    visibleRecipients={visibleRecipients}
-                />
+                {participants && participants.usersInfo.map((item: IParticipantInfo) =>
+                    item.conversationId === active &&
+                        <ChatInfo
+                            key={item._id}
+                            visibleBurger={visibleBurger}
+                            visibleRecipients={visibleRecipients}
+                            item={item}
+
+                        />
+                )}
                 <Messages
                     participants={participants?.usersInfo!}
                     conversationId={active}
