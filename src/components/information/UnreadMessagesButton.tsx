@@ -32,33 +32,33 @@ const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
   }, [unreadMessages]);
 
     return (
-      <>
-        {isAdmin ? (
-          <Link to={`${ENV.SUPPORT_CHATS}`}>
-            <div className={style.envelope}>
-              {unreadMessages?.length > 0 &&
-              <div className={style.count}>{count}</div>
-              }
-              <div className={style.icon}>
-                <img src={notifMessages} alt="" />
-              </div>
-            </div>
-          </Link>
-        ) : (
-          <div className={style.envelope} onClick={startChat}>
-            {!visibleChat 
-            ?  <>
-                {unreadMessages?.length > 0 &&
-                <div className={style.count}>{count}</div>}
-                <div className={style.icon}>
-                  <img src={ChatIcon} alt="" />
+        <div className={style['chat-block']}>
+            {isAdmin ? (
+                <Link to={`${ENV.SUPPORT_CHATS}`}>
+                    <div className={style.envelope}>
+                        {unreadMessages?.length > 0 &&
+                            <div className={style.count}>{count}</div>
+                        }
+                        <div className={style.icon}>
+                            <img src={notifMessages} alt=""/>
+                        </div>
+                    </div>
+                </Link>
+            ) : (
+                <div className={style.envelope} onClick={startChat}>
+                    {!visibleChat
+                        ? <>
+                            {unreadMessages?.length > 0 &&
+                                <div className={style.count}>{count}</div>}
+                            <div className={style.icon}>
+                                <img src={ChatIcon} alt=""/>
+                            </div>
+                        </>
+                        : <FontAwesomeIcon icon={faChevronDown}/>
+                    }
                 </div>
-              </>
-             : <FontAwesomeIcon icon={faChevronDown} />
-            }
-          </div>
-        )}
-      </>
+            )}
+        </div>
     );
 };
 

@@ -23,8 +23,8 @@ const [visible, setVisible] = useState(false);
             <div className={style['right-info']}>
             <div className={favorites && favorites.includes(movie._id as string) 
                   ? style.favorite 
-                  : style.nofavorite}
-                ><FontAwesomeIcon icon={faStar}/>
+                  : style.nofavorite}>
+                <FontAwesomeIcon icon={faStar}/>
             </div>
             {(movie.rating && movie.rating > 0)
             ? <div className={style.rating}>{movie.rating.toFixed(1)}</div>

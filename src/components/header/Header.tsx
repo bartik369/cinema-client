@@ -13,6 +13,7 @@ import * as contentConst from '../../utils/constants/content'
 import Glasses from '../../assets/pics/cinema.png';
 import Login from '../../assets/pics/login.svg';
 import style from './Header.module.css';
+import Logo from "./Logo";
 
 const Header: FC = () => {
   const token = useAppSelector(state => state.auth.token);
@@ -62,11 +63,7 @@ const Header: FC = () => {
         : style['nav-relative']}
       >
         <div className={style.container}>
-            <Link className={style.logo} to={'/'}>
-              <img src={Glasses} alt='' />
-              <div className={style.bold}>{contentConst.film}</div>
-              <span>{contentConst.library}</span>
-            </Link>
+          <Logo />
           <Navbar />
           <div className={style.right}>
             <div onClick={() => setVisible(true)} className={style.search}>

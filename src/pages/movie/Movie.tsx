@@ -13,17 +13,17 @@ import { setExistTrailer } from '../../store/movieOptionsSlice';
 import { useGetMovieActorsMutation } from '../../store/actorApi';
 import { IMovie, IMovieRating, IMovieAddFavorite } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
-import ENV from '../../env.config';
 import Rating from '../../components/rating/Rating';
+import MovieInfo from "./MovieInfo";
 import Casts from './Casts';
 import Loader from '../../components/loader/Loader';
+import RatingScore from "./RatingScore";
 import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import nonePoster from '../../assets/pics/blank_movie.jpg';
-import vignette from '../../assets/pics/vignette.png';
-import cinema from '../../assets/pics/cinema.jpg';
 import style from './Movies.module.css';
+import VideoLayer from "./VideoLayer";
+import Poster from "./Poster";
 
 const Movie: FC = () => {
   const dispatch = useAppDispatch()
@@ -56,18 +56,19 @@ const Movie: FC = () => {
       getMovieActors(movie.actors);
       getFavorites({ id: user._id });
     }
+
     if (movie && movie.trailer) {
       dispatch(setExistTrailer(true))
     } else {
       dispatch(setExistTrailer(false))
     }
+
     if (window.innerWidth < 1125) {
      dispatch(setExistTrailer(false))
      } 
   }, [movie, user]);
 
   const ratingHandler = async (value: number) => {
-
     if (movie) {
       const ratingData: IMovieRating = {
         id: movie._id!,
@@ -86,7 +87,6 @@ const Movie: FC = () => {
   };
 
   const favoriteHandler = async (_id: string) => {
-
     if (isAuth && user && movie) {
       const favoriteData: IMovieAddFavorite = {
         userId: user._id,
@@ -119,65 +119,26 @@ const Movie: FC = () => {
             autoClose={7000}
             position="top-center"
           />
-          <div className={style['video-layer']}>
-            {movie.trailer 
-            ? (<video className={style.video} autoPlay muted loop
-                src={`${ENV.API_URL_UPLOADS_MOVIES}${movie.trailer}`}
-              />) 
-            : (<img className={style.cinema} src={cinema} alt="" />)}
-            <img className={style.vignette} src={vignette} alt='' />
-          </div>
+          <VideoLayer movie={movie} />
           <div className={style.inner}>
-            <div className={style.poster}>
-              <img alt="" src={ movie.picture
-                    ? `${ENV.API_URL_UPLOADS_MOVIES}${movie.picture}`
-                    : nonePoster
-                }
-              />
-            </div>
+            <Poster movie={movie} />
             <div className={style.info}>
-              <div className={style['title-ru']}>{movie.titleRu}</div>
-              <div className={style['title-en']}>{movie.titleEn}</div>
-              <div className={style['ext-info']}>
-                <div className={style.sub}>{movie.year}</div>
-                <div className={style.sub}>{movie.country}</div>
-                <div className={style.sub}>
-                  {movie.time}
-                  <span>{contentConst.movieMins}</span>
-                </div>
-              </div>
-              <div className={style['ext-info']}>
-                <div className={style.category}>
-                  {movie &&
-                    movie.genre.map((item, index) => (
-                      <div className={style.item} key={index}>
-                        {item}
-                      </div>
-                    ))}
-                </div>
-              </div>
-              <div className={style.age}>{movie.ageCategory}</div>
-              <div className={style.description}>{movie.description}</div>
+              <MovieInfo movie={movie} />
               <div className={style.action}>
                 <div className={style.watch}>{contentConst.watch}</div>
                 <div className={favorites && favorites.movies.includes(movie._id as string)
                       ? style.favorite
                       : style.nofavorite
-                  }
-                >
-                  <FontAwesomeIcon
+                }>
+                  <FontAwesomeIcon icon={faStar}
                     onClick={() => favoriteHandler(movie._id as string)}
-                    icon={faStar}
                   />
                 </div>
-                <div 
-                className={style['movie-rating']}
-                onClick={() => setVisibleRating(true)}>
-                  <div className={style.number}>
-                    {movieRating && movieRating.toFixed(1)}
-                  </div>
-                  <div className={style.vote}>{contentConst.vote}</div>
-                </div>
+                <RatingScore
+                    movieRating={movieRating!}
+                    visibleRating={visibleRating}
+                    setVisibleRating={setVisibleRating}
+                />
               </div>
               <Casts actors={actors!}/>
             </div>

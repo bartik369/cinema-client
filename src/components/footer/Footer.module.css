@@ -74,30 +74,6 @@ ul li {
     flex-direction: column;
 }
 
-.menu .chat-block {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    right: 20px;
-    bottom: 20px;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    background-color: #4D3C77;
-    color: #fff;
-    font-size: 15px;
-    z-index: 9999;
-    transition: all .6s ease-in-out;
-}
-
-.menu .chat-block:hover {
-    box-shadow: 0 2px 2px 0 rgba(41, 66, 191, 0.06), 0 4px 4px 0 rgba(41, 66, 191, 0.06), 0 8px 8px 0 rgba(41, 66, 191, 0.06), 0 16px 16px 0 rgba(41, 66, 191, 0.06), 0 32px 32px 0 rgba(41, 66, 191, 0.06), 0 64px 64px 0 rgba(41, 66, 191, 0.06);
-    background-color: #5242ba;
-    transform: scale(1.03);
-}
 
 @media (max-width: 1140px) {
     .notrailer {
