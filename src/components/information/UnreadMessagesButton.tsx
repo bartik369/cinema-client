@@ -27,7 +27,7 @@ const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
 
     if (unreadMessages) {
       let res = unreadMessages.reduce((acc:any, el:any) => acc + el.qty, 0);
-      setCount(res)
+      setCount(res);
     }
   }, [unreadMessages]);
 

@@ -50,10 +50,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const messageMenuRef = useRef<IListRefObj>({});
 
   useEffect(() => {
-    
     if (recipientId && chatInfo._id) {
       setSkip(false);
-      setMessage({...message, 
+      setMessage({
+        ...message,
         recipientId: recipientId,
         conversationId: chatInfo._id,
         senderId: user._id,
@@ -66,7 +66,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   }, [recipientId, message.content, chatInfo]);
 
   useEffect(() => {
-    const outsideClickhandler = (e: any) => {
+    const outsideClickHandler = (e: any) => {
       
       if (messageMenuRef.current) {
         Object.values(messageMenuRef).map((item) => {
@@ -78,7 +78,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         });
       }
     };
-    document.addEventListener('click', outsideClickhandler);
+    document.addEventListener('click', outsideClickHandler);
   }, []);
 
   const sendMessageHandler = () => {
@@ -96,35 +96,37 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
             setIsUpdating(false);
           })
         } else {
-          createMessage(formData).unwrap().then(() => {
-            setMessage({...message, content: '', replyTo: ''});
-            setReplyId('');
-          })
+          createMessage(formData)
+              .unwrap()
+              .then(() => {
+                setMessage({...message, content: '', replyTo: ''})
+                setReplyId('');
+          }).catch(error => console.log(error));
         }
   };
 
   const editMessageHandler = (id: string) => {
-    getMessage(id).unwrap().then((data) => {
+    getMessage(id)
+        .unwrap()
+        .then((data) => {
       setMessage({...data});
       setIsUpdating(true);
-    });
+    }).catch(error => console.log(error));
   };
 
   const deleteMessageHandler = (id: string) => {
     id && deleteMessage(id).unwrap().then(() => {
       setMessageMenu('');
-    })
+    }).catch(error => console.log(error));
   }
 
   const replayMessageHandler = (id:string) => {
-    
     if (id) {
       setMessage({...message, replyTo: id});
       setReplyId(id);
     }
   }
   const messageIdHandler = (id: string) => {
-
     if (messageMenu === id) {
       setMessageMenu('');
     } else {

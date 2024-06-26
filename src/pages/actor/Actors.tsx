@@ -73,7 +73,7 @@ const Actors: FC = () => {
               nav={{ current: page, total: actors?.total_pages! }}
             />
         </>
-        : (actors?.data.length === 0 && debouncedSearch.length) 
+        : (actors?.data.length === 0 && debouncedSearch.length > 0)
           ? <div className={style.warning}>{contentConst.nothingFound}</div>
           : <Loader />
       }

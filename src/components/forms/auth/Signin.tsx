@@ -32,7 +32,7 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
 
   const showPassword = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setPasswordType(passwordType ? false : true);
+    setPasswordType(!passwordType);
   };
   
   const login = async (e: { preventDefault: () => void }) => {
@@ -54,7 +54,7 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
   return (
     <div className={style.auth}>
       <div className={style.toast}>
-      <ToastContainer theme="colored" autoClose={7000} position="top-center"/>
+        <ToastContainer theme="colored" autoClose={7000} position="top-center"/>
       </div> 
       <div className={style.inner}>
         <div className={style.banner}>
@@ -80,19 +80,10 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
           </div>
           <div className={style.label}>{contentConst.password}</div>
           <div className={style['input-data']}>
-            {passwordType ? (
-              <FontAwesomeIcon
-                className={style.icon}
-                onClick={showPassword}
-                icon={faEyeSlash}
-              />
-            ) : (
-              <FontAwesomeIcon
-                className={style.icon}
-                onClick={showPassword}
-                icon={faEye}
-              />
-            )}
+            {passwordType
+                ? <FontAwesomeIcon className={style.icon} onClick={showPassword} icon={faEyeSlash} />
+                : <FontAwesomeIcon className={style.icon} onClick={showPassword} icon={faEye} />
+            }
             <input className={style.data} type={passwordType ? "text" : "password"}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setAuthData({ ...authData, password: e.target.value })

@@ -1,5 +1,7 @@
 
 // forms
+export const addMovieSuccess = 'Фильм успешно добавлен!';
+export const addMovieFailed = 'Произошла ошибка в процессе добавления';
 export const notFilled = 'Не заполнено';
 export const movieCategory = 'Категория';
 export const movieSelectCategory = 'Выберите категорию';
@@ -25,6 +27,8 @@ export const selectMovieTitle = 'Введите название';
 export const selectMovieDescription = 'Краткое описание';
 export const selectPosterFile = 'Выбрать обложку';
 
+export const addActorSuccess = 'Актер успешно добавлен!';
+export const addActorFailed = 'Произошла ошибка в процессе добавления';
 export const actorNameEn = 'Имя, фамилия - англ';
 export const actorNameRu = 'Имя, фамилия - рус';
 export const actorPhoto = 'Фото';

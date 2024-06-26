@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import { IMessage } from '../../types/chat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip, faXmark, faReply} from '@fortawesome/free-solid-svg-icons';

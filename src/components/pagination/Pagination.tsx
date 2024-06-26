@@ -23,10 +23,10 @@ const Pagination: FC<IPaginationProps> = ({
   nav,
   setPage,
 }) => {
-  const paginationNUmbers = [];
+  const paginationNumbers = [];
 
   for (let i = 1; i <= nav?.total!; i++) {
-    paginationNUmbers.push(i);
+    paginationNumbers.push(i);
   }
 
   return (
@@ -39,8 +39,8 @@ const Pagination: FC<IPaginationProps> = ({
         <span className={style["prev-arrow"]}></span>
         {contentConst.prev}
       </button>
-      {paginationNUmbers &&
-        paginationNUmbers.map((item, index) => (
+      {paginationNumbers &&
+        paginationNumbers.map((item, index) => (
           <button key={index} className={item === nav?.current 
             ? style.active 
             : style.notactive}

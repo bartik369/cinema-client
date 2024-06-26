@@ -30,11 +30,14 @@ const Footer: FC = () => {
 
   const startChat = () => {
     if (isAuth) {
-      setVisibleChat(!visibleChat);
-      openChat(user._id).unwrap().then((data) => {
-        setChatInfo({...data});
-        setRecipientId(data.participants.filter((item:string) => item !== user._id));
-      });
+      setVisibleChat(true);
+      openChat(user._id)
+          .unwrap()
+          .then((data) => {
+            setChatInfo({...data});
+            setRecipientId(data.participants.filter((item:string) => item !== user._id));
+          })
+          .catch(error => console.log(error));
     } else {
       toast.error(contentConst.errorAddFavotite);
     }

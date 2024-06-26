@@ -20,7 +20,7 @@ const LastMovies: FC = () => {
   const slidesCount = useCountLastHook();
 
   useEffect(() => {
-    getFavorites({ id: user?._id });
+    getFavorites({ id: user?._id }).catch(error => console.log(error));
   }, [user]);
 
   return (

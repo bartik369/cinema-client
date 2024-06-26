@@ -1,13 +1,25 @@
 import React, { FC, MouseEvent } from 'react';
+import Genre from "./Genre";
+import Casts from "./Casts";
 import { IMovie } from '../../../types/media';
-import { ageItemsData, categoryMovies, yearMedia } from '../../../utils/data/data';
-import { countryList } from '../../../utils/data/coutry';
-import { directorsList } from '../../../utils/data/directors';
+import { ageItemsData} from '../../../utils/data/data';
 import { useGetAllActorsQuery } from '../../../store/actorApi';
 import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCamera, faVideo } from '@fortawesome/free-solid-svg-icons';
 import style from '../AddItemForm.module.css';
+import Year from "./Year";
+import Country from "./Country";
+import Time from "./Time";
+import RuTitle from "./RuTitle";
+import EngTitle from "./EngTitle";
+import Category from "./Category";
+import Director from "./Director";
+import Description from "./Description";
+import Age from "./Age";
+import RemoveCasts from "./RemoveCasts";
+import Poster from "./Poster";
+import Trailer from "./Trailer";
 
 interface IMovieProps {
   movie: IMovie;
@@ -35,213 +47,31 @@ const MovieForm: FC<IMovieProps> = ({
 }) => {
   const {data: actors} = useGetAllActorsQuery();
 
-  console.log(actors && actors)
-
   return (
     <form className={style.form}>
       <div className={style['main-column']}>
-        <div className={style.column2}>
-          <span className={style['input-info']}>
-            {contentConst.movieNameRu}
-          </span>
-          <input
-            type="text" value={movie.titleRu} placeholder={contentConst.fill}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setMovie({ ...movie, titleRu: e.target.value })
-            }
-          />
-        </div>
-        <div className={style.column2}>
-          <span className={style['input-info']}>
-            {contentConst.movieNameEn}
-          </span>
-          <input
-            type="text" value={movie.titleEn} placeholder={contentConst.fill}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setMovie({ ...movie, titleEn: e.target.value })
-            }
-          />
-        </div>
+          <RuTitle movie={movie} setMovie={setMovie} />
+          <EngTitle movie={movie} setMovie={setMovie} />
       </div>
       <div className={style['main-column']}>
-        <div className={style.column3}>
-          <span className={style['input-info']}>{contentConst.movieYear}</span>
-          <select
-            value={movie.year}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setMovie({ ...movie, year: e.target.value })
-            }
-          >
-            <option value="" disabled>
-              {contentConst.select}
-            </option>
-            {yearMedia.map((item) => (
-              <option key={item.id}>{item.year}</option>
-            ))}
-          </select>
-        </div>
-        <div className={style.column3}>
-          <span className={style['input-info']}>
-            {contentConst.movieCountry}
-          </span>
-          <select
-            value={movie.country}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setMovie({ ...movie, country: e.target.value })
-            }
-          >
-            <option value="" disabled>
-              {contentConst.select}
-            </option>
-            {countryList.map((item) => (
-              <option key={item.id}>{item.name}</option>
-            ))}
-          </select>
-        </div>
-        <div className={style.column3}>
-          <span className={style['input-info']}>{contentConst.movieTime}</span>
-          <input
-            type="text" value={movie.time} placeholder={contentConst.fill}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setMovie({ ...movie, time: e.target.value })
-            }
-          />
-        </div>
+          <Year movie={movie} setMovie={setMovie}/>
+          <Country movie={movie} setMovie={setMovie} />
+          <Time movie={movie} setMovie={setMovie}/>
       </div>
-      <div className={style.block}>
-        <span className={style['input-info']}>
-          {contentConst.movieDescription}
-        </span>
-        <textarea
-          placeholder={contentConst.fill} value={movie.description}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-            setMovie({ ...movie, description: e.target.value })
-          }
-        />
-      </div>
+        <Description movie={movie} setMovie={setMovie} />
       <div className={style['main-column']}>
-        <div className={style.column2}>
-          <span className={style['input-info']}>
-            {contentConst.movieCategory}
-          </span>
-          <select
-            value={{ ...movie.genre }}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => addGenre(e)}
-          >
-            <option value="" disabled>
-              {contentConst.select}
-            </option>
-            {categoryMovies.map((item) => (
-              <option key={item.id}>{item.name}</option>
-            ))}
-          </select>
-        </div>
-        <div className={style.column2}>
-          <span className={style['input-info']}>
-            {contentConst.movieDirector}
-          </span>
-          <select
-            value={movie.director}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setMovie({ ...movie, director: e.target.value })
-            }
-          >
-            <option value="" disabled>
-              {contentConst.select}
-            </option>
-            {directorsList.map((item) => (
-              <option key={item.id}>{item.name}</option>
-            ))}
-          </select>
-        </div>
+          <Category movie={movie} addGenre={addGenre}/>
+          <Director movie={movie} setMovie={setMovie} />
       </div>
-      <div className={style.genre}>
-        {movie &&
-          movie.genre.map((item) => (
-            <div className={style.item}>
-              {item}
-              <FontAwesomeIcon
-                className={style['close-btn']}
-                onClick={(e: React.MouseEvent) => deleteGenre(e, item)}
-                icon={faXmark}
-              />
-            </div>
-          ))}
-      </div>
+      <Genre movie={movie} deleteGenre={deleteGenre}/>
       <div className={style['main-column']}>
-        <div className={style.column2}>
-          <span className={style['input-info']}>{contentConst.movieCast}</span>
-          <select value={{ ...movie.actors }}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => addActor(e)}
-          >
-            <option value="" disabled>
-              {contentConst.select}
-            </option>
-            {actors &&
-              actors.map((item) => (
-                <option key={item._id}>{item.nameRu}</option>
-              ))}
-          </select>
-        </div>
-        <div className={style.column2}>
-          <span className={style['input-info']}>{contentConst.movieAge}</span>
-          <select
-            value={movie.ageCategory}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setMovie({ ...movie, ageCategory: e.target.value })
-            }
-          >
-            <option value="" disabled>
-              {contentConst.select}
-            </option>
-            {ageItemsData.map((item) => (
-              <option key={item.id}>{item.age}</option>
-            ))}
-          </select>
-        </div>
+        <Casts actors={actors!} movie={movie} addActor={addActor}/>
+        <Age movie={movie} setMovie={setMovie}/>
       </div>
-      <div className={style.genre}>
-        {movie &&
-          movie.actors.map((item) => (
-            <div className={style.item}>
-              {item}
-              <FontAwesomeIcon
-                className={style['close-btn']}
-                onClick={(e: React.MouseEvent) => deleteActor(e, item)}
-                icon={faXmark}
-              />
-            </div>
-          ))}
-      </div>
+        <RemoveCasts movie={movie} deleteActor={deleteActor}/>
       <div className={style['main-column']}>
-        <div className={style.column3}>
-          <span className={style['input-info']}>{contentConst.actorPhoto}</span>
-          <label className={style['photo-layer']} htmlFor={"upload"}>
-            <FontAwesomeIcon className={style['photo-icon']} icon={faCamera} />
-            <span className={style['select-photo']}>
-              {contentConst.actorSelectPhoto}
-            </span>
-          </label>
-          <input name="file" id="upload" type="file" hidden
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => { imgAction(e); }}
-          />
-        </div>
-        <div className={style.column3}>
-          <span className={style['input-info']}>
-            {contentConst.movieTrailer}
-          </span>
-          <label className={style['photo-layer']} htmlFor={"upload-video"}>
-            <FontAwesomeIcon className={style['photo-icon']} icon={faVideo} />
-            <span className={style['select-photo']}>
-              {contentConst.actorSelectPhoto}
-            </span>
-          </label>
-          <input name="file" id="upload-video" type="file" hidden
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              videoAction(e);
-            }}
-          />
-        </div>
+          <Poster imgAction={imgAction}/>
+          <Trailer videoAction={videoAction}/>
         <div className={style.column2}>
           <button className={style.reset}
             onClick={(e: MouseEvent<HTMLButtonElement>) => resetFormHandler(e)}>

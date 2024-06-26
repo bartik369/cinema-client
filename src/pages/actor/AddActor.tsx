@@ -1,8 +1,10 @@
 import React, { FC, useState } from 'react';
 import { useAddActorMutation } from '../../store/actorApi';
 import { IActor } from '../../types/media';
+import * as contentConst from '../../utils/constants/content';
 import ActorForm from '../../components/forms/actor/ActorForm';
 import PreviewActor from '../../components/preview/PreviewActor';
+import {ToastContainer, toast} from "react-toastify";
 import style from './AddActor.module.css';
 
 const AddActor: FC = () => {
@@ -40,7 +42,10 @@ const AddActor: FC = () => {
       }
     });
     formData.append('file', file);
-    formData && addActor(formData);
+    formData && addActor(formData)
+        .then(() => {
+          toast.success(contentConst.addActorSuccess)})
+        .catch((error) => toast.error(error.data.message));
   };
 
   const addGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -69,25 +74,28 @@ const AddActor: FC = () => {
   };
 
   return (
-    <div className={style.container}>
-      <div className={style['l-side']}>
-        <ActorForm
-          actor={actor}
-          setActor={setActor}
-          imgAction={imgAction}
-          deleteGenre={deleteGenre}
-          addGenre={addGenre}
-          setFile={setFile}
-        />
+      <div className={style.container}>
+        <div className={style.toast}>
+          <ToastContainer theme="colored" autoClose={7000} position="top-center"/>
+        </div>
+        <div className={style['l-side']}>
+          <ActorForm
+              actor={actor}
+              setActor={setActor}
+              imgAction={imgAction}
+              deleteGenre={deleteGenre}
+              addGenre={addGenre}
+              setFile={setFile}
+          />
+        </div>
+        <div className={style['r-side']}>
+          <PreviewActor
+              prevImg={prevImg}
+              actor={actor}
+              createActorHandler={createActorHandler}
+          />
+        </div>
       </div>
-      <div className={style['r-side']}>
-        <PreviewActor
-          prevImg={prevImg}
-          actor={actor}
-          createActorHandler={createActorHandler}
-        />
-      </div>
-    </div>
   );
 };
 

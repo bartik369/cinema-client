@@ -8,8 +8,8 @@
     display: flex;
 }
 
-.header-nav .menu-items .menu-item,
-.header-nav .menu-items .active {
+.header-nav .menu-items .menu-item li,
+.header-nav .menu-items .active li {
     margin-right: 25px;
     font-size: 12px;
     font-family: inherit;

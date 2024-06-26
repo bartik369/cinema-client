@@ -2,6 +2,8 @@ import React, { FC, useState, MouseEvent } from 'react';
 import { useAddMovieMutation } from '../../store/movieApi';
 import PreviewPoster from '../../components/poster/PreviewPoster';
 import { IMovie } from '../../types/media';
+import * as contentConst from '../../utils/constants/content';
+import {ToastContainer, toast} from "react-toastify";
 import MovieForm from '../../components/forms/movie/MovieForm';
 import style from './AddMovie.module.css';
 
@@ -24,6 +26,8 @@ const AddMovie: FC = () => {
     rating: null,
   });
 
+  console.log(movie)
+
   const [file, setFile] = useState<string | Blob>('');
   const [trailer, setTrailer] = useState<string | Blob>();
   const [prevImg, setPrevImg] = useState<string | null>('');
@@ -38,7 +42,9 @@ const AddMovie: FC = () => {
     trailer && formData.append('trailer', trailer);
 
     console.log(formData)
-    formData && addMovie(formData);
+    formData && addMovie(formData)
+        .then(() => toast.success(contentConst.addMovieSuccess))
+        .catch(error => toast.error(error.data.message))
   };
 
   const addGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -101,30 +107,33 @@ const AddMovie: FC = () => {
 
   
   return (
-    <div className={style.container}>
-      <div className={style['l-side']}>
-        <MovieForm
-          movie={movie}
-          setMovie={setMovie}
-          imgAction={imgAction}
-          videoAction={videoAction}
-          addGenre={addGenre}
-          deleteGenre={deleteGenre}
-          addActor={addActor}
-          deleteActor={deleteActor}
-          setFile={setFile}
-          resetFormHandler={resetFormHandler}
-        />
-      </div>
+      <div className={style.container}>
+        <div className={style.toast}>
+          <ToastContainer theme="colored" autoClose={7000} position="top-center"/>
+        </div>
+        <div className={style['l-side']}>
+          <MovieForm
+              movie={movie}
+              setMovie={setMovie}
+              imgAction={imgAction}
+              videoAction={videoAction}
+              addGenre={addGenre}
+              deleteGenre={deleteGenre}
+              addActor={addActor}
+              deleteActor={deleteActor}
+              setFile={setFile}
+              resetFormHandler={resetFormHandler}
+          />
+        </div>
 
-      <div className={style['r-side']}>
-        <PreviewPoster
-          prevImg={prevImg}
-          movie={movie}
-          createMovieHandler={createMovieHandler}
-        />
+        <div className={style['r-side']}>
+          <PreviewPoster
+              prevImg={prevImg}
+              movie={movie}
+              createMovieHandler={createMovieHandler}
+          />
+        </div>
       </div>
-    </div>
   );
 };
 

@@ -20,7 +20,7 @@ const TopMovies: FC = () => {
   const slidesCount = useCountTopHook();
 
   useEffect(() => {
-    getFavorites({ id: user?._id });
+    getFavorites({ id: user?._id }).catch(error => console.log(error));
   }, [user]);
 
   return (

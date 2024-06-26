@@ -71,7 +71,7 @@ const DropYear: FC<IDropYearProps> = ({
                   type="checkbox"
                   checked={checkedYear[item.id]}
                   value={checkedYear[item.id] || ""}
-                  disabled={existYear && existYear.includes(item.value) === false}
+                  disabled={existYear && !existYear.includes(item.value)}
                 />
                 <span className={style.checkmark}></span>
                 <label htmlFor={item.value}>{item.title}</label>

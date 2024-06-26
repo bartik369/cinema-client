@@ -33,15 +33,13 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
             setEmptySearchResult(false)
           }
         })
-        .catch(error => {
-          return error
-        })
+        .catch(error => console.log(error))
       } else {
         reset();
         setEmptySearchResult(false);
       }
       
-  }, [debouncedSearch, emptySearchResult]);
+  }, [debouncedSearch]);
 
   return (
     <div className={style.search}>

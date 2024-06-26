@@ -68,7 +68,7 @@ const DropCategory: FC<IDropCategoryProps> = ({
                   value="12"
                   type="checkbox"
                   checked={checkedGenre[item.id]}
-                  disabled={existGenre && existGenre.includes(item.name) === false}
+                  disabled={existGenre && !existGenre.includes(item.name)}
                 />
                 <span className={style.checkmark}></span>
                 <label htmlFor={item.value}>{item.name}</label>

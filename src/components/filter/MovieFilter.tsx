@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import DropCategory from '../dropdown/DropCategory';
 import DropCountry from '../dropdown/DropCountry';
 import DropYear from '../dropdown/DropYear';

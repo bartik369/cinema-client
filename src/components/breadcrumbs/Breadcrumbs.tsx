@@ -13,17 +13,19 @@ const Breadcrumbs: FC = () => {
   const navigate = useNavigate();
   const regExMovie = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
   const regExActor = location.pathname.match(/\/actors\/[a-zA-Z0-9]/);
-  const pathnames = location.pathname.split('/').filter((x) => x);
+  const pathname = location.pathname.split('/').filter((x) => x);
   const [getMovie, { data: movie }] = useGetMovieMutation();
   const actorTitle = useAppSelector((state) => state.movies.movieTitle);
 
   useEffect(() => {
-    regExMovie && getMovie(pathnames[1]);
-  }, [pathnames[1]]);
+    regExMovie && getMovie(pathname[1])
+        .then(data => console.log(data))
+        .catch((error) => console.log(error));
+  }, [pathname[1]]);
 
   return (
-    <div className={pathnames.length === 0 ? style.hidden : style.breadcrumbs}>
-      {pathnames.length > 0 && (
+    <div className={pathname.length === 0 ? style.hidden : style.breadcrumbs}>
+      {pathname.length > 0 && (
         <div className={style.home}>
           <div className={style['home-icon']}>
             <FontAwesomeIcon icon={faHome} />
@@ -33,9 +35,9 @@ const Breadcrumbs: FC = () => {
           </Link>
         </div>
       )}
-      {pathnames.map((name, index) => {
-        const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
-        const isLast = index === pathnames.length - 1;
+      {pathname.map((name, index) => {
+        const routeTo = `/${pathname.slice(0, index + 1).join('/')}`;
+        const isLast = index === pathname.length - 1;
 
         return isLast 
         ? (

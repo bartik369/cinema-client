@@ -61,7 +61,7 @@ const DropCountry: FC<IDropCountryProps> = ({
                 id={item.name} 
                 type="checkbox"
                 checked={checkedCountry[item.id]}
-                disabled={existCountry.includes(item.name) === false}
+                disabled={existCountry && !existCountry.includes(item.name)}
                  />
                  <span className={style.checkmark}></span>
                  <label htmlFor={item.value}>{item.name}</label>

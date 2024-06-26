@@ -33,7 +33,7 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
 
   const showPassword = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setPasswordType(passwordType ? false : true);
+    setPasswordType(!passwordType);
   };
 
   const create = async (e: { preventDefault: () => void }) => {
@@ -86,19 +86,10 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
         </div>
         <div className={style.label}>{contentConst.password}</div>
         <div className={style['input-data']}>
-          {passwordType ? (
-            <FontAwesomeIcon
-              className={style.icon}
-              onClick={showPassword}
-              icon={faEyeSlash}
-            />
-          ) : (
-            <FontAwesomeIcon
-              className={style.icon}
-              onClick={showPassword}
-              icon={faEye}
-            />
-          )}
+          {passwordType
+              ? <FontAwesomeIcon className={style.icon} onClick={showPassword} icon={faEyeSlash} />
+              : <FontAwesomeIcon className={style.icon} onClick={showPassword} icon={faEye} />
+          }
           <input className={style.data} type={passwordType ? "text" : "password"}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setAuthData({ ...authData, password: e.target.value })
@@ -113,19 +104,10 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
         </div>
         <span className={style.label}>{contentConst.repeatPassword}</span>
         <div className={style['input-data']}>
-          {passwordType ? (
-            <FontAwesomeIcon
-              className={style.icon}
-              onClick={showPassword}
-              icon={faEyeSlash}
-            />
-          ) : (
-            <FontAwesomeIcon
-              className={style.icon}
-              onClick={showPassword}
-              icon={faEye}
-            />
-          )}
+          {passwordType
+              ? <FontAwesomeIcon className={style.icon} onClick={showPassword} icon={faEyeSlash} />
+              : <FontAwesomeIcon className={style.icon} onClick={showPassword} icon={faEye}/>
+          }
           <input className={style.data} type={passwordType ? "text" : "password"}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setAuthData({ ...authData, repeatPassword: e.target.value })
