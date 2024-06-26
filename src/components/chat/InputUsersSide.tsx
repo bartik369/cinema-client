@@ -3,13 +3,16 @@ import { IMessage } from '../../types/chat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip, faXmark, faReply} from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content';
+import InputActions from "./InputActions";
 import style from './Chat.module.css';
+import ButtonsActions from "./ButtonsActions";
 
 interface InputUsersSideProps {
     replyId: string;
     messages: IMessage[];
     message: IMessage,
     isUpdating:boolean;
+    file: string | Blob;
     setMessage: (message:IMessage) => void;
     setFile: (file: Blob | string) => void;
     sendMessageHandler: () => void;
@@ -21,6 +24,7 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
     messages,
     message,
     isUpdating,
+    file,
     setMessage,
     setFile,
     sendMessageHandler,
@@ -39,33 +43,16 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
                 </div>
           )}
         <div className={style.input} onClick={(e) => e.stopPropagation()}>
-          <div className={style.inner}>
-            <input onChange={(e) => 
-              setMessage({ ...message, content: e.target.value })}
-              value={message?.content}
-              type="text"
+            <InputActions
+                message={message}
+                setMessage={setMessage}
             />
-            {(message && message.content.length > 0) && 
-            <FontAwesomeIcon onClick={() => setMessage({...message, content: ''})}
-            className={style.reset} icon={faXmark} />}
-          </div>
-
-          <div className={style.buttons}>
-            <label className={style.file} htmlFor={"upload"}>
-              <FontAwesomeIcon
-                className={style["photo-icon"]}
-                icon={faPaperclip}
-              />
-            </label>
-            <input type="file" name="file" id="upload" hidden
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                e.target.files && setFile(e.target.files[0])
-              }
+            <ButtonsActions
+                file={file}
+                setFile={setFile}
+                sendMessageHandler={sendMessageHandler}
+                isUpdating={isUpdating}
             />
-            <button className={style.btn} onClick={sendMessageHandler}>
-              {isUpdating ? contentConst.updateBtn : contentConst.sendData}
-            </button>
-          </div>
         </div>
       </div>
     );

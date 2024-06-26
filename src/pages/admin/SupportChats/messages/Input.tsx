@@ -1,11 +1,10 @@
 import React, {FC, useState, useRef, useEffect} from 'react';
 import { IMessage} from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
-import { useCreateMessageMutation, useUpdateMessageMutation 
-} from '../../../../store/chatApi';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperclip, faReply, faXmark} from "@fortawesome/free-solid-svg-icons";
-import * as contentConst from '../../../../utils/constants/content';
+import { useCreateMessageMutation, useUpdateMessageMutation} from '../../../../store/chatApi';
+import ReplyMessage from "./ReplyMessage";
+import InputActions from "./InputActions";
+import ButtonsActions from "./ButtonsActions";
 import style from './Messages.module.css';
 
 interface IInputProps {
@@ -57,6 +56,36 @@ const Input: FC<IInputProps> = ({
     updatedAt: '',
   });
 
+    useEffect(() => {
+        const outsideClickhandler = (e: any) => {
+            if (messageMenuRef.current) {
+                Object.values(messageMenuRef).map((item) => {
+                    if (item !== e.target) {
+                        setMessageMenu('');
+                        setMessage({ ...message, content: '' });
+                    }
+                });
+            }
+        };
+        document.addEventListener("click", outsideClickhandler);
+    }, []);
+
+    useEffect(() => {
+        setMessage({
+            ...message,
+            recipientId: recipientId && recipientId,
+            conversationId: conversationId && conversationId,
+            senderId: user?._id,
+            replyTo: replyId && replyId,
+        });
+        setMediaSkip(false);
+    }, [recipientId, conversationId, replyId])
+
+    useEffect(() => {
+        updatedMessage &&
+        setMessage({ ...updatedMessage });
+    }, [updatedMessage]);
+
   const sendMessageHandler = () => {
     const formData = new FormData();
     type messageKey = keyof typeof message;
@@ -86,77 +115,24 @@ const Input: FC<IInputProps> = ({
     setReplyId('');
   };
 
-    useEffect(() => {
-    const outsideClickhandler = (e: any) => {
-      if (messageMenuRef.current) {
-        Object.values(messageMenuRef).map((item) => {
-          if (item !== e.target) {
-            setMessageMenu('');
-            setMessage({ ...message, content: '' });
-            // setReplyId('');
-          }
-        });
-      }
-    };
-    document.addEventListener("click", outsideClickhandler);
-  }, []);
-
-  useEffect(() => {
-      setMessage({
-        ...message,
-        recipientId: recipientId && recipientId,
-        conversationId: conversationId && conversationId,
-        senderId: user?._id,
-        replyTo: replyId && replyId,
-      });
-      setMediaSkip(false);
-  }, [recipientId, conversationId, replyId])
-
-  useEffect(() => {
-    updatedMessage && 
-    setMessage({ ...updatedMessage });
-  }, [updatedMessage]);
-
     return (
       <div className={style.typing} onClick={(e) => e.stopPropagation()}>
         <div className={style.input}>
-          {replyId && (
-            <div className={style["reply-for"]}>
-              <FontAwesomeIcon icon={faReply} className={style["reply-icon"]} />
-              {replyMessage}
-              <FontAwesomeIcon
-                onClick={resetReplyHandler}
-                icon={faXmark}
-                className={style["reset-reply"]}
-              />
-            </div>
-          )}
-          <div className={style.inner}>
-            <input onChange={(e) => setMessage({ ...message, content: e.target.value })}
-              value={message?.content}
-              type="text"
+          {replyId &&
+              <ReplyMessage
+              replyMessage={replyMessage}
+              resetReplyHandler={resetReplyHandler}
+          />}
+          <InputActions
+              message={message}
+              setMessage={setMessage}
+          />
+            <ButtonsActions
+                file={file}
+                setFile={setFile}
+                sendMessageHandler={sendMessageHandler}
+                isUpdating={isUpdating}
             />
-            {message && message.content.length > 0 && (
-              <FontAwesomeIcon
-                onClick={() => setMessage({ ...message, content: "" })}
-                className={style.reset}
-                icon={faXmark}
-              />
-            )}
-          </div>
-          <div className={style.buttons}>
-            <label className={style.file} htmlFor={"upload"}>
-              <FontAwesomeIcon className={style["photo-icon"]} icon={faPaperclip}/>
-            </label>
-            <input type="file"name="file" id="upload" hidden
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                e.target.files && setFile(e.target.files[0])
-              }
-            />
-            <button className={style.btn} onClick={sendMessageHandler}>
-              {isUpdating ? contentConst.updateBtn : contentConst.sendData}
-            </button>
-          </div>
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, {FC, MouseEvent, useState} from 'react';
 import { useAddActorMutation } from '../../store/actorApi';
 import { IActor } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
@@ -23,6 +23,25 @@ const AddActor: FC = () => {
       genre: [],
     },
   });
+
+  const resetFormHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setActor({
+      ...actor,
+      _id: '',
+      nameEn: '',
+      nameRu: '',
+      picture: '',
+      extInfo: {
+        birthday: 0,
+        country: '',
+        city: '',
+        height: '',
+        gender: '',
+        genre: [],
+      }
+    });
+  };
 
   const [file, setFile] = useState<string | Blob>('');
   const [prevImg, setPrevImg] = useState<string | null>('');
@@ -86,6 +105,7 @@ const AddActor: FC = () => {
               deleteGenre={deleteGenre}
               addGenre={addGenre}
               setFile={setFile}
+              resetFormHandler={resetFormHandler}
           />
         </div>
         <div className={style['r-side']}>

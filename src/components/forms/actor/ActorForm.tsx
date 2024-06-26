@@ -1,8 +1,7 @@
-import React, { FC} from 'react';
+import React, {FC, MouseEvent} from 'react';
 import { IActor } from '../../../types/media';
-import * as contentConst from '../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faXmark} from '@fortawesome/free-solid-svg-icons';
 import style from '../AddItemForm.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import RuName from "./RuName";
@@ -14,6 +13,7 @@ import Height from "./Height";
 import Gender from "./Gender";
 import Genre from './Genre';
 import Portrait from "./Portrait";
+import ResetForm from "../../UI/buttons/ResetForm";
 
 interface IActorProps {
   actor: IActor;
@@ -22,6 +22,7 @@ interface IActorProps {
   deleteGenre: (e: React.MouseEvent, item: string) => void;
   setFile: (file: string | Blob) => void;
   addGenre: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  resetFormHandler: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ActorForm: FC<IActorProps> = ({
@@ -29,7 +30,7 @@ const ActorForm: FC<IActorProps> = ({
   setActor,
   imgAction,
   deleteGenre,
-  addGenre,
+  addGenre, resetFormHandler,
   }) => {
 
   return (
@@ -48,6 +49,7 @@ const ActorForm: FC<IActorProps> = ({
       <div className={style['main-column']}>
           <Genre addGenre={addGenre}/>
           <Portrait imgAction={imgAction} />
+          <ResetForm resetFormHandler={resetFormHandler} />
       </div>
       <div className={style.genre}>
         {actor.extInfo.genre.map((item) => (

@@ -30,7 +30,7 @@ const Footer: FC = () => {
 
   const startChat = () => {
     if (isAuth) {
-      setVisibleChat(true);
+      setVisibleChat(!visibleChat);
       openChat(user._id)
           .unwrap()
           .then((data) => {

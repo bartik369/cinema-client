@@ -9,7 +9,6 @@ interface IChatInfoProps {
     visibleRecipients: boolean;
     item: IParticipantInfo;
 }
-
 const ChatInfo:FC<IChatInfoProps> = ({visibleBurger, visibleRecipients, item
 
 }) => {

@@ -2,11 +2,7 @@ import React, { FC, MouseEvent } from 'react';
 import Genre from "./Genre";
 import Casts from "./Casts";
 import { IMovie } from '../../../types/media';
-import { ageItemsData} from '../../../utils/data/data';
 import { useGetAllActorsQuery } from '../../../store/actorApi';
-import * as contentConst from '../../../utils/constants/content';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCamera, faVideo } from '@fortawesome/free-solid-svg-icons';
 import style from '../AddItemForm.module.css';
 import Year from "./Year";
 import Country from "./Country";
@@ -20,6 +16,7 @@ import Age from "./Age";
 import RemoveCasts from "./RemoveCasts";
 import Poster from "./Poster";
 import Trailer from "./Trailer";
+import ResetForm from "../../UI/buttons/ResetForm";
 
 interface IMovieProps {
   movie: IMovie;
@@ -73,10 +70,7 @@ const MovieForm: FC<IMovieProps> = ({
           <Poster imgAction={imgAction}/>
           <Trailer videoAction={videoAction}/>
         <div className={style.column2}>
-          <button className={style.reset}
-            onClick={(e: MouseEvent<HTMLButtonElement>) => resetFormHandler(e)}>
-          {contentConst.resetForm}
-          </button>
+            <ResetForm resetFormHandler={resetFormHandler} />
         </div>
       </div>
     </form>

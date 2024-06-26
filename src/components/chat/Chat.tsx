@@ -73,7 +73,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
 
           if (item !== e.target) {
             setMessageMenu('');
-            // setReplyId('');
           }
         });
       }
@@ -90,11 +89,13 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         file && formData.append('file', file);
         
         if (isUpdating) {
-          updateMessage(formData).unwrap().then(() => {
+          updateMessage(formData)
+              .unwrap()
+              .then(() => {
             setMessage({...message, content: '', replyTo: ''});
             setReplyId('');
             setIsUpdating(false);
-          })
+          }).catch(error => console.log(error));
         } else {
           createMessage(formData)
               .unwrap()
@@ -154,10 +155,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
             message={message}
             media={media!}
             messageMenu={messageMenu}
-            replayMessageHandler={replayMessageHandler}
-            messageIdHandler={messageIdHandler}
             messages={messages}
             chatInfo={chatInfo}
+            replayMessageHandler={replayMessageHandler}
+            messageIdHandler={messageIdHandler}
           />
           : ( 
           <Recipient 
@@ -165,11 +166,11 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
             user={user}
             media={media!}
             messageMenu={messageMenu}
+            messages={messages}
+            chatInfo={chatInfo}
             messageIdHandler={messageIdHandler}
             deleteMessageHandler={deleteMessageHandler}
             editMessageHandler={editMessageHandler}
-            messages={messages}
-            chatInfo={chatInfo}
           />
             )
           )
@@ -181,9 +182,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         replyId={replyId}
         messages={messages!}
         message={message}
+        isUpdating={isUpdating}
+        file={file}
         setMessage={setMessage}
         setFile={setFile}
-        isUpdating={isUpdating}
         sendMessageHandler={sendMessageHandler}
         resetReplyHandler={resetReplyHandler}
       />

@@ -184,26 +184,26 @@ span.hide {
     display: none;
 }
 
-.main-column .reset {
-    font-size: 11px;
-    font-family: inherit;
-    padding: 10.3px;
-    margin: 0;
-    border-radius: 4px;
-    border: none;
-    background-color: #9E4784;
-    color: #fff;
-    display: flex;
-    width: fit-content;
-    align-items: center;
-    cursor: pointer;
-    transition: all .6s ease-in-out;
-    position: absolute;
-}
+/*.main-column .reset {*/
+/*    font-size: 11px;*/
+/*    font-family: inherit;*/
+/*    padding: 10.3px;*/
+/*    margin: 0;*/
+/*    border-radius: 4px;*/
+/*    border: none;*/
+/*    background-color: #9E4784;*/
+/*    color: #fff;*/
+/*    display: flex;*/
+/*    width: fit-content;*/
+/*    align-items: center;*/
+/*    cursor: pointer;*/
+/*    transition: all .6s ease-in-out;*/
+/*    position: absolute;*/
+/*}*/
 
-.main-column .reset:hover {
-    background-color: #c257a2;
-}
+/*.main-column .reset:hover {*/
+/*    background-color: #c257a2;*/
+/*}*/
 
 @media screen and (max-width: 960px) {
     .column2 {

@@ -26,8 +26,6 @@ const AddMovie: FC = () => {
     rating: null,
   });
 
-  console.log(movie)
-
   const [file, setFile] = useState<string | Blob>('');
   const [trailer, setTrailer] = useState<string | Blob>();
   const [prevImg, setPrevImg] = useState<string | null>('');
@@ -40,8 +38,6 @@ const AddMovie: FC = () => {
     });
     file && formData.append('file', file);
     trailer && formData.append('trailer', trailer);
-
-    console.log(formData)
     formData && addMovie(formData)
         .then(() => toast.success(contentConst.addMovieSuccess))
         .catch(error => toast.error(error.data.message))
@@ -105,7 +101,6 @@ const AddMovie: FC = () => {
     e.target.files && setTrailer(e.target.files[0]);
   };
 
-  
   return (
       <div className={style.container}>
         <div className={style.toast}>
