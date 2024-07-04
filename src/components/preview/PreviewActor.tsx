@@ -71,7 +71,7 @@ const PreviewActor: FC<IPreviewActorProps> = ({
           ''
         )}
         {actor.nameRu && actor.nameEn && (
-          <button className={style['btn-submit']} onClick={createActorHandler}>
+          <button type="button" className={style['btn-submit']} onClick={createActorHandler}>
             {contentConst.addBtn}
           </button>
         )}
