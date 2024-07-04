@@ -120,7 +120,6 @@ const AddMovie: FC = () => {
               resetFormHandler={resetFormHandler}
           />
         </div>
-
         <div className={style['r-side']}>
           <PreviewPoster
               prevImg={prevImg}
