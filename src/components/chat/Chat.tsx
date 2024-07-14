@@ -65,20 +65,18 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     }
   }, [recipientId, message.content, chatInfo]);
 
-  useEffect(() => {
-    const outsideClickHandler = (e: any) => {
+  const outsideClickHandler = (e: any) => {
       
-      if (messageMenuRef.current) {
-        Object.values(messageMenuRef).map((item) => {
+    if (messageMenuRef.current) {
+      Object.values(messageMenuRef).map((item) => {
 
-          if (item !== e.target) {
-            setMessageMenu('');
-          }
-        });
-      }
-    };
-    document.addEventListener('click', outsideClickHandler);
-  }, []);
+        if (item !== e.target) {
+          setMessageMenu('');
+        }
+      });
+    }
+  };
+  document.addEventListener('click', outsideClickHandler);
 
   const sendMessageHandler = () => {
     const formData = new FormData();

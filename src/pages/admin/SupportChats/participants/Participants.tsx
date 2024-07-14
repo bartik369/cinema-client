@@ -37,19 +37,17 @@ const Participants: FC<IParticipantsProps> = ({
   const messageMenuRef = useRef<IListRefObj>({});
   const [closeTicket] = useCloseTicketMutation();
 
-  useEffect(() => {
-    const outsideClickhandler = (e: any) => {
-      if (messageMenuRef.current) {
-        Object.values(messageMenuRef).map((item) => {
-          if (item !== e.target) {
-            setMessageMenu('');
-          }
-        });
-      }
-    };
-    document.addEventListener("click", outsideClickhandler);
-  }, []);
-
+  const outsideClickhandler = (e: any) => {
+    if (messageMenuRef.current) {
+      Object.values(messageMenuRef).map((item) => {
+        if (item !== e.target) {
+          setMessageMenu('');
+        }
+      });
+    }
+  };
+  document.addEventListener("click", outsideClickhandler);
+  
   const messageIdHandler = (id: string) => {
 
     if (messageMenu === id) {

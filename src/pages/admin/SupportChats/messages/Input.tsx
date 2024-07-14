@@ -56,19 +56,17 @@ const Input: FC<IInputProps> = ({
     updatedAt: '',
   });
 
-    useEffect(() => {
-        const outsideClickhandler = (e: any) => {
-            if (messageMenuRef.current) {
-                Object.values(messageMenuRef).map((item) => {
-                    if (item !== e.target) {
-                        setMessageMenu('');
-                        setMessage({ ...message, content: '' });
-                    }
-                });
+  const outsideClickhandler = (e: any) => {
+    if (messageMenuRef.current) {
+        Object.values(messageMenuRef).map((item) => {
+            if (item !== e.target) {
+                setMessageMenu('');
+                setMessage({ ...message, content: '' });
             }
-        };
-        document.addEventListener("click", outsideClickhandler);
-    }, []);
+        });
+    }
+  };
+  document.addEventListener("click", outsideClickhandler);
 
     useEffect(() => {
         setMessage({
