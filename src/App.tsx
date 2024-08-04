@@ -18,6 +18,7 @@ import Admin from "./pages/admin/Admin";
 import SupportChats from "./pages/admin/SupportChats/chats/SupportChats";
 import EditMainSlider from "./pages/slider/EditMainSlider";
 import style from "./App.module.css";
+import Layout from "./routes/Layout";
 
 const App: FC = () => {
   const [verifyToken] = useVerifyTokenMutation();
@@ -29,27 +30,27 @@ const App: FC = () => {
 
   return (
     <div className={style.wrapper}>
-      <Header />
       <Routes>
-        <Route path="/" index element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:id" element={<Movie />} />
-        <Route path="/actors/:id" element={<Actor />} />
-        <Route path="/actors" element={<Actors />} />
-        <Route path="/404" element={<Page404 />} />
-        <Route path="*" element={<Navigate to="/404" replace />} />
-        <Route element={<PrivateRoutes allowedRoles={[contentConst.USER]} />}>
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-        <Route element={<PrivateRoutes allowedRoles={[contentConst.ADMIN, contentConst.SUPPORT]} />}>
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/add-movie" element={<AddMovie />} />
-          <Route path="/admin/add-actor" element={<AddActor />} />
-          <Route path="/admin/edit-slider" element={<EditMainSlider />} />
-          <Route path="/admin/support-chats" element={<SupportChats />} />
+        <Route path='/' element={<Layout />}>
+          <Route path="/" index element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:id" element={<Movie />} />
+          <Route path="/actors/:id" element={<Actor />} />
+          <Route path="/actors" element={<Actors />} />
+          <Route path="/404" element={<Page404 />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+          <Route element={<PrivateRoutes allowedRoles={[contentConst.USER]} />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route element={<PrivateRoutes allowedRoles={[contentConst.ADMIN, contentConst.SUPPORT]} />}>
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/add-movie" element={<AddMovie />} />
+            <Route path="/admin/add-actor" element={<AddActor />} />
+            <Route path="/admin/edit-slider" element={<EditMainSlider />} />
+            <Route path="/admin/support-chats" element={<SupportChats />} />
+          </Route>
         </Route>
       </Routes>
-      <Footer />
     </div>
   );
 };

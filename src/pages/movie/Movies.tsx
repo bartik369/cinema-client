@@ -50,8 +50,8 @@ const Movies = () => {
             onPrevPageClick={handlePrevPage}
             onNextPageClick={handleNextPage}
             disable={{
-              left: page == 1,
-              right: page == movies?.total_pages,
+              left: page === 1,
+              right: page === movies?.total_pages,
             }}
             nav={{ current: page, total: movies?.total_pages! }}
           />

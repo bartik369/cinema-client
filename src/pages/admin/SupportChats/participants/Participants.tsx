@@ -1,4 +1,4 @@
-import {FC, useState, useRef, useEffect} from 'react';
+import {FC, useState, useRef} from 'react';
 import { IUnreadMessages } from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
 import { IParticipantInfo } from '../../../../types/chat';
@@ -47,7 +47,7 @@ const Participants: FC<IParticipantsProps> = ({
     }
   };
   document.addEventListener("click", outsideClickhandler);
-  
+
   const messageIdHandler = (id: string) => {
 
     if (messageMenu === id) {
