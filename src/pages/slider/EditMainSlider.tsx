@@ -102,8 +102,7 @@ const EditMainSlider: FC = () => {
         <div className={style.add}>
           <button
             className={style.btn}
-            onClick={() => setModalSlider(!modalSlider)}
-          >
+            onClick={() => setModalSlider(!modalSlider)}>
             {contentConst.addSlide}
           </button>
         </div>
