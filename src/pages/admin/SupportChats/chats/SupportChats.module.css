@@ -3,7 +3,7 @@
     margin: 0 auto 40px;
     width: 100%;
     max-width: 1320px;
-    height: 85vh;
+    height: calc(100vh - 105px);
     overflow: hidden;
     position: relative;
     font-family: inherit;
