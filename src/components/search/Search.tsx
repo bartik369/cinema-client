@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import { useSearchMovieMutation } from '../../store/movieApi';
 import useDebounce from '../../hooks/useDebounce';
@@ -40,8 +41,9 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
       }
       
   }, [debouncedSearch]);
+  const searchModal = document.getElementById('portal') as HTMLElement
 
-  return (
+  return ReactDOM.createPortal(
     <div className={style.search}>
       <div className={style.inner}>
         <div className={style.title}>{contentConst.search}</div>
@@ -87,8 +89,9 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
       <button className={style.close} onClick={visibleHandler}>
         <FontAwesomeIcon icon={faXmark} />
       </button>
-    </div>
-  );
+    </div>,
+    searchModal
+  )
 };
 
 export default Search;

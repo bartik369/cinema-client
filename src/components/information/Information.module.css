@@ -13,7 +13,7 @@
     background-color: #4D3C77;
     color: #fff;
     font-size: 15px;
-    z-index: 9999;
+    z-index: 999;
     transition: all .6s ease-in-out;
 }
 
@@ -22,6 +22,7 @@
     background-color: #5242ba;
     transform: scale(1.03);
 }
+
 .information {
     position: absolute;
     z-index: 9999;
