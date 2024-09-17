@@ -41,7 +41,7 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
       }
       
   }, [debouncedSearch]);
-  const searchModal = document.getElementById('portal') as HTMLElement
+  const searchModal = document.getElementById('portal') as HTMLElement;
 
   return ReactDOM.createPortal(
     <div className={style.search}>
