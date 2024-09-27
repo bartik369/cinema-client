@@ -39,7 +39,7 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
     <menu className={style['profile-menu']}>
         <ul className={style.items}>
           {profileMenuData.map((item, index) =>
-            !isAdmin && item.url === `${ENV.ADMIN}` ? null : (
+            !isAdmin && item.url === `${ENV.ADMIN}` ? 'Not admin' : (
               <li key={index}>
                  <NavLink className={({ isActive }) => (isActive 
                   ? style.active 
