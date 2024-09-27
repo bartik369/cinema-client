@@ -33,6 +33,9 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
     window.location.reload();
   }
 
+  console.log(isAdmin);
+  
+
   return (
     <menu className={style['profile-menu']}>
         <ul className={style.items}>
