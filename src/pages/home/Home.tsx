@@ -11,7 +11,6 @@ import style from './Home.module.css';
 
 const Home: FC = () => {
   const [visibleInfo, setVisibleInfo] = useState<boolean>(false);
-
   useEffect(() => {
     if (localStorage.getItem('projectInformation') === 'true') {
       setVisibleInfo(false);
