@@ -13,7 +13,7 @@ const PrivateRoutes: FC<IPrivateRoutesProps> = ({ allowedRoles }) => {
   const user = useAppSelector((state) => state.auth.user);
 
   return (
-    <div>
+    <>
       {token && user.roles.length === 0 
       ? <Loader />
       : (token && user) &&
@@ -21,7 +21,7 @@ const PrivateRoutes: FC<IPrivateRoutesProps> = ({ allowedRoles }) => {
         ? <Outlet />
         : <Navigate to="/" state={{ from: location }} replace />
       }
-    </div>
+    </>
   );
 };
 

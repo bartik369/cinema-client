@@ -10,7 +10,6 @@ import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars, faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content'
-import Glasses from '../../assets/pics/cinema.png';
 import Login from '../../assets/pics/login.svg';
 import style from './Header.module.css';
 import Logo from "./Logo";

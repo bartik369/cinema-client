@@ -7,7 +7,7 @@ interface IINformationProps {
     visibleInfo: boolean;
 }
 
-const Information:FC<IINformationProps> = memo(({setVisibleInfo, visibleInfo}) => {
+const Information:FC<IINformationProps> = ({setVisibleInfo, visibleInfo}) => {
     return (
         <div className={style.information}>
             <div className={style.inner}>
@@ -20,6 +20,6 @@ const Information:FC<IINformationProps> = memo(({setVisibleInfo, visibleInfo}) =
             </div>
         </div>
     );
-});
+};
 
 export default Information;

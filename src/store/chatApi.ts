@@ -164,7 +164,6 @@ export const {
     useGetRecipientMessagesQuery,
     useGetConversationIdMutation,
     useGetActiveConverstionMutation,
-    // useGetActiveConverstionMessagesQuery,
     useGetMessageMutation,
     useMarkAsReadMutation,
     useGetConversationMediaQuery,

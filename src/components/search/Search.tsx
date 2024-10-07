@@ -27,7 +27,6 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
         searchMovie(debouncedSearch)
         .unwrap()
         .then((data) => {
-          
           if (data.length === 0) {
             setEmptySearchResult(true)
           } else {

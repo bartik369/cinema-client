@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import { IActor, IListResponse } from "../types/media";
-
 import ENV from "../env.config";
 
 export const actorApi = createApi({

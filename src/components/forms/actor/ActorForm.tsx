@@ -2,8 +2,6 @@ import React, {FC, MouseEvent} from 'react';
 import { IActor } from '../../../types/media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark} from '@fortawesome/free-solid-svg-icons';
-import style from '../AddItemForm.module.css';
-import 'react-datepicker/dist/react-datepicker.css';
 import RuName from "./RuName";
 import EngName from "./EngName";
 import Country from "./Country";
@@ -14,6 +12,8 @@ import Gender from "./Gender";
 import Genre from './Genre';
 import Portrait from "./Portrait";
 import ResetForm from "../../UI/buttons/ResetForm";
+import 'react-datepicker/dist/react-datepicker.css';
+import style from '../AddItemForm.module.css';
 
 interface IActorProps {
   actor: IActor;
