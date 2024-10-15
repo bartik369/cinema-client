@@ -6,9 +6,9 @@ import { useOpenChatMutation, useGetUnreadMessagesQuery } from '../../store/chat
 import { IChatInfo } from '../../types/chat';
 import UnreadMessagesButton from '../information/UnreadMessagesButton';
 import Chat from '../chat/Chat';
-import * as contentConst from '../../utils/constants/content';
-import style from './Footer.module.css';
 import Menu from "./Menu";
+import * as contentConst from '../../utils/constants/content';
+import style from './Footer.module.scss';
 
 const Footer: FC = () => {
   const location = useLocation();

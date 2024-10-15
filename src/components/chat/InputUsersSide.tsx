@@ -1,11 +1,10 @@
 import React, {FC} from 'react';
 import { IMessage } from '../../types/chat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperclip, faXmark, faReply} from '@fortawesome/free-solid-svg-icons';
-import * as contentConst from '../../utils/constants/content';
+import { faXmark, faReply} from '@fortawesome/free-solid-svg-icons';
 import InputActions from "./InputActions";
-import style from './Chat.module.css';
 import ButtonsActions from "./ButtonsActions";
+import style from './Chat.module.scss';
 
 interface InputUsersSideProps {
     replyId: string;

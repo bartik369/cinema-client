@@ -1,0 +1,144 @@
+.participants {
+    font-family: inherit;
+    position: relative;
+    .menu-list {
+        padding: 6px;
+        background-color: #2d2e44;
+        border-radius: 6px;
+        top: 13px;
+        right: 45px;
+        font-size: 12px;
+        z-index: 99;
+        position: absolute;
+    }
+    .menu-list .icon {
+        font-size: 14px;
+        margin-right: 5px;
+    }
+    .menu-list li {
+        padding: 6px 8px;
+        cursor: pointer;
+        font-size: 12px;
+        color: #bec5d1;
+    }
+    .menu-list li:hover {
+        color: #e6eaf3;
+    }
+    .user .pin {
+        width: 21px;
+        height: 21px;
+        position: absolute;
+        top: -3px;
+        left: -22px;
+    }
+    .user .pin img {
+        width: 100%;
+        object-fit: cover;
+        height: 21px;
+    }
+    .item {
+        padding: 8px 20px 8px 25px;
+        cursor: pointer;
+        background-color: #212335;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border-bottom: 4px solid #191b29;
+        transition: all .6s ease-in-out;
+    }
+    .item-active,
+    .item:hover {
+        padding: 8px 20px 8px 25px;
+        cursor: pointer;
+        background-color: #824D74;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border-bottom: 4px solid #643b59;
+    }
+    .item-active .user .info .ticket,
+    .item-active .user .info .message,
+    .item-active .user .info .time,
+    .item-active .user .info .menu,
+    .item:hover .user .info .ticket,
+    .item:hover .user .info .message,
+    .item:hover .user .info .time,
+    .item:hover .user .info .menu {
+        color: #fff;
+    }
+    .item-active .user .info .email,
+    .item:hover .user .info .email {
+        color: #f3dae7;
+    }
+    .user {
+        display: flex;
+        align-items: center;
+        font-family: inherit;
+        position: relative;
+    }
+    .user .info .count {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: -15px;
+        right: -20px;
+        color: #fff;
+        font-size: 10px;
+        background-color: #678ede;
+    }
+    .user .avatar {
+        width: 45px;
+        height: 45px;
+        margin-right: 7px;
+    }
+    .user .avatar img {
+        object-fit: cover;
+        width: 100%;
+        height: 45px;
+        border-radius: 50%;
+    }
+    .user .info .menu {
+        position: absolute;
+        padding: 5px 10px;
+        color: #b3b7d7;
+        font-size: 17px;
+        cursor: pointer;
+        right: 0;
+        top: 15px;
+    }
+    .user .info .time {
+        color: #6c6f8c;
+        font-size: 10px;
+        position: absolute;
+        right: 0px;
+        top: 3px;
+    }
+    .user .info .active {
+        position: absolute;
+        top: 25px;
+        padding: 5px;
+        width: 100%;
+    }
+    .inactive {
+        display: none;
+    }
+    .user .info .menu:hover {
+        color: #d0d3ea;
+    }
+    .user .info .ticket {
+        color: #a5b2cb;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .user .info .email {
+        color: #6b7588;
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+    .user .info .message {
+        color: #d0d7e3;
+        font-size: 12px;
+    }
+}

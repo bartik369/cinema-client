@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import * as contentConst from '../../../../utils/constants/content';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply, faClone} from "@fortawesome/free-solid-svg-icons";
-import style from './Messages.module.css';
+import style from './Messages.module.scss';
 
 
 interface RecipientMessageMenuProps {

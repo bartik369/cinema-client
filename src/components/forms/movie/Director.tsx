@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {IMovie} from "../../../types/media";
 import * as contentConst from "../../../utils/constants/content";
 import {directorsList} from "../../../utils/data/directors";
-import style from "../AddItemForm.module.css";
+import style from "../AddItemForm.module.scss";
 
 interface IDirectorProps {
     movie: IMovie;

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { IActor } from "../../types/media";
 import ENV from "../../env.config";
-import style from './Movies.module.css';
+import style from './Movies.module.scss';
 
 interface ICastsProps {
   actors: IActor[];

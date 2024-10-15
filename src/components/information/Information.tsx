@@ -1,6 +1,6 @@
-import {FC, memo} from 'react';
+import {FC} from 'react';
 import * as contentConst from '../../utils/constants/content';
-import style from './Information.module.css';
+import style from './Information.module.scss';
 
 interface IINformationProps {
     setVisibleInfo: (visibleInfo:boolean) => void;

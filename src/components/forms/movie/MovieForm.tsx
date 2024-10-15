@@ -3,7 +3,6 @@ import Genre from "./Genre";
 import Casts from "./Casts";
 import { IMovie } from '../../../types/media';
 import { useGetAllActorsQuery } from '../../../store/actorApi';
-import style from '../AddItemForm.module.css';
 import Year from "./Year";
 import Country from "./Country";
 import Time from "./Time";
@@ -17,6 +16,7 @@ import RemoveCasts from "./RemoveCasts";
 import Poster from "./Poster";
 import Trailer from "./Trailer";
 import ResetForm from "../../UI/buttons/ResetForm";
+import style from '../AddItemForm.module.scss';
 
 interface IMovieProps {
   movie: IMovie;

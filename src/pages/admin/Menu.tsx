@@ -7,7 +7,7 @@ import { useGetUnreadMessagesQuery } from '../../store/chatApi';
 import ENV from '../../env.config';
 import { faImages, faFilm, faAddressCard, faNewspaper, faEnvelope, faCreditCard
 } from '@fortawesome/free-solid-svg-icons';
-import style from './Admin.module.css';
+import style from './Admin.module.scss';
 
 const Menu: FC = () => {
   const user = useAppSelector(state => state.auth.user);

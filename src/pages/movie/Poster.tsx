@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {IMovie} from "../../types/media";
 import ENV from "../../env.config";
 import nonePoster from "../../assets/pics/blank_movie.jpg";
-import style from "./Movies.module.css";
+import style from "./Movies.module.scss";
 
 interface IPosterProps {
     movie: IMovie

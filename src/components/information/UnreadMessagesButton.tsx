@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import ChatIcon from '../../assets/pics/chat.svg';
 import notifMessages from '../../assets/pics/message-notif.svg';
-import style from './Information.module.css'
+import style from './Information.module.scss'
 
 interface IUnreadMessagesButton {
     unreadMessages: IUnreadMessages[];

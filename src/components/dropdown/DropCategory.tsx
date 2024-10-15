@@ -5,7 +5,7 @@ import * as contentConst from '../../utils/constants/content';
 import { setMovieCategory } from '../../store/movieOptionsSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
-import style from './Drop.module.css';
+import style from './Drop.module.scss';
 
 interface IDropCategoryProps {
   existGenre: string[];

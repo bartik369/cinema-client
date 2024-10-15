@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import * as contentConst from "../../../utils/constants/content";
 import {yearMedia} from "../../../utils/data/data";
 import {IMovie} from "../../../types/media";
-import style from "../AddItemForm.module.css";
+import style from "../AddItemForm.module.scss";
 
 interface IYearProps {
     movie: IMovie;

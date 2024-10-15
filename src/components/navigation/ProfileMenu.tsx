@@ -3,10 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { profileMenuData } from '../../utils/data/data';
 import { useAppSelector } from '../../hooks/reduxHook';
 import { useLogoutUserMutation } from '../../store/authApi';
-import ENV from '../../env.config';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import style from './ProfileMenu.module.css';
+import style from './ProfileMenu.module.scss';
 
 interface IProfileMenuProps {
     setProfileMenu: (profileMenu: boolean) => void;

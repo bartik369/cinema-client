@@ -4,7 +4,7 @@ import { faXmark} from '@fortawesome/free-solid-svg-icons';
 import { ratingMovie } from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content'
 import { IMovie } from '../../types/media';
-import style from './Rating.module.css';
+import style from './Rating.module.scss';
 
 interface IRatingProps  {
     visibleRating: boolean;

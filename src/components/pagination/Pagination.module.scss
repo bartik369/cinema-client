@@ -1,0 +1,68 @@
+.pagination {
+    display: flex;
+    margin: 30px auto;
+    width: fit-content;
+    padding: 3px 2px;
+    .active,
+    .notactive {
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        margin-right: 5px;
+        cursor: pointer;
+        color: #fff;
+    }
+    .active {
+        background-color: #BB8493;
+    }
+    .notactive {
+        background-color: transparent;
+    }
+    .next,
+    .prev {
+        background-color: transparent;
+        padding: 5px 12px;
+        color: #fff;
+        border: none;
+        margin: 0px 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    .next .next-arrow,
+    .prev .prev-arrow {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 3px;
+        border-top: 2px solid rgb(255, 255, 255);
+        border-right: 2px solid rgb(255, 255, 255);
+        transform: rotate(45deg);
+    }
+    .next .next-arrow {
+        transform: rotate(45deg);
+    }
+    .prev .prev-arrow {
+        transform: rotate(-135deg);
+    }
+    .prev:hover,
+    .next:hover {
+        color: #d698a9;
+    }
+    .next:hover .next-arrow,
+    .prev:hover .prev-arrow {
+        border-top: 2px solid #d698a9;
+        border-right: 2px solid #d698a9;
+    }
+    .next:disabled .next-arrow,
+    .pagination .prev:disabled .prev-arrow {
+        border-top: 2px solid rgb(65, 65, 65);
+        border-right: 2px solid rgb(65, 65, 65);
+    }
+    .prev:disabled,
+    .next:disabled {
+        padding: 5px 12px;
+        color: rgb(65, 65, 65);
+    }
+}

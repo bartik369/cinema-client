@@ -2,7 +2,7 @@ import {FC} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPen, faClone } from "@fortawesome/free-solid-svg-icons";
 import * as contentConst from '../../utils/constants/content'
-import style from './Chat.module.css';
+import style from './Chat.module.scss';
 
 interface ISenderMessageMenuProps {
     messageId: string;

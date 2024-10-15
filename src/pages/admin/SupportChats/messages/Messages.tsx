@@ -8,7 +8,7 @@ import Sender from './Sender';
 import Input from './Input';
 import Recipient from './Recipient';
 import * as contentConst from '../../../../utils/constants/content';
-import style from './Messages.module.css';
+import style from './Messages.module.scss';
 
 interface IMessagesProps {
   participants: IUser[];

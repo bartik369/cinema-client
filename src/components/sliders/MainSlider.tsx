@@ -14,7 +14,7 @@ import {
   ButtonNext,
 } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import style from './MainSlider.module.css';
+import style from './MainSlider.module.scss';
 
 const MainSlider: FC = () => {
   const { data: slides } = useGetSlidesQuery();

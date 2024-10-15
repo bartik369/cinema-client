@@ -7,7 +7,7 @@ import { IMovie } from '../../types/media';
 import Loader from '../../components/loader/Loader';
 import * as contentConst from '../../utils/constants/content';
 import ENV from '../../env.config';
-import style from './Actor.module.css';
+import style from './Actor.module.scss';
 
 const Actor:FC = () => {
     const [birthday, setBirthday] = useState<any>();

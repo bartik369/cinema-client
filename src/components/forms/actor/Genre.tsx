@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import * as contentConst from "../../../utils/constants/content";
 import {categoryMovies} from "../../../utils/data/data";
-import style from "../AddItemForm.module.css";
+import style from "../AddItemForm.module.scss";
 
 interface IGenreProps {
     addGenre: (e: React.ChangeEvent<HTMLSelectElement>) => void;

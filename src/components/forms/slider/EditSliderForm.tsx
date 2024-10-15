@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCamera } from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../../utils/constants/content';
 import defaultPreview from '../../../assets/pics/zaglushka.png';
-import style from './EditSliderForm.module.css';
+import style from './EditSliderForm.module.scss';
 
 interface IEditSliderForm {
   slider: ISlider;

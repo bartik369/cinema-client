@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faReply, faXmark} from "@fortawesome/free-solid-svg-icons";
-import style from "./Messages.module.css";
+import style from "./Messages.module.scss";
 
 interface ReplyMessageProps {
     replyMessage: string;

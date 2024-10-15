@@ -1,0 +1,26 @@
+.main {
+    max-width: 2000px;
+    margin: 0 auto;
+    .container {
+        width: 100%;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 10px;
+        .title {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        .title span {
+            font-size: 22px;
+            font-family: inherit;
+            color: rgb(199, 210, 232);
+        }
+        .title .icon {
+            font-size: 23px;
+            font-family: inherit;
+            color: #fd8841;
+            margin-right: 6px;
+        }
+    }
+}

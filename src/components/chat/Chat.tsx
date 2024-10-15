@@ -10,7 +10,7 @@ import InputUsersSide from './InputUsersSide';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark} from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content';
-import style from './Chat.module.css';
+import style from './Chat.module.scss';
 
 interface IChatProps {
     visibleHandler: () => void;

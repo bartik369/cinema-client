@@ -5,7 +5,7 @@ import { useCreateMessageMutation, useUpdateMessageMutation} from '../../../../s
 import ReplyMessage from "./ReplyMessage";
 import InputActions from "./InputActions";
 import ButtonsActions from "./ButtonsActions";
-import style from './Messages.module.css';
+import style from './Messages.module.scss';
 
 interface IInputProps {
     messages: IMessage[];

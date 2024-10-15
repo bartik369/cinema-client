@@ -1,0 +1,28 @@
+.container {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    .container__inner {
+        display: flex;
+        flex-direction: column;
+        .add {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .add .btn {
+            background-color: #3e29bf;
+            color: rgb(237, 237, 237);
+            border-radius: 4px;
+            font-size: 11px;
+            border: none;
+            padding: 10px 14px;
+            margin-bottom: 15px;
+            transition: all .5s ease-in-out;
+            cursor: pointer;
+        }
+        .add .btn:hover {
+            background-color: #4fd1bf;
+        }
+    }
+}

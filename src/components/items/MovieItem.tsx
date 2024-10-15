@@ -3,7 +3,7 @@ import ENV from '../../env.config';
 import { IMovie } from '../../types/media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar} from '@fortawesome/free-solid-svg-icons';
-import style from './MovieItem.module.css';
+import style from './MovieItem.module.scss';
 
 interface MovieItemProps {
   movie: IMovie;

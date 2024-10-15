@@ -7,7 +7,7 @@ import * as contentConst from '../../utils/constants/content';
 import supportAvatar from '../../assets/pics/support.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import style from './Chat.module.css';
+import style from './Chat.module.scss';
 
 interface IRecipientProps {
     messages: IMessage[];

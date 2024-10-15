@@ -3,7 +3,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { menuItemsData } from '../../utils/data/data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
-import style from './Navbar.module.css';
+import style from './Navbar.module.scss';
 
 const Navbar: FC = () => {
   return (

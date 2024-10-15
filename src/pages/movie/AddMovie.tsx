@@ -5,7 +5,7 @@ import { IMovie } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
 import {ToastContainer, toast} from "react-toastify";
 import MovieForm from '../../components/forms/movie/MovieForm';
-import style from './AddMovie.module.css';
+import style from './AddMovie.module.scss';
 
 const AddMovie: FC = () => {
   const [addMovie] = useAddMovieMutation()

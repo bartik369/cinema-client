@@ -11,7 +11,7 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from "pure-react-carousel";
 import ENV from "../../env.config";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import style from "./MainSlider.module.css";
+import style from "./MainSlider.module.scss";
 
 const LastMovies: FC = () => {
   const [getFavorites, { data: favorites }] = useGetFavoritesMutation();

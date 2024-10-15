@@ -4,7 +4,7 @@ import { faTrashCan, faPen } from '@fortawesome/free-solid-svg-icons';
 import { useGetSlidesQuery } from '../../store/adminApi';
 import * as contentConst from '../../utils/constants/content';
 import ENV from '../../env.config';
-import style from './SlidersList.module.css';
+import style from './SlidersList.module.scss';
 
 interface ISliderLIstProps {
   update: (id: string) => void;

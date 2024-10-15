@@ -1,5 +1,5 @@
 import { FC, useEffect, useState, useRef, MouseEvent } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../navigation/Navbar';
 import Search from '../search/Search';
 import Signin from '../forms/auth/Signin';
@@ -7,12 +7,12 @@ import Signup from '../forms/auth/Signup';
 import { useAppSelector } from '../../hooks/reduxHook';
 import ProfileMenu from '../navigation/ProfileMenu';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
+import Logo from "./Logo";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars, faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content'
 import Login from '../../assets/pics/login.svg';
-import style from './Header.module.css';
-import Logo from "./Logo";
+import style from './Header.module.scss';
 
 const Header: FC = () => {
   const token = useAppSelector(state => state.auth.token);

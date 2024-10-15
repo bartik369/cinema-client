@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import * as contentConst from '../../utils/constants/content';
 import video404 from '../../assets/video/404video.mp4';
-import style from './Page404.module.css';
+import style from './Page404.module.scss';
 
 const Page404: FC = () => {
   return (

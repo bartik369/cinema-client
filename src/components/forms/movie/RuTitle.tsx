@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {IMovie} from "../../../types/media";
 import * as contentConst from "../../../utils/constants/content";
-import style from "../AddItemForm.module.css";
+import style from "../AddItemForm.module.scss";
 
  interface IRuTitle {
      movie: IMovie;

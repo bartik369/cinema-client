@@ -3,7 +3,7 @@ import * as contentConst from '../../utils/constants/content'
 import {useGetUsersQuery} from '../../store/adminApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import style from './Admin.module.css'
+import style from './Admin.module.scss'
 
 const UsersCounts: FC = () => {
   const { data: users } = useGetUsersQuery();

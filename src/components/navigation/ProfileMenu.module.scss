@@ -1,0 +1,64 @@
+.profile-menu {
+    position: absolute;
+    top: 22px;
+    display: flex;
+    right: 0;
+    width: 150px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e1e2e;
+    box-shadow: rgba(15, 15, 27, 0.7) 0 50px 100px -20px, rgba(15, 15, 27, 0.8) 0 30px 60px -30px;
+    padding: 20px;
+    border-radius: 6px;
+    z-index: 99;
+    ul li:not(:last-child) {
+        border-bottom: 1px solid #30354f;
+    }
+    li {
+        display: inline-block;
+        padding: 9px 20px;
+    }
+    li .icon {
+        margin-right: 7px;
+    }
+    li a {
+        color: #cbd6e9;
+        text-decoration: none;
+        font-family: inherit;
+        font-weight: 300;
+        font-size: 13px;
+    }
+    .active {
+        color: #e2a6b6;
+    }
+    li a:hover {
+        color: #e2a6b6;
+    }
+}
+
+.logout {
+    color: #cbd6e9;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    text-transform: uppercase;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    margin-top: 20px;
+    cursor: pointer;
+    img {
+        width: 22px;
+        margin-left: 2px;
+    }
+}
+
+.logout:hover {
+    color: #5be8d5;
+}
+
+.logout:hover {
+    color: #e2a6b6;
+}
+
+ul.items {}

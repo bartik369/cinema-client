@@ -7,7 +7,7 @@ import MovieFilter from '../../components/filter/MovieFilter';
 import Loader from '../../components/loader/Loader';
 import Pagination from '../../components/pagination/Pagination';
 import ENV from '../../env.config';
-import style from './Movies.module.css';
+import style from './Movies.module.scss';
 
 const Movies = () => {
   const [page, setPage] = useState(1);

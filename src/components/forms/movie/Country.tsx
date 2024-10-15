@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import * as contentConst from "../../../utils/constants/content";
 import {countryList} from "../../../utils/data/coutry";
 import {IMovie} from "../../../types/media";
-import style from "../AddItemForm.module.css";
+import style from "../AddItemForm.module.scss";
 
 interface ICountryProps {
     movie: IMovie;

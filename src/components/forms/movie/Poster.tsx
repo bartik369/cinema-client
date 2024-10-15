@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import style from "../AddItemForm.module.css";
 import * as contentConst from "../../../utils/constants/content";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
+import style from "../AddItemForm.module.scss";
 
 interface  IPosterPost {
     imgAction: (e: React.ChangeEvent<HTMLInputElement>) => void;

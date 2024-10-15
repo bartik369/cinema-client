@@ -4,7 +4,7 @@ import * as contentConst from '../../../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbTack, faCheck} from '@fortawesome/free-solid-svg-icons';
 import { IParticipantInfo } from '../../../../types/chat';
-import style from './Participants.module.css';
+import style from './Participants.module.scss';
 
 interface IParticipantsMenuProps {
     participant: IParticipantInfo;

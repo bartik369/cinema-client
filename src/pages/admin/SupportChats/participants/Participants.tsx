@@ -10,7 +10,7 @@ import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import ENV from '../../../../env.config';
 import defaultAvatar from '../../../../assets/pics/profile-circle.svg';
 import pinIcom from '../../../../assets/pics/pin.svg'
-import style from './Participants.module.css';
+import style from './Participants.module.scss';
 
 interface IParticipantsProps {
     participants:IParticipantInfo[] ;

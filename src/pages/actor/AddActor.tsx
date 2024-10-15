@@ -5,7 +5,7 @@ import * as contentConst from '../../utils/constants/content';
 import ActorForm from '../../components/forms/actor/ActorForm';
 import PreviewActor from '../../components/preview/PreviewActor';
 import {ToastContainer, toast} from "react-toastify";
-import style from './AddActor.module.css';
+import style from './AddActor.module.scss';
 
 const AddActor: FC = () => {
   const [addActor] = useAddActorMutation();

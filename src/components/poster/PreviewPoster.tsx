@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { IMovie } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
 import BlankMovie from '../../assets/pics/blank_movie.jpg';
-import style from './PreviewPoster.module.css';
+import style from './PreviewPoster.module.scss';
 
 interface IPreviewPosterProps {
   prevImg: string | null;

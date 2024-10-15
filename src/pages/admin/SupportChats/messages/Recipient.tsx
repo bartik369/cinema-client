@@ -9,7 +9,7 @@ import * as contentConst from '../../../../utils/constants/content';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../../assets/pics/profile-circle.svg";
-import style from "./Messages.module.css";
+import style from "./Messages.module.scss";
 
 interface IRecipientProps {
     message: IMessage;

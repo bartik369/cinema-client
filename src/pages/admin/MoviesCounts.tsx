@@ -3,7 +3,7 @@ import {useGetMoviesCountQuery} from '../../store/adminApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as contentConst from '../../utils/constants/content'
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import style from './Admin.module.css'
+import style from './Admin.module.scss'
 
 const MoviesCounts: FC = () => {
     const {data: moviesCount} = useGetMoviesCountQuery();

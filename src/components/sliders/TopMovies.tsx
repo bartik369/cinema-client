@@ -11,7 +11,7 @@ import ENV from '../../env.config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import style from './MainSlider.module.css';
+import style from './MainSlider.module.scss';
 
 const TopMovies: FC = () => {
   const [getFavorites, {data: favorites}] = useGetFavoritesMutation();

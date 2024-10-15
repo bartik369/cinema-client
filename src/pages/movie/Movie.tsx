@@ -21,9 +21,9 @@ import RatingScore from "./RatingScore";
 import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import style from './Movies.module.css';
 import VideoLayer from "./VideoLayer";
 import Poster from "./Poster";
+import style from './Movies.module.scss';
 
 const Movie: FC = () => {
   const dispatch = useAppDispatch()

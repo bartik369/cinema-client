@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import * as contentConst from "../../../utils/constants/content";
 import {genderItemsData} from "../../../utils/data/data";
 import {IActor} from "../../../types/media";
-import style from "../AddItemForm.module.css";
+import style from "../AddItemForm.module.scss";
 
 interface IGenderProps {
     actor: IActor;

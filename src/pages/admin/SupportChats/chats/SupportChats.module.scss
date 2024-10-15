@@ -1,0 +1,59 @@
+.chats {
+    display: flex;
+    margin: 0 auto 40px;
+    width: 100%;
+    max-width: 1320px;
+    height: calc(100vh - 105px);
+    overflow: hidden;
+    position: relative;
+    font-family: inherit;
+    .conversations {
+        width: 0;
+        overflow: hidden;
+        transition: all .5s ease;
+    }
+    .active {
+        background-color: #10111a;
+        flex: 0 0 320px;
+        overflow-y: scroll;
+        position: relative;
+    }
+    .messages {
+        flex: 1 1 25%;
+        background-color: #181825;
+        background-image: url('../../../../assets/pics/chat-texture.png');
+    }
+    .messages .chat-info {
+        width: 100%;
+        height: 50px;
+        background-color: #1d1e2d;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+    }
+    .messages .chat-info .toggle {
+        display: none;
+    }
+    .messages .chat-info .number {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 850px) {
+    .chats .messages .chat-info .toggle {
+        display: flex;
+        background-color: transparent;
+        border: none;
+        font-size: 21px;
+        color: #b2bac9;
+    }
+    .chats .messages {
+        background-color: #181825;
+        background-image: url('../../../../assets/pics/chat-texture.png');
+        flex-grow: 1;
+    }
+}

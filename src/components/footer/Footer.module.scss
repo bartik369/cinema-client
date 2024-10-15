@@ -1,0 +1,119 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 120px;
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+.notrailer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+.inner {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+ul li {
+    list-style: none;
+    padding: 4px 0;
+}
+
+.info {
+    width: 100px;
+    img {
+        width: 100%;
+    }
+}
+
+.social {
+    display: flex;
+    margin-bottom: 15px;
+    div {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #1c1c2b;
+        border-radius: 50%;
+        margin: 3px;
+        cursor: pointer;
+        transition: all .4s ease-in-out;
+    }
+    div:hover {
+        background-color: #29293d;
+    }
+    div img {
+        width: 23px;
+    }
+}
+
+.menu {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    a {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 14px;
+        color: #a4aec1;
+    }
+}
+
+@media (max-width: 1140px) {
+    .notrailer {
+        display: flex;
+        padding-top: 120px;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        max-width: 1320px;
+        margin: 0 auto;
+    }
+    .menu .chat-block {
+        right: 20px;
+        bottom: 100px;
+    }
+}
+
+@media (max-width: 800px) {
+    .inner {
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    .inner {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .menu a {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 13px;
+        color: #a4aec1;
+    }
+}
+
+@media (max-width: 400px) {
+    .inner {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .menu a {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 12px;
+        color: #a4aec1;
+    }
+}

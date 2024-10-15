@@ -4,10 +4,8 @@ import * as contentConst from "../src/utils/constants/content";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import { useVerifyTokenMutation } from "./store/authApi";
 import Home from "./pages/home/Home";
-import Header from "./components/header/Header";
 import Movies from "./pages/movie/Movies";
 import AddMovie from "./pages/movie/AddMovie";
-import Footer from "./components/footer/Footer";
 import AddActor from "./pages/actor/AddActor";
 import Movie from "./pages/movie/Movie";
 import Actor from "./pages/actor/Actor";
@@ -17,8 +15,8 @@ import Page404 from "./pages/404/Page404";
 import Admin from "./pages/admin/Admin";
 import SupportChats from "./pages/admin/SupportChats/chats/SupportChats";
 import EditMainSlider from "./pages/slider/EditMainSlider";
-import style from "./App.module.css";
 import Layout from "./routes/Layout";
+import style from "./App.module.scss";
 
 const App: FC = () => {
   const [verifyToken] = useVerifyTokenMutation();

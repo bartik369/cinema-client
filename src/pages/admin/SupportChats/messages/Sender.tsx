@@ -7,7 +7,7 @@ import MediaFile from './MediaFile';
 import * as contentConst from '../../../../utils/constants/content';
 import { faCheck, faCheckDouble, faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import supportIcon from '../../../../assets/pics/support.png'
-import style from './Messages.module.css';
+import style from './Messages.module.scss';
 
 interface ISenderProps {
     message: IMessage;

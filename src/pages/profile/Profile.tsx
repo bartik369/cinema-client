@@ -16,7 +16,7 @@ import invite from '../../assets/pics/invite.svg';
 import settings from '../../assets/pics/settings.svg';
 import plan from '../../assets/pics/plan.svg';
 import certificate from '../../assets/pics/certificate.svg';
-import style from './Profile.module.css';
+import style from './Profile.module.scss';
 
 const Profile: FC = () => {
   const user = useAppSelector((state) => state.auth.user);

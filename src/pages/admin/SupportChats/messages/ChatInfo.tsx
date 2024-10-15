@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {IParticipantInfo} from "../../../../types/chat";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
-import style from "../chats/SupportChats.module.css";
+import style from "../chats/SupportChats.module.scss";
 
 interface IChatInfoProps {
     visibleBurger: () => void;

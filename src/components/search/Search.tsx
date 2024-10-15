@@ -7,7 +7,7 @@ import ENV from '../../env.config';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import style from './Search.module.css';
+import style from './Search.module.scss';
 
 interface IVisibleProps {
   visibleHandler: () => void;

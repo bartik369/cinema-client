@@ -1,6 +1,6 @@
 import React, {FC, MouseEvent} from 'react';
-import style from "./Buttons.module.css";
 import * as contentConst from "../../../utils/constants/content";
+import style from "./Buttons.module.scss";
 
 interface IResetForm {
     resetFormHandler: (e: MouseEvent<HTMLButtonElement>) => void;

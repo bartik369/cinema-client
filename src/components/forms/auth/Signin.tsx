@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import validate from '../../../middleware/validateAuth';
 import authBanner from '../../../assets/pics/authwall.jpg'
 import { faEye, faEyeSlash, faEnvelope, faXmark } from '@fortawesome/free-solid-svg-icons';
-import style from './Auth.module.css';
+import style from './Auth.module.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface ISigninProps {

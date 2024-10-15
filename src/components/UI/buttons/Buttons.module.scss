@@ -1,0 +1,20 @@
+.reset {
+    font-size: 11px;
+    font-family: inherit;
+    padding: 10px;
+    margin: 0;
+    border-radius: 4px;
+    border: none;
+    background-color: #9E4784;
+    color: #fff;
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    cursor: pointer;
+    transition: all .6s ease-in-out;
+    position: absolute;
+}
+
+.reset:hover {
+    background-color: #c257a2;
+}

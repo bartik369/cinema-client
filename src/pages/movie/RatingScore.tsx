@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import * as contentConst  from '../../utils/constants/content';
-import style from './Movies.module.css';
+import style from './Movies.module.scss';
 
 interface IRatingScoreProps {
     movieRating: number;

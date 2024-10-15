@@ -8,7 +8,7 @@ import ENV from '../../env.config';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheck, faCheckDouble, faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import style from './Chat.module.css';
+import style from './Chat.module.scss';
 
 interface ISenderProps {
     user: IUser;

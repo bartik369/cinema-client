@@ -6,7 +6,7 @@ import { pageTitles } from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import style from './Breadcrumbs.module.css';
+import style from './Breadcrumbs.module.scss';
 
 const Breadcrumbs: FC = () => {
   const location = useLocation();

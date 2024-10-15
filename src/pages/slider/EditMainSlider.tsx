@@ -9,7 +9,7 @@ import {
 import EditSliderForm from '../../components/forms/slider/EditSliderForm';
 import SlidersList from '../../components/sliders/SlidersList';
 import * as contentConst from '../../utils/constants/content';
-import style from './EditMainSlider.module.css';
+import style from './EditMainSlider.module.scss';
 
 const EditMainSlider: FC = () => {
   const [slider, setSlider] = useState<ISlider>({

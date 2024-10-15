@@ -5,7 +5,7 @@ import { yearMovieRageData } from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import style from './Drop.module.css';
+import style from './Drop.module.scss';
 
 interface IDropYearProps {
   existYear: string[];

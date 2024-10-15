@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperclip} from "@fortawesome/free-solid-svg-icons";
 import * as contentConst from "../../utils/constants/content";
-import style from "./Chat.module.css";
+import style from "./Chat.module.scss";
 
 interface ButtonsActionsProps {
     file: string | Blob;

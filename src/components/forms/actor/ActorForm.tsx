@@ -13,7 +13,7 @@ import Genre from './Genre';
 import Portrait from "./Portrait";
 import ResetForm from "../../UI/buttons/ResetForm";
 import 'react-datepicker/dist/react-datepicker.css';
-import style from '../AddItemForm.module.css';
+import style from '../AddItemForm.module.scss';
 
 interface IActorProps {
   actor: IActor;

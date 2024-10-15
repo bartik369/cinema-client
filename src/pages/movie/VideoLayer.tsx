@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import ENV from '../../env.config';
 import {IMovie} from "../../types/media";
 import cinema from '../../assets/pics/cinema.jpg';
-import style from './Movies.module.css';
+import style from './Movies.module.scss';
 
 interface IVideoLayerProps {
     movie: IMovie;

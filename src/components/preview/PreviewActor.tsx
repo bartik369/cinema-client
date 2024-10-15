@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IActor } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
 import BlankAvatar from '../../assets/pics/blank_avatar.jpg';
-import style from './PreviewActor.module.css';
+import style from './PreviewActor.module.scss';
 
 interface IPreviewActorProps {
   prevImg: string | null;

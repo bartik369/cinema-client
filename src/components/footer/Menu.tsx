@@ -5,7 +5,7 @@ import Instagram from "../../assets/pics/instagram.svg";
 import VK from "../../assets/pics/vk.svg";
 import Telegram from "../../assets/pics/telegram.svg";
 import Twitter from "../../assets/pics/twitter.svg";
-import style from "./Footer.module.css";
+import style from "./Footer.module.scss";
 
 const Menu = () => {
     return (

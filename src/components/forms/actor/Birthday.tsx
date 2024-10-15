@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import * as contentConst from "../../../utils/constants/content";
 import DatePicker from "react-datepicker";
-import style from "../AddItemForm.module.css";
 import {IActor} from "../../../types/media";
+import style from "../AddItemForm.module.scss";
 
 interface IBirthdayProps {
     actor: IActor;

@@ -1,4 +1,4 @@
-import { FC, useState, useCallback, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Commercial from '../../components/banners/Сommercial';
 import LastMovies from '../../components/sliders/LastMovies';
 import TopMovies from '../../components/sliders/TopMovies';
@@ -7,7 +7,7 @@ import Information from '../../components/information/Information';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy, faStar } from '@fortawesome/free-solid-svg-icons';
-import style from './Home.module.css';
+import style from './Home.module.scss';
 
 const Home: FC = () => {
   const [visibleInfo, setVisibleInfo] = useState<boolean>(false);

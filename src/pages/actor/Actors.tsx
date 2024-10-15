@@ -8,7 +8,7 @@ import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import ENV from '../../env.config';
-import style from './Actor.module.css';
+import style from './Actor.module.scss';
 
 const Actors: FC = () => {
   const [search, setSearch] = useState<string>('');

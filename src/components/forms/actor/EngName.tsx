@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import style from "../AddItemForm.module.css";
 import * as contentConst from "../../../utils/constants/content";
 import {IActor} from "../../../types/media";
+import style from "../AddItemForm.module.scss";
 
 interface EngNameProps {
     actor: IActor;

@@ -1,0 +1,107 @@
+.rating {
+    position: fixed;
+    background-color: #09090e;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.inner {
+    display: flex;
+    max-width: 700px;
+    flex-direction: column;
+    padding: 20px;
+    .title {
+        color: #fff;
+        margin: 7px 0;
+        font-family: inherit;
+        font-size: 18px;
+        text-align: center;
+    }
+    .ru {
+        color: #fff;
+        font-family: inherit;
+        font-size: 24px;
+        text-align: center;
+    }
+    .en {
+        color: #a4aec1;
+        font-family: inherit;
+        font-size: 13px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .numbers {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        flex-direction: row;
+    }
+    .item {
+        color: #a4aec1;
+        font-size: 17px;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border: 2px solid #30354f;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+    .item:hover {
+        border: 2px solid #6e8fd1;
+        color: #fff;
+    }
+}
+
+.close {
+    position: absolute;
+    color: aliceblue;
+    border: none;
+    font-size: 25px;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.close:hover {
+    position: absolute;
+    color: #4fd1bf;
+    border: none;
+    font-size: 25px;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+}
+
+.message {
+    color: #fff;
+    font-size: 35px;
+    position: absolute;
+    top: 30%;
+}
+
+.hidden {
+    display: none;
+}
+
+@media(max-width:600px) {
+    .message {
+        color: #fff;
+        font-size: 25px;
+        position: absolute;
+        top: 24%;
+    }
+    .inner .numbers {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {IMessage} from "../../../../types/chat";
-import style from "./Messages.module.css";
+import style from "./Messages.module.scss";
 
 interface InputActionsProps {
     message: IMessage;

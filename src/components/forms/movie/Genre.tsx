@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {IMovie} from "../../../types/media";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import style from '../AddItemForm.module.css';
+import style from '../AddItemForm.module.scss';
 
 interface IGenreProps {
     movie: IMovie;
