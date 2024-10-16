@@ -73,16 +73,9 @@
     right: 20px;
     background-color: transparent;
     cursor: pointer;
-}
-
-.close:hover {
-    position: absolute;
-    color: #4fd1bf;
-    border: none;
-    font-size: 25px;
-    top: 20px;
-    right: 20px;
-    background-color: transparent;
+    &:hover {
+        color: #4fd1bf;
+    }
 }
 
 .title {
@@ -143,10 +136,9 @@
     margin: 27px auto 0;
     border-radius: 18px;
     transition: all .5s ease-in-out;
-}
-
-.enter-btn:hover {
-    background-color: #7b4198;
+    &:hover {
+        background-color: #7b4198;
+    }
 }
 
 .login {
@@ -162,9 +154,7 @@
     .inner {
         grid-template-columns: repeat(2, 1fr);
         max-height: 450px;
-        height: 100%;
         max-width: 1000px;
-        width: 100%;
         margin: 30px;
     }
     .banner img {
@@ -177,12 +167,10 @@
     .inner {
         grid-template-columns: repeat(1, 1fr);
         max-height: 450px;
-        height: 100%;
         max-width: 1000px;
-        width: 100%;
         margin: 30px;
-    }
-    .inner .banner {
-        display: none;
+        .banner {
+            display: none;
+        }
     }
 }

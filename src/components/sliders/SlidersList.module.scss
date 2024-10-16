@@ -35,10 +35,9 @@
         background-color: #2a2e45;
         margin-right: 7px;
         cursor: pointer;
-    }
-    .info .actions .delete:hover,
-    .info .actions .update:hover {
-        background-color: #373d5a;
+        &:hover {
+            background-color: #373d5a;
+        }
     }
     .info .btns span {
         margin-left: 4px;
@@ -47,33 +46,25 @@
 
 @media (max-width: 1065px) {
     .slides-wrapper {
-        display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-gap: 20px;
     }
 }
 
 @media (max-width: 960px) {
     .slides-wrapper {
-        display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 20px;
     }
 }
 
 @media (max-width: 630px) {
     .slides-wrapper {
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 20px;
     }
 }
 
 @media (max-width: 415px) {
     .slides-wrapper {
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 20px;
     }
 }
 
@@ -82,13 +73,9 @@
 @media (max-width: 450px) {
     .info .actions .update,
     .info .actions .delete {
-        font-size: 11px;
-        border: none;
         padding: 9px 10px 7px;
         color: #a4aec1;
-        border-radius: 4px;
         background-color: #2a2e45;
-        cursor: pointer;
     }
     .info .btns span {
         display: none;

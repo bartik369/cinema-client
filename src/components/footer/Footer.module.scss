@@ -66,6 +66,10 @@ ul li {
         font-weight: 400;
         font-size: 14px;
         color: #a4aec1;
+        transition: all .6s ease-in-out;
+        &:hover {
+            color: #dddfe2;
+        }
     }
 }
 
@@ -97,10 +101,7 @@ ul li {
         grid-template-columns: repeat(2, 1fr);
     }
     .menu a {
-        font-family: inherit;
-        font-weight: 400;
         font-size: 13px;
-        color: #a4aec1;
     }
 }
 
@@ -111,9 +112,6 @@ ul li {
         grid-template-columns: repeat(2, 1fr);
     }
     .menu a {
-        font-family: inherit;
-        font-weight: 400;
         font-size: 12px;
-        color: #a4aec1;
     }
 }

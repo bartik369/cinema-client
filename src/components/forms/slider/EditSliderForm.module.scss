@@ -82,15 +82,9 @@
         right: 20px;
         background-color: transparent;
         cursor: pointer;
-    }
-    .close:hover {
-        position: absolute;
-        color: #4fd1bf;
-        border: none;
-        font-size: 25px;
-        top: 20px;
-        right: 20px;
-        background-color: transparent;
+        &:hover {
+            color: #4fd1bf;
+        }
     }
 }
 
@@ -139,9 +133,9 @@
         padding: 9px 20px;
         cursor: pointer;
         transition: all .6s ease-in-out;
-    }
-    .add:hover {
-        background-color: #7c23d5;
+        &:hover {
+            background-color: #7c23d5;
+        }
     }
     .photo-layer {
         padding: 9px;

@@ -8,9 +8,6 @@
     flex-direction: column;
 }
 
-
-/* before */
-
 input,
 textarea,
 select {
@@ -67,9 +64,6 @@ span.input-info {
     font-size: 24px;
 }
 
-
-/*  */
-
 .block {
     display: flex;
     flex-direction: column;
@@ -113,10 +107,9 @@ span.input-info {
     align-items: center;
     cursor: pointer;
     transition: all .6s ease-in-out;
-}
-
-.photo-layer:hover {
-    background-color: #80429f;
+    &:hover {
+        background-color: #80429f;
+    }
 }
 
 .photo-icon {

@@ -89,9 +89,9 @@
         margin: 0 10px;
         color: #41476c;
         transition: all .6s ease-in-out;
-    }
-    .buttons .file:hover {
-        color: #a4aec1;
+        &:hover {
+            color: #a4aec1;
+        }
     }
     .buttons .btn {
         background-color: #484175;
@@ -104,9 +104,9 @@
         border-radius: 6px;
         cursor: pointer;
         transition: all .6s ease-in-out;
-    }
-    .buttons .btn:hover {
-        background-color: #875e73;
+        &:hover {
+            background-color: #875e73;
+        }
     }
 }
 
@@ -197,10 +197,9 @@
         margin-left: 10px;
         cursor: pointer;
         transition: all .6s ease-in-out;
-    }
-    .left .content .info .menu:hover,
-    .right .content .info .menu:hover {
-        color: #fff;
+        &:hover {
+            color: #fff;
+        }
     }
     .left .content .info .active .menu-list,
     .right .content .info .active .menu-list {
@@ -214,15 +213,14 @@
         top: 23px;
         font-size: 12px;
         z-index: 99;
-    }
-    .left .content .info .active .menu-list ul li,
-    .right .content .info .active .menu-list ul li {
-        padding: 6px 8px;
-        cursor: pointer;
-    }
-    .left .content .info .active .menu-list ul li:hover,
-    .right .content .info .active .menu-list ul li :hover {
-        color: #ffffff;
+        ul li,
+        ul li {
+            padding: 6px 8px;
+            cursor: pointer;
+            &:hover {
+                color: #ffffff;
+            }
+        }
     }
     .left .content .info .active .menu-list .icon,
     .right .content .info .active .menu-list .icon {

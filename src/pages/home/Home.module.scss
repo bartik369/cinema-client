@@ -10,17 +10,17 @@
             display: flex;
             align-items: center;
             margin: 15px 0;
-        }
-        .title span {
-            font-size: 22px;
-            font-family: inherit;
-            color: rgb(199, 210, 232);
-        }
-        .title .icon {
-            font-size: 23px;
-            font-family: inherit;
-            color: #fd8841;
-            margin-right: 6px;
+            span {
+                font-size: 22px;
+                font-family: inherit;
+                color: rgb(199, 210, 232);
+            }
+            .icon {
+                font-size: 23px;
+                font-family: inherit;
+                color: #fd8841;
+                margin-right: 6px;
+            }
         }
     }
 }

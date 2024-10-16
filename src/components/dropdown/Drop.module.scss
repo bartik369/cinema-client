@@ -119,12 +119,11 @@ fieldset {
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+    &::after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
 }
 
 @media (max-width: 800px) {

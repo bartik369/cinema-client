@@ -17,21 +17,21 @@
     li {
         display: inline-block;
         padding: 9px 20px;
-    }
-    li .icon {
-        margin-right: 7px;
-    }
-    li a {
-        color: #cbd6e9;
-        text-decoration: none;
-        font-family: inherit;
-        font-weight: 300;
-        font-size: 13px;
+        .icon {
+            margin-right: 7px;
+        }
+        a {
+            color: #cbd6e9;
+            text-decoration: none;
+            font-family: inherit;
+            font-weight: 300;
+            font-size: 13px;
+            &:hover {
+                color: #e2a6b6;
+            }
+        }
     }
     .active {
-        color: #e2a6b6;
-    }
-    li a:hover {
         color: #e2a6b6;
     }
 }
@@ -47,18 +47,11 @@
     font-size: 12px;
     margin-top: 20px;
     cursor: pointer;
+    &:hover {
+        color: #e2a6b6;
+    }
     img {
         width: 22px;
         margin-left: 2px;
     }
 }
-
-.logout:hover {
-    color: #5be8d5;
-}
-
-.logout:hover {
-    color: #e2a6b6;
-}
-
-ul.items {}

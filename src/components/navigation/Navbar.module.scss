@@ -18,12 +18,11 @@
         }
         .menu-item {
             color: #bcb8da;
+            &:hover {
+                color: #ffffff !important;
+            }
         }
     }
-}
-
-.menu-item:hover {
-    color: #ffffff !important;
 }
 
 .menu-item .icon,

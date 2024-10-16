@@ -30,9 +30,9 @@
         right: 10px;
         top: 10px;
         cursor: pointer;
-    }
-    .close:hover {
-        color: #bbbedd;
+        &:hover {
+            color: #bbbedd;
+        }
     }
     .messages {
         background-image: url('../../assets/pics/chat-texture.png');
@@ -76,11 +76,11 @@
         box-sizing: border-box;
         width: 100%;
         font-size: 13px;
-    }
-    .input .inner input:hover,
-    .input .inner input:focus {
-        background-color: #1f202f;
-        border: 1px solid #3e415f;
+        &:hover,
+        &:focus {
+            background-color: #1f202f;
+            border: 1px solid #3e415f;
+        }
     }
     .typing .reply-for {
         border-radius: 20px 20px 20px 0;
@@ -113,10 +113,10 @@
         cursor: pointer;
         position: absolute;
         transition: all .6s ease-in-out;
-    }
-    .typing .reply-for .reset-reply:hover {
-        background-color: #82d8c8;
-        color: #171822;
+        &:hover {
+            background-color: #82d8c8;
+            color: #171822;
+        }
     }
     .typing .reset {
         position: absolute;
@@ -129,10 +129,10 @@
         transition: all .5s ease-in-out;
         background-color: #383b53;
         border-radius: 50%;
-    }
-    .typing .reset:hover {
-        background-color: #fd8841;
-        color: #ffffff;
+        &:hover {
+            background-color: #fd8841;
+            color: #ffffff;
+        }
     }
     .typing .buttons {
         display: flex;
@@ -147,9 +147,9 @@
         margin: 0px 10px;
         color: #6a72a5;
         transition: all .6s ease-in-out;
-    }
-    .typing .buttons .file:hover {
-        color: #a4aec1;
+        &:hover {
+            color: #a4aec1;
+        }
     }
     .typing .buttons .btn {
         background-color: #484175;
@@ -162,9 +162,9 @@
         border-radius: 6px;
         cursor: pointer;
         transition: all .6s ease-in-out;
-    }
-    .typing .buttons .btn:hover {
-        background-color: #fd8841;
+        &:hover {
+            background-color: #fd8841;
+        }
     }
     .messages .inactive {
         display: none;
@@ -231,10 +231,9 @@
         margin-left: 10px;
         cursor: pointer;
         transition: all .6s ease-in-out;
-    }
-    .messages .left .content .info .menu:hover,
-    .messages .right .content .info .menu:hover {
-        color: #fff;
+        &:hover {
+            color: #fff;
+        }
     }
     .left .content .info .active .menu-list,
     .right .content .info .active .menu-list {

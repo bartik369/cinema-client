@@ -20,9 +20,9 @@
             margin-bottom: 15px;
             transition: all .5s ease-in-out;
             cursor: pointer;
-        }
-        .add .btn:hover {
-            background-color: #4fd1bf;
+            &:hover {
+                background-color: #4fd1bf;
+            }
         }
     }
 }

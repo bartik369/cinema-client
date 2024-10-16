@@ -15,12 +15,11 @@
     font-size: 15px;
     z-index: 999;
     transition: all .6s ease-in-out;
-}
-
-.chat-block:hover {
-    box-shadow: 0 2px 2px 0 rgba(41, 66, 191, 0.06), 0 4px 4px 0 rgba(41, 66, 191, 0.06), 0 8px 8px 0 rgba(41, 66, 191, 0.06), 0 16px 16px 0 rgba(41, 66, 191, 0.06), 0 32px 32px 0 rgba(41, 66, 191, 0.06), 0 64px 64px 0 rgba(41, 66, 191, 0.06);
-    background-color: #5242ba;
-    transform: scale(1.03);
+    &:hover {
+        box-shadow: 0 2px 2px 0 rgba(41, 66, 191, 0.06), 0 4px 4px 0 rgba(41, 66, 191, 0.06), 0 8px 8px 0 rgba(41, 66, 191, 0.06), 0 16px 16px 0 rgba(41, 66, 191, 0.06), 0 32px 32px 0 rgba(41, 66, 191, 0.06), 0 64px 64px 0 rgba(41, 66, 191, 0.06);
+        background-color: #5242ba;
+        transform: scale(1.03);
+    }
 }
 
 .information {
@@ -59,9 +58,9 @@
         height: fit-content;
         cursor: pointer;
         transition: all .5s ease-in-out;
-    }
-    .inner .close:hover {
-        background-color: #9b4885;
+        &:hover {
+            background-color: #9b4885;
+        }
     }
 }
 
@@ -138,16 +137,16 @@
     .inner .buttons .yes {
         background-color: #3e29bf;
         transition: all .5s ease-in-out;
-    }
-    .inner .buttons .yes:hover {
-        background-color: #523cde;
+        &:hover {
+            background-color: #523cde;
+        }
     }
     .inner .buttons .no {
         background-color: #9f2f32;
         transition: all .5s ease-in-out;
-    }
-    .inner .buttons .no:hover {
-        background-color: hsl(358, 52%, 48%);
+        &:hover {
+            background-color: hsl(358, 52%, 48%);
+        }
     }
 }
 

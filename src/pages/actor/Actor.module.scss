@@ -70,13 +70,13 @@
         font-family: inherit;
         font-weight: 300;
         color: #a4aec1;
-    }
-    .movies a:hover {
-        color: #e2a6b6;
+        &:hover {
+            color: #e2a6b6;
+        }
     }
 }
 
-ß .actors {
+.actors {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -172,8 +172,6 @@
 
 @media (max-width:1000px) {
     .actor .info {
-        display: grid;
-        grid-gap: 30px;
         grid-template-columns: 20% 45% auto
     }
     .actor .description .item {
@@ -196,8 +194,6 @@
 
 @media (max-width:800px) {
     .actor .info {
-        display: grid;
-        grid-gap: 30px;
         grid-template-columns: repeat(300px, 1fr)
     }
     .actor .description .item {
@@ -211,8 +207,6 @@
 
 @media (max-width:600px) {
     .actor .info {
-        display: grid;
-        grid-gap: 30px;
         grid-template-columns: repeat(2, 1fr)
     }
     .actors .info .item {
@@ -245,7 +239,6 @@
 
 @media (max-width:500px) {
     .actor .info {
-        display: grid;
         grid-gap: 20px;
         grid-template-columns: repeat(1, 1fr)
     }

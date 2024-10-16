@@ -140,10 +140,9 @@ span.nf {
     font-weight: 300;
     font-size: 12px;
     transition: all .6s ease-in-out;
-}
-
-.btn-submit:hover {
-    background-color: #27bda8;
+    &:hover {
+        background-color: #27bda8;
+    }
 }
 
 @media (max-width: 600px) {

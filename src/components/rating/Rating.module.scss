@@ -55,10 +55,10 @@
         margin: 5px;
         cursor: pointer;
         border-radius: 50%;
-    }
-    .item:hover {
-        border: 2px solid #6e8fd1;
-        color: #fff;
+        &:hover {
+            border: 2px solid #6e8fd1;
+            color: #fff;
+        }
     }
 }
 
@@ -71,16 +71,9 @@
     right: 20px;
     background-color: transparent;
     cursor: pointer;
-}
-
-.close:hover {
-    position: absolute;
-    color: #4fd1bf;
-    border: none;
-    font-size: 25px;
-    top: 20px;
-    right: 20px;
-    background-color: transparent;
+    &:hover {
+        color: #4fd1bf;
+    }
 }
 
 .message {

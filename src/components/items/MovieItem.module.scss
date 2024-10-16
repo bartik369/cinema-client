@@ -6,12 +6,11 @@
     transition: all .5s ease-in-out;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(11, 3, 15, 0.7);
-}
-
-.wrapper:hover {
-    transform: scale(1.05);
-    box-shadow: 0 2px 2px 0 rgba(62, 41, 191, 0.06), 0 4px 4px 0 rgba(62, 41, 191, 0.06), 0 8px 8px 0 rgba(62, 41, 191, 0.06), 0 16px 16px 0 rgba(62, 41, 191, 0.06), 0 28px 28px 0 rgba(62, 41, 191, 0.06), 0 36px 36px 0 rgba(62, 41, 191, 0.06);
-    z-index: 9;
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 2px 2px 0 rgba(62, 41, 191, 0.06), 0 4px 4px 0 rgba(62, 41, 191, 0.06), 0 8px 8px 0 rgba(62, 41, 191, 0.06), 0 16px 16px 0 rgba(62, 41, 191, 0.06), 0 28px 28px 0 rgba(62, 41, 191, 0.06), 0 36px 36px 0 rgba(62, 41, 191, 0.06);
+        z-index: 9;
+    }
 }
 
 a {
