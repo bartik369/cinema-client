@@ -32,7 +32,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const [markMessageAsRead] = useMarkAsReadMutation();
   const { data: media } = useGetConversationMediaQuery(chatInfo && chatInfo._id);
   const [message, setMessage] = useState<IMessage>({
-    _id: '',
+    _id: '', 
     content: '',
     conversationId: '',
     createdAt: '',
@@ -65,18 +65,17 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     }
   }, [recipientId, message.content, chatInfo]);
 
-  const outsideClickHandler = (e: any) => {
-      
-    if (messageMenuRef.current) {
-      Object.values(messageMenuRef).map((item) => {
-
-        if (item !== e.target) {
-          setMessageMenu('');
-        }
-      });
+  useEffect(() => {
+    const outsideClickHandler = (e: MouseEvent):void => {
+      messageMenuRef.current && Object.values(messageMenuRef).map((item) => {
+          if (item !== e.target) setMessageMenu('');
+        });
+    };
+    document.addEventListener('click', outsideClickHandler);
+    return () => {
+      document.removeEventListener('click', outsideClickHandler)
     }
-  };
-  document.addEventListener('click', outsideClickHandler);
+  }, [])
 
   const sendMessageHandler = () => {
     const formData = new FormData();
@@ -85,29 +84,23 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
           formData.append(key, message[key as messageKey]);
         });
         file && formData.append('file', file);
-        
+
         if (isUpdating) {
-          updateMessage(formData)
-              .unwrap()
-              .then(() => {
+          updateMessage(formData).unwrap().then(() => {
             setMessage({...message, content: '', replyTo: ''});
             setReplyId('');
             setIsUpdating(false);
           }).catch(error => console.log(error));
         } else {
-          createMessage(formData)
-              .unwrap()
-              .then(() => {
-                setMessage({...message, content: '', replyTo: ''})
-                setReplyId('');
+          createMessage(formData).unwrap().then(() => {
+            setMessage({...message, content: '', replyTo: ''})
+            setReplyId('');
           }).catch(error => console.log(error));
         }
   };
 
   const editMessageHandler = (id: string) => {
-    getMessage(id)
-        .unwrap()
-        .then((data) => {
+    getMessage(id).unwrap().then((data) => {
       setMessage({...data});
       setIsUpdating(true);
     }).catch(error => console.log(error));

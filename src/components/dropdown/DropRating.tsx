@@ -24,8 +24,7 @@ const DropRating: FC<IDropRatingProps> = ({
           
           if (myRef.current && !myRef.current.contains(e.target)) {
             setDropdownDisplay(false);
-          } else {
-          }
+          } 
         }
         document.addEventListener('click', checkIfClickedOutside);
         return () => {
