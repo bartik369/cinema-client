@@ -1,4 +1,4 @@
-import { IUser } from './auth';
+
 export interface IChatInfo {
   _id: string;
   creatorId: string;
@@ -64,3 +64,6 @@ export interface IParticipants {
   usersInfo: IParticipantInfo[],
   lastMessages: IMessage[],
 }
+export type IListRefObj = {
+  [index: string]: HTMLDivElement | null;
+};

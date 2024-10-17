@@ -3,8 +3,9 @@ import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
   useDeleteMessageMutation, useUpdateMessageMutation,
   useMarkAsReadMutation, useGetConversationMediaQuery } from '../../store/chatApi';
 import Sender from './Recipient';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 import Recipient from './Sender';
-import { IMessage, IChatInfo } from '../../types/chat';
+import { IMessage, IChatInfo, IListRefObj } from '../../types/chat';
 import { IUser } from '../../types/auth';
 import InputUsersSide from './InputUsersSide';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +25,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
   const [replyId, setReplyId] = useState<string>('');
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const {data: messages} = useGetMessagesQuery(chatInfo && chatInfo._id, {skip: skip});
-  const [messageMenu, setMessageMenu] = useState('');
   const [createMessage] = useCreateMessageMutation();
   const [getMessage] = useGetMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
@@ -44,10 +44,8 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     updatedAt: '',
   });
 
-  type IListRefObj = {
-    [index: string]: HTMLDivElement | null;
-  };
   const messageMenuRef = useRef<IListRefObj>({});
+  const [messageMenu, setMessageMenu] = useOutsideClick(messageMenuRef);
 
   useEffect(() => {
     if (recipientId && chatInfo._id) {
@@ -64,18 +62,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
       });
     }
   }, [recipientId, message.content, chatInfo]);
-
-  useEffect(() => {
-    const outsideClickHandler = (e: MouseEvent):void => {
-      messageMenuRef.current && Object.values(messageMenuRef).map((item) => {
-          if (item !== e.target) setMessageMenu('');
-        });
-    };
-    document.addEventListener('click', outsideClickHandler);
-    return () => {
-      document.removeEventListener('click', outsideClickHandler)
-    }
-  }, [])
 
   const sendMessageHandler = () => {
     const formData = new FormData();

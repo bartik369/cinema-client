@@ -1,4 +1,4 @@
-import React, {FC, useState, useRef, useEffect} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import { IMessage} from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
 import { useCreateMessageMutation, useUpdateMessageMutation} from '../../../../store/chatApi';
@@ -17,7 +17,6 @@ interface IInputProps {
     isUpdating: boolean;
     updatedMessage: IMessage;
     user: IUser;
-    setMessageMenu: (id: string) => void;
     setMediaSkip: (mediaSkip: boolean) => void;
     setIsUpdating: (isUpdating: boolean) => void;
     setReplyId: (id: string) => void;
@@ -33,16 +32,10 @@ const Input: FC<IInputProps> = ({
     setReplyId,
     setIsUpdating,
     setMediaSkip,
-    setMessageMenu,
 }) => {
   const [file, setFile] = useState<string | Blob>("");
   const [createMessage] = useCreateMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
-
-    type IListRefObj = {
-    [index: string]: HTMLDivElement | null;
-  };
-  const messageMenuRef = useRef<IListRefObj>({});
   const [message, setMessage] = useState<IMessage>({
     _id: '',
     content: '',
@@ -55,19 +48,6 @@ const Input: FC<IInputProps> = ({
     senderId: '',
     updatedAt: '',
   });
-
-  const outsideClickhandler = (e: any) => {
-    if (messageMenuRef.current) {
-        Object.values(messageMenuRef).map((item) => {
-            if (item !== e.target) {
-                setMessageMenu('');
-                setMessage({ ...message, content: '' });
-            }
-        });
-    }
-  };
-  document.addEventListener("click", outsideClickhandler);
-
     useEffect(() => {
         setMessage({
             ...message,
@@ -107,7 +87,6 @@ const Input: FC<IInputProps> = ({
       });
     }
   };
-
   const resetReplyHandler = () => {
     setMessage({ ...message, content: '', replyTo: '' });
     setReplyId('');

@@ -1,6 +1,6 @@
 import React, {FC, useRef} from 'react';
 import { IUser } from '../../../../types/auth';
-import { IMessage, IMessageMedia } from '../../../../types/chat';
+import { IMessage, IMessageMedia, IListRefObj } from '../../../../types/chat';
 import RecipientMessageMenu from './RecipientMessageMenu';
 import MediaFile from './MediaFile';
 import Time from './Time';
@@ -32,10 +32,6 @@ const Recipient:FC<IRecipientProps> = ({
     replayMessageHandler,
     messageIdHandler,
 }) => {
-
-    type IListRefObj = {
-        [index: string]: HTMLDivElement | null;
-      };
     const messageMenuRef = useRef<IListRefObj>({});
 
     return (

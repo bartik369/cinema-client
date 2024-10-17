@@ -1,9 +1,10 @@
-import { FC, useState} from 'react';
+import { FC, useState, useRef} from 'react';
 import {useGetMessageMutation, useDeleteMessageMutation, useGetConversationMediaQuery
 } from '../../../../store/chatApi';
 import { IUser } from '../../../../types/auth';
-import { IMessage } from '../../../../types/chat';
+import { IMessage, IListRefObj } from '../../../../types/chat';
 import Loader from '../../../../components/loader/Loader';
+import { useOutsideClick } from '../../../../hooks/useOutsideClick';
 import Sender from './Sender';
 import Input from './Input';
 import Recipient from './Recipient';
@@ -37,7 +38,6 @@ const Messages: FC<IMessagesProps> = ({
     updatedAt: '',
   });
   const [replyId, setReplyId] = useState<string>('');
-  const [messageMenu, setMessageMenu] = useState('');
   const [replyMessage, setReplyMessage] = useState<string>('');
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [getMessage] = useGetMessageMutation();
@@ -46,6 +46,8 @@ const Messages: FC<IMessagesProps> = ({
   const { data: media } = useGetConversationMediaQuery(conversationId, {
     skip: mediaSkip,
   });
+  const messageMenuRef = useRef<IListRefObj>({});
+  const [messageMenu, setMessageMenu] = useOutsideClick(messageMenuRef);
 
   const editMessageHandler = (id: string) => {
     id && getMessage(id)
@@ -130,7 +132,6 @@ const Messages: FC<IMessagesProps> = ({
         updatedMessage={updatedMessage!}
         setIsUpdating={setIsUpdating}
         setReplyId={setReplyId}
-        setMessageMenu={setMessageMenu}
         setMediaSkip={setMediaSkip}
         mediaSkip={mediaSkip}
         user={user}
