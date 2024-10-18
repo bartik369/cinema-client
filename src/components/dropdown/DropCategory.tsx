@@ -1,8 +1,9 @@
-import {useState, FC, useEffect, useRef} from 'react';
+import {FC, useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import {categoryMovies} from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
 import { setMovieCategory } from '../../store/movieOptionsSlice';
+import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
 import style from './Drop.module.scss';
@@ -19,21 +20,8 @@ const DropCategory: FC<IDropCategoryProps> = ({
   setCheckedGenre,
 }) => {
   const dispatch = useAppDispatch();
-  const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
   const myRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const checkIfClickedOutside = (e: any) => {
-
-      if (myRef.current && !myRef.current.contains(e.target)) {
-        setDropdownDisplay(false);
-      }
-    };
-    document.addEventListener('click', checkIfClickedOutside);
-    return () => {
-      document.removeEventListener('click', checkIfClickedOutside);
-    };
-  }, []);
+  const [dropdownDisplay, setDropdownDisplay] = useDropdownMenu(myRef);
 
   return (
     <>

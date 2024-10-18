@@ -1,11 +1,11 @@
-import {FC, useState, useEffect, useRef} from 'react';
+import {FC, useState, useEffect} from 'react';
 import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
   useDeleteMessageMutation, useUpdateMessageMutation,
   useMarkAsReadMutation, useGetConversationMediaQuery } from '../../store/chatApi';
 import Sender from './Recipient';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import Recipient from './Sender';
-import { IMessage, IChatInfo, IListRefObj } from '../../types/chat';
+import { IMessage, IChatInfo } from '../../types/chat';
 import { IUser } from '../../types/auth';
 import InputUsersSide from './InputUsersSide';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,9 +43,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     senderId: '',
     updatedAt: '',
   });
-
-  const messageMenuRef = useRef<IListRefObj>({});
-  const [messageMenu, setMessageMenu] = useOutsideClick(messageMenuRef);
+  const [messageMenu, setMessageMenu] = useOutsideClick();
 
   useEffect(() => {
     if (recipientId && chatInfo._id) {

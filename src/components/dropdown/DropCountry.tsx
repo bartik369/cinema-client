@@ -1,6 +1,7 @@
-import {useState, FC, useRef, useEffect} from 'react';
+import {FC, useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { countryList } from '../../utils/data/coutry';
+import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import { setMovieCountry } from '../../store/movieOptionsSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
@@ -18,22 +19,9 @@ const DropCountry: FC<IDropCountryProps> = ({
   checkedCountry,
   setCheckedCountry,
 }) => {
-    const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
     const dispatch = useAppDispatch();
     const myRef = useRef<HTMLButtonElement>(null);
-
-    useEffect(() => {
-        const checkIfClickedOutside = (e:any) => {
-
-          if (myRef.current && !myRef.current.contains(e.target)) {
-            setDropdownDisplay(false);
-          }
-        }
-        document.addEventListener('click', checkIfClickedOutside);
-        return () => {
-          document.removeEventListener('click', checkIfClickedOutside);
-        }
-      }, [])
+    const [dropdownDisplay, setDropdownDisplay] = useDropdownMenu(myRef);
 
     return (
         <>

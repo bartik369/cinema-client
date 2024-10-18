@@ -8,7 +8,6 @@ interface IBirthdayProps {
     actor: IActor;
     setActor: (actor: IActor) => void;
 }
-
 const Birthday: FC<IBirthdayProps> = ({actor, setActor}) => {
     return (
         <div className={style.column3}>

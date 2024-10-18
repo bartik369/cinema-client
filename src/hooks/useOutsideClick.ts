@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef} from "react";
+import { IListRefObj } from "../types/chat";
 
-const useOutsideClick = (messageMenuRef: any) => {
-
-  const [messageMenu, setMessageMenu] = useState(messageMenuRef);
+const useOutsideClick = () => {
+  const [messageMenu, setMessageMenu] = useState('');
+  const messageMenuRef = useRef<IListRefObj>({});
   
   useEffect(() => {
-    const outsideClickHandler = (e: MouseEvent): void => {
-      messageMenuRef.current &&
-        Object.values(messageMenuRef).map((item) => {
-          if (item !== e.target) setMessageMenu("");
+    const outsideClickHandler = (e: MouseEvent) => {
+      messageMenuRef.current  &&
+        Object.values(messageMenuRef).forEach((item) => {
+          if (item !== e.target) setMessageMenu('');
         });
     };
     document.addEventListener("click", outsideClickHandler);
@@ -17,7 +18,7 @@ const useOutsideClick = (messageMenuRef: any) => {
     };
   }, [messageMenuRef]);
 
-  return [ messageMenu, setMessageMenu];
+  return [ messageMenu, setMessageMenu] as const;
 };
 
 export { useOutsideClick };

@@ -14,7 +14,6 @@ interface IUnreadMessagesButton {
     visibleChat: boolean;
     startChat: () => void;
 }
-
 const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
     unreadMessages, 
     isAdmin,
@@ -24,7 +23,6 @@ const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
   const [count, setCount] = useState();
 
   useEffect(() => {
-
     if (unreadMessages) {
       let res = unreadMessages.reduce((acc:any, el:any) => acc + el.qty, 0);
       setCount(res);

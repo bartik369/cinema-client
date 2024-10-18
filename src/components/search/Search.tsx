@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
 import { useSearchMovieMutation } from '../../store/movieApi';
 import useDebounce from '../../hooks/useDebounce';
-import ENV from '../../env.config';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import style from './Search.module.scss';
+import Item from './Item';
 
 interface IVisibleProps {
   visibleHandler: () => void;
@@ -22,7 +21,6 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
   const debouncedSearch = useDebounce(text.search, 1000);
 
   useEffect(() => {
-
       if (debouncedSearch.length > 1) {
         searchMovie(debouncedSearch)
         .unwrap()
@@ -66,20 +64,7 @@ const Search: FC<IVisibleProps> = ({ visibleHandler }) => {
         {searchResult &&
         <div className={style.result}>
         {searchResult.map((item) => (
-          <Link to={`${ENV.MOVIES}${item._id}`} key={item._id} reloadDocument>
-          <div className={style.item}>
-            <div className={style.description}>
-              <div className={style.title}>
-                <div className={style.ru}>
-                  {item.titleRu}
-                </div>
-                <div className={style.en}>{item.titleEn}</div>
-              </div>
-              <span>{item.year}</span>
-              <span>{item.country}</span>
-            </div>
-          </div>
-          </Link>
+          <Item key={item._id} item={item} />
         ))}
       </div>
       }

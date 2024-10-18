@@ -1,6 +1,7 @@
-import React, { useState, FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { setMovieYear } from '../../store/movieOptionsSlice';
+import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import { yearMovieRageData } from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,21 +20,8 @@ const DropYear: FC<IDropYearProps> = ({
   setCheckedYear,
 }) => {
   const dispatch = useAppDispatch();
-  const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
   const myRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const checkIfClickedOutside = (e: any) => {
-
-      if (myRef.current && !myRef.current.contains(e.target)) {
-        setDropdownDisplay(false);
-      }
-    };
-    document.addEventListener('click', checkIfClickedOutside);
-    return () => {
-      document.removeEventListener('click', checkIfClickedOutside);
-    };
-  }, []);
+  const [dropdownDisplay, setDropdownDisplay] = useDropdownMenu(myRef);
 
   return (
     <>

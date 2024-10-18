@@ -8,7 +8,6 @@ interface InputActionsProps {
     message: IMessage;
     setMessage: (message: IMessage) => void;
 }
-
 const InputActions:FC<InputActionsProps> = ({message, setMessage}) => {
     return (
         <div className={style.inner}>

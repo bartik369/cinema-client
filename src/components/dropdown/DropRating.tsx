@@ -1,7 +1,8 @@
-import {useState, FC, useEffect, useRef} from 'react';
+import {FC,useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { setMovieRating } from '../../store/movieOptionsSlice';
 import { ratingRangeData } from '../../utils/data/data';
+import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import * as contentConst from '../../utils/constants/content'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
@@ -16,21 +17,8 @@ const DropRating: FC<IDropRatingProps> = ({
   setCheckedRating,
 }) => {
     const dispatch = useAppDispatch();
-    const [dropdownDisplay, setDropdownDisplay] = useState<boolean>(false);
     const myRef = useRef<HTMLButtonElement>(null);
-
-    useEffect(() => {
-        const checkIfClickedOutside = (e:any) => {
-          
-          if (myRef.current && !myRef.current.contains(e.target)) {
-            setDropdownDisplay(false);
-          } 
-        }
-        document.addEventListener('click', checkIfClickedOutside);
-        return () => {
-          document.removeEventListener('click', checkIfClickedOutside);
-        }
-      }, [])
+    const [dropdownDisplay, setDropdownDisplay] = useDropdownMenu(myRef);
   
     return (
         <>
