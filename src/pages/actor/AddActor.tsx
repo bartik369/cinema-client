@@ -1,6 +1,6 @@
 import React, {FC, MouseEvent, useState} from 'react';
 import { useAddActorMutation } from '../../store/actorApi';
-import { IActor } from '../../types/media';
+import { IActor} from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
 import ActorForm from '../../components/forms/actor/ActorForm';
 import PreviewActor from '../../components/preview/PreviewActor';

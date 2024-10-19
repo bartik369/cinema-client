@@ -1,5 +1,6 @@
 import {FC, useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
+import { Checked } from '../../types/media';
 import {categoryMovies} from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
 import { setMovieCategory } from '../../store/movieOptionsSlice';
@@ -10,8 +11,8 @@ import style from './Drop.module.scss';
 
 interface IDropCategoryProps {
   existGenre: string[];
-  checkedGenre: any;
-  setCheckedGenre: (checkedGenre:any) => void;
+  checkedGenre: Checked;
+  setCheckedGenre: (checkedGenre:Checked) => void;
 }
 
 const DropCategory: FC<IDropCategoryProps> = ({

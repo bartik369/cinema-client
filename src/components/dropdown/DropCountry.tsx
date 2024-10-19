@@ -1,5 +1,6 @@
 import {FC, useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
+import { Checked } from '../../types/media';
 import { countryList } from '../../utils/data/coutry';
 import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import { setMovieCountry } from '../../store/movieOptionsSlice';
@@ -10,8 +11,8 @@ import style from './Drop.module.scss';
 
 interface IDropCountryProps {
   existCountry: string[];
-  checkedCountry: any;
-  setCheckedCountry: (checkedCountry:any) => void;
+  checkedCountry: Checked;
+  setCheckedCountry: (checkedCountry:Checked) => void;
 }
 
 const DropCountry: FC<IDropCountryProps> = ({
@@ -22,7 +23,6 @@ const DropCountry: FC<IDropCountryProps> = ({
     const dispatch = useAppDispatch();
     const myRef = useRef<HTMLButtonElement>(null);
     const [dropdownDisplay, setDropdownDisplay] = useDropdownMenu(myRef);
-
     return (
         <>
         <fieldset>

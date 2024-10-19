@@ -2,6 +2,7 @@ import {FC,useRef} from 'react';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { setMovieRating } from '../../store/movieOptionsSlice';
 import { ratingRangeData } from '../../utils/data/data';
+import { Checked } from '../../types/media';
 import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import * as contentConst from '../../utils/constants/content'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,8 +10,8 @@ import { faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
 import style from './Drop.module.scss';
 
 interface IDropRatingProps {
-  checkedRating: any,
-  setCheckedRating: (checkedRating:any) => void;
+  checkedRating: Checked,
+  setCheckedRating: (checkedRating:Checked) => void;
 }
 const DropRating: FC<IDropRatingProps> = ({
   checkedRating,
@@ -46,7 +47,6 @@ const DropRating: FC<IDropRatingProps> = ({
                 id={item.title}
                 type="checkbox"
                 checked={checkedRating[item.id]}
-                value={checkedRating[item.id] || false}
                  />
                  <span className={style.checkmark}></span>
                  <label htmlFor={item.value}>{item.title}</label>

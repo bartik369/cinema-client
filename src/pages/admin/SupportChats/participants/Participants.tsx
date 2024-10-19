@@ -1,7 +1,6 @@
 import {FC, useState, useRef} from 'react';
-import { IUnreadMessages } from '../../../../types/chat';
 import { IUser } from '../../../../types/auth';
-import { IParticipantInfo } from '../../../../types/chat';
+import { IParticipantInfo, IMessage, IUnreadMessages} from '../../../../types/chat';
 import ParticipantsMenu from './ParticipantsMenu';
 import { useCloseTicketMutation } from '../../../../store/chatApi';
 import Time from '../messages/Time';
@@ -15,7 +14,7 @@ import style from './Participants.module.scss';
 interface IParticipantsProps {
     participants:IParticipantInfo[] ;
     user: IUser;
-    lastMessages: any;
+    lastMessages: IMessage[];
     unreadMessages: IUnreadMessages[];
     activeConversation: string;
     getMessagesById:(id: string) => void;
@@ -37,9 +36,9 @@ const Participants: FC<IParticipantsProps> = ({
   const messageMenuRef = useRef<IListRefObj>({});
   const [closeTicket] = useCloseTicketMutation();
 
-  const outsideClickhandler = (e: any) => {
+  const outsideClickhandler = (e: MouseEvent) => {
     if (messageMenuRef.current) {
-      Object.values(messageMenuRef).map((item) => {
+      Object.values(messageMenuRef).forEach((item) => {
         if (item !== e.target) {
           setMessageMenu('');
         }
@@ -88,7 +87,8 @@ const Participants: FC<IParticipantsProps> = ({
                       <div className={style.time}>
                         <Time timeStamp={participant.updatedAt}/>
                       </div>
-                      {unreadMessages && unreadMessages.map((elem: any) => {
+                      {unreadMessages && unreadMessages.map((elem: IUnreadMessages) => {
+
                         if (elem.id === participant.conversationId) {
                           return <div className={style.count}>{elem.qty}</div>
                         }
@@ -109,7 +109,8 @@ const Participants: FC<IParticipantsProps> = ({
                       <div className={style.ticket}>№ {participant.ticketNumber}</div>
                       <div className={style.email}>{participant.email}</div>
                       <div className={style.message}>
-                        {lastMessages && lastMessages.flatMap((message: any) => {
+                        {lastMessages && lastMessages.flatMap((message: IMessage) => {
+                          
                           if (message._id.includes(participant.conversationId)) {
                             return <div key={participant._id}>{message.content.slice(0, 27)}...</div>
                           }

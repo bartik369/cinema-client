@@ -1,5 +1,3 @@
-import { url } from "inspector";
-
 export interface IMedia {
     name: string;
     category: string;
@@ -43,6 +41,7 @@ export interface IActorExt {
     height: string;
     genre: string[];
 }
+
 export interface IListResponse<T> {
     page: number;
     per_page: number;
@@ -118,4 +117,11 @@ export interface IMovieCheckMenu {
     country: [];
     year: [];
 }
+export type Checked = {
+    [index: number]: boolean;
+}
+export interface IGetActor {
+    page: number;
+    debouncedSearch: string;
+  }
 

@@ -69,7 +69,7 @@ const SupportChats:FC = () => {
                 <Participants
                     participants={participants?.usersInfo!}
                     user={user}
-                    lastMessages={participants?.lastMessages}
+                    lastMessages={participants?.lastMessages!}
                     unreadMessages={unreadMessages!}
                     activeConversation={active}
                     getMessagesById={setRecipientHandler}

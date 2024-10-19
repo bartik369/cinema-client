@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 export default function useCountTopHook() {
-    const [slidesCount, setSlidesCount] = useState<any>();
+    const [slidesCount, setSlidesCount] = useState<number>();
 
     useEffect(() => {
         if (window.innerWidth > 1200) {

@@ -4,14 +4,15 @@ import { setMovieYear } from '../../store/movieOptionsSlice';
 import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import { yearMovieRageData } from '../../utils/data/data';
 import * as contentConst from '../../utils/constants/content';
+import { Checked } from '../../types/media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import style from './Drop.module.scss';
 
 interface IDropYearProps {
   existYear: string[];
-  checkedYear: any,
-  setCheckedYear: (checkedYear:any) => void;
+  checkedYear: Checked,
+  setCheckedYear: (checkedYear:Checked) => void;
 }
 
 const DropYear: FC<IDropYearProps> = ({
@@ -58,7 +59,6 @@ const DropYear: FC<IDropYearProps> = ({
                   id={item.title}
                   type="checkbox"
                   checked={checkedYear[item.id]}
-                  value={checkedYear[item.id] || ""}
                   disabled={existYear && !existYear.includes(item.value)}
                 />
                 <span className={style.checkmark}></span>

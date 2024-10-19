@@ -13,11 +13,11 @@ const Menu: FC = () => {
   const user = useAppSelector(state => state.auth.user);
   const {data: unreadMessages} = useGetUnreadMessagesQuery(user && user._id);
   const navigate = useNavigate();
-  const [count, setCount] = useState();
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     if (unreadMessages) {
-      let res = unreadMessages.reduce((acc:any, el:any) => acc + el.qty, 0);
+      let res = unreadMessages.reduce((acc, el) => acc + el.qty, 0);
       setCount(res);
     }
   }, [unreadMessages])

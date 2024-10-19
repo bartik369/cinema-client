@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import { IActor, IListResponse } from "../types/media";
+import { IActor, IListResponse, IGetActor } from "../types/media";
 import ENV from "../env.config";
 
 export const actorApi = createApi({
@@ -12,7 +12,7 @@ export const actorApi = createApi({
         method: "GET",
       }),
     }),
-    getActors: builder.query<IListResponse<IActor>, any>({
+    getActors: builder.query<IListResponse<IActor>, IGetActor>({
       query: ({page, debouncedSearch}) => ({
         url: `${ENV.API_ACTORS}?page=${page}&perPage=10&search=${debouncedSearch}`,
         method: "GET",

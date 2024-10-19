@@ -67,3 +67,13 @@ export interface IParticipants {
 export type IListRefObj = {
   [index: string]: HTMLDivElement | null;
 };
+
+export interface ILastMessages {
+  conten:string;
+  createdAt:string;
+  read:string
+  recipientId:string;
+  senderId:string;
+  updatedAt:string;
+  _id: string[];
+}

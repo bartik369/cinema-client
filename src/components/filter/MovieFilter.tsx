@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import DropCategory from '../dropdown/DropCategory';
 import DropCountry from '../dropdown/DropCountry';
 import DropYear from '../dropdown/DropYear';
@@ -6,7 +6,7 @@ import DropRating from '../dropdown/DropRating';
 import { useGetPropertiesQuery} from '../../store/movieApi';
 import { resetFilter } from '../../store/movieOptionsSlice';
 import { useAppDispatch } from '../../hooks/reduxHook';
-import { IMovie} from '../../types/media';
+import { IMovie, Checked} from '../../types/media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 import * as contentConst from '../../utils/constants/content'
@@ -20,18 +20,24 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
 
   const dispatch = useAppDispatch();
   const { data: properties } = useGetPropertiesQuery();
-  const [checkedGenre, setCheckedGenre] = useState<any>('');
-  const [checkedCountry, setCheckedCountry] = useState('');
-  const [checkedYear, setCheckedYear] = useState('');
-  const [checkedRating, setCheckedRating] = useState('');
+  const [checkedGenre, setCheckedGenre] = useState<Checked>({});
+  const [checkedCountry, setCheckedCountry] = useState<Checked>({});
+  const [checkedYear, setCheckedYear] = useState<Checked>({});
+  const [checkedRating, setCheckedRating] = useState<Checked>({});
 
   const resetFilterHandler = () => {
     dispatch(resetFilter([]));
-    setCheckedGenre('');
-    setCheckedCountry('');
-    setCheckedYear('');
-    setCheckedRating('');
+    setCheckedGenre({});
+    setCheckedCountry({});
+    setCheckedYear({});
+    setCheckedRating({});
   }
+
+  console.log('checkedGenre ==>', checkedGenre)
+  console.log('checkedCountry ==>', checkedCountry)
+  console.log('checkedYear ==>', checkedYear)
+  console.log('checkedRating ==>', checkedRating)
+
 
   return (
     <div className={style.filter}>

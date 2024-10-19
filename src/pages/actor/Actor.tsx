@@ -10,7 +10,7 @@ import ENV from '../../env.config';
 import style from './Actor.module.scss';
 
 const Actor:FC = () => {
-    const [birthday, setBirthday] = useState<any>();
+    const [birthday, setBirthday] = useState<string>();
     const dispatch = useAppDispatch();
     const params = useParams();
     const navigate = useNavigate();
