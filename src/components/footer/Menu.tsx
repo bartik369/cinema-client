@@ -1,4 +1,3 @@
-import React from 'react';
 import {footerMenu1, footerMenu2} from "../../utils/data/data";
 import {Link} from "react-router-dom";
 import Instagram from "../../assets/pics/instagram.svg";

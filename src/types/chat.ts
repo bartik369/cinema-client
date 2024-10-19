@@ -12,7 +12,7 @@ export interface IChatInfo {
 
 export interface IUnreadMessages {
   id: string;
-  qte: number;
+  qty: number;
 }
 
 export interface IMessage {

@@ -20,12 +20,12 @@ const UnreadMessagesButton:FC<IUnreadMessagesButton> = ({
     startChat,
     visibleChat,
 }) => {
-  const [count, setCount] = useState();
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
-    if (unreadMessages) {
-      let res = unreadMessages.reduce((acc:any, el:any) => acc + el.qty, 0);
-      setCount(res);
+    if (unreadMessages) { 
+    let res = unreadMessages.reduce((acc, el) => acc + el.qty, 0);
+    setCount(res);
     }
   }, [unreadMessages]);
 

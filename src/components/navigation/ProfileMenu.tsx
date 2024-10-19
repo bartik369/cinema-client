@@ -31,8 +31,6 @@ const ProfileMenu: FC<IProfileMenuProps> = ({setProfileMenu, profileMenu}) => {
     localStorage.removeItem('accessToken');
     window.location.reload();
   }
-
-  console.log(isAdmin);
   
   return (
     <menu className={style['profile-menu']}>

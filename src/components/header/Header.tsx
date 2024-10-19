@@ -1,10 +1,11 @@
-import { FC, useEffect, useState, useRef, MouseEvent } from 'react';
+import { FC, useState, useRef} from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../navigation/Navbar';
 import Search from '../search/Search';
 import Signin from '../forms/auth/Signin';
 import Signup from '../forms/auth/Signup';
 import { useAppSelector } from '../../hooks/reduxHook';
+import { useDropdownMenu } from '../../hooks/useDropdownMenu';
 import ProfileMenu from '../navigation/ProfileMenu';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import Logo from "./Logo";
@@ -18,13 +19,13 @@ const Header: FC = () => {
   const token = useAppSelector(state => state.auth.token);
   const user = useAppSelector(state => state.auth.user);
   const [visible, setVisible] = useState<boolean>(false);
-  const [profileMenu, setProfileMenu] = useState<boolean>(false);
   const [visibleSignin, setVisibleSignin] = useState<boolean>(false);
   const [visibleSignup, setVisibleSignup] = useState<boolean>(false);
   const location = useLocation();
   const regEx = location.pathname.match(/\/movies\/[a-zA-Z0-9]/);
   const regEx404 = location.pathname.match(/\/404/);
   const myRef = useRef<HTMLButtonElement>(null);
+  const [dropdownDisplay, setDropdownDisplay] = useDropdownMenu(myRef);
 
   const visibleHandler = () => {
     setVisible(!visible);
@@ -41,18 +42,6 @@ const Header: FC = () => {
     setVisibleSignup(false);
     setVisibleSignin(false);
   };
-
-  useEffect(() => {
-    const checkIfClickedOutside = (e: MouseEvent):void => {
-      if (myRef.current && !myRef.current.contains(e.target as Node)) {
-        setProfileMenu(false);
-      }
-    }
-    document.addEventListener('click', (e:any) =>  checkIfClickedOutside(e));
-    return () => {
-      document.removeEventListener('click',(e:any) => checkIfClickedOutside(e));
-    }
-  }, []);
 
   return (
     <>
@@ -73,8 +62,8 @@ const Header: FC = () => {
             </div>
             {user && token ? (
               <button className={style['profile-btn']} ref={myRef} 
-              onClick={() => setProfileMenu(!profileMenu)}>
-                {profileMenu
+              onClick={() => setDropdownDisplay(!dropdownDisplay)}>
+                {dropdownDisplay
                   ?  <FontAwesomeIcon className={style['bars-active']} icon={faBarsStaggered} />
                   :  <FontAwesomeIcon className={style.bars} icon={faBars} />
                 }
@@ -85,8 +74,8 @@ const Header: FC = () => {
                 <span>{contentConst.enterBtn}</span>
               </div>
             )}
-             {profileMenu && 
-             <ProfileMenu setProfileMenu={setProfileMenu} profileMenu={profileMenu}/>
+             {dropdownDisplay && 
+             <ProfileMenu setProfileMenu={setDropdownDisplay} profileMenu={dropdownDisplay}/>
               }
           </div>
         </div>

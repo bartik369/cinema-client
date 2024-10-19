@@ -2,7 +2,6 @@ import {FC, useRef} from 'react';
 import { IChatInfo, IMessage, IMessageMedia } from '../../types/chat';
 import { IUser } from '../../types/auth';
 import SenderMessageMenu from './SenderMessageMenu';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
 import Time from '../../pages/admin/SupportChats/messages/Time';
 import MediaFile from '../../pages/admin/SupportChats/messages/MediaFile';
 import ENV from '../../env.config';
