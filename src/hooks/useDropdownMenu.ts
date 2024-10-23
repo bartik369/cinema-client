@@ -2,6 +2,7 @@ import { useState, useEffect} from "react";
 
 const useDropdownMenu = (myRef:React.RefObject<HTMLButtonElement>) => {
     const [dropdownDisplay, setDropdownDisplay] = useState(false);
+    
     useEffect(() => {
         const checkIfClickedOutside = (e: MouseEvent) => {
 

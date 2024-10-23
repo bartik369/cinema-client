@@ -1,10 +1,6 @@
 import { FC, useState, useEffect, MouseEvent, FormEvent } from 'react';
 import { ISlider, ISliderFormData } from '../../types/media';
-import {
-  useAddSlideMutation,
-  useGetSlideMutation,
-  useDeleteSlideMutation,
-  useUpdateSideMutation,
+import {useAddSlideMutation, useGetSlideMutation, useDeleteSlideMutation, useUpdateSideMutation,
 } from '../../store/adminApi';
 import EditSliderForm from '../../components/forms/slider/EditSliderForm';
 import SlidersList from '../../components/sliders/SlidersList';
@@ -62,7 +58,11 @@ const EditMainSlider: FC = () => {
     setUpdateStatus(true);
   };
   const removeSlideHandler = async (id: string) => {
-    await deleteSlide(id);
+    try {
+      await deleteSlide(id);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const addSlideHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -89,11 +89,8 @@ const EditMainSlider: FC = () => {
     });
     file && formData.append('file', file);
     await updateSlide(formData as unknown as ISliderFormData)
-    .then(
-      (payload) => {
-        payload && setModalSlider(false);
-      }
-    ).catch((error) => console.log(error))
+    .then((payload) => { payload && setModalSlider(false)})
+    .catch((error) => console.log(error))
   };
 
   return (

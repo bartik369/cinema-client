@@ -33,12 +33,6 @@ const MovieFilter: FC<IMovieFilterProps> = ({movies}) => {
     setCheckedRating({});
   }
 
-  console.log('checkedGenre ==>', checkedGenre)
-  console.log('checkedCountry ==>', checkedCountry)
-  console.log('checkedYear ==>', checkedYear)
-  console.log('checkedRating ==>', checkedRating)
-
-
   return (
     <div className={style.filter}>
       <div className={style.item}>

@@ -44,9 +44,7 @@ const Signup: FC<ISignupProps> = ({ signinHandler, closeFormHandler }) => {
         email: authData.email,
         password: authData.password,
       };
-      await signupUser(userData)
-      .unwrap()
-      .then((data) => {
+      await signupUser(userData).unwrap().then((data) => {
         dispatch(setCredentials(data));
         closeFormHandler();
       })

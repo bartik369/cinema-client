@@ -16,6 +16,7 @@ interface InputUsersSideProps {
     setFile: (file: Blob | string) => void;
     sendMessageHandler: () => void;
     resetReplyHandler: () => void;
+    resetUpdate:() => void;
 }
 
 const InputUsersSide:FC<InputUsersSideProps> = ({
@@ -28,6 +29,7 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
     setFile,
     sendMessageHandler,
     resetReplyHandler,
+    resetUpdate,
 }) => {
 
     return (
@@ -45,6 +47,7 @@ const InputUsersSide:FC<InputUsersSideProps> = ({
             <InputActions
                 message={message}
                 setMessage={setMessage}
+                resetUpdate={resetUpdate}
             />
             <ButtonsActions
                 file={file}

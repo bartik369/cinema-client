@@ -114,6 +114,10 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
     setMessage({ ...message, content: '', replyTo: '' });
     setReplyId('');
   };
+  const resetUpdateHandler = () => {
+    setIsUpdating(false);
+    setMessage({...message, content: ''});
+  }
 
   return (
     <div className={style.chat}>
@@ -163,6 +167,7 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
         setFile={setFile}
         sendMessageHandler={sendMessageHandler}
         resetReplyHandler={resetReplyHandler}
+        resetUpdate={resetUpdateHandler}
       />
     </div>
   );

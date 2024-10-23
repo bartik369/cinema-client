@@ -3,11 +3,9 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAppSelector } from "../hooks/reduxHook";
 import Loader from "../components/loader/Loader";
 
-interface IPrivateRoutesProps {
-  allowedRoles: string[];
-}
+type PrivateRoutesProps = {allowedRoles: string[]};
 
-const PrivateRoutes: FC<IPrivateRoutesProps> = ({ allowedRoles }) => {
+  const PrivateRoutes: FC<PrivateRoutesProps> = ({ allowedRoles }) => {
   const location = useLocation();
   const token = localStorage.getItem("accessToken");
   const user = useAppSelector((state) => state.auth.user);

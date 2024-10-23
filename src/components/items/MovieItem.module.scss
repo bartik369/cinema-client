@@ -1,7 +1,11 @@
-.wrapper {
-    background-color: #0e0f16;
+@mixin flexColumn {
     display: flex;
     flex-direction: column;
+}
+
+.wrapper {
+    background-color: #0e0f16;
+    @include flexColumn;
     margin-bottom: 20px;
     transition: all .5s ease-in-out;
     border-radius: 6px;
@@ -18,8 +22,7 @@ a {
 }
 
 .item {
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
     position: relative;
     img {
         object-fit: cover;
@@ -47,8 +50,7 @@ a {
     top: 50%;
     transform: translate(-50%);
     right: 0;
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
     align-items: center;
     .favorite {
         font-size: 18px;

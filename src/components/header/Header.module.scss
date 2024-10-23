@@ -1,8 +1,12 @@
-.container {
-    width: 100%;
-    max-width: 1320px;
+@mixin flexCenter {
     display: flex;
     align-items: center;
+}
+
+.container {
+    @include flexCenter;
+    width: 100%;
+    max-width: 1320px;
     height: 70px;
     margin: 0 auto;
 }
@@ -31,8 +35,7 @@
 .logo {
     width: fit-content;
     height: fit-content;
-    display: flex;
-    align-items: center;
+    @include flexCenter;
     justify-content: center;
     margin-left: 18px;
     a {
@@ -63,8 +66,7 @@
 .right {
     right: 10%;
     position: absolute;
-    align-items: center;
-    display: flex;
+    @include flexCenter;
 }
 
 .search-icon {
@@ -78,9 +80,8 @@
 }
 
 .auth {
-    display: flex;
+    @include flexCenter;
     width: fit-content;
-    align-items: center;
     margin-left: 30px;
     cursor: pointer;
     img {

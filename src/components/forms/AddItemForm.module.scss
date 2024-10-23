@@ -1,3 +1,8 @@
+@mixin flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
 .form {
     width: 100%;
     box-sizing: border-box;
@@ -30,8 +35,6 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-    outline: none;
-    font-size: 11px;
     color: #a4aec1;
     background-color: #222331;
     border: 1px solid #484a68;
@@ -40,7 +43,6 @@ select:focus {
 input::placeholder {
     color: #a4aec1;
     font-weight: 300;
-    font-family: "Roboto", sans-serif;
 }
 
 textarea {
@@ -65,8 +67,7 @@ span.input-info {
 }
 
 .block {
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
 }
 
 .main-column {
@@ -75,14 +76,12 @@ span.input-info {
 }
 
 .column1 {
-    display: flex;
+    @include flexColumn;
     flex-grow: 1;
-    flex-direction: column;
 }
 
 .column2 {
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
     width: 50%;
 }
 
@@ -92,8 +91,7 @@ span.input-info {
 }
 
 .column3 {
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
     width: 33%;
 }
 
@@ -174,13 +172,9 @@ span.hide {
 
 @media screen and (max-width: 960px) {
     .column2 {
-        display: flex;
-        flex-direction: column;
         width: 50%;
     }
     .column3 {
-        display: flex;
-        flex-direction: column;
         width: 33%;
     }
 }

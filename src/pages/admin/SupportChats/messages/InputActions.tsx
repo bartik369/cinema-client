@@ -7,9 +7,10 @@ import style from "./Messages.module.scss";
 interface InputActionsProps {
     message: IMessage;
     setMessage: (message: IMessage) => void;
+    resetUpdate: () => void;
 }
 
-const InputActions:FC<InputActionsProps> = ({message, setMessage}) => {
+const InputActions:FC<InputActionsProps> = ({message, setMessage, resetUpdate}) => {
     return (
         <div className={style.inner}>
             <input onChange={(e) => setMessage({
@@ -20,7 +21,7 @@ const InputActions:FC<InputActionsProps> = ({message, setMessage}) => {
             />
             {message && message.content.length > 0 && (
                 <FontAwesomeIcon
-                    onClick={() => setMessage({...message, content: ""})}
+                    onClick={() => resetUpdate()}
                     className={style.reset}
                     icon={faXmark}
                 />

@@ -91,6 +91,10 @@ const Input: FC<IInputProps> = ({
     setMessage({ ...message, content: '', replyTo: '' });
     setReplyId('');
   };
+  const resetUpdateHandler = () => {
+    setIsUpdating(false);
+    setMessage({...message, content: ''});
+  }
 
     return (
       <div className={style.typing} onClick={(e) => e.stopPropagation()}>
@@ -103,6 +107,7 @@ const Input: FC<IInputProps> = ({
           <InputActions
               message={message}
               setMessage={setMessage}
+              resetUpdate={resetUpdateHandler}
           />
             <ButtonsActions
                 file={file}
