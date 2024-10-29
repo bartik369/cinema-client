@@ -7,12 +7,9 @@
     border: none;
     background-color: #9E4784;
     color: #fff;
-    display: flex;
-    width: fit-content;
-    align-items: center;
     cursor: pointer;
     transition: all .6s ease-in-out;
-    position: absolute;
+    align-self: flex-end;
 }
 
 .reset:hover {

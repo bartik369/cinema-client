@@ -69,9 +69,7 @@ const MovieForm: FC<IMovieProps> = ({
       <div className={style['main-column']}>
           <Poster imgAction={imgAction}/>
           <Trailer videoAction={videoAction}/>
-        <div className={style.column2}>
-            <ResetForm resetFormHandler={resetFormHandler} />
-        </div>
+          <ResetForm resetFormHandler={resetFormHandler} />
       </div>
     </form>
   );
