@@ -1,10 +1,9 @@
 import { FC, useState} from 'react';
-import {useGetMessageMutation, useDeleteMessageMutation, useGetConversationMediaQuery
-} from '../../../../store/chatApi';
+import {useGetConversationMediaQuery } from '../../../../store/chatApi';
 import { IUser } from '../../../../types/auth';
 import { IMessage} from '../../../../types/chat';
 import Loader from '../../../../components/loader/Loader';
-import { useOutsideClick } from '../../../../hooks/useOutsideClick';
+import { useMessages } from '../../../../hooks/useMessages';
 import Sender from './Sender';
 import Input from './Input';
 import Recipient from './Recipient';
@@ -25,62 +24,20 @@ const Messages: FC<IMessagesProps> = ({
   recipientId,
   conversationId,
 }) => {
-  const [updatedMessage, setUpdatedMessage] = useState<IMessage>({
-    _id: '',
-    content: '',
-    conversationId: '',
-    createdAt: '',
-    mediaId: '',
-    read: '',
-    recipientId: '',
-    replyTo: '',
-    senderId: '',
-    updatedAt: '',
-  });
-  const [replyId, setReplyId] = useState<string>('');
-  const [replyMessage, setReplyMessage] = useState<string>('');
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
-  const [getMessage] = useGetMessageMutation();
-  const [deleteMessage] = useDeleteMessageMutation();
   const [mediaSkip, setMediaSkip] = useState(true);
   const { data: media } = useGetConversationMediaQuery(conversationId, {
     skip: mediaSkip,
   });
-  const [messageMenu, setMessageMenu] = useOutsideClick();
-
-  const editMessageHandler = (id: string) => {
-    id && getMessage(id)
-      .unwrap()
-      .then((data) => {
-        setUpdatedMessage({ ...data });
-        setIsUpdating(true);
-      });
-  };
-
-  const deleteMessageHandler = (id: string) => {
-    id && deleteMessage(id)
-        .unwrap()
-        .then(() => {
-          setMessageMenu('');
-        });
-  };
+  const [editMessageHandler, deleteMessageHandler, messageIdHandler, isUpdating, setIsUpdating,
+    messageMenu, replyId, setReplyId, replyMessage, setReplyMessage, updatedMessage
+  ] = useMessages();
 
   const replayMessageHandler = (id: string) => {
     if (id) {
       messages && messages.forEach((item) => {
-         if (item._id === id) {
-           setReplyMessage(item.content);
-         }
+         if (item._id === id) setReplyMessage(item.content);
       })
       setReplyId(id);
-    }
-  };
-  const messageIdHandler = (id: string) => {
-
-    if (messageMenu === id) {
-      setMessageMenu('');
-    } else {
-      setMessageMenu(id);
     }
   };
 
