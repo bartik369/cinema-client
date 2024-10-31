@@ -1,7 +1,7 @@
 .wrapper {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 50%);
 }
 
 .portrait {
@@ -43,6 +43,7 @@ span.nf {
 }
 
 .ru {
+    word-break: break-all;
     color: #ffffff;
     font-family: inherit;
     font-size: 35px;

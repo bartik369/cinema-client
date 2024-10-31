@@ -1,34 +1,17 @@
-import React, { FC, useState, MouseEvent } from 'react';
+import React, { FC, useState } from 'react';
 import { useAddMovieMutation } from '../../store/movieApi';
 import PreviewPoster from '../../components/poster/PreviewPoster';
-import { IMovie } from '../../types/media';
 import * as contentConst from '../../utils/constants/content';
+import { useMovieAction } from '../../hooks/useMovieAction';
 import {ToastContainer, toast} from "react-toastify";
 import MovieForm from '../../components/forms/movie/MovieForm';
 import style from './AddMovie.module.scss';
 
 const AddMovie: FC = () => {
   const [addMovie] = useAddMovieMutation()
-  const [movie, setMovie] = useState<IMovie>({
-    _id: '',
-    titleEn: '',
-    titleRu: '',
-    genre: [],
-    picture: '',
-    trailer: '',
-    year: '',
-    country: '',
-    ageCategory: '',
-    description: '',
-    director: '',
-    time: '',
-    actors: [],
-    rating: null,
-  });
-
   const [file, setFile] = useState<string | Blob>('');
   const [trailer, setTrailer] = useState<string | Blob>();
-  const [prevImg, setPrevImg] = useState<string | null>('');
+  const [movie, prevImg, setPrevImg,  setMovie, addGenre, deleteGenre, addActor, deleteActor, resetFormHandler] = useMovieAction();
 
   const createMovieHandler = () => {
     const formData = new FormData();
@@ -43,54 +26,6 @@ const AddMovie: FC = () => {
         .catch(error => toast.error(error.data.message))
   };
 
-  const addGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setMovie({
-      ...movie,
-      genre: [...movie.genre, e.target.value],
-    });
-  };
-
-  const deleteGenre = (e: React.MouseEvent, item: string) => {
-    e.preventDefault();
-    setMovie({
-      ...movie,
-      genre: movie.genre.filter((elem) => elem !== item),
-    });
-  };
-
-  const addActor = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setMovie({
-      ...movie,
-      actors: [...movie.actors, e.target.value],
-    });
-  };
-
-  const deleteActor = (e: React.MouseEvent, item: string) => {
-    e.preventDefault();
-    setMovie({
-      ...movie,
-      actors: movie.actors.filter((elem) => elem !== item),
-    });
-  };
-
-  const resetFormHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setMovie({
-      ...movie,
-      titleEn: '',
-      titleRu: '',
-      genre: [],
-      trailer: '',
-      year: '',
-      country: '',
-      ageCategory: '',
-      description: '',
-      director: '',
-      time: '',
-      actors: [],
-    });
-    setPrevImg('');
-  };
 
   const imgAction = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.files && setFile(e.target.files[0]);

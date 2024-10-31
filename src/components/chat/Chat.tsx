@@ -1,11 +1,9 @@
 import {FC, useState, useEffect} from 'react';
-import { useCreateMessageMutation,useGetMessagesQuery, useGetMessageMutation,
-  useDeleteMessageMutation, useUpdateMessageMutation,
-  useMarkAsReadMutation, useGetConversationMediaQuery } from '../../store/chatApi';
+import { useGetMessagesQuery, useMarkAsReadMutation, useGetConversationMediaQuery } from '../../store/chatApi';
 import Sender from './Recipient';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
 import Recipient from './Sender';
-import { IMessage, IChatInfo } from '../../types/chat';
+import {useChat} from '../../hooks/useChat';
+import { IChatInfo } from '../../types/chat';
 import { IUser } from '../../types/auth';
 import InputUsersSide from './InputUsersSide';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,29 +19,12 @@ interface IChatProps {
 }
 const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) => {
   const [skip, setSkip] = useState<boolean>(true);
-  const [file, setFile] = useState<string | Blob>('');
-  const [replyId, setReplyId] = useState<string>('');
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const {data: messages} = useGetMessagesQuery(chatInfo && chatInfo._id, {skip: skip});
-  const [createMessage] = useCreateMessageMutation();
-  const [getMessage] = useGetMessageMutation();
-  const [deleteMessage] = useDeleteMessageMutation();
-  const [updateMessage] = useUpdateMessageMutation();
   const [markMessageAsRead] = useMarkAsReadMutation();
   const { data: media } = useGetConversationMediaQuery(chatInfo && chatInfo._id);
-  const [message, setMessage] = useState<IMessage>({
-    _id: '', 
-    content: '',
-    conversationId: '',
-    createdAt: '',
-    mediaId: '',
-    read: '',
-    recipientId: '',
-    replyTo: '',
-    senderId: '',
-    updatedAt: '',
-  });
-  const [messageMenu, setMessageMenu] = useOutsideClick();
+  const [message, setMessage, messageMenu, setMessageMenu, editMessageHandler, deleteMessageHandler,
+    replayMessageHandler, messageIdHandler, resetReplyHandler, resetUpdateHandler, 
+    isUpdating, setIsUpdating, replyId, setReplyId, sendMessageHandler, file, setFile] = useChat();
 
   useEffect(() => {
     if (recipientId && chatInfo._id) {
@@ -60,64 +41,6 @@ const Chat: FC<IChatProps> = ({ visibleHandler, user, chatInfo, recipientId}) =>
       });
     }
   }, [recipientId, message.content, chatInfo]);
-
-  const sendMessageHandler = () => {
-    const formData = new FormData();
-        type messageKey = keyof typeof message;
-        Object.keys(message).forEach((key) => {
-          formData.append(key, message[key as messageKey]);
-        });
-        file && formData.append('file', file);
-
-        if (isUpdating) {
-          updateMessage(formData).unwrap().then(() => {
-            setMessage({...message, content: '', replyTo: ''});
-            setReplyId('');
-            setIsUpdating(false);
-          }).catch(error => console.log(error));
-        } else {
-          createMessage(formData).unwrap().then(() => {
-            setMessage({...message, content: '', replyTo: ''})
-            setReplyId('');
-          }).catch(error => console.log(error));
-        }
-  };
-
-  const editMessageHandler = (id: string) => {
-    getMessage(id).unwrap().then((data) => {
-      setMessage({...data});
-      setIsUpdating(true);
-    }).catch(error => console.log(error));
-  };
-
-  const deleteMessageHandler = (id: string) => {
-    id && deleteMessage(id).unwrap().then(() => {
-      setMessageMenu('');
-    }).catch(error => console.log(error));
-  }
-
-  const replayMessageHandler = (id:string) => {
-    if (id) {
-      setMessage({...message, replyTo: id});
-      setReplyId(id);
-    }
-  }
-  const messageIdHandler = (id: string) => {
-    if (messageMenu === id) {
-      setMessageMenu('');
-    } else {
-      setMessageMenu(id);
-    }
-  };
-
-  const resetReplyHandler = () => {
-    setMessage({ ...message, content: '', replyTo: '' });
-    setReplyId('');
-  };
-  const resetUpdateHandler = () => {
-    setIsUpdating(false);
-    setMessage({...message, content: ''});
-  }
 
   return (
     <div className={style.chat}>

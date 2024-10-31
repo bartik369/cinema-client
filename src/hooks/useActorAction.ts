@@ -1,8 +1,6 @@
 import { useState, MouseEvent } from "react";
 import { IActor } from "../types/media";
-
 // AddActor
-
 const useActorAction = () => {
     const [actor, setActor] = useState<IActor>({
         _id: '',
