@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../../hooks/reduxHook";
@@ -6,6 +6,7 @@ import { useGetFavoritesMutation, useGetLatestMoviesQuery} from "../../store/mov
 import useCountLastHook from "../../hooks/useCountLastHook";
 import MovieItem from "../items/MovieItem";
 import Loader from "../loader/Loader";
+import PrevLoading from "./PrevLoading";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from "pure-react-carousel";
@@ -25,7 +26,7 @@ const LastMovies: FC = () => {
 
   return (
     <div className={style.movies__carousel}>
-      {movies ? (
+      {movies && (
         <CarouselProvider
           naturalSlideWidth={70}
           naturalSlideHeight={160}
@@ -46,19 +47,16 @@ const LastMovies: FC = () => {
           <Slider className={style.movies__slider}>
             {movies &&
               movies.map((movie) => (
-                <Slide className={style["carousel__inner"]}
-                  key={movie._id}
-                  index={0}
-                >
+                <Suspense fallback={<PrevLoading />}>
+                   <Slide className={style["carousel__inner"]} key={movie._id} index={0}>
                   <Link to={`${ENV.MOVIES}${movie._id}`}>
                     <MovieItem movie={movie} favorites={favorites?.movies!} />
                   </Link>
                 </Slide>
+                </Suspense>
               ))}
           </Slider>
         </CarouselProvider>
-      ) : (
-        <Loader />
       )}
     </div>
   );

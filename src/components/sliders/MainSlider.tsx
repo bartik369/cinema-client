@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useGetSlidesQuery } from '../../store/adminApi';
 import Loader from '../loader/Loader';
@@ -42,6 +42,7 @@ const MainSlider: FC = () => {
         {slides &&
           slides.map((slide) => (
             <Link  key={slide._id} to={`${ENV.MOVIES_URL}${slide.movieLink}`}>
+              <Suspense fallback={'Loading'}>
               <Slide className={style['carousel__inner-slide']} index={0}>
                 <div className={style.description}>{slide.description}</div>
                 <button className={style.watch}>{contentConst.watch}</button>
@@ -50,6 +51,7 @@ const MainSlider: FC = () => {
                   alt=''
                 />
               </Slide>
+              </Suspense>
             </Link>
           ))}
       </Slider>

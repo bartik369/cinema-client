@@ -25,8 +25,7 @@ const AddMovie: FC = () => {
         .then(() => toast.success(contentConst.addMovieSuccess))
         .catch(error => toast.error(error.data.message))
   };
-
-
+  
   const imgAction = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.files && setFile(e.target.files[0]);
     e.target.files && setPrevImg(URL.createObjectURL(e.target.files[0]));

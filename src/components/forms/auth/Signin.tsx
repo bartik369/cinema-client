@@ -39,9 +39,7 @@ const Signin: FC<ISigninProps> = ({ signupHandler, closeFormHandler }) => {
     e.preventDefault();
     
       if (errors?.email?.length === 0 && errors?.password?.length === 0) {
-        await signinUser(authData)
-        .unwrap()
-        .then((data) => {
+        await signinUser(authData).unwrap().then((data) => {
             dispatch(setCredentials(data));
             dispatch(setAuth(true));
             closeFormHandler();

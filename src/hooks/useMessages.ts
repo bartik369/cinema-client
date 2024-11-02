@@ -48,12 +48,8 @@ const useMessages = () => {
           setMessageMenu(id);
         }
       };
-    return [editMessageHandler, 
-        deleteMessageHandler,
-        messageIdHandler,
-        isUpdating, setIsUpdating,
-        messageMenu,
-        replyId, setReplyId,
+    return [editMessageHandler, deleteMessageHandler,messageIdHandler,
+        isUpdating, setIsUpdating, messageMenu, replyId, setReplyId,
         replyMessage, setReplyMessage, updatedMessage, setUpdatedMessage
     ] as const
 }
