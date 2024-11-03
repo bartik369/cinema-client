@@ -1,18 +1,19 @@
-import { FC, useEffect, Suspense } from "react";
+import React, { FC, useEffect, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../../hooks/reduxHook";
 import { useGetFavoritesMutation, useGetLatestMoviesQuery} from "../../store/movieApi";
 import useCountLastHook from "../../hooks/useCountLastHook";
-import MovieItem from "../items/MovieItem";
+// import MovieItem from "../items/MovieItem";
 import Loader from "../loader/Loader";
-import PrevLoading from "./PrevLoading";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from "pure-react-carousel";
 import ENV from "../../env.config";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import style from "./MainSlider.module.scss";
+
+const LazyMovie = React.lazy(() => import('../items/MovieItem'));
 
 const LastMovies: FC = () => {
   const [getFavorites, { data: favorites }] = useGetFavoritesMutation();
@@ -26,7 +27,7 @@ const LastMovies: FC = () => {
 
   return (
     <div className={style.movies__carousel}>
-      {movies && (
+      {movies ? (
         <CarouselProvider
           naturalSlideWidth={70}
           naturalSlideHeight={160}
@@ -47,16 +48,18 @@ const LastMovies: FC = () => {
           <Slider className={style.movies__slider}>
             {movies &&
               movies.map((movie) => (
-                <Suspense fallback={<PrevLoading />}>
                    <Slide className={style["carousel__inner"]} key={movie._id} index={0}>
-                  <Link to={`${ENV.MOVIES}${movie._id}`}>
-                    <MovieItem movie={movie} favorites={favorites?.movies!} />
-                  </Link>
+                      <Suspense fallback={<div>Заглушка</div>}>
+                    <Link to={`${ENV.MOVIES}${movie._id}`}>
+                        <LazyMovie movie={movie} favorites={favorites?.movies!} />
+                    </Link>
+                    </Suspense>
                 </Slide>
-                </Suspense>
               ))}
           </Slider>
         </CarouselProvider>
+      ) : (
+        <Loader />
       )}
     </div>
   );

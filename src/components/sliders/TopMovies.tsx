@@ -1,4 +1,4 @@
-import { FC, useEffect, Suspense } from 'react';
+import { FC, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector} from '../../hooks/reduxHook';
 import Loader from '../loader/Loader';
@@ -8,7 +8,6 @@ import useCountTopHook  from '../../hooks/useCountTopHook';
 import {CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,
 } from 'pure-react-carousel';
 import ENV from '../../env.config';
-import PrevLoading from './PrevLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -47,13 +46,11 @@ const TopMovies: FC = () => {
         <Slider className={style.movies__slider}>
           {movies &&
             movies.map((movie) => (
-              <Suspense fallback={<PrevLoading />}>
                  <Slide key={movie._id} className={style['carousel__inner']} index={0}>
                 <Link to={`${ENV.MOVIES}${movie._id}`}>
                   <MovieItem movie={movie} favorites={favorites?.movies!} />
                 </Link>
               </Slide>
-              </Suspense>
             ))}
         </Slider>
       </CarouselProvider>
