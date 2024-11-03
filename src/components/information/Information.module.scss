@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .chat-block {
     position: fixed;
     @include flexCenter;
@@ -159,6 +160,12 @@
     100% {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(239, 148, 92, 0);
+    }
+}
+
+@media (max-width: 560px) {
+    .chat-block {
+        bottom: 90px;
     }
 }
 
