@@ -1,4 +1,4 @@
-import { FC, useState, useRef} from 'react';
+import { FC, useState, useRef, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../navigation/Navbar';
 import Search from '../search/Search';
@@ -27,6 +27,14 @@ const Header: FC = () => {
   const myRef = useRef<HTMLButtonElement>(null);
   const [dropdownDisplay, setDropdownDisplay] = useDropdownMenu(myRef);
 
+  useEffect(() => {
+     if (visible || visibleSignin || visibleSignup) {
+      document.body.style.overflowY = 'hidden';
+     } else {
+      document.body.style.overflowY = 'unset';
+     }
+  }, [visible, visibleSignin, visibleSignup]);
+
   const visibleHandler = () => {
     setVisible(!visible);
   };
@@ -42,7 +50,6 @@ const Header: FC = () => {
     setVisibleSignup(false);
     setVisibleSignin(false);
   };
-
   return (
     <>
     {visible && <Search visibleHandler={visibleHandler} />}
